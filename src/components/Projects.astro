@@ -1,61 +1,11 @@
 ---
-interface Project {
-	number: string
-	title: string
-	quote: string
-	tags: string[]
-	image: string
-	imageAlt: string
-	liveUrl: string
-	secondaryLabel: string
-	secondaryUrl: string
-	reversed: boolean
-}
+import { Image } from 'astro:assets'
+import { getCollection } from 'astro:content'
 
-const projects: Project[] = [
-	{
-		number: '01.',
-		title: 'Ethereal OS',
-		quote:
-			'"The challenge was to build a real-time collaborative operating system in the browser. We had to rethink state synchronization using CRDTs while maintaining a 60fps glassmorphic UI."',
-		tags: ['React 18', 'TypeScript', 'WebRTC', 'Tailwind CSS'],
-		image: '/images/project-ethereal.png',
-		imageAlt:
-			'Abstract minimal digital landscape with dark monolithic structures and subtle blue neon light reflections',
-		liveUrl: '#projects',
-		secondaryLabel: 'Source',
-		secondaryUrl: '#projects',
-		reversed: false,
-	},
-	{
-		number: '02.',
-		title: 'Quantum Ledger',
-		quote:
-			'"A high-frequency trading dashboard requiring sub-millisecond data updates. The architecture leverages Rust-based WASM modules for heavy data processing directly on the client side."',
-		tags: ['Next.js', 'Rust / WASM', 'GraphQL', 'D3.js'],
-		image: '/images/project-quantum.png',
-		imageAlt:
-			'Dark futuristic server room with linear blue neon highlights and metallic grid patterns',
-		liveUrl: '#projects',
-		secondaryLabel: 'Case Study',
-		secondaryUrl: '#projects',
-		reversed: true,
-	},
-	{
-		number: '03.',
-		title: 'Nero E-Commerce',
-		quote:
-			'"Headless commerce for luxury fashion. Focused on zero-layout shift during image loading and an ultra-minimalist checkout flow that prioritizes speed and security."',
-		tags: ['Shopify Plus', 'Remix', 'Stripe', 'Framer Motion'],
-		image: '/images/project-nero.png',
-		imageAlt:
-			'Modern brutalist skyscraper facade with sharp angles and dramatic shadows at dusk',
-		liveUrl: '#projects',
-		secondaryLabel: 'Source',
-		secondaryUrl: '#projects',
-		reversed: false,
-	},
-]
+const rawProjects = await getCollection('projects')
+const projects = rawProjects
+	.map((p) => p.data)
+	.sort((a, b) => a.order - b.order)
 ---
 
 <section class="py-32 px-8 bg-surface-container-low" id="projects">
@@ -89,16 +39,25 @@ const projects: Project[] = [
 						{/* Image Column */}
 						<div
 							class:list={[
-								'col-span-12 lg:col-span-7 overflow-hidden relative shadow-2xl transition-premium group-hover:scale-[1.02] group-hover:shadow-accent-blue/10',
+								'col-span-12 lg:col-span-7 overflow-hidden relative shadow-2xl transition-premium group-hover:scale-[1.01] group-hover:shadow-accent-blue/10 rounded-[2px]',
 								project.reversed && 'lg:order-2',
 							]}
 						>
-							<div class="aspect-[16/10] bg-surface-container overflow-hidden">
-								<img
-									class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out"
-									alt={project.imageAlt}
+							<div class="relative h-full min-h-[300px] lg:min-h-[450px] bg-surface-container overflow-hidden group-hover:after:opacity-0 after:transition-opacity after:duration-700 after:absolute after:inset-0 after:bg-black/20 after:pointer-events-none">
+								{/* Noise/Grain Overlay */}
+								<div class="absolute inset-0 opacity-[0.03] pointer-events-none z-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
+								
+								{/* Image */}
+								<Image
 									src={project.image}
+									alt={project.imageAlt}
+									width={800}
+									height={500}
+									class="w-full h-full object-cover object-center scale-[1.20] grayscale brightness-[0.85] contrast-[1.1] opacity-90 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100 group-hover:scale-[1.25] transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]"
 								/>
+								
+								{/* Vignette Overlay */}
+								<div class="absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.5)] pointer-events-none z-20"></div>
 							</div>
 						</div>
 
@@ -134,11 +93,18 @@ const projects: Project[] = [
 
 							{/* Tags */}
 							<div class="flex flex-wrap gap-3 mb-10">
-								{project.tags.map((tag) => (
-									<span class="px-4 py-1 text-[10px] uppercase tracking-widest border border-accent-blue/20 text-accent-blue bg-accent-blue/5 transition-premium hover:bg-accent-blue hover:text-white">
-										{tag}
-									</span>
-								))}
+								{
+									project.tags.map((tag) => (
+										<span class="flex items-center gap-2 px-4 py-1.5 text-[10px] uppercase tracking-widest border border-accent-blue/20 text-accent-blue bg-accent-blue/5 transition-premium hover:bg-accent-blue hover:text-white group/tag">
+											<img
+												src={`https://cdn.simpleicons.org/${tag.icon}/white`}
+												alt=""
+												class="w-3 h-3 opacity-70 group-hover/tag:opacity-100 transition-opacity"
+											/>
+											{tag.label}
+										</span>
+									))
+								}
 							</div>
 
 							{/* Links */}
@@ -146,18 +112,39 @@ const projects: Project[] = [
 								<a
 									class="group/link flex items-center gap-2 text-sm tracking-widest uppercase text-on-surface hover:text-accent-blue transition-colors duration-500"
 									href={project.liveUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={`View live demo of ${project.title}`}
 								>
 									Live Demo
-									<span class="material-symbols-outlined text-sm group-hover/link:translate-x-2 transition-transform duration-500">
+									<span class="material-symbols-outlined text-sm group-hover/link:translate-x-2 transition-transform duration-500" aria-hidden="true">
 										arrow_forward
 									</span>
 								</a>
-								<a
-									class="text-sm tracking-widest uppercase text-on-surface-variant hover:text-accent-blue transition-colors duration-500"
-									href={project.secondaryUrl}
-								>
-									{project.secondaryLabel}
-								</a>
+								<div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+									<a
+										class="text-sm tracking-widest uppercase text-on-surface-variant hover:text-accent-blue transition-colors duration-500"
+										href={project.secondaryUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label={`View ${project.secondaryLabel.toLowerCase()} repository for ${project.title}`}
+									>
+										{project.secondaryLabel}
+									</a>
+									{
+										project.thirdUrl && (
+											<a
+												class="text-sm tracking-widest uppercase text-on-surface-variant hover:text-accent-blue transition-colors duration-500"
+												href={project.thirdUrl}
+												target="_blank"
+												rel="noopener noreferrer"
+												aria-label={`View ${project.thirdLabel?.toLowerCase() || 'secondary source'} repository for ${project.title}`}
+											>
+												{project.thirdLabel}
+											</a>
+										)
+									}
+								</div>
 							</div>
 						</div>
 					</section>
@@ -165,7 +152,8 @@ const projects: Project[] = [
 			}
 		</div>
 
-		<!-- Archive CTA -->
+		<!-- Archive CTA (Temporarily Disabled) -->
+		<!--
 		<div class="mt-48 flex justify-center reveal">
 			<button class="group flex flex-col items-center">
 				<span
@@ -178,5 +166,6 @@ const projects: Project[] = [
 				>
 			</button>
 		</div>
+		-->
 	</div>
 </section>

@@ -1,0 +1,21 @@
+{
+  "order": 3,
+  "number": "03.",
+  "title": "Tickets App",
+  "quote": "\"A high-performance real-time queue system. The frontend leverages React 19 with native WebSockets for instant reactivity across Kiosk, Desk, and Board interfaces. The backend is a lightweight, ultra-fast service built with Bun and TypeScript, handling dynamic ticket prioritization (Normal/Preferential) and multi-desk synchronization with Zod-validated schemas.\"",
+  "tags": [
+    { "label": "React 19", "icon": "react" },
+    { "label": "Bun", "icon": "bun" },
+    { "label": "WebSockets", "icon": "socketdotio" },
+    { "label": "TypeScript", "icon": "typescript" },
+    { "label": "Zod", "icon": "zod" }
+  ],
+  "image": "../../assets/images/project-tickets-websockets.webp",
+  "imageAlt": "Modern brutalist skyscraper facade with sharp angles and dramatic shadows at dusk",
+  "liveUrl": "https://ticketsapp-react.vercel.app",
+  "secondaryLabel": "Frontend Source",
+  "secondaryUrl": "https://github.com/Jejorm/tickets-app-react",
+  "thirdLabel": "Backend Source",
+  "thirdUrl": "https://github.com/Jejorm/tickets-app",
+  "reversed": false
+}
