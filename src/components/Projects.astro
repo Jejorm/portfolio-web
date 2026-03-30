@@ -1,0 +1,182 @@
+---
+interface Project {
+	number: string
+	title: string
+	quote: string
+	tags: string[]
+	image: string
+	imageAlt: string
+	liveUrl: string
+	secondaryLabel: string
+	secondaryUrl: string
+	reversed: boolean
+}
+
+const projects: Project[] = [
+	{
+		number: '01.',
+		title: 'Ethereal OS',
+		quote:
+			'"The challenge was to build a real-time collaborative operating system in the browser. We had to rethink state synchronization using CRDTs while maintaining a 60fps glassmorphic UI."',
+		tags: ['React 18', 'TypeScript', 'WebRTC', 'Tailwind CSS'],
+		image: '/images/project-ethereal.png',
+		imageAlt:
+			'Abstract minimal digital landscape with dark monolithic structures and subtle blue neon light reflections',
+		liveUrl: '#projects',
+		secondaryLabel: 'Source',
+		secondaryUrl: '#projects',
+		reversed: false,
+	},
+	{
+		number: '02.',
+		title: 'Quantum Ledger',
+		quote:
+			'"A high-frequency trading dashboard requiring sub-millisecond data updates. The architecture leverages Rust-based WASM modules for heavy data processing directly on the client side."',
+		tags: ['Next.js', 'Rust / WASM', 'GraphQL', 'D3.js'],
+		image: '/images/project-quantum.png',
+		imageAlt:
+			'Dark futuristic server room with linear blue neon highlights and metallic grid patterns',
+		liveUrl: '#projects',
+		secondaryLabel: 'Case Study',
+		secondaryUrl: '#projects',
+		reversed: true,
+	},
+	{
+		number: '03.',
+		title: 'Nero E-Commerce',
+		quote:
+			'"Headless commerce for luxury fashion. Focused on zero-layout shift during image loading and an ultra-minimalist checkout flow that prioritizes speed and security."',
+		tags: ['Shopify Plus', 'Remix', 'Stripe', 'Framer Motion'],
+		image: '/images/project-nero.png',
+		imageAlt:
+			'Modern brutalist skyscraper facade with sharp angles and dramatic shadows at dusk',
+		liveUrl: '#projects',
+		secondaryLabel: 'Source',
+		secondaryUrl: '#projects',
+		reversed: false,
+	},
+]
+---
+
+<section class="py-32 px-8 bg-surface-container-low" id="projects">
+	<div class="max-w-7xl mx-auto">
+		<!-- Section Header -->
+		<div class="mb-32 reveal">
+			<span
+				class="text-accent-blue uppercase tracking-[0.3em] text-[10px] mb-6 block"
+				>Portfolio Archive — 2024 Edition</span
+			>
+			<h2
+				class="text-7xl md:text-8xl serif-display italic font-light tracking-tight text-on-surface leading-[0.9]"
+			>
+				Selected <br />
+				<span class="ml-12 md:ml-24 text-accent-blue">Works</span>
+			</h2>
+			<p
+				class="mt-12 text-on-surface-variant max-w-xl text-lg leading-relaxed font-light"
+			>
+				A curated collection of digital monoliths built with structural
+				integrity and performance at the core. Each project represents a unique
+				challenge in scale, architecture, and user experience.
+			</p>
+		</div>
+
+		<!-- Project Gallery -->
+		<div class="space-y-48">
+			{
+				projects.map((project) => (
+					<section class="asymmetric-grid group reveal">
+						{/* Image Column */}
+						<div
+							class:list={[
+								'col-span-12 lg:col-span-7 overflow-hidden relative shadow-2xl transition-premium group-hover:scale-[1.02] group-hover:shadow-accent-blue/10',
+								project.reversed && 'lg:order-2',
+							]}
+						>
+							<div class="aspect-[16/10] bg-surface-container overflow-hidden">
+								<img
+									class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out"
+									alt={project.imageAlt}
+									src={project.image}
+								/>
+							</div>
+						</div>
+
+						{/* Content Column */}
+						<div
+							class:list={[
+								'col-span-12 lg:col-span-5 flex flex-col justify-center',
+								project.reversed
+									? 'lg:order-1 lg:pr-12 transition-premium group-hover:-translate-x-2'
+									: 'lg:pl-12 transition-premium group-hover:translate-x-2',
+							]}
+						>
+							<span class="text-accent-blue serif-display italic text-2xl mb-4">
+								{project.number}
+							</span>
+							<h3 class="text-5xl serif-display tracking-tighter mb-8">
+								{project.title}
+							</h3>
+
+							{/* Quote Block */}
+							<div
+								class:list={[
+									'bg-surface-container-lowest border-l-2 p-8 mb-8 transition-premium group-hover:bg-black',
+									project.reversed
+										? 'border-accent-blue/60 group-hover:border-accent-blue'
+										: 'border-accent-blue group-hover:border-accent-blue-deep',
+								]}
+							>
+								<p class="text-on-surface-variant font-light leading-relaxed italic">
+									{project.quote}
+								</p>
+							</div>
+
+							{/* Tags */}
+							<div class="flex flex-wrap gap-3 mb-10">
+								{project.tags.map((tag) => (
+									<span class="px-4 py-1 text-[10px] uppercase tracking-widest border border-accent-blue/20 text-accent-blue bg-accent-blue/5 transition-premium hover:bg-accent-blue hover:text-white">
+										{tag}
+									</span>
+								))}
+							</div>
+
+							{/* Links */}
+							<div class="flex items-center gap-8">
+								<a
+									class="group/link flex items-center gap-2 text-sm tracking-widest uppercase text-on-surface hover:text-accent-blue transition-colors duration-500"
+									href={project.liveUrl}
+								>
+									Live Demo
+									<span class="material-symbols-outlined text-sm group-hover/link:translate-x-2 transition-transform duration-500">
+										arrow_forward
+									</span>
+								</a>
+								<a
+									class="text-sm tracking-widest uppercase text-on-surface-variant hover:text-accent-blue transition-colors duration-500"
+									href={project.secondaryUrl}
+								>
+									{project.secondaryLabel}
+								</a>
+							</div>
+						</div>
+					</section>
+				))
+			}
+		</div>
+
+		<!-- Archive CTA -->
+		<div class="mt-48 flex justify-center reveal">
+			<button class="group flex flex-col items-center">
+				<span
+					class="text-on-surface-variant uppercase tracking-[0.4em] text-[10px] mb-4 group-hover:text-accent-blue transition-colors duration-500"
+					>Explore Archive</span
+				>
+				<span
+					class="material-symbols-outlined text-3xl font-light text-accent-blue animate-bounce"
+					>expand_more</span
+				>
+			</button>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════
+   ARCHITECT PORTFOLIO — Design System
+   Philosophy: "Architectural Silence"
+   ═══════════════════════════════════════════════════ */
+
+@theme {
+	/* ── Color Tokens: The Material Palette ── */
+	--color-accent-blue: #3b82f6;
+	--color-accent-blue-deep: #1d4ed8;
+	--color-surface: #0e0e0e;
+	--color-surface-dim: #0e0e0e;
+	--color-surface-bright: #2c2c2c;
+	--color-surface-container-lowest: #000000;
+	--color-surface-container-low: #131313;
+	--color-surface-container: #191a1a;
+	--color-surface-container-high: #1f2020;
+	--color-surface-container-highest: #252626;
+	--color-surface-variant: #252626;
+	--color-on-surface: #e7e5e4;
+	--color-on-surface-variant: #acabaa;
+	--color-on-background: #e7e5e4;
+	--color-background: #0e0e0e;
+	--color-primary: #c6c6c6;
+	--color-primary-dim: #b9b9b9;
+	--color-primary-container: #464747;
+	--color-on-primary: #3f4041;
+	--color-on-primary-container: #d0d0d0;
+	--color-secondary: #9f9d9d;
+	--color-secondary-dim: #9f9d9d;
+	--color-secondary-container: #3b3b3b;
+	--color-on-secondary: #202020;
+	--color-on-secondary-container: #c1bfbe;
+	--color-tertiary: #fff8f4;
+	--color-tertiary-dim: #efdccc;
+	--color-tertiary-container: #fbe8d7;
+	--color-on-tertiary: #6a5d50;
+	--color-on-tertiary-container: #615448;
+	--color-outline: #767575;
+	--color-outline-variant: #484848;
+	--color-inverse-surface: #fcf8f8;
+	--color-inverse-on-surface: #565554;
+	--color-inverse-primary: #5e5f5f;
+	--color-error: #ee7d77;
+	--color-error-dim: #bb5551;
+	--color-error-container: #7f2927;
+	--color-on-error: #490106;
+	--color-on-error-container: #ff9993;
+	--color-surface-tint: #c6c6c6;
+
+	/* ── Typography ── */
+	--font-headline: "Newsreader", serif;
+	--font-body: "Inter", sans-serif;
+	--font-label: "Inter", sans-serif;
+
+	/* ── Border Radius — Architectural Precision ── */
+	--radius: 0.25rem;
+	--radius-lg: 0.5rem;
+	--radius-xl: 0.75rem;
+}
+
+/* ═══════════════════════════════════════════════════
+   BASE STYLES — Native CSS for core identity
+   ═══════════════════════════════════════════════════ */
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background-color: #0e0e0e;
+	color: #e7e5e4;
+	font-family: "Inter", sans-serif;
+}
+
+::selection {
+	background-color: #3b82f6;
+	color: #fff;
+}
+
+/* ── Custom Scrollbar — Minimal ── */
+::-webkit-scrollbar {
+	width: 4px;
+}
+::-webkit-scrollbar-track {
+	background: #0e0e0e;
+}
+::-webkit-scrollbar-thumb {
+	background: #3b82f6;
+}
+
+/* ═══════════════════════════════════════════════════
+   UTILITY CLASSES — Native CSS animations & layouts
+   ═══════════════════════════════════════════════════ */
+
+/* Serif display shorthand */
+.serif-display {
+	font-family: "Newsreader", serif;
+}
+
+/* Material Symbols config */
+.material-symbols-outlined {
+	font-variation-settings:
+		"FILL" 0,
+		"wght" 300,
+		"GRAD" 0,
+		"opsz" 24;
+}
+
+/* ── Scroll Reveal Animation ── */
+.reveal {
+	opacity: 0;
+	transform: translateY(30px);
+	transition:
+		opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+		transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: opacity, transform;
+}
+.reveal.active {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* ── Premium Transition ── */
+.transition-premium {
+	transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Asymmetric Grid ── */
+.asymmetric-grid {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: 2rem;
+}
+
+/* ── Nav Scrolled State ── */
+nav.scrolled {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	background: rgba(14, 14, 14, 0.95);
+	border-color: rgba(59, 130, 246, 0.2);
+}
+
+/* ── Mobile Menu ── */
+.mobile-menu {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mobile-menu.open {
+	max-height: 400px;
+}

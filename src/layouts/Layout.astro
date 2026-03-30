@@ -1,0 +1,39 @@
+---
+import { ClientRouter } from 'astro:transitions'
+import '../styles/global.css'
+
+interface Props {
+	title?: string
+	description?: string
+}
+
+const {
+	title = 'ARCHITECT | Full-Stack Portfolio',
+	description = 'Full-stack developer focused on the intersection of technical precision and aesthetic reduction. Designing digital structures with intent.',
+} = Astro.props
+---
+
+<!doctype html>
+<html class="dark" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content={description} />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,400;0,6..72,800;1,6..72,200&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+			rel="stylesheet"
+		/>
+		<title>{title}</title>
+		<ClientRouter />
+	</head>
+	<body class="antialiased overflow-x-hidden">
+		<slot />
+	</body>
+</html>

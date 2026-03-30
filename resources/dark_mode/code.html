@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ARCHITECT | Full-Stack Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,400;0,6..72,800;1,6..72,200&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "accent-blue": "#3b82f6", // Electric Azure
+              "accent-blue-deep": "#1d4ed8", // Deep Sapphire
+              "on-surface-variant": "#acabaa",
+              "outline": "#767575",
+              "on-primary-fixed": "#3e3f40",
+              "primary-fixed-dim": "#d4d4d4",
+              "on-surface": "#e7e5e4",
+              "error": "#ee7d77",
+              "surface-tint": "#c6c6c6",
+              "background": "#0e0e0e",
+              "inverse-on-surface": "#565554",
+              "secondary-dim": "#9f9d9d",
+              "on-tertiary-fixed-variant": "#6e6053",
+              "secondary-fixed": "#e4e2e1",
+              "on-tertiary": "#6a5d50",
+              "tertiary-fixed": "#feebda",
+              "surface-container-lowest": "#000000",
+              "surface-container": "#191a1a",
+              "on-error": "#490106",
+              "surface-variant": "#252626",
+              "inverse-primary": "#5e5f5f",
+              "surface-container-highest": "#252626",
+              "tertiary": "#fff8f4",
+              "primary-container": "#464747",
+              "on-tertiary-fixed": "#504438",
+              "secondary": "#9f9d9d",
+              "surface-container-high": "#1f2020",
+              "surface-container-low": "#131313",
+              "on-secondary": "#202020",
+              "tertiary-dim": "#efdccc",
+              "on-background": "#e7e5e4",
+              "surface-dim": "#0e0e0e",
+              "primary": "#c6c6c6",
+              "tertiary-container": "#fbe8d7",
+              "on-tertiary-container": "#615448",
+              "on-secondary-container": "#c1bfbe",
+              "error-container": "#7f2927",
+              "on-error-container": "#ff9993",
+              "secondary-fixed-dim": "#d6d4d3",
+              "outline-variant": "#484848",
+              "on-primary": "#3f4041",
+              "error-dim": "#bb5551",
+              "tertiary-fixed-dim": "#efdccc",
+              "primary-dim": "#b9b9b9",
+              "on-secondary-fixed-variant": "#5c5b5b",
+              "surface-bright": "#2c2c2c",
+              "inverse-surface": "#fcf8f8",
+              "on-primary-container": "#d0d0d0",
+              "surface": "#0e0e0e",
+              "on-tertiary-container": "#615448",
+              "on-secondary-fixed": "#3f3f3f",
+              "primary-fixed": "#e3e2e2",
+              "on-primary-fixed-variant": "#5a5c5c",
+              "secondary-container": "#3b3b3b"
+            },
+            fontFamily: {
+              "headline": ["Newsreader"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #0e0e0e;
+            color: #e7e5e4;
+            font-family: 'Inter', sans-serif;
+        }
+        .serif-display {
+            font-family: 'Newsreader', serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Transition utility */
+        .transition-premium {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        /* Custom scrollbar for minimalist look */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0e0e0e; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; }
+        
+        .asymmetric-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+        }
+        
+        nav.scrolled {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            background: rgba(14, 14, 14, 0.95);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden selection:bg-accent-blue selection:text-white">
+<!-- Top Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-zinc-900/60 backdrop-blur-xl border-b border-accent-blue/10 transition-all duration-700 ease-in-out" id="main-nav">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-8 py-6 transition-all duration-700" id="nav-container">
+<div class="text-xl font-medium tracking-tighter text-zinc-100 font-['Newsreader']">ARCHITECT</div>
+<div class="hidden md:flex space-x-12 items-center">
+<a class="text-zinc-500 hover:text-accent-blue transition-colors duration-500 font-['Newsreader'] tracking-tight" href="#about">About</a>
+<a class="text-zinc-500 hover:text-accent-blue transition-colors duration-500 font-['Newsreader'] tracking-tight" href="#skills">Skills</a>
+<a class="text-zinc-500 hover:text-accent-blue transition-colors duration-500 font-['Newsreader'] tracking-tight" href="#projects">Projects</a>
+<a class="px-6 py-2 bg-accent-blue text-white font-medium transition-all duration-500 hover:bg-accent-blue-deep active:scale-95" href="#contact">Contact</a>
+</div>
+<div class="md:hidden">
+<span class="material-symbols-outlined text-on-surface">menu</span>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero: Architectural Silence -->
+<section class="min-h-screen flex flex-col justify-center px-8 relative overflow-hidden">
+<div class="max-w-7xl mx-auto w-full pt-20">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+<div class="lg:col-span-8 reveal active">
+<h1 class="serif-display text-7xl md:text-9xl leading-[0.9] tracking-tighter mb-12">
+                            Designing <br/>
+<span class="italic text-accent-blue">digital structures</span> <br/>
+                            with intent.
+                        </h1>
+</div>
+<div class="lg:col-span-4 pb-4 reveal active" style="transition-delay: 200ms;">
+<p class="text-on-surface-variant font-body text-lg max-w-xs mb-8 leading-relaxed">
+                            Full-stack developer focused on the intersection of technical precision and aesthetic reduction.
+                        </p>
+<a class="group flex items-center gap-4 text-accent-blue tracking-widest uppercase text-xs font-semibold hover:text-white transition-colors duration-500" href="#projects">
+                            View Works 
+                            <span class="h-px w-12 bg-accent-blue transition-all duration-500 group-hover:w-20 group-hover:bg-white"></span>
+</a>
+</div>
+</div>
+</div>
+<!-- Ambient Light Element -->
+<div class="absolute -bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-accent-blue/10 rounded-full blur-[120px]"></div>
+<div class="absolute -top-1/4 -left-1/4 w-[400px] h-[400px] bg-accent-blue/5 rounded-full blur-[100px]"></div>
+</section>
+<!-- Personal Profile: Material Density -->
+<section class="py-32 px-8 bg-surface-container-low reveal" id="about">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+<div class="relative group">
+<div class="aspect-[4/5] bg-surface-container overflow-hidden shadow-2xl transition-premium group-hover:shadow-accent-blue/5">
+<img alt="Profile" class="w-full h-full object-cover grayscale brightness-75 transition-transform duration-1000 ease-out group-hover:scale-105" data-alt="Black and white professional portrait of a man in a dark turtleneck looking thoughtfully into the distance with sharp lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNuR2xalIPiF_HTN0WQGU_nrzCYUZdG6rF3dRugZ3mNqapPSh1VyiqWDPDzKHYdM2BF6TgcPMSuc3QpLIra7Sv8YRPc_kx-dzG0U2g2cVwnEXEJSUxCS1Yv6PdJpOpYg1UtHAzHNrYqhP-d3f1DDpzEGmF8VUr68fP9DAltNct4jx5HpzApoKL7ucHB7VP40KhOBSwHqcVjpPb-7LgUwyTXZqC3Es8FSGR1CTSajSzcKgya7IkufWDRPh0MMqxXzebAPZlQVdsjw"/>
+</div>
+<div class="absolute -bottom-8 -right-8 w-48 h-48 bg-accent-blue/10 backdrop-blur-3xl p-6 hidden md:block border border-accent-blue/20 transition-premium group-hover:-translate-x-2 group-hover:-translate-y-2">
+<p class="text-[10px] uppercase tracking-[0.3em] text-accent-blue mb-2">Location</p>
+<p class="font-headline text-lg italic">Berlin, Germany</p>
+</div>
+</div>
+<div class="space-y-12">
+<div class="space-y-4">
+<span class="text-[10px] uppercase tracking-[0.4em] text-accent-blue">Background</span>
+<h2 class="serif-display text-5xl leading-tight">A synthesis of <span class="text-accent-blue">code</span> and spatial logic.</h2>
+</div>
+<div class="space-y-6 text-on-surface-variant font-body leading-relaxed text-lg">
+<p>
+                                I approach software development as a form of digital architecture. Every line of code serves a structural purpose, and every interface is a deliberate space for human interaction.
+                            </p>
+<p>
+                                With a decade of experience across the stack, I specialize in building systems that are as robust as they are refined. My work is defined by what is absent as much as what is present.
+                            </p>
+</div>
+<div class="pt-8 flex gap-12">
+<div>
+<p class="text-3xl serif-display text-accent-blue">12+</p>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Global Awards</p>
+</div>
+<div>
+<p class="text-3xl serif-display text-accent-blue">150k</p>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Lines Refined</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Skills: The Blueprint -->
+<section class="py-32 px-8 bg-surface reveal" id="skills">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+<div class="max-w-2xl">
+<span class="text-[10px] uppercase tracking-[0.4em] text-accent-blue">Expertise</span>
+<h2 class="serif-display text-6xl mt-4">Technical Apparatus</h2>
+</div>
+<p class="text-on-surface-variant max-w-xs text-right hidden md:block italic">A curated selection of modern technologies used to construct high-performance environments.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-accent-blue/10">
+<!-- Tech Column 1 -->
+<div class="bg-surface p-12 space-y-8 border-r border-accent-blue/5 transition-premium hover:bg-surface-container-low group">
+<h3 class="serif-display text-2xl italic text-accent-blue">Frontend</h3>
+<ul class="space-y-4 text-on-surface-variant font-body">
+<li class="flex justify-between items-center group/item">
+<span class="group-hover/item:text-accent-blue transition-colors duration-500">React &amp; Next.js</span>
+<span class="text-[10px] opacity-40 group-hover/item:opacity-100 group-hover/item:text-accent-blue">01</span>
+</li>
+<li class="flex justify-between items-center group/item">
+<span class="group-hover/item:text-accent-blue transition-colors duration-500">TypeScript</span>
+<span class="text-[10px] opacity-40 group-hover/item:opacity-100 group-hover/item:text-accent-blue">02</span>
+</li>
+<li class="flex justify-between items-center group/item">
+<span class="group-hover/item:text-accent-blue transition-colors duration-500">Tailwind CSS</span>
+<span class="text-[10px] opacity-40 group-hover/item:opacity-100 group-hover/item:text-accent-blue">03</span>
+</li>
+<li class="flex justify-between items-center group/item">
+<span class="group-hover/item:text-accent-blue transition-colors duration-500">WebGL &amp; Three.js</span>
+<span class="text-[10px] opacity-40 group-hover/item:opacity-100 group-hover/item:text-accent-blue">04</span>
+</li>
+</ul>
+</div>
+<!-- Tech Column 2 -->
+<div class="bg-surface p-12 space-y-8 border-r border-accent-blue/5 transition-premium hover:bg-surface-container-low group">
+<h3 class="serif-display text-2xl italic text-accent-blue">Backend</h3>
+<ul class="space-y-4 text-on-surface-variant font-body">
+<li class="flex justify-between items-center group/item">
+<span class="group-hover/item:text-accent-blue transition-colors duration-500">Node.js / Go</span>
+<span class="text-[10px] opacity-40 group-hover/item:opacity-100 group-hover/item:text-accent-blue">05</span>
+</li>
+<li class="flex justify-between items-center group/item">
+<span class="group-hover/item:text-accent-blue transition-colors duration-500">PostgreSQL</span>
+<span class="text-[10px] opacity-40 group-hover/item:opacity-100 group-hover/item:text-accent-blue">06</span>
+</li>
+<li class="flex justify-between items-center group/item">
+<span class="group-hover/item:text-accent-blue transition-colors duration-500">GraphQL / REST</span>
+<span class="text-[10px] opacity-40 group-hover/item:opacity-100 group-hover/item:text-accent-blue">07</span>
+</li>
+<li class="flex justify-between items-center group/item">
+<span class="group-hover/item:text-accent-blue transition-colors duration-500">Redis</span>
+<span class="text-[10px] opacity-40 group-hover/item:opacity-100 group-hover/item:text-accent-blue">08</span>
+</li>
+</ul>
+</div>
+<!-- Tech Column 3 -->
+<div class="bg-surface p-12 space-y-8 transition-premium hover:bg-surface-container-low group">
+<h3 class="serif-display text-2xl italic text-accent-blue">Systems</h3>
+<ul class="space-y-4 text-on-surface-variant font-body">
+<li class="flex justify-between items-center group/item">
+<span class="group-hover/item:text-accent-blue transition-colors duration-500">AWS &amp; Vercel</span>
+<span class="text-[10px] opacity-40 group-hover/item:opacity-100 group-hover/item:text-accent-blue">09</span>
+</li>
+<li class="flex justify-between items-center group/item">
+<span class="group-hover/item:text-accent-blue transition-colors duration-500">Docker / K8s</span>
+<span class="text-[10px] opacity-40 group-hover/item:opacity-100 group-hover/item:text-accent-blue">10</span>
+</li>
+<li class="flex justify-between items-center group/item">
+<span class="group-hover/item:text-accent-blue transition-colors duration-500">CI/CD Pipelines</span>
+<span class="text-[10px] opacity-40 group-hover/item:opacity-100 group-hover/item:text-accent-blue">11</span>
+</li>
+<li class="flex justify-between items-center group/item">
+<span class="group-hover/item:text-accent-blue transition-colors duration-500">Security Auditing</span>
+<span class="text-[10px] opacity-40 group-hover/item:opacity-100 group-hover/item:text-accent-blue">12</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects: Constructed Works -->
+<section class="py-32 px-8 bg-surface-container-low" id="projects">
+<div class="max-w-7xl mx-auto">
+<div class="mb-32 reveal">
+<span class="text-accent-blue uppercase tracking-[0.3em] text-[10px] mb-6 block">Portfolio Archive — 2024 Edition</span>
+<h2 class="text-7xl md:text-8xl serif-display italic font-light tracking-tight text-on-surface leading-[0.9]">
+                    Selected <br/> <span class="ml-12 md:ml-24 text-accent-blue">Works</span>
+</h2>
+<p class="mt-12 text-on-surface-variant max-w-xl text-lg leading-relaxed font-light">
+                    A curated collection of digital monoliths built with structural integrity and performance at the core. Each project represents a unique challenge in scale, architecture, and user experience.
+                </p>
+</div>
+<!-- Project Gallery -->
+<div class="space-y-48">
+<!-- Project 01: Ethereal OS -->
+<section class="asymmetric-grid group reveal">
+<div class="col-span-12 lg:col-span-7 overflow-hidden relative shadow-2xl transition-premium group-hover:scale-[1.02] group-hover:shadow-accent-blue/10">
+<div class="aspect-[16/10] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out" data-alt="Abstract minimal digital landscape with dark monolithic structures and subtle geometric light reflections in obsidian black" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9EFSlUv35m-QWFA0ORzr2xOUUj1Rlg4UuXjkDC91bHQOU2YGtJaogLPPAi2scJaiDZKBGeMZXGpx3R7DxU-DADS3Hiaic-EZdwgDB0OYEKkusjt0W36jk2XUVPa1YtbkCdcDTreBvWvpn7t1BYyOiNwk5y6JNMN77A-aknUmTdBP_lXgtfcxJfHNwLKf_LxAkiQgU2O1eE4I2E8L254TLkrSvexmCHZtAdwtdbSpyCrfoao2OEC3dkbkJDXioKbNBsbOO3TW2eg"/>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-5 flex flex-col justify-center lg:pl-12 transition-premium group-hover:translate-x-2">
+<span class="text-accent-blue serif-display italic text-2xl mb-4">01.</span>
+<h3 class="text-5xl serif-display tracking-tighter mb-8">Ethereal OS</h3>
+<div class="bg-surface-container-lowest border-l-2 border-accent-blue p-8 mb-8 transition-premium group-hover:bg-black group-hover:border-accent-blue-deep">
+<p class="text-on-surface-variant font-light leading-relaxed italic">
+                            "The challenge was to build a real-time collaborative operating system in the browser. We had to rethink state synchronization using CRDTs while maintaining a 60fps glassmorphic UI."
+                        </p>
+</div>
+<div class="flex flex-wrap gap-3 mb-10">
+<span class="px-4 py-1 text-[10px] uppercase tracking-widest border border-accent-blue/20 text-accent-blue bg-accent-blue/5 transition-premium hover:bg-accent-blue hover:text-white">React 18</span>
+<span class="px-4 py-1 text-[10px] uppercase tracking-widest border border-accent-blue/20 text-accent-blue bg-accent-blue/5 transition-premium hover:bg-accent-blue hover:text-white">TypeScript</span>
+<span class="px-4 py-1 text-[10px] uppercase tracking-widest border border-accent-blue/20 text-accent-blue bg-accent-blue/5 transition-premium hover:bg-accent-blue hover:text-white">WebRTC</span>
+<span class="px-4 py-1 text-[10px] uppercase tracking-widest border border-accent-blue/20 text-accent-blue bg-accent-blue/5 transition-premium hover:bg-accent-blue hover:text-white">Tailwind CSS</span>
+</div>
+<div class="flex items-center gap-8">
+<a class="group/link flex items-center gap-2 text-sm tracking-widest uppercase text-on-surface hover:text-accent-blue transition-colors duration-500" href="#">
+                            Live Demo 
+                            <span class="material-symbols-outlined text-sm group-hover/link:translate-x-2 transition-transform duration-500">arrow_forward</span>
+</a>
+<a class="text-sm tracking-widest uppercase text-on-surface-variant hover:text-accent-blue transition-colors duration-500" href="#">Source</a>
+</div>
+</div>
+</section>
+<!-- Project 02: Quantum Ledger -->
+<section class="asymmetric-grid group reveal">
+<div class="col-span-12 lg:col-span-5 order-2 lg:order-1 flex flex-col justify-center lg:pr-12 transition-premium group-hover:-translate-x-2">
+<span class="text-accent-blue serif-display italic text-2xl mb-4">02.</span>
+<h3 class="text-5xl serif-display tracking-tighter mb-8">Quantum Ledger</h3>
+<div class="bg-surface-container-lowest border-l-2 border-accent-blue/60 p-8 mb-8 transition-premium group-hover:bg-black group-hover:border-accent-blue">
+<p class="text-on-surface-variant font-light leading-relaxed italic">
+                            "A high-frequency trading dashboard requiring sub-millisecond data updates. The architecture leverages Rust-based WASM modules for heavy data processing directly on the client side."
+                        </p>
+</div>
+<div class="flex flex-wrap gap-3 mb-10">
+<span class="px-4 py-1 text-[10px] uppercase tracking-widest border border-accent-blue/20 text-accent-blue bg-accent-blue/5 transition-premium hover:bg-accent-blue hover:text-white">Next.js</span>
+<span class="px-4 py-1 text-[10px] uppercase tracking-widest border border-accent-blue/20 text-accent-blue bg-accent-blue/5 transition-premium hover:bg-accent-blue hover:text-white">Rust / WASM</span>
+<span class="px-4 py-1 text-[10px] uppercase tracking-widest border border-accent-blue/20 text-accent-blue bg-accent-blue/5 transition-premium hover:bg-accent-blue hover:text-white">GraphQL</span>
+<span class="px-4 py-1 text-[10px] uppercase tracking-widest border border-accent-blue/20 text-accent-blue bg-accent-blue/5 transition-premium hover:bg-accent-blue hover:text-white">D3.js</span>
+</div>
+<div class="flex items-center gap-8">
+<a class="group/link flex items-center gap-2 text-sm tracking-widest uppercase text-on-surface hover:text-accent-blue transition-colors duration-500" href="#">
+                            Live Demo 
+                            <span class="material-symbols-outlined text-sm group-hover/link:translate-x-2 transition-transform duration-500">arrow_forward</span>
+</a>
+<a class="text-sm tracking-widest uppercase text-on-surface-variant hover:text-accent-blue transition-colors duration-500" href="#">Case Study</a>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-7 order-1 lg:order-2 overflow-hidden relative shadow-2xl transition-premium group-hover:scale-[1.02] group-hover:shadow-accent-blue/10">
+<div class="aspect-[16/10] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out" data-alt="Dark futuristic server room with linear blue neon highlights and metallic grid patterns, high tech architectural atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADShD0gb04WRNpKQJQhJzkdYhYPrIue36bp8Ry4n-DR4RW0pMJDsRqJj002TmlHE_AQzkAeybk6HfQIQXOJVOWybbKgORpnjwscx82xWDFoNxrHkEc2fPXiwjjrVLrKUuuWfTgqRdUujaojh_Jnf2J0VE5BVlWV0NlMQFOQFEt882n_O03Bw2wy4V0AyNk5_xYx0tmzLrUzuIA6pBtdkswijMHaDtf9hql18K8XU4iF2w_9gxA6D0JvQReF-dLdLwKKsqOk4GJfw"/>
+</div>
+</div>
+</section>
+<!-- Project 03: Nero E-Commerce -->
+<section class="asymmetric-grid group reveal">
+<div class="col-span-12 lg:col-span-7 overflow-hidden relative shadow-2xl transition-premium group-hover:scale-[1.02] group-hover:shadow-accent-blue/10">
+<div class="aspect-[16/10] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out" data-alt="Modern brutalist skyscraper facade with sharp angles and dramatic shadows at dusk, architectural photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLrw8H5vlL4a2oSBr4HLBXdEJxkdDKhqKPNgMJAAi0CwBzrAWSbp0kgf4M9ZA2W205oYYZpTmAMaQPOFd0q6uwetsVLqNXQpd10uolXOcbkvfbQQXKG6ckZKVR9zqcB4JRkXan_YxLJ0UYEKNPVUimwCluFZV6wEw0lWW8eQyXLKzPYkYr6SgEMByDRXJD6Ng5e6NYW1Jun1B2AUeI3d2MH42u9DhfqsPs3JWOTe4d7NMENsXPyAt860iutefKw77UM_oPDymMlA"/>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-5 flex flex-col justify-center lg:pl-12 transition-premium group-hover:translate-x-2">
+<span class="text-accent-blue serif-display italic text-2xl mb-4">03.</span>
+<h3 class="text-5xl serif-display tracking-tighter mb-8">Nero E-Commerce</h3>
+<div class="bg-surface-container-lowest border-l-2 border-accent-blue p-8 mb-8 transition-premium group-hover:bg-black group-hover:border-accent-blue-deep">
+<p class="text-on-surface-variant font-light leading-relaxed italic">
+                            "Headless commerce for luxury fashion. Focused on zero-layout shift during image loading and an ultra-minimalist checkout flow that prioritizes speed and security."
+                        </p>
+</div>
+<div class="flex flex-wrap gap-3 mb-10">
+<span class="px-4 py-1 text-[10px] uppercase tracking-widest border border-accent-blue/20 text-accent-blue bg-accent-blue/5 transition-premium hover:bg-accent-blue hover:text-white">Shopify Plus</span>
+<span class="px-4 py-1 text-[10px] uppercase tracking-widest border border-accent-blue/20 text-accent-blue bg-accent-blue/5 transition-premium hover:bg-accent-blue hover:text-white">Remix</span>
+<span class="px-4 py-1 text-[10px] uppercase tracking-widest border border-accent-blue/20 text-accent-blue bg-accent-blue/5 transition-premium hover:bg-accent-blue hover:text-white">Stripe</span>
+<span class="px-4 py-1 text-[10px] uppercase tracking-widest border border-accent-blue/20 text-accent-blue bg-accent-blue/5 transition-premium hover:bg-accent-blue hover:text-white">Framer Motion</span>
+</div>
+<div class="flex items-center gap-8">
+<a class="group/link flex items-center gap-2 text-sm tracking-widest uppercase text-on-surface hover:text-accent-blue transition-colors duration-500" href="#">
+                            Live Demo 
+                            <span class="material-symbols-outlined text-sm group-hover/link:translate-x-2 transition-transform duration-500">arrow_forward</span>
+</a>
+<a class="text-sm tracking-widest uppercase text-on-surface-variant hover:text-accent-blue transition-colors duration-500" href="#">Source</a>
+</div>
+</div>
+</section>
+</div>
+<!-- Pagination/Archive Link -->
+<div class="mt-48 flex justify-center reveal">
+<button class="group flex flex-col items-center">
+<span class="text-on-surface-variant uppercase tracking-[0.4em] text-[10px] mb-4 group-hover:text-accent-blue transition-colors duration-500">Explore Archive</span>
+<span class="material-symbols-outlined text-3xl font-light text-accent-blue animate-bounce">expand_more</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Monolith Code Block (Signature) -->
+<section class="py-32 px-8 bg-surface reveal">
+<div class="max-w-5xl mx-auto">
+<div class="bg-surface-container-lowest relative border-l-2 border-accent-blue p-8 md:p-16 transition-premium hover:border-accent-blue-deep shadow-lg hover:shadow-accent-blue/5">
+<div class="absolute top-4 right-4 text-[10px] uppercase tracking-widest text-accent-blue/40">src/philosophy.ts</div>
+<code class="font-body text-sm md:text-base leading-relaxed text-secondary-dim block">
+<span class="text-accent-blue italic">// The Architectural Mandate</span><br/>
+<span class="text-accent-blue">const</span> vision = {<br/>
+                          structure: <span class="text-on-surface">"Uncompromising"</span>,<br/>
+                          aesthetic: <span class="text-on-surface">"Reduced"</span>,<br/>
+                          execution: <span class="text-on-surface">"Flawless"</span><br/>
+                        };<br/><br/>
+<span class="text-accent-blue">function</span> createDigitalSpace(intent: Intent) {<br/>
+                          <span class="text-accent-blue">return</span> intent.filter(noise =&gt; noise === <span class="text-accent-blue">null</span>)<br/>
+                            .map(essence =&gt; buildWithPrecision(essence));<br/>
+                        }
+                    </code>
+</div>
+</div>
+</section>
+<!-- Contact: The Final Dialogue -->
+<section class="py-32 px-8 bg-surface-container reveal" id="contact">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
+<div>
+<span class="text-[10px] uppercase tracking-[0.4em] text-accent-blue">Inquiry</span>
+<h2 class="serif-display text-6xl mt-4 mb-8">Let us begin a <br/><span class="italic text-accent-blue">new structure.</span></h2>
+<div class="space-y-4">
+<p class="text-on-surface-variant font-body">For commissions, technical consulting, or speaking engagements.</p>
+<a class="block text-2xl serif-display text-accent-blue hover:text-white transition-colors duration-500" href="mailto:office@architect.dev">office@architect.dev</a>
+</div>
+</div>
+<form class="space-y-12">
+<div class="relative">
+<label class="text-[10px] uppercase tracking-widest text-accent-blue absolute -top-6 left-0">01. Identity</label>
+<input class="w-full bg-transparent border-b border-accent-blue/30 py-4 focus:outline-none focus:border-accent-blue transition-colors duration-500 text-on-surface placeholder:text-zinc-700" placeholder="Your Name" type="text"/>
+</div>
+<div class="relative">
+<label class="text-[10px] uppercase tracking-widest text-accent-blue absolute -top-6 left-0">02. Communication</label>
+<input class="w-full bg-transparent border-b border-accent-blue/30 py-4 focus:outline-none focus:border-accent-blue transition-colors duration-500 text-on-surface placeholder:text-zinc-700" placeholder="Email Address" type="email"/>
+</div>
+<div class="relative">
+<label class="text-[10px] uppercase tracking-widest text-accent-blue absolute -top-6 left-0">03. Intent</label>
+<textarea class="w-full bg-transparent border-b border-accent-blue/30 py-4 focus:outline-none focus:border-accent-blue transition-colors duration-500 text-on-surface placeholder:text-zinc-700 resize-none" placeholder="Brief Description" rows="4"></textarea>
+</div>
+<button class="w-full py-6 bg-accent-blue text-white font-bold uppercase tracking-[0.2em] text-xs transition-all duration-500 hover:bg-accent-blue-deep active:scale-[0.98] shadow-lg hover:shadow-accent-blue/20">
+                            Submit Inquiry
+                        </button>
+</form>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-black">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto border-t border-accent-blue/10 w-full py-20 px-8">
+<div class="font-['Inter'] text-[10px] uppercase tracking-[0.2em] text-zinc-400 mb-8 md:mb-0">
+                © 2024 Architectural Silence. <span class="text-accent-blue">Built with precision.</span>
+</div>
+<div class="flex space-x-12">
+<a class="font-['Inter'] text-[10px] uppercase tracking-[0.2em] text-zinc-600 hover:text-accent-blue transition-colors duration-500" href="#">Github</a>
+<a class="font-['Inter'] text-[10px] uppercase tracking-[0.2em] text-zinc-600 hover:text-accent-blue transition-colors duration-500" href="#">LinkedIn</a>
+<a class="font-['Inter'] text-[10px] uppercase tracking-[0.2em] text-zinc-600 hover:text-accent-blue transition-colors duration-500" href="#">Email</a>
+</div>
+</div>
+</footer>
+<script>
+    // Intersection Observer for scroll-reveal animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                // Optional: stop observing once revealed
+                // observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Navigation scroll effect
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('main-nav');
+        const navContainer = document.getElementById('nav-container');
+        if (window.scrollY > 100) {
+            nav.classList.add('scrolled');
+            navContainer.classList.remove('py-6');
+            navContainer.classList.add('py-4');
+        } else {
+            nav.classList.remove('scrolled');
+            navContainer.classList.remove('py-4');
+            navContainer.classList.add('py-6');
+        }
+    });
+</script>
+</body></html>
