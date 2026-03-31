@@ -10,7 +10,7 @@
     { "label": "Leaflet", "icon": "leaflet" },
     { "label": "i18n", "icon": "googletranslate" }
   ],
-  "image": "../../assets/images/project-luxe-estate.webp",
+  "image": "../../assets/images/project-luxe-estate.png",
   "imageAlt": "Minimalist architectural visualization of a luxury estate with clean lines, sharp edges, and dramatic monochromatic lighting",
   "liveUrl": "https://luxe-estate-ten.vercel.app",
   "secondaryLabel": "Source",

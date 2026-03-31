@@ -13,28 +13,28 @@ const columns: SkillColumn[] = [
 	{
 		title: 'Frontend',
 		items: [
-			{ name: 'React & Next.js', number: '01' },
-			{ name: 'TypeScript', number: '02' },
-			{ name: 'Tailwind CSS', number: '03' },
-			{ name: 'WebGL & Three.js', number: '04' },
+			{ name: 'HTML & CSS', number: '01' },
+			{ name: 'React 19 & Next.js', number: '02' },
+			{ name: 'Astro & TypeScript', number: '03' },
+			{ name: 'Tailwind CSS 4', number: '04' },
 		],
 	},
 	{
 		title: 'Backend',
 		items: [
-			{ name: 'Node.js / Go', number: '05' },
-			{ name: 'PostgreSQL', number: '06' },
-			{ name: 'GraphQL / REST', number: '07' },
-			{ name: 'Redis', number: '08' },
+			{ name: 'Bun / Node.js', number: '05' },
+			{ name: 'PostgreSQL / Supabase', number: '06' },
+			{ name: 'WebSockets', number: '07' },
+			{ name: 'Clean Architecture', number: '08' },
 		],
 	},
 	{
-		title: 'Systems',
+		title: 'Systems & Extras',
 		items: [
-			{ name: 'AWS & Vercel', number: '09' },
-			{ name: 'Docker / K8s', number: '10' },
-			{ name: 'CI/CD Pipelines', number: '11' },
-			{ name: 'Security Auditing', number: '12' },
+			{ name: 'Artificial Intelligence', number: '09' },
+			{ name: 'Vercel / Netlify', number: '10' },
+			{ name: 'Zod Validation', number: '11' },
+			{ name: 'Performance Optimization', number: '12' },
 		],
 	},
 ]
@@ -45,13 +45,13 @@ const columns: SkillColumn[] = [
 		<!-- Header -->
 		<div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
 			<div class="max-w-2xl">
-				<span class="text-[10px] uppercase tracking-[0.4em] text-accent-blue"
+				<span class="text-[10px] uppercase tracking-[0.4em] text-primary"
 					>Expertise</span
 				>
-				<h2 class="serif-display text-6xl mt-4">Technical Apparatus</h2>
+				<h2 class="serif-display text-6xl mt-4 text-on-surface">Technical Apparatus</h2>
 			</div>
 			<p
-				class="text-on-surface-variant max-w-xs text-right hidden md:block italic"
+				class="text-on-surface-variant max-w-xs text-right hidden md:block italic font-light"
 			>
 				A curated selection of modern technologies used to construct
 				high-performance environments.
@@ -59,25 +59,24 @@ const columns: SkillColumn[] = [
 		</div>
 
 		<!-- Skills Grid -->
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-accent-blue/10">
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
 			{
 				columns.map((column, colIdx) => (
 					<div
 						class:list={[
 							'bg-surface p-12 space-y-8 transition-premium hover:bg-surface-container-low group',
-							colIdx < columns.length - 1 && 'border-r border-accent-blue/5',
 						]}
 					>
-						<h3 class="serif-display text-2xl italic text-accent-blue">
+						<h3 class="serif-display text-2xl italic text-primary">
 							{column.title}
 						</h3>
 						<ul class="space-y-4 text-on-surface-variant font-body">
 							{column.items.map((item) => (
 								<li class="flex justify-between items-center group/item">
-									<span class="group-hover/item:text-accent-blue transition-colors duration-500">
+									<span class="group-hover/item:text-on-surface transition-colors duration-500">
 										{item.name}
 									</span>
-									<span class="text-[10px] opacity-40 group-hover/item:opacity-100 group-hover/item:text-accent-blue">
+									<span class="text-[10px] opacity-40 group-hover/item:opacity-100 group-hover/item:text-primary transition-opacity duration-500">
 										{item.number}
 									</span>
 								</li>
