@@ -23,7 +23,7 @@ const {
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,400;0,6..72,800;1,6..72,200&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..700;1,300..700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
 			rel="stylesheet"
 		/>
 		<link
@@ -33,7 +33,33 @@ const {
 		<title>{title}</title>
 		<ClientRouter />
 	</head>
-	<body class="antialiased overflow-x-hidden">
+	<body class="antialiased overflow-x-hidden relative">
+		<!-- Arquitectural Grain Overlay -->
+		<div class="fixed inset-0 pointer-events-none z-[9999] opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
 		<slot />
+
+		<script>
+			// Tipografía Dinámica - Motor de Scroll
+			const updateScrollProgress = () => {
+				const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+				const progress = window.scrollY / scrollHeight;
+				document.documentElement.style.setProperty('--scroll-progress', progress.toFixed(4));
+				requestAnimationFrame(updateScrollProgress);
+			}
+			
+			// Inicializar motor
+			requestAnimationFrame(updateScrollProgress);
+			
+			// Observer para Scroll Reveal
+			const revealObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('active');
+					}
+				});
+			}, { threshold: 0.1 });
+
+			document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+		</script>
 	</body>
 </html>

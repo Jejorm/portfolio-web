@@ -94,9 +94,42 @@ body {
    UTILITY CLASSES — Native CSS animations & layouts
    ═══════════════════════════════════════════════════ */
 
-/* Serif display shorthand */
+/* ── Typography Engine ── */
+:root {
+	--scroll-progress: 0;
+}
+
 .serif-display {
 	font-family: "Newsreader", serif;
+	font-optical-sizing: auto;
+	/* El opsz se ajusta al tamaño de fuente, pero nosotros le damos un empujón con el scroll */
+	font-variation-settings: 
+		"opsz" calc(32 + (var(--scroll-progress) * 40)), 
+		"wght" calc(200 + (var(--scroll-progress) * 100));
+	letter-spacing: calc(-0.02em + (var(--scroll-progress) * 0.01em));
+	transition: font-variation-settings 0.1s linear, letter-spacing 0.1s linear;
+}
+
+/* Forzar opsz máximo en títulos gigantes con escala controlada */
+h1.serif-display {
+	font-size: clamp(3.5rem, 8vw, 6.5rem);
+	line-height: 0.95;
+	font-variation-settings: "opsz" 72, "wght" 300;
+	margin-bottom: 2rem;
+}
+
+/* Opsz medio para secciones con mejor balance */
+h2.serif-display {
+	font-size: clamp(2.5rem, 6vw, 4.5rem);
+	line-height: 1;
+	font-variation-settings: "opsz" 48, "wght" 400;
+}
+
+/* Texto de cuerpo con más presencia */
+.lead-text {
+	font-size: clamp(1.125rem, 2vw, 1.35rem);
+	line-height: 1.6;
+	letter-spacing: -0.01em;
 }
 
 /* Material Symbols config */
@@ -111,15 +144,26 @@ body {
 /* ── Scroll Reveal Animation ── */
 .reveal {
 	opacity: 0;
-	transform: translateY(30px);
+	transform: translateY(30px) scale(0.995);
+	filter: blur(8px) contrast(1.2) brightness(0.8);
 	transition:
-		opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-		transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-	will-change: opacity, transform;
+		opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+		transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+		filter 0.8s ease-out;
+	will-change: opacity, transform, filter;
 }
+
 .reveal.active {
 	opacity: 1;
-	transform: translateY(0);
+	transform: translateY(0) scale(1);
+	filter: blur(0) contrast(1) brightness(1);
+}
+
+/* ── Material Surface Effects ── */
+.surface-texture {
+	position: relative;
+	background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+	background-size: 24px 24px;
 }
 
 /* ── Premium Transition ── */
@@ -142,12 +186,46 @@ nav.scrolled {
 	border-color: rgba(59, 130, 246, 0.2);
 }
 
-/* ── Mobile Menu ── */
-.mobile-menu {
-	max-height: 0;
-	overflow: hidden;
-	transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+/* ── Exhibition Gallery Effects ── */
+.museum-frame {
+	position: relative;
+	padding: 1rem;
+	background: var(--color-surface-container-low);
+	border: 1px solid rgba(255, 255, 255, 0.03);
 }
-.mobile-menu.open {
-	max-height: 400px;
+
+.museum-frame::before {
+	content: "SCALE 1:100";
+	position: absolute;
+	top: -10px;
+	left: 20px;
+	font-size: 8px;
+	letter-spacing: 0.2em;
+	color: var(--color-primary);
+	background: var(--color-surface);
+	padding: 0 5px;
+}
+
+.glass-reflection {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.1) 0%,
+		rgba(255, 255, 255, 0.05) 10%,
+		transparent 40%,
+		transparent 100%
+	);
+	pointer-events: none;
+	z-index: 30;
+	opacity: 0.5;
+}
+
+.technical-mark {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	border: 1px solid var(--color-primary);
+	opacity: 0.3;
+	z-index: 40;
 }
