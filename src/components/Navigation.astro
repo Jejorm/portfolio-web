@@ -91,52 +91,53 @@ const t = useTranslations(lang)
 
 		<!-- Mobile Hamburger -->
 		<button
-			class="md:hidden p-2 -mr-2 text-on-surface focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+			class="md:hidden p-2 -mr-2 text-on-surface focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary group"
 			id="menu-toggle"
 			aria-label="Open navigation menu"
 			aria-expanded="false"
 			aria-controls="mobile-menu"
 		>
-			<span
-				class="material-symbols-outlined text-2xl pointer-events-none"
-				aria-hidden="true">menu</span
-			>
+			<div class="w-6 h-5 relative flex flex-col justify-center items-center">
+				<span class="hamburger-line absolute top-0 left-0 w-full h-0.5 bg-current transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-[.open]:top-1/2 group-[.open]:-translate-y-1/2 group-[.open]:rotate-45"></span>
+				<span class="hamburger-line w-3/4 h-0.5 bg-current transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-[.open]:opacity-0 group-[.open]:w-0 ml-auto"></span>
+				<span class="hamburger-line absolute bottom-0 left-0 w-full h-0.5 bg-current transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-[.open]:bottom-1/2 group-[.open]:translate-y-1/2 group-[.open]:-rotate-45"></span>
+			</div>
 		</button>
 	</div>
 
 	<!-- Mobile Menu -->
 	<div
-		class="mobile-menu md:hidden"
+		class="mobile-menu md:hidden overflow-hidden"
 		id="mobile-menu"
 		role="region"
 		aria-label="Mobile Navigation"
 	>
 		<div
-			class="flex flex-col px-8 pb-8 pt-2 space-y-6 bg-surface/95 backdrop-blur-3xl border-b border-white/5"
+			class="flex flex-col px-8 pb-6 pt-2 space-y-4 bg-surface/95 backdrop-blur-3xl border-b border-white/5"
 		>
 			<a
-				class="text-on-surface-variant hover:text-on-surface transition-colors duration-500 serif-display tracking-tight text-xl"
+				class="text-on-surface-variant hover:text-on-surface transition-colors duration-500 serif-display tracking-tight text-base"
 				href="#about">{t("nav.about")}</a
 			>
 			<a
-				class="text-on-surface-variant hover:text-on-surface transition-colors duration-500 serif-display tracking-tight text-xl"
+				class="text-on-surface-variant hover:text-on-surface transition-colors duration-500 serif-display tracking-tight text-base"
 				href="#skills">{t("nav.skills")}</a
 			>
 			<a
-				class="text-on-surface-variant hover:text-on-surface transition-colors duration-500 serif-display tracking-tight text-xl"
+				class="text-on-surface-variant hover:text-on-surface transition-colors duration-500 serif-display tracking-tight text-base"
 				href="#projects">{t("nav.projects")}</a
 			>
 			<a
-				class="inline-block w-full px-6 py-4 bg-primary text-on-primary font-medium tracking-wide text-center transition-all duration-500 hover:bg-white rounded-none mt-4"
+				class="inline-block w-full px-6 py-2.5 bg-primary text-on-primary font-medium tracking-wide text-center transition-all duration-500 hover:bg-white rounded-none mt-1 text-[10px] uppercase"
 				href="#contact">{t("nav.contact")}</a
 			>
 
-			<div class="flex gap-4 pt-4 border-t border-white/5">
+			<div class="flex gap-6 pt-3 border-t border-white/5">
 				{
 					Object.entries(languages).map(([l, label]) => (
 						<a
 							href={l === "en" ? "/" : `/${l}/`}
-							class={`text-[10px] uppercase tracking-widest ${lang === l ? "text-primary" : "text-on-surface-variant"}`}
+							class={`text-[9px] uppercase tracking-[0.2em] ${lang === l ? "text-primary font-bold" : "text-on-surface-variant opacity-60"}`}
 						>
 							{label}
 						</a>
@@ -146,6 +147,35 @@ const t = useTranslations(lang)
 		</div>
 	</div>
 </nav>
+
+<style>
+	.mobile-menu {
+		display: grid;
+		grid-template-rows: 0fr;
+		opacity: 0;
+		visibility: hidden;
+		transition: 
+			grid-template-rows 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+			opacity 0.4s ease,
+			visibility 0.4s;
+	}
+
+	.mobile-menu.open {
+		grid-template-rows: 1fr;
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.mobile-menu > div {
+		min-height: 0;
+	}
+
+	@media (min-width: 768px) {
+		.mobile-menu {
+			display: none;
+		}
+	}
+</style>
 
 <script>
 	function initNav() {
@@ -183,27 +213,21 @@ const t = useTranslations(lang)
 		// Mobile menu toggle with ARIA updates
 		menuToggle.addEventListener("click", () => {
 			const isOpen = mobileMenu.classList.toggle("open");
+			menuToggle.classList.toggle("open", isOpen);
 			menuToggle.setAttribute("aria-expanded", isOpen.toString());
 			menuToggle.setAttribute(
 				"aria-label",
 				isOpen ? "Close navigation menu" : "Open navigation menu",
 			);
-
-			const icon = menuToggle.querySelector(".material-symbols-outlined");
-			if (icon) {
-				icon.textContent = isOpen ? "close" : "menu";
-			}
 		});
 
 		// Close mobile menu on link click
 		mobileMenu.querySelectorAll("a").forEach((link) => {
 			link.addEventListener("click", () => {
 				mobileMenu.classList.remove("open");
+				menuToggle.classList.remove("open");
 				menuToggle.setAttribute("aria-expanded", "false");
 				menuToggle.setAttribute("aria-label", "Open navigation menu");
-
-				const icon = menuToggle.querySelector(".material-symbols-outlined");
-				if (icon) icon.textContent = "menu";
 			});
 		});
 	}
