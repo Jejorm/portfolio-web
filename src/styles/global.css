@@ -103,18 +103,22 @@ body {
 	font-family: "Newsreader", serif;
 	font-optical-sizing: auto;
 	/* El opsz se ajusta al tamaño de fuente, pero nosotros le damos un empujón con el scroll */
-	font-variation-settings: 
-		"opsz" calc(32 + (var(--scroll-progress) * 40)), 
+	font-variation-settings:
+		"opsz" calc(32 + (var(--scroll-progress) * 40)),
 		"wght" calc(200 + (var(--scroll-progress) * 100));
 	letter-spacing: calc(-0.02em + (var(--scroll-progress) * 0.01em));
-	transition: font-variation-settings 0.1s linear, letter-spacing 0.1s linear;
+	transition:
+		font-variation-settings 0.1s linear,
+		letter-spacing 0.1s linear;
 }
 
 /* Forzar opsz máximo en títulos gigantes con escala controlada */
 h1.serif-display {
 	font-size: clamp(3.5rem, 8vw, 6.5rem);
 	line-height: 0.95;
-	font-variation-settings: "opsz" 72, "wght" 300;
+	font-variation-settings:
+		"opsz" 72,
+		"wght" 300;
 	margin-bottom: 2rem;
 }
 
@@ -122,7 +126,9 @@ h1.serif-display {
 h2.serif-display {
 	font-size: clamp(2.5rem, 6vw, 4.5rem);
 	line-height: 1;
-	font-variation-settings: "opsz" 48, "wght" 400;
+	font-variation-settings:
+		"opsz" 48,
+		"wght" 400;
 }
 
 /* Texto de cuerpo con más presencia */
@@ -162,7 +168,11 @@ h2.serif-display {
 /* ── Material Surface Effects ── */
 .surface-texture {
 	position: relative;
-	background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+	background-image: radial-gradient(
+		circle at 2px 2px,
+		rgba(255, 255, 255, 0.05) 1px,
+		transparent 0
+	);
 	background-size: 24px 24px;
 }
 
@@ -232,7 +242,10 @@ nav.scrolled {
 
 /* ── Precision Cursor Base ── */
 @media (hover: hover) and (pointer: fine) {
-	html, body, a, button {
+	html,
+	body,
+	a,
+	button {
 		cursor: none !important;
 	}
 }
@@ -250,7 +263,9 @@ nav.scrolled {
 	letter-spacing: 0.3em;
 	text-transform: uppercase;
 	color: var(--color-on-surface-variant);
-	transition: color 0.4s ease, transform 0.2s ease;
+	transition:
+		color 0.4s ease,
+		transform 0.2s ease;
 }
 
 .nav-link:hover {
@@ -269,7 +284,9 @@ nav.scrolled {
 	width: 0;
 	height: 1px;
 	background-color: var(--color-primary);
-	transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	transition:
+		width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+		left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-link:hover::after {
@@ -291,8 +308,14 @@ nav.scrolled {
 }
 
 @keyframes slide-to-left {
-	from { transform: translateX(0); opacity: 1; }
-	to { transform: translateX(-30px); opacity: 0; }
+	from {
+		transform: translateX(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateX(-30px);
+		opacity: 0;
+	}
 }
 
 ::view-transition-old(root) {
@@ -304,6 +327,7 @@ nav.scrolled {
 }
 
 /* Evitar parpadeo en elementos fijos */
-#nav-container, .noise-overlay {
+#nav-container,
+.noise-overlay {
 	view-transition-name: persistent-ui;
 }

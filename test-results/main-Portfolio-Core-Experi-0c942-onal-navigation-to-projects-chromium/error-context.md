@@ -1,0 +1,245 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - navigation "Main Navigation" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Go to homepage" [ref=e4]:
+        - /url: /
+        - img "Logo" [ref=e6]
+      - generic [ref=e8]:
+        - link "About" [ref=e9]:
+          - /url: "#about"
+        - link "Skills" [ref=e10]:
+          - /url: "#skills"
+        - link "Projects" [ref=e11]:
+          - /url: "#projects"
+        - link "Contact" [ref=e12]:
+          - /url: "#contact"
+        - button "Language" [ref=e14]:
+          - generic [ref=e15]: language
+          - text: English
+  - main [ref=e16]:
+    - region "Architecting scalable systems & precise UI." [ref=e17]:
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - paragraph [ref=e21]: Full-Stack Architecture & Development
+          - heading "Architecting scalable systems & precise UI." [level=1] [ref=e23]:
+            - text: Architecting
+            - text: scalable systems
+            - text: "& precise UI."
+        - generic [ref=e24]:
+          - img "Portrait of the developer in a high-contrast, architectural style" [ref=e27]
+          - paragraph [ref=e28]: I design and build high-performance web applications using React 19, Next.js, and modern runtimes like Bun. Focus on structural integrity and aesthetic reduction.
+          - link "Navigate to selected projects archive" [ref=e29]:
+            - /url: "#projects"
+            - text: View Archive
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - img "Professional portrait of a developer" [ref=e36]
+        - generic [ref=e37]:
+          - paragraph [ref=e38]: Current Base
+          - paragraph [ref=e39]: Remote / Ecuador
+      - generic [ref=e40]:
+        - generic [ref=e41]:
+          - text: Background
+          - heading "Developing systems that scale and interfaces that perform." [level=2] [ref=e42]
+        - generic [ref=e43]:
+          - paragraph [ref=e44]: I am a Full-Stack Developer who treats software engineering as digital architecture. I don't just write code; I design resilient systems that solve complex business problems while maintaining an uncompromising standard for user experience.
+          - paragraph [ref=e45]: My expertise lies in bridging the gap between deep backend infrastructure (Node, Bun) and cutting-edge frontend ecosystems (React 19, Next.js, Astro). I build for performance, scalability, and maintainability.
+    - generic [ref=e47]:
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - text: Expertise
+          - heading "Technical Skills" [level=2] [ref=e50]
+        - paragraph [ref=e51]: A curated selection of modern technologies used to construct high-performance environments.
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - heading "Frontend Architecture" [level=3] [ref=e54]
+          - list [ref=e55]:
+            - listitem [ref=e56]:
+              - generic [ref=e57]: React 19 & Next.js
+              - generic [ref=e58]: "01"
+            - listitem [ref=e59]:
+              - generic [ref=e60]: Astro & TypeScript
+              - generic [ref=e61]: "02"
+            - listitem [ref=e62]:
+              - generic [ref=e63]: Tailwind CSS 4
+              - generic [ref=e64]: "03"
+            - listitem [ref=e65]:
+              - generic [ref=e66]: State Management & Signals
+              - generic [ref=e67]: "04"
+        - generic [ref=e68]:
+          - heading "Backend Ecosystems" [level=3] [ref=e69]
+          - list [ref=e70]:
+            - listitem [ref=e71]:
+              - generic [ref=e72]: Bun / Node.js
+              - generic [ref=e73]: "05"
+            - listitem [ref=e74]:
+              - generic [ref=e75]: PostgreSQL & Supabase
+              - generic [ref=e76]: "06"
+            - listitem [ref=e77]:
+              - generic [ref=e78]: WebSockets & Real-time
+              - generic [ref=e79]: "07"
+            - listitem [ref=e80]:
+              - generic [ref=e81]: Clean Architecture
+              - generic [ref=e82]: "08"
+        - generic [ref=e83]:
+          - heading "Platforms & Infrastructure" [level=3] [ref=e84]
+          - list [ref=e85]:
+            - listitem [ref=e86]:
+              - generic [ref=e87]: CI/CD & DevOps
+              - generic [ref=e88]: "09"
+            - listitem [ref=e89]:
+              - generic [ref=e90]: Performance Optimization
+              - generic [ref=e91]: "10"
+            - listitem [ref=e92]:
+              - generic [ref=e93]: Zod & Schema Validation
+              - generic [ref=e94]: "11"
+            - listitem [ref=e95]:
+              - generic [ref=e96]: AI Integration
+              - generic [ref=e97]: "12"
+    - generic [ref=e99]:
+      - generic [ref=e100]:
+        - generic [ref=e101]: Selected Works — 2026 Edition
+        - heading "Projects & infrastructure" [level=2] [ref=e102]:
+          - text: Projects
+          - text: "& infrastructure"
+        - paragraph [ref=e103]: A curated selection of digital structures designed with architectural rigor.
+      - list [ref=e104]:
+        - listitem "Luxe Estate" [ref=e105]:
+          - generic [ref=e107]:
+            - text: SCALE 1:100
+            - generic [ref=e112]: ARCH_VIEW_001 // 40.7128° N, 74.0060° W
+            - img [ref=e114]
+          - generic [ref=e115]:
+            - generic [ref=e118]: "01."
+            - heading "Luxe Estate" [level=3] [ref=e119]
+            - blockquote "Project architectural concept" [ref=e120]:
+              - paragraph [ref=e121]: "\"Redefining the digital luxury real estate experience. Built with Next.js 16 and Supabase, Luxe Estate combines cinematic property visualization with advanced search patterns and real-time mapping for a premium, minimalist feel.\""
+            - generic [ref=e122]:
+              - generic [ref=e123]: Next.js 16
+              - generic [ref=e124]: Supabase
+              - generic [ref=e125]: Tailwind CSS 4
+              - generic [ref=e126]: Leaflet
+              - generic [ref=e127]: i18n
+            - generic [ref=e128]:
+              - link "View live demo of Luxe Estate" [ref=e129]:
+                - /url: https://luxe-estate-ten.vercel.app
+                - text: Execute Demo
+                - generic [ref=e130]: arrow_forward
+              - link "View source repository for Luxe Estate" [ref=e132]:
+                - /url: https://github.com/Jejorm/luxe-estate
+                - text: Source
+        - 'listitem "Assembly: Endgame" [ref=e133]':
+          - generic [ref=e135]:
+            - text: SCALE 1:100
+            - generic [ref=e140]: ARCH_VIEW_002 // 40.7128° N, 74.0060° W
+            - img [ref=e142]
+          - generic [ref=e143]:
+            - generic [ref=e146]: "02."
+            - 'heading "Assembly: Endgame" [level=3] [ref=e147]'
+            - blockquote "Project architectural concept" [ref=e148]:
+              - paragraph [ref=e149]: "\"A high-stakes word-guessing survival game built with React 19. Players must rescue iconic programming languages from the clutches of Assembly. It features dynamic keyboard states, full ARIA accessibility, and a modular architecture focused on performance and UX.\""
+            - generic [ref=e150]:
+              - generic [ref=e151]: React 19
+              - generic [ref=e152]: CSS Grid
+              - generic [ref=e153]: ARIA
+              - generic [ref=e154]: Hooks
+            - generic [ref=e155]:
+              - 'link "View live demo of Assembly: Endgame" [ref=e156]':
+                - /url: https://assembly-endgam3.netlify.app
+                - text: Execute Demo
+                - generic [ref=e157]: arrow_forward
+              - 'link "View source repository for Assembly: Endgame" [ref=e159]':
+                - /url: https://github.com/Jejorm/assembly-endgame
+                - text: Source
+        - listitem "Tickets App" [ref=e160]:
+          - generic [ref=e162]:
+            - text: SCALE 1:100
+            - generic [ref=e167]: ARCH_VIEW_003 // 40.7128° N, 74.0060° W
+            - img [ref=e169]
+          - generic [ref=e170]:
+            - generic [ref=e173]: "03."
+            - heading "Tickets App" [level=3] [ref=e174]
+            - blockquote "Project architectural concept" [ref=e175]:
+              - paragraph [ref=e176]: "\"A high-performance real-time queue system. The frontend leverages React 19 with native WebSockets for instant reactivity across Kiosk, Desk, and Board interfaces. The backend is a lightweight, ultra-fast service built with Bun and TypeScript, handling dynamic ticket prioritization (Normal/Preferential) and multi-desk synchronization with Zod-validated schemas.\""
+            - generic [ref=e177]:
+              - generic [ref=e178]: React 19
+              - generic [ref=e179]: Bun
+              - generic [ref=e180]: WebSockets
+              - generic [ref=e181]: TypeScript
+              - generic [ref=e182]: Zod
+            - generic [ref=e183]:
+              - link "View live demo of Tickets App" [ref=e184]:
+                - /url: https://ticketsapp-react.vercel.app
+                - text: Execute Demo
+                - generic [ref=e185]: arrow_forward
+              - generic [ref=e186]:
+                - link "View frontend source repository for Tickets App" [ref=e187]:
+                  - /url: https://github.com/Jejorm/tickets-app-react
+                  - text: Frontend Source
+                - link "View backend source repository for Tickets App" [ref=e188]:
+                  - /url: https://github.com/Jejorm/tickets-app
+                  - text: Backend Source
+    - generic [ref=e191]:
+      - generic [ref=e192]: src/core/Architecture.ts
+      - code [ref=e194]:
+        - text: /** * The core principles of digital architecture. * Scalability is not an afterthought; it is the foundation. */ import
+        - text: Logger, PerformanceMetrics
+        - text: from '@core/telemetry'; export interface SystemArchitecture
+        - text: "readonly paradigm: 'Monolithic' | 'Microservices'; readonly latencyThresholdMs: number; scale(load: number): Promise<void>;"
+        - text: class MonolithicArchitect implements SystemArchitecture
+        - text: "public readonly paradigm = 'Monolithic'; public readonly latencyThresholdMs = 50; public async scale(load: number): Promise<void> if (load > this.latencyThresholdMs) await this.optimizeResources();"
+        - text: Logger.info('System scaled with zero downtime.');
+        - text: "private async optimizeResources(): Promise<void> return new Promise(resolve => setTimeout(resolve, 0)); // O(1) efficiency"
+    - generic [ref=e197]:
+      - generic [ref=e198]:
+        - text: Technical Advisory
+        - heading "Initiate a new technical collaboration." [level=2] [ref=e199]:
+          - text: Initiate a new
+          - text: technical collaboration.
+        - generic [ref=e200]:
+          - paragraph [ref=e201]: Available for software audits, mission-critical systems development, or joining high-performance engineering teams.
+          - link "jejorm8@gmail.com" [ref=e202]:
+            - /url: mailto:jejorm8@gmail.com
+      - generic [ref=e203]:
+        - generic [ref=e204]:
+          - generic [ref=e205]: 01. Identity
+          - textbox "01. Identity" [ref=e206]:
+            - /placeholder: e.g., Your Name or Company
+        - generic [ref=e207]:
+          - generic [ref=e208]: 02. Communication
+          - textbox "02. Communication" [ref=e209]:
+            - /placeholder: e.g., hello@domain.com
+        - generic [ref=e210]:
+          - generic [ref=e211]: 03. Collaboration
+          - textbox "03. Collaboration" [ref=e212]:
+            - /placeholder: How can we work together? Tell me about your project or idea...
+        - button "Submit message" [ref=e213]
+  - contentinfo "Site Footer" [ref=e214]:
+    - generic [ref=e215]:
+      - generic [ref=e216]: © 2026 Full-Stack Ecosystems. Developed with purpose.
+      - generic [ref=e217]:
+        - link "Visit my GitHub profile" [ref=e218]:
+          - /url: https://github.com/Jejorm
+          - img [ref=e219]
+        - link "Visit my LinkedIn profile" [ref=e221]:
+          - /url: https://www.linkedin.com/in/jeremy-orellana-76224023a/
+          - img [ref=e222]
+  - generic [ref=e226]:
+    - button "Menu" [ref=e227]:
+      - img [ref=e229]
+      - generic: Menu
+    - button "Inspect" [ref=e233]:
+      - img [ref=e235]
+      - generic: Inspect
+    - button "Audit" [ref=e237]:
+      - generic [ref=e238]:
+        - img [ref=e239]
+        - img [ref=e242]
+      - generic: Audit
+    - button "Settings" [ref=e245]:
+      - img [ref=e247]
+      - generic: Settings
+```

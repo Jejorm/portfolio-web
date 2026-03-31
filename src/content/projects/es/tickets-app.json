@@ -1,21 +1,21 @@
 {
-  "order": 3,
-  "number": "03.",
-  "title": "Tickets App",
-  "quote": "\"Sistema de gestión de flujos en tiempo real de alta eficiencia. El frontend implementa React 19 con WebSockets nativos para garantizar reactividad instantánea en terminales de Kiosco, Taquilla y Tablero. El backend, orquestado con Bun y TypeScript, gestiona la priorización dinámica y sincronización multi-punto mediante esquemas de validación Zod.\"",
-  "tags": [
-    { "label": "React 19", "icon": "react" },
-    { "label": "Bun", "icon": "bun" },
-    { "label": "WebSockets", "icon": "socketdotio" },
-    { "label": "TypeScript", "icon": "typescript" },
-    { "label": "Zod", "icon": "zod" }
-  ],
-  "image": "../../../assets/images/project-tickets-websockets.webp",
-  "imageAlt": "Fachada de un rascacielos brutalista moderno con ángulos agudos y sombras dramáticas al atardecer",
-  "liveUrl": "https://ticketsapp-react.vercel.app",
-  "secondaryLabel": "Fuente Frontend",
-  "secondaryUrl": "https://github.com/Jejorm/tickets-app-react",
-  "thirdLabel": "Fuente Backend",
-  "thirdUrl": "https://github.com/Jejorm/tickets-app",
-  "reversed": false
+	"order": 3,
+	"number": "03.",
+	"title": "Tickets App",
+	"quote": "\"Sistema de gestión de flujos en tiempo real de alta eficiencia. El frontend implementa React 19 con WebSockets nativos para garantizar reactividad instantánea en terminales de Kiosco, Taquilla y Tablero. El backend, orquestado con Bun y TypeScript, gestiona la priorización dinámica y sincronización multi-punto mediante esquemas de validación Zod.\"",
+	"tags": [
+		{ "label": "React 19", "icon": "react" },
+		{ "label": "Bun", "icon": "bun" },
+		{ "label": "WebSockets", "icon": "socketdotio" },
+		{ "label": "TypeScript", "icon": "typescript" },
+		{ "label": "Zod", "icon": "zod" }
+	],
+	"image": "../../../assets/images/project-tickets-websockets.webp",
+	"imageAlt": "Fachada de un rascacielos brutalista moderno con ángulos agudos y sombras dramáticas al atardecer",
+	"liveUrl": "https://ticketsapp-react.vercel.app",
+	"secondaryLabel": "Fuente Frontend",
+	"secondaryUrl": "https://github.com/Jejorm/tickets-app-react",
+	"thirdLabel": "Fuente Backend",
+	"thirdUrl": "https://github.com/Jejorm/tickets-app",
+	"reversed": false
 }

@@ -110,7 +110,8 @@ export const ui = {
 		'nav.language': 'Idioma',
 		'nav.language.icon': 'language',
 		'footer.copyright': 'Full-Stack Ecosystems. Desarrollado con propósito.',
-		'seo.title': 'Desarrollador Full-Stack & Arquitecto | Portfolio Profesional',
+		'seo.title':
+			'Desarrollador Full-Stack & Arquitecto | Portfolio Profesional',
 		'seo.description':
 			'Desarrollador Full-stack especializado en React 19, Next.js y sistemas de alto rendimiento. Arquitectura de estructuras digitales escalables con precisión técnica.',
 	},

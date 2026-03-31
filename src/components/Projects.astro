@@ -1,13 +1,13 @@
 ---
 import { Image } from 'astro:assets'
 import { getCollection } from 'astro:content'
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../i18n/utils'
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
 const rawProjects = await getCollection('projects', ({ id }) => {
-	return id.startsWith(`${lang}/`);
+	return id.startsWith(`${lang}/`)
 })
 const projects = rawProjects
 	.map((p) => p.data)

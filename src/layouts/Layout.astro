@@ -1,30 +1,30 @@
 ---
-import { ClientRouter } from "astro:transitions";
-import Cursor from "../components/Cursor.astro";
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import "../styles/global.css";
+import { ClientRouter } from 'astro:transitions'
+import Cursor from '../components/Cursor.astro'
+import { getLangFromUrl, useTranslations } from '../i18n/utils'
+import '../styles/global.css'
 
 // Local Fonts
-import "@fontsource-variable/inter";
-import "@fontsource-variable/newsreader";
-import "@fontsource/material-symbols-outlined";
+import '@fontsource-variable/inter'
+import '@fontsource-variable/newsreader'
+import '@fontsource/material-symbols-outlined'
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
 interface Props {
-	title?: string;
-	description?: string;
+	title?: string
+	description?: string
 }
 
-const { title = t("seo.title"), description = t("seo.description") } =
-	Astro.props;
+const { title = t('seo.title'), description = t('seo.description') } =
+	Astro.props
 
 const canonicalURL = new URL(
 	Astro.url.pathname,
-	Astro.site || "https://jeremyo.dev",
-);
-const ogImage = new URL("/og-image.png", Astro.site || "https://jeremyo.dev");
+	Astro.site || 'https://jeremyo.dev',
+)
+const ogImage = new URL('/og-image.png', Astro.site || 'https://jeremyo.dev')
 ---
 
 <!doctype html>

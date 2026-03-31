@@ -1,19 +1,21 @@
 ---
-import Cursor from "../components/Cursor.astro";
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import "../styles/global.css";
+import Cursor from '../components/Cursor.astro'
+import { getLangFromUrl, useTranslations } from '../i18n/utils'
+import '../styles/global.css'
 
 // Local Fonts
-import "@fontsource-variable/inter";
-import "@fontsource-variable/newsreader";
-import "@fontsource/material-symbols-outlined";
+import '@fontsource-variable/inter'
+import '@fontsource-variable/newsreader'
+import '@fontsource/material-symbols-outlined'
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
-const isEs = lang === "es";
-const title = isEs ? "404 | Página No Encontrada" : "404 | Page Not Found";
-const description = isEs ? "La página que buscas no existe." : "The page you are looking for does not exist.";
+const isEs = lang === 'es'
+const title = isEs ? '404 | Página No Encontrada' : '404 | Page Not Found'
+const description = isEs
+	? 'La página que buscas no existe.'
+	: 'The page you are looking for does not exist.'
 ---
 
 <!doctype html>

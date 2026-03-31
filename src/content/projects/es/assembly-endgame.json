@@ -1,18 +1,18 @@
 {
-  "order": 2,
-  "number": "02.",
-  "title": "Assembly: Endgame",
-  "quote": "\"Un ejercicio de supervivencia lógica y adivinanza de alta fidelidad desarrollado en React 19. El usuario debe rescatar lenguajes de programación icónicos mediante una interfaz de estados dinámicos, accesibilidad ARIA integral y una arquitectura modular orientada al rendimiento y la experiencia de usuario.\"",
-  "tags": [
-    { "label": "React 19", "icon": "react" },
-    { "label": "CSS Grid", "icon": "css3" },
-    { "label": "ARIA", "icon": "accessibility" },
-    { "label": "Hooks", "icon": "react" }
-  ],
-  "image": "../../../assets/images/project-assembly-endgame.webp",
-  "imageAlt": "Una interfaz digital que muestra un juego de adivinanza de palabras con chips de lenguajes de programación brillantes y una estética de terminal retro-futurista",
-  "liveUrl": "https://assembly-endgam3.netlify.app",
-  "secondaryLabel": "Fuente",
-  "secondaryUrl": "https://github.com/Jejorm/assembly-endgame",
-  "reversed": true
+	"order": 2,
+	"number": "02.",
+	"title": "Assembly: Endgame",
+	"quote": "\"Un ejercicio de supervivencia lógica y adivinanza de alta fidelidad desarrollado en React 19. El usuario debe rescatar lenguajes de programación icónicos mediante una interfaz de estados dinámicos, accesibilidad ARIA integral y una arquitectura modular orientada al rendimiento y la experiencia de usuario.\"",
+	"tags": [
+		{ "label": "React 19", "icon": "react" },
+		{ "label": "CSS Grid", "icon": "css3" },
+		{ "label": "ARIA", "icon": "accessibility" },
+		{ "label": "Hooks", "icon": "react" }
+	],
+	"image": "../../../assets/images/project-assembly-endgame.webp",
+	"imageAlt": "Una interfaz digital que muestra un juego de adivinanza de palabras con chips de lenguajes de programación brillantes y una estética de terminal retro-futurista",
+	"liveUrl": "https://assembly-endgam3.netlify.app",
+	"secondaryLabel": "Fuente",
+	"secondaryUrl": "https://github.com/Jejorm/assembly-endgame",
+	"reversed": true
 }

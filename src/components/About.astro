@@ -1,10 +1,10 @@
 ---
 import { Image } from 'astro:assets'
 import profileImg from '../assets/images/profile.webp'
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../i18n/utils'
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 ---
 
 <section class="py-32 px-8 bg-surface-container-low reveal" id="about">
