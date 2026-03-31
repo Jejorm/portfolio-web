@@ -33,9 +33,9 @@ export const ui = {
 		'skills.subtitle': 'Technical Skills',
 		'skills.description':
 			'A curated selection of modern technologies used to construct high-performance environments.',
-		'skills.col1': 'Frontend',
-		'skills.col2': 'Backend',
-		'skills.col3': 'Platforms & Extras',
+		'skills.col1': 'Frontend Architecture',
+		'skills.col2': 'Backend Ecosystems',
+		'skills.col3': 'Platforms & Infrastructure',
 		'projects.title': 'Projects',
 		'projects.subtitle':
 			'A curated selection of digital structures designed with architectural rigor.',
@@ -76,9 +76,9 @@ export const ui = {
 		'about.subtitle3': 'e interfaces que',
 		'about.subtitle4': 'eficaces',
 		'about.description1':
-			'Soy un Desarrollador Full-Stack que trata la ingeniería de software como arquitectura digital. No solo escribo código; diseño sistemas resilientes que resuelven problemas de negocio complejos manteniendo un estándar inquebrantable de experiencia de usuario.',
+			'Soy un Desarrollador Full-Stack obsesionado con la excelencia técnica y la integridad del código. Trato la ingeniería de software como una disciplina arquitectónica donde la legibilidad, el rendimiento y la escalabilidad no son opcionales. Mi enfoque se basa en principios SOLID y arquitecturas limpias, transformando desafíos complejos en sistemas elegantes y mantenibles.',
 		'about.description2':
-			'Mi experiencia radica en cerrar la brecha entre la infraestructura backend profunda (Node, Bun) y los ecosistemas frontend de vanguardia (React 19, Next.js, Astro). Construyo para el rendimiento, la escalabilidad y la mantenibilidad.',
+			'Más allá del stack técnico, aporto un pensamiento crítico y una mentalidad de resolución de problemas constante. Creo que la gran ingeniería nace de la colaboración empática y una comunicación clara. Mi experiencia une infraestructuras backend robustas con ecosistemas frontend de vanguardia, manteniendo siempre un estándar innegociable de calidad.',
 		'about.location.label': 'Base Actual',
 		'about.location.value': 'Remoto / Ecuador',
 		'skills.title': 'Experiencia',
