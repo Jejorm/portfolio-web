@@ -241,6 +241,55 @@ nav.scrolled {
 	--cursor-size: 20px;
 }
 
+/* ── Navigation Premium ── */
+.nav-link {
+	position: relative;
+	font-family: var(--font-label);
+	font-size: 11px;
+	font-weight: 500;
+	letter-spacing: 0.3em;
+	text-transform: uppercase;
+	color: var(--color-on-surface-variant);
+	transition: color 0.4s ease, transform 0.2s ease;
+}
+
+.nav-link:hover {
+	color: var(--color-on-surface);
+}
+
+.nav-link:active {
+	transform: scale(0.95);
+}
+
+.nav-link::after {
+	content: "";
+	position: absolute;
+	bottom: -4px;
+	left: 50%;
+	width: 0;
+	height: 1px;
+	background-color: var(--color-primary);
+	transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover::after {
+	width: 100%;
+	left: 0;
+}
+
+.logo-container {
+	font-family: var(--font-headline);
+	font-style: italic;
+	font-weight: 200;
+	font-size: 1.25rem;
+	letter-spacing: -0.02em;
+	transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logo-container:hover {
+	transform: skewX(-5deg);
+}
+
 @keyframes slide-to-left {
 	from { transform: translateX(0); opacity: 1; }
 	to { transform: translateX(-30px); opacity: 0; }
