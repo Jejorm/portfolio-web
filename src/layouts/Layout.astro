@@ -4,6 +4,11 @@ import Cursor from "../components/Cursor.astro";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import "../styles/global.css";
 
+// Local Fonts
+import "@fontsource-variable/inter";
+import "@fontsource-variable/newsreader";
+import "@fontsource/material-symbols-outlined";
+
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
@@ -66,20 +71,10 @@ const ogImage = new URL("/og-image.png", Astro.site || "https://jeremyo.dev");
 			href={new URL("/", Astro.site || "https://yourdomain.com")}
 		/>
 
-		<!-- Favicons -->
+		<!-- Local Fonts -->
 		<link rel="icon" type="image/svg+xml" href="/logo.svg?v=1" />
 		<link rel="apple-touch-icon" href="/logo.svg?v=1" />
-
-		<!-- Fonts -->
-		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..700;1,300..700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,300..700&display=swap"
-			rel="stylesheet"
-		/>
-		<link
-			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-			rel="stylesheet"
-		/>
-		<title>{title}</title>
+		
 		<ClientRouter />
 	</head>
 	<body id="top" class="antialiased overflow-x-hidden relative">
