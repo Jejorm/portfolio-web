@@ -9,7 +9,7 @@
     { "label": "ARIA", "icon": "accessibility" },
     { "label": "Hooks", "icon": "react" }
   ],
-  "image": "../../assets/images/project-assembly-endgame.png",
+  "image": "../../../assets/images/project-assembly-endgame.png",
   "imageAlt": "A digital interface showing a word-guessing game with glowing programming language chips and a retro-futuristic terminal aesthetic",
   "liveUrl": "https://assembly-endgam3.netlify.app",
   "secondaryLabel": "Source",

@@ -6,16 +6,18 @@ import "../styles/global.css";
 interface Props {
 	title?: string;
 	description?: string;
+	lang?: string;
 }
 
 const {
 	title = "DEVELOPER | Full-Stack Portfolio",
 	description = "Full-stack developer focused on the intersection of technical precision and aesthetic reduction. Designing digital structures with intent.",
+	lang = "en",
 } = Astro.props;
 ---
 
 <!doctype html>
-<html class="dark" lang="en">
+<html class="dark" lang={lang}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />

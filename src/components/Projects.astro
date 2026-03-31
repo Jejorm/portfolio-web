@@ -1,8 +1,14 @@
 ---
 import { Image } from 'astro:assets'
 import { getCollection } from 'astro:content'
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
-const rawProjects = await getCollection('projects')
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const rawProjects = await getCollection('projects', ({ id }) => {
+	return id.startsWith(`${lang}/`);
+})
 const projects = rawProjects
 	.map((p) => p.data)
 	.sort((a, b) => a.order - b.order)
@@ -14,20 +20,18 @@ const projects = rawProjects
 		<div class="mb-32 reveal">
 			<span
 				class="text-primary uppercase tracking-[0.3em] text-[10px] mb-6 block"
-				>Portfolio Archive — {new Date().getFullYear()} Edition</span
+				>{t('nav.projects')} Archive — {new Date().getFullYear()} Edition</span
 			>
 			<h2
 				class="text-7xl md:text-8xl serif-display italic font-light tracking-tight text-on-surface leading-[0.9]"
 			>
-				Selected <br />
-				<span class="ml-12 md:ml-24 text-primary">Works</span>
+				{t('projects.title')} <br />
+				<span class="ml-12 md:ml-24 text-primary">{t('projects.subtitle').split(' ')[0]}</span>
 			</h2>
 			<p
 				class="mt-12 text-on-surface-variant max-w-xl text-lg leading-relaxed font-light"
 			>
-				A curated collection of digital monoliths built with structural
-				integrity and performance at the core. Each project represents a unique
-				challenge in scale, architecture, and user experience.
+				{t('projects.subtitle')}
 			</p>
 		</div>
 
@@ -144,7 +148,7 @@ const projects = rawProjects
 									rel="noopener noreferrer"
 									aria-label={`View live demo of ${project.title}`}
 								>
-									Live Demo
+									{t('projects.live')}
 									<span class="material-symbols-outlined text-sm group-hover/link:translate-x-2 transition-transform duration-500" aria-hidden="true">
 										arrow_forward
 									</span>

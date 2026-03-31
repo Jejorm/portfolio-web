@@ -56,7 +56,7 @@
 </style>
 
 <script>
-	// Declaración para extender el objeto window en TypeScript (si es necesario)
+	// Declaración para extender el objeto window en TypeScript
 	declare global {
 		interface Window {
 			__cursorX?: number;
@@ -66,32 +66,31 @@
 		}
 	}
 
-	const cursor = document.getElementById("precision-cursor");
-
-	// Recuperar posiciones anteriores para evitar saltos a (0,0)
-	let mouseX = window.__mouseX || 0;
-	let mouseY = window.__mouseY || 0;
-	let cursorX = window.__cursorX || mouseX;
-	let cursorY = window.__cursorY || mouseY;
+	let cursor: HTMLElement | null = null;
+	let mouseX = window.__mouseX !== undefined ? window.__mouseX : -100;
+	let mouseY = window.__mouseY !== undefined ? window.__mouseY : -100;
+	let cursorX = window.__cursorX !== undefined ? window.__cursorX : mouseX;
+	let cursorY = window.__cursorY !== undefined ? window.__cursorY : mouseY;
 	const speed = 0.15;
-
-	// Si ya tenemos posición, mostrar el cursor inmediatamente
-	if (window.__mouseX && cursor) {
-		cursor.classList.add("visible");
-		cursor.style.left = `${cursorX}px`;
-		cursor.style.top = `${cursorY}px`;
-	}
 
 	const moveCursor = () => {
 		cursorX += (mouseX - cursorX) * speed;
 		cursorY += (mouseY - cursorY) * speed;
 
+		// Re-seleccionar el cursor por si fue reemplazado en la navegación
+		if (!cursor) cursor = document.getElementById("precision-cursor");
+		
 		if (cursor) {
 			cursor.style.left = `${cursorX}px`;
 			cursor.style.top = `${cursorY}px`;
 			// Persistir para la siguiente navegación
 			window.__cursorX = cursorX;
 			window.__cursorY = cursorY;
+
+			// Asegurar visibilidad si ya hay movimiento previo
+			if (window.__mouseX !== undefined && !cursor.classList.contains("visible")) {
+				cursor.classList.add("visible");
+			}
 		}
 
 		requestAnimationFrame(moveCursor);
@@ -103,16 +102,19 @@
 		window.__mouseX = mouseX;
 		window.__mouseY = mouseY;
 		
+		if (!cursor) cursor = document.getElementById("precision-cursor");
 		if (cursor && !cursor.classList.contains("visible")) {
 			cursor.classList.add("visible");
 		}
 	});
 
+	// Iniciar motor de movimiento
 	requestAnimationFrame(moveCursor);
 
 	const updateHoverState = () => {
+		if (!cursor) cursor = document.getElementById("precision-cursor");
 		const interactives = document.querySelectorAll(
-			'a, button, [role="button"], .group',
+			'a, button, [role="button"], .group, .group\\/lang',
 		);
 
 		interactives.forEach((el) => {
@@ -125,14 +127,28 @@
 		});
 	};
 
-	window.addEventListener("mousedown", () => cursor?.classList.add("clicking"));
-	window.addEventListener("mouseup", () =>
-		cursor?.classList.remove("clicking"),
-	);
-
-	document.addEventListener("astro:page-load", () => {
-		updateHoverState();
+	window.addEventListener("mousedown", () => {
+		if (!cursor) cursor = document.getElementById("precision-cursor");
+		cursor?.classList.add("clicking");
+	});
+	window.addEventListener("mouseup", () => {
+		if (!cursor) cursor = document.getElementById("precision-cursor");
+		cursor?.classList.remove("clicking");
 	});
 
+	// Reinicializar en cada navegación de Astro (incluyendo cambios de idioma)
+	document.addEventListener("astro:page-load", () => {
+		cursor = document.getElementById("precision-cursor");
+		updateHoverState();
+		
+		// Si ya teníamos posición, forzar posición inicial inmediata
+		if (window.__mouseX !== undefined && cursor) {
+			cursor.classList.add("visible");
+			cursor.style.left = `${window.__cursorX}px`;
+			cursor.style.top = `${window.__cursorY}px`;
+		}
+	});
+
+	// Inicializar primer estado
 	updateHoverState();
 </script>

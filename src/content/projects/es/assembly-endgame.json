@@ -1,0 +1,18 @@
+{
+  "order": 2,
+  "number": "02.",
+  "title": "Assembly: Endgame",
+  "quote": "\"Un juego de supervivencia de adivinanza de palabras de alto riesgo construido con React 19. Los jugadores deben rescatar lenguajes de programación icónicos de las garras de Assembly. Presenta estados de teclado dinámicos, accesibilidad ARIA completa y una arquitectura modular centrada en el rendimiento y la experiencia de usuario.\"",
+  "tags": [
+    { "label": "React 19", "icon": "react" },
+    { "label": "CSS Grid", "icon": "css3" },
+    { "label": "ARIA", "icon": "accessibility" },
+    { "label": "Hooks", "icon": "react" }
+  ],
+  "image": "../../../assets/images/project-assembly-endgame.png",
+  "imageAlt": "Una interfaz digital que muestra un juego de adivinanza de palabras con chips de lenguajes de programación brillantes y una estética de terminal retro-futurista",
+  "liveUrl": "https://assembly-endgam3.netlify.app",
+  "secondaryLabel": "Fuente",
+  "secondaryUrl": "https://github.com/Jejorm/assembly-endgame",
+  "reversed": true
+}

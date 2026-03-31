@@ -1,4 +1,9 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 interface SkillItem {
 	name: string
 	number: string
@@ -11,7 +16,7 @@ interface SkillColumn {
 
 const columns: SkillColumn[] = [
 	{
-		title: 'Frontend',
+		title: t('skills.col1'),
 		items: [
 			{ name: 'HTML & CSS', number: '01' },
 			{ name: 'React 19 & Next.js', number: '02' },
@@ -20,7 +25,7 @@ const columns: SkillColumn[] = [
 		],
 	},
 	{
-		title: 'Backend',
+		title: t('skills.col2'),
 		items: [
 			{ name: 'Bun / Node.js', number: '05' },
 			{ name: 'PostgreSQL / Supabase', number: '06' },
@@ -29,7 +34,7 @@ const columns: SkillColumn[] = [
 		],
 	},
 	{
-		title: 'Systems & Extras',
+		title: t('skills.col3'),
 		items: [
 			{ name: 'Artificial Intelligence', number: '09' },
 			{ name: 'Vercel / Netlify', number: '10' },
@@ -46,15 +51,14 @@ const columns: SkillColumn[] = [
 		<div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
 			<div class="max-w-2xl">
 				<span class="text-[10px] uppercase tracking-[0.4em] text-primary"
-					>Expertise</span
+					>{t('skills.title')}</span
 				>
-				<h2 class="serif-display text-6xl mt-4 text-on-surface">Technical Apparatus</h2>
+				<h2 class="serif-display text-6xl mt-4 text-on-surface">{t('skills.subtitle')}</h2>
 			</div>
 			<p
 				class="text-on-surface-variant max-w-xs text-right hidden md:block italic font-light"
 			>
-				A curated selection of modern technologies used to construct
-				high-performance environments.
+				{t('skills.description')}
 			</p>
 		</div>
 

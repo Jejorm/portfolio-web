@@ -1,6 +1,10 @@
 ---
 import { Image } from 'astro:assets'
 import profileImg from '../assets/images/profile.jpg'
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="py-32 px-8 bg-surface-container-low reveal" id="about">
@@ -28,9 +32,9 @@ import profileImg from '../assets/images/profile.jpg'
 					<p
 						class="text-[10px] uppercase tracking-[0.3em] text-on-surface-variant mb-2"
 					>
-						Current Base
+						{t('about.location.label')}
 					</p>
-					<p class="serif-display text-xl text-on-surface">Remote / Ecuador</p>
+					<p class="serif-display text-xl text-on-surface">{t('about.location.value')}</p>
 				</div>
 			</div>
 
@@ -38,13 +42,13 @@ import profileImg from '../assets/images/profile.jpg'
 			<div class="space-y-12">
 				<div class="space-y-4">
 					<span class="text-[10px] uppercase tracking-[0.4em] text-primary"
-						>Background</span
+						>{t('about.title')}</span
 					>
 					<h2 class="serif-display text-5xl leading-tight text-on-surface">
-						Engineering systems that <span class="italic text-primary"
-							>scale</span
-						> and interfaces that <span class="italic text-primary"
-							>perform</span
+						{t('about.subtitle1')} <span class="italic text-primary"
+							>{t('about.subtitle2')}</span
+						> {t('about.subtitle3')} <span class="italic text-primary"
+							>{t('about.subtitle4')}</span
 						>.
 					</h2>
 				</div>
@@ -53,16 +57,10 @@ import profileImg from '../assets/images/profile.jpg'
 					class="space-y-6 text-on-surface-variant font-body leading-relaxed text-lg font-light"
 				>
 					<p>
-						I am a Full-Stack Developer who treats software engineering as
-						digital architecture. I don't just write code; I design resilient
-						systems that solve complex business problems while maintaining an
-						uncompromising standard for user experience.
+						{t('about.description1')}
 					</p>
 					<p>
-						My expertise lies in bridging the gap between deep backend
-						infrastructure (Node, Bun) and cutting-edge frontend ecosystems
-						(React 19, Next.js, Astro). I build for performance, scalability,
-						and maintainability.
+						{t('about.description2')}
 					</p>
 				</div>
 			</div>

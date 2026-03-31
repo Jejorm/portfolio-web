@@ -1,4 +1,9 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const currentYear = new Date().getFullYear();
 ---
 
@@ -9,8 +14,7 @@ const currentYear = new Date().getFullYear();
 		<div
 			class="font-body text-[10px] uppercase tracking-[0.2em] text-on-surface-variant mb-8 md:mb-0"
 		>
-			© {currentYear} Full-Stack Ecosystems.
-			<span class="text-primary ml-2">Developed with purpose.</span>
+			© {currentYear} {t('footer.copyright')}
 		</div>
 		<div class="flex space-x-10 items-center">
 			<a

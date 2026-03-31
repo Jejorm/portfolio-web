@@ -1,0 +1,21 @@
+{
+  "order": 3,
+  "number": "03.",
+  "title": "Tickets App",
+  "quote": "\"Un sistema de gestión de colas en tiempo real de alto rendimiento. El frontend aprovecha React 19 con WebSockets nativos para una reactividad instantánea en las interfaces de Kiosco, Taquilla y Tablero. El backend es un servicio ligero y ultra rápido construido con Bun y TypeScript, manejando la priorización dinámica de tickets (Normal/Preferencial) y la sincronización multi-taquilla con esquemas validados por Zod.\"",
+  "tags": [
+    { "label": "React 19", "icon": "react" },
+    { "label": "Bun", "icon": "bun" },
+    { "label": "WebSockets", "icon": "socketdotio" },
+    { "label": "TypeScript", "icon": "typescript" },
+    { "label": "Zod", "icon": "zod" }
+  ],
+  "image": "../../../assets/images/project-tickets-websockets.png",
+  "imageAlt": "Fachada de un rascacielos brutalista moderno con ángulos agudos y sombras dramáticas al atardecer",
+  "liveUrl": "https://ticketsapp-react.vercel.app",
+  "secondaryLabel": "Fuente Frontend",
+  "secondaryUrl": "https://github.com/Jejorm/tickets-app-react",
+  "thirdLabel": "Fuente Backend",
+  "thirdUrl": "https://github.com/Jejorm/tickets-app",
+  "reversed": false
+}

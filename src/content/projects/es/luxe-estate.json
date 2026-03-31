@@ -1,0 +1,19 @@
+{
+  "order": 1,
+  "number": "01.",
+  "title": "Luxe Estate",
+  "quote": "\"Redefiniendo la experiencia inmobiliaria de lujo digital. Construido con Next.js 16 y Supabase, Luxe Estate combina la visualización cinematográfica de propiedades con patrones de búsqueda avanzados y mapeo en tiempo real para una sensación premium y minimalista.\"",
+  "tags": [
+    { "label": "Next.js 16", "icon": "nextdotjs" },
+    { "label": "Supabase", "icon": "supabase" },
+    { "label": "Tailwind CSS 4", "icon": "tailwindcss" },
+    { "label": "Leaflet", "icon": "leaflet" },
+    { "label": "i18n", "icon": "googletranslate" }
+  ],
+  "image": "../../../assets/images/project-luxe-estate.png",
+  "imageAlt": "Visualización arquitectónica minimalista de una finca de lujo con líneas limpias, bordes afilados y una iluminación monocromática dramática",
+  "liveUrl": "https://luxe-estate-ten.vercel.app",
+  "secondaryLabel": "Fuente",
+  "secondaryUrl": "https://github.com/Jejorm/luxe-estate",
+  "reversed": false
+}
