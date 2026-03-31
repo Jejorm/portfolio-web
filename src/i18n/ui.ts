@@ -54,6 +54,9 @@ export const ui = {
 			'How can we work together? Tell me about your project or idea...',
 		'contact.form.submit': 'Submit message',
 		'footer.copyright': 'Full-Stack Ecosystems. Developed with purpose.',
+		'seo.title': 'Full-Stack Developer & Architect | Professional Portfolio',
+		'seo.description':
+			'Full-stack developer specializing in React 19, Next.js, and high-performance systems. Architecting scalable digital structures with technical precision.',
 	},
 	es: {
 		'nav.about': 'Sobre mí',

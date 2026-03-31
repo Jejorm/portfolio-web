@@ -1,19 +1,25 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import Cursor from "../components/Cursor.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import "../styles/global.css";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 interface Props {
 	title?: string;
 	description?: string;
-	lang?: string;
 }
 
-const {
-	title = "DEVELOPER | Full-Stack Portfolio",
-	description = "Full-stack developer focused on the intersection of technical precision and aesthetic reduction. Designing digital structures with intent.",
-	lang = "en",
-} = Astro.props;
+const { title = t("seo.title"), description = t("seo.description") } =
+	Astro.props;
+
+const canonicalURL = new URL(
+	Astro.url.pathname,
+	Astro.site || "https://jeremyo.dev",
+);
+const ogImage = new URL("/og-image.png", Astro.site || "https://jeremyo.dev");
 ---
 
 <!doctype html>
@@ -21,12 +27,52 @@ const {
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Primary Meta Tags -->
+		<title>{title}</title>
+		<meta name="title" content={title} />
 		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImage} />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={Astro.url} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={ogImage} />
+
+		<!-- I18n -->
+		<link
+			rel="alternate"
+			hreflang="en"
+			href={new URL("/", Astro.site || "https://yourdomain.com")}
+		/>
+		<link
+			rel="alternate"
+			hreflang="es"
+			href={new URL("/es", Astro.site || "https://yourdomain.com")}
+		/>
+		<link
+			rel="alternate"
+			hreflang="x-default"
+			href={new URL("/", Astro.site || "https://yourdomain.com")}
+		/>
+
+		<!-- Favicons -->
 		<link rel="icon" type="image/svg+xml" href="/logo.svg?v=1" />
 		<link rel="apple-touch-icon" href="/logo.svg?v=1" />
+
+		<!-- Fonts -->
 		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..700;1,300..700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..700;1,300..700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,300..700&display=swap"
 			rel="stylesheet"
 		/>
 		<link
