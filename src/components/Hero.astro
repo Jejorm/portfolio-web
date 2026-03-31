@@ -1,5 +1,6 @@
 ---
-
+import { Image } from 'astro:assets'
+import heroImg from '../assets/images/hero-image.png'
 ---
 
 <section class="min-h-screen flex flex-col justify-center px-8 relative overflow-hidden bg-surface" aria-label="Introduction">
@@ -23,6 +24,21 @@
 				class="lg:col-span-4 pb-4 reveal active"
 				style="transition-delay: 200ms;"
 			>
+				<div class="relative group mb-12">
+					<div
+						class="aspect-[4/5] bg-surface-container overflow-hidden shadow-2xl transition-premium group-hover:shadow-primary/5"
+					>
+						<Image
+							alt="Portrait of the developer"
+							class="w-full h-full object-cover grayscale brightness-75 contrast-125 transition-transform-colors duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03] group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100"
+							src={heroImg}
+							widths={[400, 800]}
+							sizes="(max-width: 768px) 100vw, 33vw"
+							loading="eager"
+							decoding="async"
+						/>
+					</div>
+				</div>
 				<p
 					class="text-on-surface-variant font-body text-lg max-w-sm mb-8 leading-relaxed font-light"
 				>
