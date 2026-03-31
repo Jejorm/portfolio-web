@@ -5,42 +5,44 @@
 <section class="py-32 px-8 bg-surface reveal">
 	<div class="max-w-5xl mx-auto">
 		<div
-			class="bg-surface-container-lowest relative border-l-2 border-accent-blue p-8 md:p-16 transition-premium hover:border-accent-blue-deep shadow-lg hover:shadow-accent-blue/5"
+			class="bg-surface-container-lowest relative border-l-2 border-primary p-8 md:p-16 transition-all duration-700 hover:border-white shadow-lg hover:shadow-[0_0_40px_rgba(255,255,255,0.05)] group/code"
 		>
 			<div
-				class="absolute top-4 right-4 text-[10px] uppercase tracking-widest text-accent-blue/40"
+				class="absolute top-4 right-6 text-[10px] uppercase tracking-widest text-on-surface-variant opacity-50 group-hover/code:opacity-100 transition-opacity duration-700 font-mono"
 			>
-				src/philosophy.ts
+				src/core/Architecture.ts
 			</div>
-			<code
-				class="font-body text-sm md:text-base leading-relaxed text-secondary-dim block"
-			>
-				<span class="text-accent-blue italic">
-					{'// The Architectural Mandate'}
-				</span>
-				<br />
-				<span class="text-accent-blue">const</span>
-				{' vision = {'}
-				<br />
-				{'  structure: '}<span class="text-on-surface">"Uncompromising"</span>,
-				<br />
-				{'  aesthetic: '}<span class="text-on-surface">"Reduced"</span>,
-				<br />
-				{'  execution: '}<span class="text-on-surface">"Flawless"</span>
-				<br />
-				{'};'}
-				<br /><br />
-				<span class="text-accent-blue">function</span>
-				{' createDigitalSpace(intent: Intent) {'}
-				<br />
-				{'  '}<span class="text-accent-blue">return</span>
-				{' intent.filter(noise => noise === '}
-				<span class="text-accent-blue">null</span>{')'}
-				<br />
-				{'    .map(essence => buildWithPrecision(essence));'}
-				<br />
-				{'}'}
-			</code>
+			
+			<pre class="font-mono text-xs md:text-sm leading-loose overflow-x-auto"><code class="block text-on-surface-variant transition-colors duration-700">
+<span class="text-on-surface-variant group-hover/code:text-[#6c7a89] transition-colors duration-700 italic">/**
+ * The core principles of digital architecture.
+ * Scalability is not an afterthought; it is the foundation.
+ */</span>
+
+<span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">import</span> <span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">{</span> Logger<span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">,</span> PerformanceMetrics <span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">}</span> <span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">from</span> <span class="text-on-surface-variant group-hover/code:text-[#f1fa8c] transition-colors duration-700">'@core/telemetry'</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">;</span>
+
+<span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">export interface</span> <span class="text-on-surface-variant group-hover/code:text-[#8be9fd] transition-colors duration-700">SystemArchitecture</span> <span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">{</span>
+  readonly <span class="text-on-surface-variant group-hover/code:text-[#50fa7b] transition-colors duration-700">paradigm</span><span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">:</span> <span class="text-on-surface-variant group-hover/code:text-[#f1fa8c] transition-colors duration-700">'Monolithic'</span> <span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">|</span> <span class="text-on-surface-variant group-hover/code:text-[#f1fa8c] transition-colors duration-700">'Microservices'</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">;</span>
+  readonly <span class="text-on-surface-variant group-hover/code:text-[#50fa7b] transition-colors duration-700">latencyThresholdMs</span><span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">:</span> <span class="text-on-surface-variant group-hover/code:text-[#bd93f9] transition-colors duration-700">number</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">;</span>
+  <span class="text-on-surface-variant group-hover/code:text-[#50fa7b] transition-colors duration-700">scale</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">(</span><span class="text-on-surface-variant group-hover/code:text-[#ffb86c] transition-colors duration-700">load</span><span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">:</span> <span class="text-on-surface-variant group-hover/code:text-[#bd93f9] transition-colors duration-700">number</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">):</span> <span class="text-on-surface-variant group-hover/code:text-[#8be9fd] transition-colors duration-700">Promise</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">&lt;</span><span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">void</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">&gt;;</span>
+<span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">}</span>
+
+<span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">class</span> <span class="text-on-surface-variant group-hover/code:text-[#8be9fd] transition-colors duration-700">MonolithicArchitect</span> <span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">implements</span> <span class="text-on-surface-variant group-hover/code:text-[#8be9fd] transition-colors duration-700">SystemArchitecture</span> <span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">{</span>
+  <span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">public readonly</span> <span class="text-on-surface-variant group-hover/code:text-[#50fa7b] transition-colors duration-700">paradigm</span> <span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">=</span> <span class="text-on-surface-variant group-hover/code:text-[#f1fa8c] transition-colors duration-700">'Monolithic'</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">;</span>
+  <span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">public readonly</span> <span class="text-on-surface-variant group-hover/code:text-[#50fa7b] transition-colors duration-700">latencyThresholdMs</span> <span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">=</span> <span class="text-on-surface-variant group-hover/code:text-[#bd93f9] transition-colors duration-700">50</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">;</span>
+
+  <span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">public async</span> <span class="text-on-surface-variant group-hover/code:text-[#50fa7b] transition-colors duration-700">scale</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">(</span><span class="text-on-surface-variant group-hover/code:text-[#ffb86c] transition-colors duration-700">load</span><span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">:</span> <span class="text-on-surface-variant group-hover/code:text-[#bd93f9] transition-colors duration-700">number</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">):</span> <span class="text-on-surface-variant group-hover/code:text-[#8be9fd] transition-colors duration-700">Promise</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">&lt;</span><span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">void</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">&gt; {</span>
+    <span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">if</span> <span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">(</span>load <span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">&gt;</span> <span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">this</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">.</span>latencyThresholdMs<span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">) {</span>
+      <span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">await</span> <span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">this</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">.</span><span class="text-on-surface-variant group-hover/code:text-[#50fa7b] transition-colors duration-700">optimizeResources</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">();</span>
+    <span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">}</span>
+    Logger<span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">.</span><span class="text-on-surface-variant group-hover/code:text-[#50fa7b] transition-colors duration-700">info</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">(</span><span class="text-on-surface-variant group-hover/code:text-[#f1fa8c] transition-colors duration-700">'System scaled with zero downtime.'</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">);</span>
+  <span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">}</span>
+
+  <span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">private async</span> <span class="text-on-surface-variant group-hover/code:text-[#50fa7b] transition-colors duration-700">optimizeResources</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">():</span> <span class="text-on-surface-variant group-hover/code:text-[#8be9fd] transition-colors duration-700">Promise</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">&lt;</span><span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">void</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">&gt; {</span>
+    <span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">return new</span> <span class="text-on-surface-variant group-hover/code:text-[#8be9fd] transition-colors duration-700">Promise</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">(</span><span class="text-on-surface-variant group-hover/code:text-[#ffb86c] transition-colors duration-700">resolve</span> <span class="text-on-surface-variant group-hover/code:text-[#ff79c6] transition-colors duration-700">=&gt;</span> <span class="text-on-surface-variant group-hover/code:text-[#8be9fd] transition-colors duration-700">setTimeout</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">(resolve,</span> <span class="text-on-surface-variant group-hover/code:text-[#bd93f9] transition-colors duration-700">0</span><span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">));</span> <span class="text-on-surface-variant group-hover/code:text-[#6c7a89] transition-colors duration-700 italic">// O(1) efficiency</span>
+  <span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">}</span>
+<span class="text-on-surface-variant group-hover/code:text-[#f8f8f2] transition-colors duration-700">}</span>
+			</code></pre>
 		</div>
 	</div>
 </section>
