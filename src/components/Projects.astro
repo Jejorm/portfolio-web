@@ -20,13 +20,13 @@ const projects = rawProjects
 		<div class="mb-32 reveal">
 			<span
 				class="text-primary uppercase tracking-[0.3em] text-[10px] mb-6 block"
-				>{t('nav.projects')} Archive — {new Date().getFullYear()} Edition</span
+				>{lang === 'es' ? 'Obras Seleccionadas' : 'Selected Works'} — {new Date().getFullYear()} Edition</span
 			>
 			<h2
 				class="text-7xl md:text-8xl serif-display italic font-light tracking-tight text-on-surface leading-[0.9]"
 			>
 				{t('projects.title')} <br />
-				<span class="ml-12 md:ml-24 text-primary">{t('projects.subtitle').split(' ')[0]}</span>
+				<span class="ml-12 md:ml-24 text-primary italic lowercase">{lang === 'es' ? 'e infraestructura' : '& infrastructure'}</span>
 			</h2>
 			<p
 				class="mt-12 text-on-surface-variant max-w-xl text-lg leading-relaxed font-light"

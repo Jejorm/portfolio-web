@@ -2,7 +2,7 @@
   "order": 2,
   "number": "02.",
   "title": "Assembly: Endgame",
-  "quote": "\"Un juego de supervivencia de adivinanza de palabras de alto riesgo construido con React 19. Los jugadores deben rescatar lenguajes de programación icónicos de las garras de Assembly. Presenta estados de teclado dinámicos, accesibilidad ARIA completa y una arquitectura modular centrada en el rendimiento y la experiencia de usuario.\"",
+  "quote": "\"Un ejercicio de supervivencia lógica y adivinanza de alta fidelidad desarrollado en React 19. El usuario debe rescatar lenguajes de programación icónicos mediante una interfaz de estados dinámicos, accesibilidad ARIA integral y una arquitectura modular orientada al rendimiento y la experiencia de usuario.\"",
   "tags": [
     { "label": "React 19", "icon": "react" },
     { "label": "CSS Grid", "icon": "css3" },

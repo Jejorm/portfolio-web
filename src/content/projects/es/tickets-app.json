@@ -2,7 +2,7 @@
   "order": 3,
   "number": "03.",
   "title": "Tickets App",
-  "quote": "\"Un sistema de gestión de colas en tiempo real de alto rendimiento. El frontend aprovecha React 19 con WebSockets nativos para una reactividad instantánea en las interfaces de Kiosco, Taquilla y Tablero. El backend es un servicio ligero y ultra rápido construido con Bun y TypeScript, manejando la priorización dinámica de tickets (Normal/Preferencial) y la sincronización multi-taquilla con esquemas validados por Zod.\"",
+  "quote": "\"Sistema de gestión de flujos en tiempo real de alta eficiencia. El frontend implementa React 19 con WebSockets nativos para garantizar reactividad instantánea en terminales de Kiosco, Taquilla y Tablero. El backend, orquestado con Bun y TypeScript, gestiona la priorización dinámica y sincronización multi-punto mediante esquemas de validación Zod.\"",
   "tags": [
     { "label": "React 19", "icon": "react" },
     { "label": "Bun", "icon": "bun" },

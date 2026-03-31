@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -11,21 +11,22 @@ const t = useTranslations(lang);
 			<!-- Info -->
 			<div>
 				<span class="text-[10px] uppercase tracking-[0.4em] text-primary"
-					>{t('contact.title')}</span
+					>{t("contact.title")}</span
 				>
 				<h2 class="serif-display text-6xl mt-4 mb-8 text-on-surface">
-					{t('contact.subtitle1')} <br />
-					<span class="italic text-primary">{t('contact.subtitle2')}</span>
+					{t("contact.subtitle1")}
+					<br />
+					<span class="italic text-primary">{t("contact.subtitle2")}</span>
 				</h2>
 				<div class="space-y-4">
 					<p class="text-on-surface-variant font-body font-light">
-						{t('contact.description')}
+						{t("contact.description")}
 					</p>
 					<a
 						class="inline-block text-2xl serif-display text-primary hover:text-white transition-colors duration-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-8 focus-visible:ring-offset-surface-container"
-						href="mailto:hello@yourdomain.com"
+						href="mailto:jejorm8@gmail.com"
 					>
-						hello@yourdomain.com
+						jejorm8@gmail.com
 					</a>
 				</div>
 			</div>
@@ -41,7 +42,7 @@ const t = useTranslations(lang);
 						class="text-xs uppercase tracking-widest text-primary absolute -top-6 left-0 transition-opacity group-focus-within:opacity-100 opacity-70"
 						for="contact-name"
 					>
-						{t('contact.form.identity')}
+						{t("contact.form.identity")}
 					</label>
 					<input
 						id="contact-name"
@@ -50,7 +51,7 @@ const t = useTranslations(lang);
 						aria-required="true"
 						autocomplete="name"
 						class="w-full bg-transparent border-b border-white/20 py-5 text-lg focus:outline-none focus:border-primary focus:bg-white/5 transition-all duration-500 text-on-surface placeholder:text-on-surface-variant/40 focus-visible:ring-0 px-4 -mx-4 rounded-t-sm"
-						placeholder={t('contact.form.identity.placeholder')}
+						placeholder={t("contact.form.identity.placeholder")}
 						type="text"
 					/>
 				</div>
@@ -60,7 +61,7 @@ const t = useTranslations(lang);
 						class="text-xs uppercase tracking-widest text-primary absolute -top-6 left-0 transition-opacity group-focus-within:opacity-100 opacity-70"
 						for="contact-email"
 					>
-						{t('contact.form.communication')}
+						{t("contact.form.communication")}
 					</label>
 					<input
 						id="contact-email"
@@ -69,7 +70,7 @@ const t = useTranslations(lang);
 						aria-required="true"
 						autocomplete="email"
 						class="w-full bg-transparent border-b border-white/20 py-5 text-lg focus:outline-none focus:border-primary focus:bg-white/5 transition-all duration-500 text-on-surface placeholder:text-on-surface-variant/40 focus-visible:ring-0 px-4 -mx-4 rounded-t-sm"
-						placeholder={t('contact.form.communication.placeholder')}
+						placeholder={t("contact.form.communication.placeholder")}
 						type="email"
 					/>
 				</div>
@@ -79,7 +80,7 @@ const t = useTranslations(lang);
 						class="text-xs uppercase tracking-widest text-primary absolute -top-6 left-0 transition-opacity group-focus-within:opacity-100 opacity-70"
 						for="contact-message"
 					>
-						{t('contact.form.intent')}
+						{t("contact.form.intent")}
 					</label>
 					<textarea
 						id="contact-message"
@@ -87,7 +88,7 @@ const t = useTranslations(lang);
 						required
 						aria-required="true"
 						class="w-full bg-transparent border-b border-white/20 py-5 text-lg focus:outline-none focus:border-primary focus:bg-white/5 transition-all duration-500 text-on-surface placeholder:text-on-surface-variant/40 resize-none focus-visible:ring-0 px-4 -mx-4 rounded-t-sm min-h-[120px]"
-						placeholder={t('contact.form.intent.placeholder')}
+						placeholder={t("contact.form.intent.placeholder")}
 						rows="4"></textarea>
 				</div>
 
@@ -95,7 +96,7 @@ const t = useTranslations(lang);
 					type="submit"
 					class="w-full py-6 mt-4 bg-primary text-on-primary font-bold uppercase tracking-[0.2em] text-sm transition-all duration-500 hover:bg-white active:scale-[0.99] rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-surface-container cursor-pointer"
 				>
-					{t('contact.form.submit')}
+					{t("contact.form.submit")}
 				</button>
 			</form>
 		</div>
