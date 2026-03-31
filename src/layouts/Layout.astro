@@ -1,17 +1,17 @@
 ---
-import { ClientRouter } from 'astro:transitions'
-import Cursor from '../components/Cursor.astro'
-import '../styles/global.css'
+import { ClientRouter } from "astro:transitions";
+import Cursor from "../components/Cursor.astro";
+import "../styles/global.css";
 
 interface Props {
-	title?: string
-	description?: string
+	title?: string;
+	description?: string;
 }
 
 const {
-	title = 'ARCHITECT | Full-Stack Portfolio',
-	description = 'Full-stack developer focused on the intersection of technical precision and aesthetic reduction. Designing digital structures with intent.',
-} = Astro.props
+	title = "DEVELOPER | Full-Stack Portfolio",
+	description = "Full-stack developer focused on the intersection of technical precision and aesthetic reduction. Designing digital structures with intent.",
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -21,8 +21,8 @@ const {
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href="/logo.svg?v=1" />
+		<link rel="apple-touch-icon" href="/logo.svg?v=1" />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..700;1,300..700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
 			rel="stylesheet"
@@ -34,34 +34,47 @@ const {
 		<title>{title}</title>
 		<ClientRouter />
 	</head>
-	<body class="antialiased overflow-x-hidden relative">
+	<body id="top" class="antialiased overflow-x-hidden relative">
 		<Cursor />
 		<!-- Arquitectural Grain Overlay -->
-		<div id="noise-overlay" class="noise-overlay fixed inset-0 pointer-events-none z-[9999] opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+		<div
+			id="noise-overlay"
+			class="noise-overlay fixed inset-0 pointer-events-none z-[9999] opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"
+		>
+		</div>
 		<slot />
 
 		<script>
 			// Tipografía Dinámica - Motor de Scroll
 			const updateScrollProgress = () => {
-				const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+				const scrollHeight =
+					document.documentElement.scrollHeight - window.innerHeight;
 				const progress = window.scrollY / scrollHeight;
-				document.documentElement.style.setProperty('--scroll-progress', progress.toFixed(4));
+				document.documentElement.style.setProperty(
+					"--scroll-progress",
+					progress.toFixed(4),
+				);
 				requestAnimationFrame(updateScrollProgress);
-			}
-			
+			};
+
 			// Inicializar motor
 			requestAnimationFrame(updateScrollProgress);
-			
-			// Observer para Scroll Reveal
-			const revealObserver = new IntersectionObserver((entries) => {
-				entries.forEach(entry => {
-					if (entry.isIntersecting) {
-						entry.target.classList.add('active');
-					}
-				});
-			}, { threshold: 0.1 });
 
-			document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+			// Observer para Scroll Reveal
+			const revealObserver = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add("active");
+						}
+					});
+				},
+				{ threshold: 0.1 },
+			);
+
+			document
+				.querySelectorAll(".reveal")
+				.forEach((el) => revealObserver.observe(el));
 		</script>
 	</body>
 </html>

@@ -11,13 +11,16 @@
 		class="flex justify-between items-center max-w-7xl mx-auto px-8 py-6 transition-all duration-700"
 		id="nav-container"
 	>
-		<!-- Brand / Logo Container (Ready for Custom Logo) -->
+		<!-- Brand / Logo Container -->
 		<a
-			href="#"
-			class="logo-container text-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-8 focus-visible:ring-offset-surface group"
+			href="/"
+			class="logo-container flex items-center gap-3 text-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-8 focus-visible:ring-offset-surface group"
 			aria-label="Go to homepage"
+			onclick="if (window.location.pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); return false; }"
 		>
-			<span class="relative z-10">ARCHITECT</span>
+			<div class="w-10 h-10 relative z-10 transition-transform duration-700 group-hover:scale-110">
+				<img src="/logo.svg" alt="Logo" class="w-full h-full drop-shadow-2xl" />
+			</div>
 			<div class="absolute -inset-x-4 -inset-y-2 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-700 rounded-sm -z-10"></div>
 		</a>
 
