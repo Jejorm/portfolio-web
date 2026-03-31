@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from 'astro:transitions'
+import Cursor from '../components/Cursor.astro'
 import '../styles/global.css'
 
 interface Props {
@@ -34,8 +35,9 @@ const {
 		<ClientRouter />
 	</head>
 	<body class="antialiased overflow-x-hidden relative">
+		<Cursor />
 		<!-- Arquitectural Grain Overlay -->
-		<div class="fixed inset-0 pointer-events-none z-[9999] opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+		<div id="noise-overlay" class="noise-overlay fixed inset-0 pointer-events-none z-[9999] opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
 		<slot />
 
 		<script>

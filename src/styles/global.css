@@ -229,3 +229,32 @@ nav.scrolled {
 	opacity: 0.3;
 	z-index: 40;
 }
+
+/* ── Precision Cursor Base ── */
+@media (hover: hover) and (pointer: fine) {
+	html, body, a, button {
+		cursor: none !important;
+	}
+}
+
+:root {
+	--cursor-size: 20px;
+}
+
+@keyframes slide-to-left {
+	from { transform: translateX(0); opacity: 1; }
+	to { transform: translateX(-30px); opacity: 0; }
+}
+
+::view-transition-old(root) {
+	animation: 0.6s cubic-bezier(0.16, 1, 0.3, 1) both slide-to-left;
+}
+
+::view-transition-new(root) {
+	animation: 0.6s cubic-bezier(0.16, 1, 0.3, 1) both slide-from-right;
+}
+
+/* Evitar parpadeo en elementos fijos */
+#nav-container, .noise-overlay {
+	view-transition-name: persistent-ui;
+}

@@ -32,10 +32,10 @@ const projects = rawProjects
 		</div>
 
 		<!-- Project Gallery -->
-		<div class="space-y-64">
+		<div class="space-y-64" role="list">
 			{
 				projects.map((project) => (
-					<section class="asymmetric-grid group reveal">
+					<section class="asymmetric-grid group reveal" role="listitem" aria-labelledby={`project-title-${project.number.replace('.', '')}`}>
 						{/* Image Column - Museum Display */}
 						<div
 							class:list={[
@@ -43,7 +43,7 @@ const projects = rawProjects
 								project.reversed && 'lg:order-2',
 							]}
 						>
-							<div class="museum-frame shadow-2xl rounded-[2px]">
+							<div class="museum-frame shadow-2xl rounded-[2px]" aria-hidden="true">
 								{/* Technical Marks */}
 								<div class="technical-mark top-0 left-0 -translate-x-1/2 -translate-y-1/2"></div>
 								<div class="technical-mark top-0 right-0 translate-x-1/2 -translate-y-1/2"></div>
@@ -65,11 +65,12 @@ const projects = rawProjects
 									{/* Image */}
 									<Image
 										src={project.image}
-										alt={project.imageAlt}
+										alt={`Architectural representation of ${project.title}: ${project.imageAlt}`}
 										widths={[720, 1280, 1920]}
 										sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1280px"
 										quality="high"
 										class="w-full h-full object-cover object-center grayscale brightness-[0.8] contrast-[1.2] opacity-80 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]"
+										style={`view-transition-name: project-image-${project.number.replace('.', '')}`}
 									/>
 									
 									{/* Vignette Overlay */}
@@ -87,13 +88,13 @@ const projects = rawProjects
 									: 'lg:pl-16 transition-premium group-hover:translate-x-2',
 							]}
 						>
-							<div class="flex items-center gap-4 mb-6">
+							<div class="flex items-center gap-4 mb-6" aria-hidden="true">
 								<span class="h-[1px] w-12 bg-primary/30"></span>
 								<span class="text-primary serif-display italic text-2xl">
 									{project.number}
 								</span>
 							</div>
-							<h3 class="text-4xl md:text-5xl serif-display tracking-tighter mb-10 leading-none">
+							<h3 id={`project-title-${project.number.replace('.', '')}`} class="text-4xl md:text-5xl serif-display tracking-tighter mb-10 leading-none">
 								{project.title}
 							</h3>
 
@@ -105,6 +106,8 @@ const projects = rawProjects
 										? 'border-primary/60 group-hover:border-primary'
 										: 'border-primary group-hover:border-white',
 								]}
+								role="blockquote"
+								aria-label="Project architectural concept"
 							>
 								<p class="text-on-surface-variant font-light leading-relaxed italic">
 									{project.quote}

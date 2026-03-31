@@ -1,0 +1,110 @@
+---
+
+---
+
+<div
+	id="precision-cursor"
+	class="fixed w-14 h-14 rounded-full border border-primary/20 pointer-events-none z-[10000] mix-blend-difference hidden lg:block will-change-[left,top]"
+>
+	<div
+		class="absolute inset-0 m-auto w-1 h-1 bg-primary rounded-full shadow-[0_0_15px_rgba(198,198,198,0.6)]"
+	>
+	</div>
+	{/* Technical Crosshair Lines */}
+	<div
+		class="absolute -top-3 left-1/2 w-[1px] h-5 bg-primary/10 -translate-x-1/2"
+	>
+	</div>
+	<div
+		class="absolute -bottom-3 left-1/2 w-[1px] h-5 bg-primary/10 -translate-x-1/2"
+	>
+	</div>
+	<div
+		class="absolute top-1/2 -left-3 w-5 h-[1px] bg-primary/10 -translate-y-1/2"
+	>
+	</div>
+	<div
+		class="absolute top-1/2 -right-3 w-5 h-[1px] bg-primary/10 -translate-y-1/2"
+	>
+	</div>
+</div>
+
+<style>
+	#precision-cursor {
+		transform: translate(-50%, -50%) scale(1);
+		transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+			background-color 0.4s ease,
+			border-color 0.4s ease;
+	}
+
+	#precision-cursor.hovering {
+		transform: translate(-50%, -50%) scale(1.8);
+		background-color: rgba(198, 198, 198, 0.03);
+		border-color: rgba(198, 198, 198, 0.6);
+	}
+
+	#precision-cursor.clicking {
+		transform: translate(-50%, -50%) scale(0.7);
+		border-color: rgba(255, 255, 255, 0.8);
+	}
+</style>
+
+<script>
+	const cursor = document.getElementById("precision-cursor");
+
+	let mouseX = 0;
+	let mouseY = 0;
+	let cursorX = 0;
+	let cursorY = 0;
+	const speed = 0.15; // Lerp suave pero responsive
+
+	const moveCursor = () => {
+		cursorX += (mouseX - cursorX) * speed;
+		cursorY += (mouseY - cursorY) * speed;
+
+		if (cursor) {
+			cursor.style.left = `${cursorX}px`;
+			cursor.style.top = `${cursorY}px`;
+		}
+
+		requestAnimationFrame(moveCursor);
+	};
+
+	window.addEventListener("mousemove", (e) => {
+		mouseX = e.clientX;
+		mouseY = e.clientY;
+	});
+
+	// Iniciar motor de movimiento
+	requestAnimationFrame(moveCursor);
+
+	// Eventos de Hover
+	const updateHoverState = () => {
+		const interactives = document.querySelectorAll(
+			'a, button, [role="button"], .group',
+		);
+
+		interactives.forEach((el) => {
+			el.addEventListener("mouseenter", () =>
+				cursor?.classList.add("hovering"),
+			);
+			el.addEventListener("mouseleave", () =>
+				cursor?.classList.remove("hovering"),
+			);
+		});
+	};
+
+	// Eventos de Click
+	window.addEventListener("mousedown", () => cursor?.classList.add("clicking"));
+	window.addEventListener("mouseup", () =>
+		cursor?.classList.remove("clicking"),
+	);
+
+	// Reinicializar en navegación de Astro
+	document.addEventListener("astro:page-load", () => {
+		updateHoverState();
+	});
+
+	// Inicializar primer estado
+	updateHoverState();
+</script>
