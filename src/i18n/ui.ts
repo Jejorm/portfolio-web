@@ -11,6 +11,8 @@ export const ui = {
 		'nav.skills': 'Skills',
 		'nav.projects': 'Projects',
 		'nav.contact': 'Contact',
+		'nav.language': 'Language',
+		'nav.language.icon': 'language',
 		'hero.focus': 'Full-Stack Architecture & Development',
 		'hero.title1': 'Architecting',
 		'hero.title2': 'scalable systems',
@@ -85,9 +87,9 @@ export const ui = {
 		'skills.subtitle': 'Habilidades Técnicas',
 		'skills.description':
 			'Una selección cuidada de tecnologías modernas utilizadas para crear entornos de alto rendimiento.',
-		'skills.col1': 'Frontend',
-		'skills.col2': 'Backend',
-		'skills.col3': 'Plataformas y Extras',
+		'skills.col1': 'Arquitectura Frontend',
+		'skills.col2': 'Ecosistemas Backend',
+		'skills.col3': 'Plataformas e Infraestructura',
 		'projects.title': 'Proyectos',
 		'projects.subtitle':
 			'Una selección de estructuras digitales diseñadas con rigor arquitectónico.',
@@ -105,6 +107,11 @@ export const ui = {
 		'contact.form.intent.placeholder':
 			'¿Cómo podemos trabajar juntos? Cuéntame sobre tu proyecto o idea...',
 		'contact.form.submit': 'Enviar Mensaje',
+		'nav.language': 'Idioma',
+		'nav.language.icon': 'language',
 		'footer.copyright': 'Full-Stack Ecosystems. Desarrollado con propósito.',
+		'seo.title': 'Desarrollador Full-Stack & Arquitecto | Portfolio Profesional',
+		'seo.description':
+			'Desarrollador Full-stack especializado en React 19, Next.js y sistemas de alto rendimiento. Arquitectura de estructuras digitales escalables con precisión técnica.',
 	},
 } as const

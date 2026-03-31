@@ -1,6 +1,6 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import { languages } from '../i18n/ui';
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { languages } from "../i18n/ui";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -17,105 +17,131 @@ const t = useTranslations(lang);
 	>
 		<!-- Brand / Logo Container -->
 		<a
-			href={lang === 'en' ? "/" : `/${lang}/`}
+			href={lang === "en" ? "/" : `/${lang}/`}
 			class="logo-container flex items-center gap-3 text-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-8 focus-visible:ring-offset-surface group"
 			aria-label="Go to homepage"
-			onclick={`if (window.location.pathname === '${lang === 'en' ? '/' : `/${lang}/`}') { window.scrollTo({ top: 0, behavior: 'smooth' }); return false; }`}
+			onclick={`if (window.location.pathname === '${lang === "en" ? "/" : `/${lang}/`}') { window.scrollTo({ top: 0, behavior: 'smooth' }); return false; }`}
 		>
-			<div class="w-10 h-10 relative z-10 transition-transform duration-700 group-hover:scale-110">
+			<div
+				class="w-10 h-10 relative z-10 transition-transform duration-700 group-hover:scale-110"
+			>
 				<img src="/logo.svg" alt="Logo" class="w-full h-full drop-shadow-2xl" />
 			</div>
-			<div class="absolute -inset-x-4 -inset-y-2 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-700 rounded-sm -z-10"></div>
+			<div
+				class="absolute -inset-x-4 -inset-y-2 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-700 rounded-sm -z-10"
+			>
+			</div>
 		</a>
 
 		<!-- Desktop Nav -->
 		<div class="hidden md:flex space-x-12 items-center">
 			<a
 				class="nav-link focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-8 focus-visible:ring-offset-surface"
-				href="#about">{t('nav.about')}</a
+				href="#about">{t("nav.about")}</a
 			>
 			<a
 				class="nav-link focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-8 focus-visible:ring-offset-surface"
-				href="#skills">{t('nav.skills')}</a
+				href="#skills">{t("nav.skills")}</a
 			>
 			<a
 				class="nav-link focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-8 focus-visible:ring-offset-surface"
-				href="#projects">{t('nav.projects')}</a
+				href="#projects">{t("nav.projects")}</a
 			>
 			<a
 				class="px-8 py-2.5 border border-primary/30 text-primary text-[10px] uppercase tracking-[0.3em] font-semibold transition-all duration-500 hover:bg-primary hover:text-on-primary hover:border-primary active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-8 focus-visible:ring-offset-surface"
-				href="#contact">{t('nav.contact')}</a
+				href="#contact">{t("nav.contact")}</a
 			>
-			
+
 			<!-- Language Switcher -->
 			<div class="relative group/lang ml-4">
-				<button class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300">
-					<span class="material-symbols-outlined text-sm">language</span>
-					{lang.toUpperCase()}
+				<button
+					class="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-on-surface-variant hover:text-primary transition-colors duration-300 font-semibold"
+					aria-label={t("nav.language")}
+					aria-haspopup="true"
+					aria-expanded="false"
+				>
+					<span
+						class="material-symbols-outlined text-sm opacity-60"
+						aria-hidden="true"
+					>
+						{t("nav.language.icon")}
+					</span>
+					{languages[lang]}
 				</button>
-				<div class="absolute right-0 top-full pt-4 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all duration-300">
-					<div class="bg-surface-container-high border border-white/5 p-2 shadow-2xl flex flex-col gap-1 min-w-[120px]">
-						{Object.entries(languages).map(([l, label]) => (
-							<a 
-								href={l === 'en' ? '/' : `/${l}/`} 
-								class={`px-4 py-2 text-[10px] uppercase tracking-widest hover:bg-white/5 transition-colors ${lang === l ? 'text-primary' : 'text-on-surface-variant'}`}
-							>
-								{label}
-							</a>
-						))}
+				<div
+					class="absolute right-0 top-full pt-4 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all duration-300"
+				>
+					<div
+						class="bg-surface-container-high border border-white/5 p-2 shadow-2xl flex flex-col gap-1 min-w-[140px] backdrop-blur-3xl"
+					>
+						{
+							Object.entries(languages).map(([l, label]) => (
+								<a
+									href={l === "en" ? "/" : `/${l}/`}
+									class={`px-4 py-2 text-[10px] uppercase tracking-widest hover:bg-white/5 transition-colors ${lang === l ? "text-primary" : "text-on-surface-variant"}`}
+								>
+									{label}
+								</a>
+							))
+						}
 					</div>
 				</div>
 			</div>
 		</div>
 
 		<!-- Mobile Hamburger -->
-		<button 
-			class="md:hidden p-2 -mr-2 text-on-surface focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary" 
-			id="menu-toggle" 
+		<button
+			class="md:hidden p-2 -mr-2 text-on-surface focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+			id="menu-toggle"
 			aria-label="Open navigation menu"
 			aria-expanded="false"
 			aria-controls="mobile-menu"
 		>
-			<span class="material-symbols-outlined text-2xl pointer-events-none" aria-hidden="true"
-				>menu</span
+			<span
+				class="material-symbols-outlined text-2xl pointer-events-none"
+				aria-hidden="true">menu</span
 			>
 		</button>
 	</div>
 
 	<!-- Mobile Menu -->
-	<div 
-		class="mobile-menu md:hidden" 
+	<div
+		class="mobile-menu md:hidden"
 		id="mobile-menu"
 		role="region"
 		aria-label="Mobile Navigation"
 	>
-		<div class="flex flex-col px-8 pb-8 pt-2 space-y-6 bg-surface/95 backdrop-blur-3xl border-b border-white/5">
+		<div
+			class="flex flex-col px-8 pb-8 pt-2 space-y-6 bg-surface/95 backdrop-blur-3xl border-b border-white/5"
+		>
 			<a
 				class="text-on-surface-variant hover:text-on-surface transition-colors duration-500 serif-display tracking-tight text-xl"
-				href="#about">{t('nav.about')}</a
+				href="#about">{t("nav.about")}</a
 			>
 			<a
 				class="text-on-surface-variant hover:text-on-surface transition-colors duration-500 serif-display tracking-tight text-xl"
-				href="#skills">{t('nav.skills')}</a
+				href="#skills">{t("nav.skills")}</a
 			>
 			<a
 				class="text-on-surface-variant hover:text-on-surface transition-colors duration-500 serif-display tracking-tight text-xl"
-				href="#projects">{t('nav.projects')}</a
+				href="#projects">{t("nav.projects")}</a
 			>
 			<a
 				class="inline-block w-full px-6 py-4 bg-primary text-on-primary font-medium tracking-wide text-center transition-all duration-500 hover:bg-white rounded-none mt-4"
-				href="#contact">{t('nav.contact')}</a
+				href="#contact">{t("nav.contact")}</a
 			>
-			
+
 			<div class="flex gap-4 pt-4 border-t border-white/5">
-				{Object.entries(languages).map(([l, label]) => (
-					<a 
-						href={l === 'en' ? '/' : `/${l}/`} 
-						class={`text-[10px] uppercase tracking-widest ${lang === l ? 'text-primary' : 'text-on-surface-variant'}`}
-					>
-						{label}
-					</a>
-				))}
+				{
+					Object.entries(languages).map(([l, label]) => (
+						<a
+							href={l === "en" ? "/" : `/${l}/`}
+							class={`text-[10px] uppercase tracking-widest ${lang === l ? "text-primary" : "text-on-surface-variant"}`}
+						>
+							{label}
+						</a>
+					))
+				}
 			</div>
 		</div>
 	</div>
@@ -123,58 +149,65 @@ const t = useTranslations(lang);
 
 <script>
 	function initNav() {
-		const nav = document.getElementById('main-nav')
-		const navContainer = document.getElementById('nav-container')
-		const menuToggle = document.getElementById('menu-toggle')
-		const mobileMenu = document.getElementById('mobile-menu')
+		const nav = document.getElementById("main-nav");
+		const navContainer = document.getElementById("nav-container");
+		const menuToggle = document.getElementById("menu-toggle");
+		const mobileMenu = document.getElementById("mobile-menu");
 
-		if (!nav || !navContainer || !menuToggle || !mobileMenu) return
+		if (!nav || !navContainer || !menuToggle || !mobileMenu) return;
 
 		// Throttle scroll event for performance
 		let ticking = false;
-		window.addEventListener('scroll', () => {
-			if (!ticking) {
-				window.requestAnimationFrame(() => {
-					if (window.scrollY > 50) {
-						nav.classList.add('scrolled')
-						navContainer.classList.remove('py-6')
-						navContainer.classList.add('py-4')
-					} else {
-						nav.classList.remove('scrolled')
-						navContainer.classList.remove('py-4')
-						navContainer.classList.add('py-6')
-					}
-					ticking = false;
-				});
-				ticking = true;
-			}
-		}, { passive: true })
+		window.addEventListener(
+			"scroll",
+			() => {
+				if (!ticking) {
+					window.requestAnimationFrame(() => {
+						if (window.scrollY > 50) {
+							nav.classList.add("scrolled");
+							navContainer.classList.remove("py-6");
+							navContainer.classList.add("py-4");
+						} else {
+							nav.classList.remove("scrolled");
+							navContainer.classList.remove("py-4");
+							navContainer.classList.add("py-6");
+						}
+						ticking = false;
+					});
+					ticking = true;
+				}
+			},
+			{ passive: true },
+		);
 
 		// Mobile menu toggle with ARIA updates
-		menuToggle.addEventListener('click', () => {
-			const isOpen = mobileMenu.classList.toggle('open')
-			menuToggle.setAttribute('aria-expanded', isOpen.toString())
-			menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu')
-			
-			const icon = menuToggle.querySelector('.material-symbols-outlined')
+		menuToggle.addEventListener("click", () => {
+			const isOpen = mobileMenu.classList.toggle("open");
+			menuToggle.setAttribute("aria-expanded", isOpen.toString());
+			menuToggle.setAttribute(
+				"aria-label",
+				isOpen ? "Close navigation menu" : "Open navigation menu",
+			);
+
+			const icon = menuToggle.querySelector(".material-symbols-outlined");
 			if (icon) {
-				icon.textContent = isOpen ? 'close' : 'menu'
+				icon.textContent = isOpen ? "close" : "menu";
 			}
-		})
+		});
 
 		// Close mobile menu on link click
-		mobileMenu.querySelectorAll('a').forEach((link) => {
-			link.addEventListener('click', () => {
-				mobileMenu.classList.remove('open')
-				menuToggle.setAttribute('aria-expanded', 'false')
-				menuToggle.setAttribute('aria-label', 'Open navigation menu')
-				
-				const icon = menuToggle.querySelector('.material-symbols-outlined')
-				if (icon) icon.textContent = 'menu'
-			})
-		})
+		mobileMenu.querySelectorAll("a").forEach((link) => {
+			link.addEventListener("click", () => {
+				mobileMenu.classList.remove("open");
+				menuToggle.setAttribute("aria-expanded", "false");
+				menuToggle.setAttribute("aria-label", "Open navigation menu");
+
+				const icon = menuToggle.querySelector(".material-symbols-outlined");
+				if (icon) icon.textContent = "menu";
+			});
+		});
 	}
 
-	initNav()
-	document.addEventListener('astro:after-swap', initNav)
+	initNav();
+	document.addEventListener("astro:after-swap", initNav);
 </script>
