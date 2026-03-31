@@ -9,7 +9,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "check": "biome check --write .",
+    "test": "playwright test"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
@@ -21,6 +25,7 @@
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.9"
+    "@biomejs/biome": "2.4.9",
+    "@playwright/test": "^1.58.2"
   }
 }
