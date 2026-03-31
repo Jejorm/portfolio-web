@@ -9,7 +9,7 @@
     { "label": "ARIA", "icon": "accessibility" },
     { "label": "Hooks", "icon": "react" }
   ],
-  "image": "../../../assets/images/project-assembly-endgame.png",
+  "image": "../../../assets/images/project-assembly-endgame.webp",
   "imageAlt": "Una interfaz digital que muestra un juego de adivinanza de palabras con chips de lenguajes de programación brillantes y una estética de terminal retro-futurista",
   "liveUrl": "https://assembly-endgam3.netlify.app",
   "secondaryLabel": "Fuente",

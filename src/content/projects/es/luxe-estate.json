@@ -25,7 +25,7 @@
       "icon": "googletranslate"
     }
   ],
-  "image": "../../../assets/images/project-luxe-estate.png",
+  "image": "../../../assets/images/project-luxe-estate.webp",
   "imageAlt": "Visualización arquitectónica minimalista de una finca de lujo con líneas limpias, bordes afilados y una iluminación monocromática dramática",
   "liveUrl": "https://luxe-estate-ten.vercel.app",
   "secondaryLabel": "Fuente",

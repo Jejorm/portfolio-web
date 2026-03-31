@@ -10,7 +10,7 @@
     { "label": "TypeScript", "icon": "typescript" },
     { "label": "Zod", "icon": "zod" }
   ],
-  "image": "../../../assets/images/project-tickets-websockets.png",
+  "image": "../../../assets/images/project-tickets-websockets.webp",
   "imageAlt": "Fachada de un rascacielos brutalista moderno con ángulos agudos y sombras dramáticas al atardecer",
   "liveUrl": "https://ticketsapp-react.vercel.app",
   "secondaryLabel": "Fuente Frontend",
