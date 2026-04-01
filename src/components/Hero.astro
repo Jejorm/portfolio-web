@@ -27,20 +27,49 @@ const t = useTranslations(lang)
 				class="lg:col-span-4 pt-12 lg:pt-32 reveal active"
 				style="transition-delay: 200ms;"
 			>
-				<p class="text-on-surface-variant font-body lead-text mb-12 font-light border-l border-primary/20 pl-8 py-4">
-					{t('hero.description')}
-				</p>
-				<div class="pl-8">
-					<a
-						class="group flex items-center gap-4 text-on-surface tracking-widest uppercase text-xs font-semibold hover:text-primary transition-colors duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-8 focus-visible:ring-offset-surface"
-						href="#projects"
-						aria-label="Navigate to selected projects archive"
-					>
-						{t('hero.cta')}
-						<span
-							class="h-[1px] w-12 bg-on-surface-variant transition-all duration-500 group-hover:w-20 group-hover:bg-primary"
-						></span>
-					</a>
+				<div class="relative group">
+					<!-- Technical Container -->
+					<div class="bg-surface-container-low p-8 border border-white/5 relative overflow-hidden transition-premium hover:border-primary/20 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+						<!-- Scanner Effect -->
+						<div class="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+
+						<!-- Precision Marks -->
+						<div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-primary/40 opacity-50"></div>
+						<div class="absolute top-0 right-0 w-2 h-2 border-t border-r border-primary/40 opacity-50"></div>
+						<div class="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-primary/40 opacity-50"></div>
+						<div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-primary/40 opacity-50"></div>
+
+						<!-- Brief Label & Coordinates -->
+						<div class="flex items-center justify-between mb-8">
+							<div class="flex items-center gap-3">
+								<span class="text-[8px] tracking-[0.5em] uppercase text-primary font-bold">Brief / 001</span>
+								<div class="h-[1px] w-12 bg-gradient-to-r from-primary/30 to-transparent"></div>
+							</div>
+							<span class="text-[7px] font-mono text-on-surface-variant/40 tracking-tighter">40.7128° N, 74.0060° W</span>
+						</div>
+
+						<p class="text-on-surface-variant font-body text-base lg:text-lg leading-relaxed mb-10 font-light relative z-10">
+							{t('hero.description')}
+						</p>
+
+						<div class="flex items-center gap-4 pt-6 border-t border-white/5 relative z-10">
+							<a
+								class="group/cta flex items-center gap-4 text-on-surface tracking-widest uppercase text-[10px] font-semibold hover:text-primary transition-colors duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-8 focus-visible:ring-offset-surface"
+								href="#projects"
+								aria-label="Navigate to selected projects archive"
+							>
+								{t('hero.cta')}
+								<span
+									class="h-[1px] w-8 bg-on-surface-variant transition-all duration-500 group-hover/cta:w-16 group-hover/cta:bg-primary"
+								></span>
+							</a>
+						</div>
+					</div>
+
+					<!-- Floating Technical Detail -->
+					<div class="absolute -bottom-6 -right-4 bg-surface px-3 py-1 border border-white/10 hidden xl:block pointer-events-none opacity-40">
+						<span class="text-[7px] tracking-widest uppercase text-on-surface-variant">V.6.1.1 // SYSTEM_STABLE</span>
+					</div>
 				</div>
 			</div>
 		</div>
