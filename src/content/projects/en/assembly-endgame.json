@@ -2,7 +2,17 @@
 	"order": 2,
 	"number": "02.",
 	"title": "Assembly: Endgame",
-	"quote": "\"A high-stakes word-guessing survival game built with React 19. Players must rescue iconic programming languages from the clutches of Assembly. It features dynamic keyboard states, full ARIA accessibility, and a modular architecture focused on performance and UX.\"",
+	"quote": "\"A high-stakes word-guessing survival game built with React 19. Players rescue iconic programming languages through dynamic state management and full ARIA accessibility.\"",
+	"challenges": [
+		"Complex state orchestration for managing language lifecycles, attempts, and real-time win/loss conditions.",
+		"Ensuring universal accessibility (WCAG) in a dynamic game environment through precise ARIA live regions.",
+		"Visual and logical synchronization of an interactive keyboard with attempt history for seamless navigation."
+	],
+	"solutions": [
+		"Strategic use of 'aria-live' to notify screen readers of critical state changes and game outcomes.",
+		"Modular architecture based on specialized components (Status, LanguageChips, Keyboard) for clean rendering logic.",
+		"Implementation of dynamic visual feedback and celebration effects (react-confetti) to enhance user experience (UX)."
+	],
 	"tags": [
 		{ "label": "React 19", "icon": "react" },
 		{ "label": "CSS Grid", "icon": "css3" },

@@ -1,0 +1,68 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const principles = [
+	{
+		number: '01',
+		title: lang === 'es' ? 'S.O.L.I.D sobre Conveniencia' : 'S.O.L.I.D over Convenience',
+		description: lang === 'es' 
+			? 'Priorizo la mantenibilidad a largo plazo sobre los atajos temporales. El código limpio es el único camino a la escalabilidad.' 
+			: 'I prioritize long-term maintainability over temporary shortcuts. Clean code is the only path to scalability.',
+	},
+	{
+		number: '02',
+		title: lang === 'es' ? 'Rendimiento por Diseño' : 'Performance by Design',
+		description: lang === 'es' 
+			? 'El rendimiento no es una optimización posterior, es una base arquitectónica. Cada ms cuenta en la experiencia del usuario.' 
+			: 'Performance is not a post-optimization; it is an architectural foundation. Every ms counts in the user experience.',
+	},
+	{
+		number: '03',
+		title: lang === 'es' ? 'Arquitectura Resiliente' : 'Resilient Architecture',
+		description: lang === 'es' 
+			? 'Diseño sistemas que fallan con elegancia. La robustez técnica nace de prever el error y mitigar su impacto.' 
+			: 'I design systems that fail gracefully. Technical robustness comes from anticipating error and mitigating its impact.',
+	}
+]
+---
+
+<section class="py-32 px-8 bg-surface-container-lowest border-y border-white/5 reveal" id="principles">
+	<div class="max-w-7xl mx-auto">
+		<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+			<!-- Header -->
+			<div class="lg:col-span-4">
+				<span class="text-[10px] uppercase tracking-[0.4em] text-primary block mb-6">Manifesto // 0.1</span>
+				<h2 class="serif-display text-5xl text-on-surface leading-tight">
+					{lang === 'es' ? 'Principios' : 'Core'} <br /> 
+					<span class="italic text-primary">{lang === 'es' ? 'Técnicos' : 'Principles'}</span>
+				</h2>
+				<p class="mt-8 text-on-surface-variant font-light leading-relaxed max-w-sm">
+					{lang === 'es' 
+						? 'Los dogmas que rigen cada línea de código y cada decisión arquitectónica que tomo.' 
+						: 'The dogmas that govern every line of code and every architectural decision I make.'}
+				</p>
+			</div>
+
+			<!-- Principles List -->
+			<div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+				{principles.map((item) => (
+					<div class="space-y-6 group">
+						<div class="flex items-center gap-4">
+							<span class="font-mono text-[10px] text-primary opacity-40 group-hover:opacity-100 transition-opacity">
+								{item.number}
+							</span>
+							<div class="h-[1px] w-12 bg-primary/20 group-hover:w-16 group-hover:bg-primary transition-all duration-700"></div>
+						</div>
+						<h3 class="serif-display text-2xl text-on-surface italic">{item.title}</h3>
+						<p class="text-sm text-on-surface-variant leading-relaxed font-light opacity-80 group-hover:opacity-100 transition-opacity">
+							{item.description}
+						</p>
+					</div>
+				))}
+			</div>
+		</div>
+	</div>
+</section>

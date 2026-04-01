@@ -2,7 +2,17 @@
 	"order": 3,
 	"number": "03.",
 	"title": "Tickets App",
-	"quote": "\"A high-performance real-time queue system. The frontend leverages React 19 with native WebSockets for instant reactivity across Kiosk, Desk, and Board interfaces. The backend is a lightweight, ultra-fast service built with Bun and TypeScript, handling dynamic ticket prioritization (Normal/Preferential) and multi-desk synchronization with Zod-validated schemas.\"",
+	"quote": "\"High-efficiency real-time flow architecture. The ecosystem bridges React 19 with native WebSockets and a Bun/TypeScript backend for instant reactivity.\"",
+	"challenges": [
+		"Zero-latency multi-client synchronization of global queue state using binary/JSON protocols over WebSockets.",
+		"Implementation of dynamic prioritization logic (Normal vs Preferential) ensuring integrity in concurrent environments.",
+		"Designing a robust exponential backoff reconnection infrastructure for critical clients (Kiosks and Board screens)."
+	],
+	"solutions": [
+		"Leveraging Bun.serve for high-performance native WebSockets and Zod schemas for strict message validation at the edge.",
+		"Abstraction of domain logic through custom Hooks (useSocketTicket) and Context API for clean state management.",
+		"Decoupled and containerized architecture with Docker for consistent deployments and immediate horizontal scalability."
+	],
 	"tags": [
 		{ "label": "React 19", "icon": "react" },
 		{ "label": "Bun", "icon": "bun" },
