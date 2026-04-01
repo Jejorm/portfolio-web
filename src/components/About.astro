@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets'
-import profileImg from '../assets/images/profile.webp'
+import heroImg from '../assets/images/hero-image.webp'
 import { getLangFromUrl, useTranslations } from '../i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
@@ -16,9 +16,9 @@ const t = useTranslations(lang)
 					class="aspect-[4/5] bg-surface-container overflow-hidden shadow-2xl transition-premium group-hover:shadow-primary/5"
 				>
 					<Image
-						alt="Professional portrait of a developer"
+						alt="Portrait of the developer in a high-contrast style"
 						class="w-full h-full object-cover grayscale brightness-75 contrast-125 transition-transform-colors duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03] group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100"
-						src={profileImg}
+						src={heroImg}
 						widths={[400, 800, 1200]}
 						sizes="(max-width: 768px) 100vw, 50vw"
 						loading="lazy"
