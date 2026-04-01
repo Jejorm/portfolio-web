@@ -2,7 +2,17 @@
 	"order": 2,
 	"number": "02.",
 	"title": "Assembly: Endgame",
-	"quote": "\"Un ejercicio de supervivencia lógica y adivinanza de alta fidelidad desarrollado en React 19. El usuario debe rescatar lenguajes de programación icónicos mediante una interfaz de estados dinámicos, accesibilidad ARIA integral y una arquitectura modular orientada al rendimiento y la experiencia de usuario.\"",
+	"quote": "\"Un ejercicio de supervivencia lógica desarrollado en React 19. El usuario rescata lenguajes de programación mediante una interfaz de estados dinámicos, accesibilidad ARIA integral y una arquitectura modular orientada al rendimiento.\"",
+	"challenges": [
+		"Orquestación de estados complejos para gestionar ciclos de vida de lenguajes, intentos y condiciones de victoria/derrota en tiempo real.",
+		"Garantizar accesibilidad universal (WCAG) en una aplicación de juego dinámica mediante regiones de anuncio ARIA precisas.",
+		"Sincronización visual y lógica de un teclado interactivo con el historial de intentos para una navegación fluida."
+	],
+	"solutions": [
+		"Uso estratégico de 'aria-live' para notificar cambios de estado críticos y resultados del juego a lectores de pantalla.",
+		"Arquitectura modular basada en componentes especializados (Status, LanguageChips, Keyboard) para una lógica de renderizado limpia.",
+		"Implementación de feedback visual dinámico y efectos de celebración (react-confetti) para elevar la experiencia de usuario (UX)."
+	],
 	"tags": [
 		{ "label": "React 19", "icon": "react" },
 		{ "label": "CSS Grid", "icon": "css3" },

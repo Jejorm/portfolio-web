@@ -1,27 +1,82 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils'
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<section class="min-h-screen flex flex-col justify-center px-8 relative overflow-hidden bg-surface surface-texture" aria-labelledby="hero-heading">
+<section
+	class="min-h-screen flex flex-col justify-center px-8 relative overflow-hidden bg-surface surface-texture"
+	aria-labelledby="hero-heading"
+>
 	<!-- Noise Gradient Overlay -->
-	<div class="absolute inset-0 opacity-[0.05] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none z-0" aria-hidden="true"></div>
-	
+	<div
+		class="absolute inset-0 opacity-[0.05] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none z-0"
+		aria-hidden="true"
+	>
+	</div>
+
 	<div class="max-w-7xl mx-auto w-full pt-32 pb-20 relative z-10">
 		<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
 			<div class="lg:col-span-8 reveal active">
-				<p class="text-primary tracking-[0.4em] uppercase text-[10px] font-semibold mb-10 flex items-center gap-6" aria-label="Professional focus">
-					<span class="w-12 h-[1px] bg-primary/40" aria-hidden="true"></span>
-					{t('hero.focus')}
-				</p>
-				<h1 id="hero-heading" class="serif-display text-on-surface mb-0 text-7xl lg:text-[10rem] leading-[0.85]">
-					{t('hero.title1')} <br />
-					<span class="italic text-primary">{t('hero.title2')}</span>
+				<div class="flex items-center gap-4 mb-10 group cursor-default">
+					<p
+						class="text-primary tracking-[0.4em] uppercase text-[10px] font-semibold flex items-center gap-6"
+						aria-label="Professional focus"
+					>
+						<span
+							class="w-12 h-[1px] bg-primary/40 group-hover:w-20 transition-all duration-700"
+							aria-hidden="true"></span>
+						{t("hero.focus")}
+					</p>
+					<span
+						class="flex h-2.5 w-2.5 rounded-full bg-emerald-500/60 animate-pulse shadow-[0_0_12px_rgba(16,185,129,0.4)]"
+						title="System Online / Available"></span>
+				</div>
+				<h1
+					id="hero-heading"
+					class="serif-display text-on-surface mb-8 text-7xl lg:text-[10rem] leading-[0.85] tracking-tighter"
+				>
+					{t("hero.title1")}
 					<br />
-					{t('hero.title3')}
+					<span class="italic text-primary font-extralight"
+						>{t("hero.title2")}</span
+					>
+					<br />
+					{t("hero.title3")}
 				</h1>
+
+				<!-- Author Signature / Credential -->
+				<div class="flex items-center gap-10 mt-12 opacity-70 hover:opacity-100 transition-opacity duration-500">
+					<div class="flex flex-col">
+						<span class="serif-display italic text-2xl text-on-surface">Jeremy Orellana</span>
+					</div>
+					<div class="h-10 w-[1px] bg-white/10"></div>
+					<div class="flex gap-8 items-center">
+						<a href="https://github.com/Jejorm" target="_blank" rel="noopener noreferrer" class="group transition-all duration-300 hover:scale-110" aria-label="GitHub Profile">
+							<svg
+								viewBox="0 0 24 24"
+								class="w-7 h-7 fill-current text-on-surface-variant opacity-60 group-hover:opacity-100 group-hover:text-primary transition-all"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.63-.33 2.47-.33c.84 0 1.68.11 2.47.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69 1.02.69 2.06v3.07c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"
+								></path>
+							</svg>
+						</a>
+						<a href="https://www.linkedin.com/in/jeremy-orellana-76224023a/" target="_blank" rel="noopener noreferrer" class="group transition-all duration-300 hover:scale-110" aria-label="LinkedIn Profile">
+							<svg
+								viewBox="0 0 24 24"
+								class="w-7 h-7 fill-current text-on-surface-variant opacity-60 group-hover:opacity-100 group-hover:text-primary transition-all"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"
+								></path>
+							</svg>
+						</a>
+					</div>
+				</div>
 			</div>
 			<div
 				class="lg:col-span-4 pt-12 lg:pt-32 reveal active"
@@ -29,36 +84,66 @@ const t = useTranslations(lang)
 			>
 				<div class="relative group">
 					<!-- Technical Container -->
-					<div class="bg-surface-container-low p-8 border border-white/5 relative overflow-hidden transition-premium hover:border-primary/20 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+					<div
+						class="bg-surface-container-low p-8 border border-white/5 relative overflow-hidden transition-premium hover:border-primary/20 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+					>
 						<!-- Scanner Effect -->
-						<div class="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+						<div
+							class="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+						>
+						</div>
 
 						<!-- Precision Marks -->
-						<div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-primary/40 opacity-50"></div>
-						<div class="absolute top-0 right-0 w-2 h-2 border-t border-r border-primary/40 opacity-50"></div>
-						<div class="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-primary/40 opacity-50"></div>
-						<div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-primary/40 opacity-50"></div>
+						<div
+							class="absolute top-0 left-0 w-2 h-2 border-t border-l border-primary/40 opacity-50"
+						>
+						</div>
+						<div
+							class="absolute top-0 right-0 w-2 h-2 border-t border-r border-primary/40 opacity-50"
+						>
+						</div>
+						<div
+							class="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-primary/40 opacity-50"
+						>
+						</div>
+						<div
+							class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-primary/40 opacity-50"
+						>
+						</div>
 
 						<!-- Brief Label & Coordinates -->
 						<div class="flex items-center justify-between mb-8">
 							<div class="flex items-center gap-3">
-								<span class="text-[8px] tracking-[0.5em] uppercase text-primary font-bold">Brief / 001</span>
-								<div class="h-[1px] w-12 bg-gradient-to-r from-primary/30 to-transparent"></div>
+								<span
+									class="text-[8px] tracking-[0.5em] uppercase text-primary font-bold"
+									>Brief / 001</span
+								>
+								<div
+									class="h-[1px] w-12 bg-gradient-to-r from-primary/30 to-transparent"
+								>
+								</div>
 							</div>
-							<span class="text-[7px] font-mono text-on-surface-variant/40 tracking-tighter">40.7128° N, 74.0060° W</span>
+							<span
+								class="text-[7px] font-mono text-on-surface-variant/40 tracking-tighter"
+								>40.7128° N, 74.0060° W</span
+							>
 						</div>
 
-						<p class="text-on-surface-variant font-body text-base lg:text-lg leading-relaxed mb-10 font-light relative z-10">
-							{t('hero.description')}
+						<p
+							class="text-on-surface-variant font-body text-base lg:text-lg leading-relaxed mb-10 font-light relative z-10"
+						>
+							{t("hero.description")}
 						</p>
 
-						<div class="flex items-center gap-4 pt-6 border-t border-white/5 relative z-10">
+						<div
+							class="flex items-center gap-4 pt-6 border-t border-white/5 relative z-10"
+						>
 							<a
 								class="group/cta flex items-center gap-4 text-on-surface tracking-widest uppercase text-[10px] font-semibold hover:text-primary transition-colors duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-8 focus-visible:ring-offset-surface"
 								href="#projects"
 								aria-label="Navigate to selected projects archive"
 							>
-								{t('hero.cta')}
+								{t("hero.cta")}
 								<span
 									class="h-[1px] w-8 bg-on-surface-variant transition-all duration-500 group-hover/cta:w-16 group-hover/cta:bg-primary"
 								></span>
@@ -67,8 +152,13 @@ const t = useTranslations(lang)
 					</div>
 
 					<!-- Floating Technical Detail -->
-					<div class="absolute -bottom-6 -right-4 bg-surface px-3 py-1 border border-white/10 hidden xl:block pointer-events-none opacity-40">
-						<span class="text-[7px] tracking-widest uppercase text-on-surface-variant">V.6.1.1 // SYSTEM_STABLE</span>
+					<div
+						class="absolute -bottom-6 -right-4 bg-surface px-3 py-1 border border-white/10 hidden xl:block pointer-events-none opacity-40"
+					>
+						<span
+							class="text-[7px] tracking-widest uppercase text-on-surface-variant"
+							>V.6.1.1 // SYSTEM_STABLE</span
+						>
 					</div>
 				</div>
 			</div>
@@ -80,6 +170,12 @@ const t = useTranslations(lang)
 		class="absolute -bottom-1/4 -right-1/4 w-[800px] h-[800px] bg-gradient-to-br from-primary/5 to-transparent rounded-full blur-[120px] pointer-events-none"
 	>
 	</div>
-	<div class="absolute top-0 left-1/4 w-[1px] h-full bg-gradient-to-b from-transparent via-white/5 to-transparent pointer-events-none"></div>
-	<div class="absolute top-0 left-2/4 w-[1px] h-full bg-gradient-to-b from-transparent via-white/5 to-transparent pointer-events-none"></div>
+	<div
+		class="absolute top-0 left-1/4 w-[1px] h-full bg-gradient-to-b from-transparent via-white/5 to-transparent pointer-events-none"
+	>
+	</div>
+	<div
+		class="absolute top-0 left-2/4 w-[1px] h-full bg-gradient-to-b from-transparent via-white/5 to-transparent pointer-events-none"
+	>
+	</div>
 </section>

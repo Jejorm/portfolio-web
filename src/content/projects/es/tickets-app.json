@@ -2,7 +2,17 @@
 	"order": 3,
 	"number": "03.",
 	"title": "Tickets App",
-	"quote": "\"Sistema de gestión de flujos en tiempo real de alta eficiencia. El frontend implementa React 19 con WebSockets nativos para garantizar reactividad instantánea en terminales de Kiosco, Taquilla y Tablero. El backend, orquestado con Bun y TypeScript, gestiona la priorización dinámica y sincronización multi-punto mediante esquemas de validación Zod.\"",
+	"quote": "\"Arquitectura de flujos en tiempo real de alta eficiencia. El ecosistema une React 19 con WebSockets nativos y un backend en Bun/TypeScript para garantizar reactividad instantánea en entornos de alta demanda.\"",
+	"challenges": [
+		"Sincronización multi-cliente de estado global (Queue State) sin latencia perceptible mediante protocolos binarios/JSON sobre WebSockets.",
+		"Implementación de lógica de priorización dinámica (Normal vs Preferencial) asegurando integridad en entornos concurrentes.",
+		"Diseño de una infraestructura robusta de reconexión exponencial para clientes críticos (Kioscos y Pantallas de Sala)."
+	],
+	"solutions": [
+		"Uso de Bun.serve para WebSockets nativos de alto rendimiento y esquemas Zod para validación estricta de mensajes en el borde.",
+		"Abstracción de lógica de dominio mediante Hooks personalizados (useSocketTicket) y Context API para una gestión de estado limpia.",
+		"Arquitectura desacoplada y containerizada con Docker para despliegues consistentes y escalabilidad horizontal inmediata."
+	],
 	"tags": [
 		{ "label": "React 19", "icon": "react" },
 		{ "label": "Bun", "icon": "bun" },

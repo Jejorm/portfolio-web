@@ -119,7 +119,7 @@ const projects = rawProjects
 							</div>
 
 							{/* Tags */}
-							<div class="flex flex-wrap gap-3 mb-10">
+							<div class="flex flex-wrap gap-3 mb-12">
 								{
 									project.tags.map((tag) => (
 										<span class="flex items-center gap-2 px-4 py-1.5 text-[10px] uppercase tracking-widest border border-white/10 text-on-surface-variant bg-surface-container transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.15)] group/tag cursor-default">
@@ -139,6 +139,43 @@ const projects = rawProjects
 								}
 							</div>
 
+							{/* Deep Case Study Analysis (Challenges & Solutions) */}
+							{
+								(project.challenges || project.solutions) && (
+									<div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12 p-6 bg-surface-container-highest/30 border border-white/5 relative group-hover:border-primary/20 transition-colors duration-700 overflow-hidden">
+										{/* Precision Marks */}
+										<div class="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-primary/30 opacity-40"></div>
+										<div class="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-primary/30 opacity-40"></div>
+
+										{/* Challenges Column */}
+										<div class="space-y-4">
+											<span class="text-[9px] uppercase tracking-[0.4em] text-primary/60 font-bold block mb-4 border-b border-primary/10 pb-2">Technical Rigor // Challenges</span>
+											<ul class="space-y-4">
+												{project.challenges?.map((challenge, idx) => (
+													<li class="flex gap-3 text-[11px] leading-relaxed text-on-surface-variant font-light group/item">
+														<span class="text-primary font-mono opacity-40">0{idx + 1}</span>
+														<p>{challenge}</p>
+													</li>
+												))}
+											</ul>
+										</div>
+
+										{/* Solutions Column */}
+										<div class="space-y-4">
+											<span class="text-[9px] uppercase tracking-[0.4em] text-emerald-500/60 font-bold block mb-4 border-b border-emerald-500/10 pb-2">Technical Implementation // Solutions</span>
+											<ul class="space-y-4">
+												{project.solutions?.map((solution, idx) => (
+													<li class="flex gap-3 text-[11px] leading-relaxed text-on-surface/80 font-light italic">
+														<span class="text-emerald-500 font-mono opacity-50">—</span>
+														<p>{solution}</p>
+													</li>
+												))}
+											</ul>
+										</div>
+									</div>
+								)
+							}
+
 							{/* Links */}
 							<div class="flex items-center gap-8">
 								<a
@@ -149,9 +186,19 @@ const projects = rawProjects
 									aria-label={`View live demo of ${project.title}`}
 								>
 									{t('projects.live')}
-									<span class="material-symbols-outlined text-sm group-hover/link:translate-x-2 transition-transform duration-500" aria-hidden="true">
-										arrow_forward
-									</span>
+									<svg
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="1.5"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										class="w-4 h-4 group-hover/link:translate-x-2 transition-transform duration-500"
+										aria-hidden="true"
+									>
+										<line x1="5" y1="12" x2="19" y2="12"></line>
+										<polyline points="12 5 19 12 12 19"></polyline>
+									</svg>
 								</a>
 								<div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
 									<a

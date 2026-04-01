@@ -2,7 +2,17 @@
 	"order": 1,
 	"number": "01.",
 	"title": "Luxe Estate",
-	"quote": "\"Redefiniendo la experiencia inmobiliaria digital de lujo. Construido con Next.js 16 y Supabase, Luxe Estate combina la visualización cinematográfica de propiedades con patrones de búsqueda avanzados y visualización en tiempo real, lo que le confiere un aspecto minimalista y de alta calidad.\"",
+	"quote": "\"Redefiniendo la experiencia inmobiliaria digital de lujo. Luxe Estate combina visualización cinematográfica con una infraestructura robusta basada en Server Components y Server Actions para un rendimiento excepcional.\"",
+	"challenges": [
+		"Sincronización de estado compleja entre mapas interactivos (Leaflet) y filtros de servidor en Next.js 16.",
+		"Gestión de internacionalización dinámica (i18n) que afecta tanto a la UI como a las consultas de base de datos en tiempo real.",
+		"Optimización de carga de imágenes de alta resolución para mantener una experiencia 'Luxe' sin penalizar el Core Web Vitals."
+	],
+	"solutions": [
+		"Arquitectura 'Server Components First' para minimizar el JS enviado al cliente y maximizar el SEO.",
+		"Implementación de Server Actions con validación estricta y UI optimista para una respuesta instantánea en favoritos y auth.",
+		"Sistema de filtrado híbrido que utiliza Supabase PostgREST para consultas eficientes y seguras desde el servidor."
+	],
 	"tags": [
 		{
 			"label": "Next.js 16",
