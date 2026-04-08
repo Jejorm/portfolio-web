@@ -18,7 +18,7 @@ export const ui = {
 		'hero.title2': 'scalable systems',
 		'hero.title3': '& precise UI.',
 		'hero.description':
-			'I design and build high-performance web applications using React 19, Next.js, and modern runtimes like Bun. Focus on structural integrity and aesthetic reduction.',
+			'I design and build high-performance web applications using modern technologies and efficient runtimes. Focus on structural integrity and aesthetic reduction.',
 		'hero.cta': 'View Archive',
 		'about.title': 'Background',
 		'about.subtitle1': 'Developing systems that',
@@ -28,7 +28,7 @@ export const ui = {
 		'about.description1':
 			"I am a Full-Stack Developer who treats software engineering as digital architecture. I don't just write code; I design resilient systems that solve complex business problems while maintaining an uncompromising standard for user experience.",
 		'about.description2':
-			'My expertise lies in bridging the gap between deep backend infrastructure (Node, Bun) and cutting-edge frontend ecosystems (React 19, Next.js, Astro). I build for performance, scalability, and maintainability.',
+			'My expertise lies in bridging the gap between deep backend infrastructure and cutting-edge frontend ecosystems. I build for performance, scalability, and maintainability.',
 		'about.location.label': 'Current Base',
 		'about.location.value': 'Remote / Ecuador',
 		'skills.title': 'Expertise',
@@ -58,7 +58,7 @@ export const ui = {
 		'footer.copyright': 'Full-Stack Ecosystems. Developed with purpose.',
 		'seo.title': 'Full-Stack Developer & Architect | Professional Portfolio',
 		'seo.description':
-			'Full-stack developer specializing in React 19, Next.js, and high-performance systems. Architecting scalable digital structures with technical precision.',
+			'Full-stack developer specializing in modern technologies and high-performance systems. Architecting scalable digital architectures with technical precision.',
 	},
 	es: {
 		'nav.about': 'Sobre mí',
@@ -70,17 +70,17 @@ export const ui = {
 		'hero.title2': 'sistemas escalables',
 		'hero.title3': 'y UI precisa.',
 		'hero.description':
-			'Arquitecto y construyo aplicaciones web de alto rendimiento usando React 19, Next.js y entornos modernos como Bun. Enfoque en integridad estructural y reducción estética.',
-		'hero.cta': 'Ver Archivo',
+			'Diseño y desarrollo aplicaciones web de alto rendimiento utilizando tecnologías modernas y entornos de ejecución eficientes. Me centro en la integridad estructural y la simplicidad estética.',
+		'hero.cta': 'Ver Proyectos',
 		'about.title': 'Trayectoria',
-		'about.subtitle1': 'Desarrollando sistemas',
+		'about.subtitle1': 'Arquitectura de sistemas',
 		'about.subtitle2': 'escalables',
-		'about.subtitle3': 'e interfaces que',
-		'about.subtitle4': 'eficaces',
+		'about.subtitle3': 'e interfaces',
+		'about.subtitle4': 'eficientes',
 		'about.description1':
-			'Soy un Desarrollador Full-Stack obsesionado con la excelencia técnica y la integridad del código. Trato la ingeniería de software como una disciplina arquitectónica donde la legibilidad, el rendimiento y la escalabilidad no son opcionales. Mi enfoque se basa en principios SOLID y arquitecturas limpias, transformando desafíos complejos en sistemas elegantes y mantenibles.',
+			'Soy un desarrollador full-stack que enfoca la ingeniería de software como una forma de arquitectura digital. No me limito a escribir código; diseño sistemas robustos que resuelven problemas empresariales complejos sin dejar de lado un nivel de excelencia en la experiencia del usuario.',
 		'about.description2':
-			'Más allá del stack técnico, aporto un pensamiento crítico y una mentalidad de resolución de problemas constante. Creo que la gran ingeniería nace de la colaboración empática y una comunicación clara. Mi experiencia une infraestructuras backend robustas con ecosistemas frontend de vanguardia, manteniendo siempre un estándar innegociable de calidad.',
+			'Mi especialidad consiste en tender puentes entre la infraestructura de backend y los ecosistemas de frontend de última generación. Desarrollo con el objetivo de lograr rendimiento, escalabilidad y facilidad de mantenimiento.',
 		'about.location.label': 'Base Actual',
 		'about.location.value': 'Remoto / Ecuador',
 		'skills.title': 'Experiencia',
@@ -113,6 +113,6 @@ export const ui = {
 		'seo.title':
 			'Desarrollador Full-Stack & Arquitecto | Portfolio Profesional',
 		'seo.description':
-			'Desarrollador Full-stack especializado en React 19, Next.js y sistemas de alto rendimiento. Arquitectura de estructuras digitales escalables con precisión técnica.',
+			'Desarrollador Full-stack especializado en tecnologías modernas y sistemas de alto rendimiento. Arquitectura de estructuras digitales escalables con precisión técnica.',
 	},
 } as const
