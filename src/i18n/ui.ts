@@ -31,6 +31,14 @@ export const ui = {
 			'My expertise lies in bridging the gap between efficient backend logic and dynamic frontend ecosystems. I am continuously learning and building for performance, scalability, and maintainability.',
 		'about.location.label': 'Current Base',
 		'about.location.value': 'Remote / Ecuador',
+		'about.milestone1':
+			'Developing real-time applications and seamless full-stack data flows.',
+		'about.milestone2':
+			'Building modern, reactive user interfaces with React, Next.js, and high-performance tooling.',
+		'about.milestone3':
+			'Creating efficient backend services using Node.js, Bun, and containerized deployments.',
+		'about.milestone4':
+			'Dedicated to clean code, SOLID principles, and reliable testing practices.',
 		'skills.title': 'Expertise',
 		'skills.subtitle': 'Technical Skills',
 		'skills.description':
@@ -85,6 +93,14 @@ export const ui = {
 			'Mi experiencia se centra en conectar una lógica de backend eficiente con ecosistemas de frontend dinámicos. Sigo aprendiendo continuamente y construyendo con un enfoque en rendimiento, escalabilidad y mantenibilidad.',
 		'about.location.label': 'Ubicación actual',
 		'about.location.value': 'Remoto / Ecuador',
+		'about.milestone1':
+			'Desarrollando aplicaciones en tiempo real y flujos de datos full-stack eficientes.',
+		'about.milestone2':
+			'Construyendo interfaces de usuario modernas y reactivas con React, Next.js y herramientas de alto rendimiento.',
+		'about.milestone3':
+			'Creando servicios backend eficientes utilizando Node.js, Bun y despliegues en contenedores.',
+		'about.milestone4':
+			'Comprometido con el código limpio, los principios SOLID y prácticas de testing confiables.',
 		'skills.title': 'Conocimientos',
 		'skills.subtitle': 'Habilidades Técnicas',
 		'skills.description':
