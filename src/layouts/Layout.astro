@@ -90,6 +90,38 @@ const ogImage = new URL('/og-image.png', Astro.site || 'https://jeremyo.dev')
 		<slot />
 
 		<script>
+			import Lenis from 'lenis';
+
+			let lenis;
+
+			function initLenis() {
+				if (lenis) {
+					lenis.destroy();
+				}
+				
+				lenis = new Lenis({
+					autoRaf: true,
+					duration: 1.2,
+					easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+				});
+
+				// Intercept anchor links to use Lenis scroll
+				document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+					anchor.addEventListener('click', function (e) {
+						e.preventDefault();
+						const targetId = this.getAttribute('href');
+						if (targetId && targetId !== '#') {
+							const targetElement = document.querySelector(targetId);
+							if (targetElement) {
+								lenis.scrollTo(targetElement, { offset: -96 }); // -96px for the 6rem header
+								// Update URL to keep history and fix tests
+								history.pushState(null, '', targetId);
+							}
+						}
+					});
+				});
+			}
+
 			// Tipografía Dinámica - Motor de Scroll
 			const updateScrollProgress = () => {
 				const scrollHeight =
@@ -102,24 +134,31 @@ const ogImage = new URL('/og-image.png', Astro.site || 'https://jeremyo.dev')
 				requestAnimationFrame(updateScrollProgress);
 			};
 
-			// Inicializar motor
-			requestAnimationFrame(updateScrollProgress);
+			function initFeatures() {
+				initLenis();
+				
+				// Inicializar motor de tipografía
+				requestAnimationFrame(updateScrollProgress);
 
-			// Observer para Scroll Reveal
-			const revealObserver = new IntersectionObserver(
-				(entries) => {
-					entries.forEach((entry) => {
-						if (entry.isIntersecting) {
-							entry.target.classList.add("active");
-						}
-					});
-				},
-				{ threshold: 0.1 },
-			);
+				// Observer para Scroll Reveal
+				const revealObserver = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (entry.isIntersecting) {
+								entry.target.classList.add("active");
+							}
+						});
+					},
+					{ threshold: 0.1 },
+				);
 
-			document
-				.querySelectorAll(".reveal")
-				.forEach((el) => revealObserver.observe(el));
+				document
+					.querySelectorAll(".reveal")
+					.forEach((el) => revealObserver.observe(el));
+			}
+
+			initFeatures();
+			document.addEventListener("astro:after-swap", initFeatures);
 		</script>
 	</body>
 </html>

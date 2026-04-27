@@ -65,8 +65,7 @@
    ═══════════════════════════════════════════════════ */
 
 html {
-	scroll-behavior: smooth;
-	scroll-padding-top: 6rem;
+	/* Lenis will handle smooth scrolling */
 }
 
 body {
