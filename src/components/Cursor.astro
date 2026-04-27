@@ -4,7 +4,7 @@
 
 <div
 	id="precision-cursor"
-	class="fixed w-14 h-14 rounded-full border border-primary/20 pointer-events-none z-[10000] mix-blend-difference hidden lg:block will-change-[left,top]"
+	class="fixed w-14 h-14 rounded-full border border-primary/20 pointer-events-none z-[10000] mix-blend-difference will-change-[left,top]"
 	style="view-transition-name: precision-cursor;"
 >
 	<div
@@ -32,11 +32,18 @@
 
 <style>
 	#precision-cursor {
+		display: none;
 		transform: translate(-50%, -50%) scale(1);
 		transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
 			background-color 0.4s ease,
 			border-color 0.4s ease;
 		opacity: 0;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		#precision-cursor {
+			display: block;
+		}
 	}
 
 	#precision-cursor.visible {
@@ -114,7 +121,7 @@
 	const updateHoverState = () => {
 		if (!cursor) cursor = document.getElementById("precision-cursor");
 		const interactives = document.querySelectorAll(
-			'a, button, [role="button"], .group, .group\\/lang',
+			'a, button, [role="button"], .group, .group\\/lang, .group\\/tag',
 		);
 
 		interactives.forEach((el) => {
