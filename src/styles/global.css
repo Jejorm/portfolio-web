@@ -242,10 +242,10 @@ nav.scrolled {
 
 /* ── Precision Cursor Base ── */
 @media (hover: hover) and (pointer: fine) {
-	html,
-	body,
-	a,
-	button {
+	html:not(.disable-custom-cursor),
+	html:not(.disable-custom-cursor) body,
+	html:not(.disable-custom-cursor) a,
+	html:not(.disable-custom-cursor) button {
 		cursor: none !important;
 	}
 }

@@ -91,6 +91,17 @@ const t = useTranslations(lang)
 					</div>
 				</div>
 			</div>
+
+			<!-- Cursor Toggle -->
+			<button
+				id="cursor-toggle"
+				class="group flex items-center gap-3 px-3 py-1.5 border border-white/10 bg-surface-container-low hover:bg-white/5 hover:border-white/20 transition-all duration-500 ml-6 rounded-[2px]"
+				aria-label="Toggle custom cursor"
+				title="Toggle Custom Cursor"
+			>
+				<span class="text-[9px] uppercase tracking-[0.3em] text-on-surface-variant group-hover:text-on-surface transition-colors font-semibold">CURSOR</span>
+				<div id="cursor-toggle-indicator" class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)] transition-all duration-500"></div>
+			</button>
 		</div>
 
 		<!-- Mobile Hamburger -->
@@ -238,6 +249,39 @@ const t = useTranslations(lang)
 				menuToggle.setAttribute("aria-label", "Open navigation menu");
 			});
 		});
+
+		// Cursor Toggle logic
+		const cursorToggle = document.getElementById("cursor-toggle");
+		const cursorToggleIndicator = document.getElementById("cursor-toggle-indicator");
+		
+		if (cursorToggle && cursorToggleIndicator) {
+			const setCursorState = (disabled) => {
+				if (disabled) {
+					cursorToggleIndicator.className = "w-1.5 h-1.5 rounded-full bg-white/20 transition-all duration-500";
+				} else {
+					cursorToggleIndicator.className = "w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)] transition-all duration-500";
+				}
+			};
+
+			// Set initial state
+			setCursorState(document.documentElement.classList.contains("disable-custom-cursor"));
+
+			cursorToggle.addEventListener("click", () => {
+				const isCurrentlyDisabled = document.documentElement.classList.contains("disable-custom-cursor");
+				
+				if (isCurrentlyDisabled) {
+					// Enable custom cursor
+					document.documentElement.classList.remove("disable-custom-cursor");
+					localStorage.setItem("disable-custom-cursor", "false");
+					setCursorState(false);
+				} else {
+					// Disable custom cursor
+					document.documentElement.classList.add("disable-custom-cursor");
+					localStorage.setItem("disable-custom-cursor", "true");
+					setCursorState(true);
+				}
+			});
+		}
 	}
 
 	initNav();
