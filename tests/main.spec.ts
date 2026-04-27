@@ -5,25 +5,25 @@ test.describe('Portfolio Core Experience', () => {
 		await page.goto('/')
 
 		// Check SEO Title (English - default)
-		await expect(page).toHaveTitle(/Full-Stack Developer & Architect/i)
+		await expect(page).toHaveTitle(/Full-Stack Developer \| Professional Portfolio/i)
 	})
 
 	test('should switch to Spanish and update content', async ({ page }) => {
 		await page.goto('/es')
 
 		// Check SEO Title (Spanish)
-		await expect(page).toHaveTitle(/Desarrollador Full-Stack & Arquitecto/i)
+		await expect(page).toHaveTitle(/Desarrollador Full-Stack \| Portafolio Profesional/i)
 
 		// Check Hero subtitle in Spanish
-		const heroTitle = page.locator('h1')
-		await expect(heroTitle).toContainText('sistemas escalables')
+		const heroTitle = page.locator('#hero-heading')
+		await expect(heroTitle).toContainText('aplicaciones web escalables')
 	})
 
 	test('should have a functional navigation to projects', async ({ page }) => {
 		await page.goto('/')
 
 		// Click on the Hero CTA
-		await page.getByRole('link', { name: /View Archive/i }).click()
+		await page.getByRole('link', { name: /Navigate to selected projects archive/i }).click()
 
 		// Verify it scrolled to or navigated to the projects section
 		await expect(page).toHaveURL(/.*#projects/)

@@ -8,6 +8,7 @@ export const defaultLang = 'en'
 export const ui = {
 	en: {
 		'nav.about': 'About',
+		'nav.principles': 'Principles',
 		'nav.skills': 'Skills',
 		'nav.projects': 'Projects',
 		'nav.contact': 'Contact',
@@ -70,6 +71,7 @@ export const ui = {
 	},
 	es: {
 		'nav.about': 'Sobre mí',
+		'nav.principles': 'Principios',
 		'nav.skills': 'Habilidades',
 		'nav.projects': 'Proyectos',
 		'nav.contact': 'Contacto',
