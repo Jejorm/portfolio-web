@@ -6,285 +6,187 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils'
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
-const rawProjects = await getCollection('projects', ({ id }) => {
-	return id.startsWith(`${lang}/`)
-})
-const projects = rawProjects
-	.map((p) => p.data)
-	.sort((a, b) => a.order - b.order)
+const projects = (
+	await getCollection('projects', ({ id }) => id.startsWith(`${lang}/`))
+)
+	.sort((a, b) => a.data.order - b.data.order)
+	.map((entry) => ({
+		...entry.data,
+		slug: entry.id.split('/').pop() as string,
+		index: String(entry.data.order).padStart(2, '0'),
+	}))
 ---
 
-<section class="py-32 px-8 bg-surface-container-low" id="projects">
-	<div class="max-w-7xl mx-auto">
-		<!-- Section Header -->
-		<div class="mb-32 reveal">
-			<span
-				class="text-primary uppercase tracking-[0.3em] text-[10px] mb-6 block"
-				>{lang === 'es' ? 'Obras Seleccionadas' : 'Selected Works'} — {new Date().getFullYear()} Edition</span
-			>
-			<h2
-				class="text-7xl md:text-8xl serif-display italic font-light tracking-tight text-on-surface leading-[0.9]"
-			>
-				{t('projects.title')} <br />
-				<span class="ml-12 md:ml-24 text-primary italic lowercase">{lang === 'es' ? 'e infraestructura' : '& infrastructure'}</span>
-			</h2>
-			<p
-				class="mt-12 text-on-surface-variant max-w-xl text-lg leading-relaxed font-light"
-			>
-				{t('projects.subtitle')}
-			</p>
-		</div>
+<section id="projects" class="border-t border-line" aria-labelledby="projects-heading">
+	<div
+		class="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 px-4 py-24 md:px-8 md:py-32 lg:grid-cols-12 lg:gap-8"
+	>
+		<!-- Sticky index: title, intro and a live table of contents -->
+		<div class="lg:col-span-4">
+			<div class="lg:sticky lg:top-28">
+				<h2 id="projects-heading" class="display text-[clamp(3rem,6vw,5.5rem)]" data-reveal>
+					{t('work.title')}
+				</h2>
+				<p class="mt-6 max-w-[32ch] text-lg text-ink-muted" data-reveal style="--d: 1">
+					{t('work.intro')}
+				</p>
 
-		<!-- Project Gallery -->
-		<div class="space-y-64" role="list">
-			{
-				projects.map((project) => (
-					<section class="asymmetric-grid group reveal" role="listitem" aria-labelledby={`project-title-${project.number.replace('.', '')}`}>
-						{/* Image Column - Museum Display */}
-						<div
-							class:list={[
-								'col-span-12 lg:col-span-7 transition-premium group-hover:scale-[1.01]',
-								project.reversed && 'lg:order-2',
-							]}
-						>
-							<div class="museum-frame shadow-2xl rounded-[2px]" aria-hidden="true">
-								{/* Technical Marks */}
-								<div class="technical-mark top-0 left-0 -translate-x-1/2 -translate-y-1/2"></div>
-								<div class="technical-mark top-0 right-0 translate-x-1/2 -translate-y-1/2"></div>
-								<div class="technical-mark bottom-0 left-0 -translate-x-1/2 translate-y-1/2"></div>
-								<div class="technical-mark bottom-0 right-0 translate-x-1/2 translate-y-1/2"></div>
-								
-								{/* Technical Data Overlays */}
-								<div class="absolute bottom-4 right-4 z-40 text-[8px] uppercase tracking-[0.3em] text-white/40 font-mono">
-									ARCH_VIEW_0{project.number.replace('.', '')} // 40.7128° N, 74.0060° W
-								</div>
-
-								<div class="relative h-full min-h-[300px] lg:min-h-[480px] bg-surface-container overflow-hidden group-hover:after:opacity-0 after:transition-opacity after:duration-700 after:absolute after:inset-0 after:bg-black/20 after:pointer-events-none">
-									{/* Noise/Grain Overlay */}
-									<div class="absolute inset-0 opacity-[0.03] pointer-events-none z-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
-									
-									{/* Glass Reflection Overlay */}
-									<div class="glass-reflection group-hover:opacity-10 transition-opacity duration-1000"></div>
-									
-									{/* Image */}
-									<Image
-										src={project.image}
-										alt={`Architectural representation of ${project.title}: ${project.imageAlt}`}
-										widths={[720, 1280, 1920]}
-										sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1280px"
-										quality="high"
-										class="w-full h-full object-cover object-center grayscale brightness-[0.8] contrast-[1.2] opacity-80 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]"
-										style={`view-transition-name: project-image-${project.number.replace('.', '')}`}
-									/>
-									
-									{/* Vignette Overlay */}
-									<div class="absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.4)] pointer-events-none z-20"></div>
-								</div>
-							</div>
-						</div>
-
-						{/* Content Column - Exhibition Label */}
-						<div
-							class:list={[
-								'col-span-12 lg:col-span-5 flex flex-col justify-center',
-								project.reversed
-									? 'lg:order-1 lg:pr-16 transition-premium group-hover:-translate-x-2'
-									: 'lg:pl-16 transition-premium group-hover:translate-x-2',
-							]}
-						>
-							<div class="flex items-center gap-4 mb-6" aria-hidden="true">
-								<span class="h-[1px] w-12 bg-primary/30"></span>
-								<span class="text-primary serif-display italic text-2xl">
-									{project.number}
-								</span>
-							</div>
-							<h3 id={`project-title-${project.number.replace('.', '')}`} class="text-4xl md:text-5xl serif-display tracking-tighter mb-10 leading-none">
-								{project.title}
-							</h3>
-
-							{/* Quote Block */}
-							<div
-								class:list={[
-									'bg-surface-container-lowest border-l-2 p-8 mb-8 transition-premium group-hover:bg-black',
-									project.reversed
-										? 'border-primary/60 group-hover:border-primary'
-										: 'border-primary group-hover:border-white',
-								]}
-								role="blockquote"
-								aria-label="Project architectural concept"
-							>
-								<p class="text-on-surface-variant font-light leading-relaxed italic">
-									{project.quote}
-								</p>
-							</div>
-
-							{/* Tags */}
-							<div class="flex flex-wrap gap-3 mb-12">
-								{
-									project.tags.map((tag) => (
-										<span class="flex items-center gap-2 px-4 py-1.5 text-[10px] uppercase tracking-widest border border-white/10 text-on-surface-variant bg-surface-container transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.15)] group/tag">
-											<img
-												src={`https://cdn.simpleicons.org/${tag.icon}/white`}
-												alt=""
-												class="w-3 h-3 opacity-50 group-hover/tag:hidden"
-											/>
-											<img
-												src={`https://cdn.simpleicons.org/${tag.icon}/black`}
-												alt=""
-												class="w-3 h-3 hidden group-hover/tag:block"
-											/>
-											{tag.label}
-										</span>
-									))
-								}
-							</div>
-
-							{/* Deep Case Study Analysis (Challenges & Solutions) */}
-							{
-								(project.challenges || project.solutions) && (
-									<div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12 p-6 bg-surface-container-highest/30 border border-white/5 relative group-hover:border-primary/20 transition-colors duration-700 overflow-hidden">
-										{/* Precision Marks */}
-										<div class="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-primary/30 opacity-40"></div>
-										<div class="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-primary/30 opacity-40"></div>
-
-										{/* Challenges Column */}
-										<div class="space-y-4">
-											<span class="text-[9px] uppercase tracking-[0.4em] text-primary/60 font-bold block mb-4 border-b border-primary/10 pb-2">Technical Rigor // Challenges</span>
-											<ul class="space-y-4">
-												{project.challenges?.map((challenge, idx) => (
-													<li class="flex gap-3 text-[11px] leading-relaxed text-on-surface-variant font-light group/item">
-														<span class="text-primary font-mono opacity-40">0{idx + 1}</span>
-														<p>{challenge}</p>
-													</li>
-												))}
-											</ul>
-										</div>
-
-										{/* Solutions Column */}
-										<div class="space-y-4">
-											<span class="text-[9px] uppercase tracking-[0.4em] text-emerald-500/60 font-bold block mb-4 border-b border-emerald-500/10 pb-2">Technical Implementation // Solutions</span>
-											<ul class="space-y-4">
-												{project.solutions?.map((solution, idx) => (
-													<li class="flex gap-3 text-[11px] leading-relaxed text-on-surface/80 font-light italic">
-														<span class="text-emerald-500 font-mono opacity-50">—</span>
-														<p>{solution}</p>
-													</li>
-												))}
-											</ul>
-										</div>
-									</div>
-								)
-							}
-
-							{/* Links */}
-							<div class="flex items-center gap-8">
-								<a
-									class="group/link flex items-center gap-2 text-sm tracking-widest uppercase text-on-surface hover:text-primary transition-colors duration-500"
-									href={project.liveUrl}
-									target="_blank"
-									rel="noopener noreferrer"
-									aria-label={`View live demo of ${project.title}`}
-								>
-									{t('projects.live')}
-									<svg
-										viewBox="0 0 24 24"
-										fill="none"
-										stroke="currentColor"
-										stroke-width="1.5"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										class="w-4 h-4 group-hover/link:translate-x-2 transition-transform duration-500"
-										aria-hidden="true"
-									>
-										<line x1="5" y1="12" x2="19" y2="12"></line>
-										<polyline points="12 5 19 12 12 19"></polyline>
-									</svg>
-								</a>
-								<div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+				<nav class="mt-14 hidden lg:block" aria-label={t('work.index')}>
+					<ol class="border-t border-line">
+						{
+							projects.map((project) => (
+								<li class="border-b border-line">
 									<a
-										class="text-sm tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors duration-500"
-										href={project.secondaryUrl}
-										target="_blank"
-										rel="noopener noreferrer"
-										aria-label={`View ${project.secondaryLabel.toLowerCase()} repository for ${project.title}`}
+										href={`#${project.slug}`}
+										class="project-index-link group grid grid-cols-[3rem_1fr] items-baseline gap-2 py-4 text-ink-muted transition-colors hover:text-ink"
+										data-target={project.slug}
 									>
-										{project.secondaryLabel}
+										<span class="meta">{project.index}</span>
+										<span>
+											<span class="block text-xl font-semibold tracking-tight">
+												{project.title}
+											</span>
+											<span class="meta mt-1 block">{project.kind}</span>
+										</span>
 									</a>
-									{
-										project.thirdUrl && (
-											<a
-												class="text-sm tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors duration-500"
-												href={project.thirdUrl}
-												target="_blank"
-												rel="noopener noreferrer"
-												aria-label={`View ${project.thirdLabel?.toLowerCase() || 'secondary source'} repository for ${project.title}`}
-											>
-												{project.thirdLabel}
-											</a>
-										)
-									}
-								</div>
-							</div>
-						</div>
-					</section>
-				))
-			}
-		</div>
-
-		{/* Technical Integrity Seal */}
-		<div class="mt-48 pt-12 border-t border-white/5 reveal">
-			<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
-				<div class="max-w-md">
-					<span class="text-[8px] uppercase tracking-[0.5em] text-primary font-bold block mb-4">Quality Assurance // 100%</span>
-					<h3 class="serif-display text-3xl text-on-surface italic mb-4">
-						{lang === 'es' ? 'Integridad del Sistema' : 'System Integrity'}
-					</h3>
-					<p class="text-xs text-on-surface-variant leading-relaxed font-light">
-						{lang === 'es' 
-							? 'Cada línea de código es sometida a auditorías automáticas de estilo, tipos y pruebas de integración para asegurar un despliegue sin regresiones.' 
-							: 'Every line of code undergoes automatic style, type, and integration audits to ensure regression-free deployment.'}
-					</p>
-				</div>
-				
-				<div class="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full md:w-auto">
-					<div class="bg-surface-container-highest/20 p-4 border border-white/5 space-y-2 group">
-						<span class="text-[7px] uppercase tracking-widest text-primary/60 block">Static Analysis</span>
-						<p class="font-mono text-[10px] text-on-surface uppercase">Biome Check</p>
-						<div class="h-[1px] w-full bg-emerald-500/30"></div>
-					</div>
-					<div class="bg-surface-container-highest/20 p-4 border border-white/5 space-y-2 group">
-						<span class="text-[7px] uppercase tracking-widest text-primary/60 block">Type Safety</span>
-						<p class="font-mono text-[10px] text-on-surface uppercase">Strict TS</p>
-						<div class="h-[1px] w-full bg-emerald-500/30"></div>
-					</div>
-					<div class="bg-surface-container-highest/20 p-4 border border-white/5 space-y-2 group">
-						<span class="text-[7px] uppercase tracking-widest text-primary/60 block">E2E Testing</span>
-						<p class="font-mono text-[10px] text-on-surface uppercase">Playwright</p>
-						<div class="h-[1px] w-full bg-emerald-500/30"></div>
-					</div>
-					<div class="bg-surface-container-highest/20 p-4 border border-white/5 space-y-2 group">
-						<span class="text-[7px] uppercase tracking-widest text-primary/60 block">Runtime</span>
-						<p class="font-mono text-[10px] text-on-surface uppercase">Bun / Node</p>
-						<div class="h-[1px] w-full bg-emerald-500/30"></div>
-					</div>
-				</div>
+								</li>
+							))
+						}
+					</ol>
+				</nav>
 			</div>
 		</div>
 
-		<!-- Archive CTA (Temporarily Disabled) -->
-		<!--
-		<div class="mt-48 flex justify-center reveal">
-			<button class="group flex flex-col items-center">
-				<span
-					class="text-on-surface-variant uppercase tracking-[0.4em] text-[10px] mb-4 group-hover:text-primary transition-colors duration-500"
-					>Explore Archive</span
-				>
-				<span
-					class="material-symbols-outlined text-3xl font-light text-primary animate-bounce"
-					>expand_more</span
-				>
-			</button>
+		<!-- Case studies -->
+		<div class="space-y-28 md:space-y-40 lg:col-span-8">
+			{
+				projects.map((project, i) => (
+					<article id={project.slug} class="project group scroll-mt-24" aria-labelledby={`${project.slug}-title`}>
+						<figure class="overflow-hidden bg-raised">
+							<div class="clip-reveal aspect-[16/10]">
+								<Image
+									src={project.image}
+									alt={project.imageAlt}
+									widths={[640, 960, 1440]}
+									sizes="(min-width: 1024px) 60vw, 100vw"
+									loading={i === 0 ? 'eager' : 'lazy'}
+									class="h-full w-full scale-[1.35] object-cover object-[50%_48%] transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.4]"
+								/>
+							</div>
+						</figure>
+
+						<div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-8 md:gap-8">
+							<header class="md:col-span-5">
+								<p class="meta text-ink-muted">
+									{project.index} <span aria-hidden="true">/</span> {project.kind}
+								</p>
+								<h3 id={`${project.slug}-title`} class="display mt-3 text-[clamp(2.5rem,5vw,4.25rem)]">
+									{project.title}
+								</h3>
+								<p class="mt-5 max-w-[46ch] text-lg leading-snug">{project.summary}</p>
+							</header>
+
+							<div class="flex flex-col gap-3 md:col-span-3 md:items-end md:pt-7">
+								<a
+									class="inline-flex items-center gap-2 bg-ink px-5 py-3 text-[15px] font-medium text-paper transition-[background-color,transform] duration-300 hover:bg-accent hover:text-on-accent active:scale-[0.98]"
+									href={project.liveUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={`${t('work.live')}: ${project.title}`}
+								>
+									{t('work.live')}
+									<span class="arrow-nudge" aria-hidden="true">↗</span>
+								</a>
+								{project.links.map((link) => (
+									<a
+										class="link-line inline-flex items-center gap-2 text-[15px] text-ink-muted hover:text-ink"
+										href={link.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label={`${link.label}: ${project.title}`}
+									>
+										{link.label}
+										<span class="arrow-nudge" aria-hidden="true">↗</span>
+									</a>
+								))}
+							</div>
+						</div>
+
+						<p class="mt-8 max-w-[62ch] leading-relaxed text-ink-muted">{project.description}</p>
+
+						<div class="mt-10 grid grid-cols-1 gap-10 border-t border-line pt-8 md:grid-cols-2 md:gap-8">
+							<div>
+								<h4 class="text-sm font-semibold">{t('work.challenges')}</h4>
+								<ol class="mt-4 space-y-4">
+									{project.challenges.map((item, n) => (
+										<li class="grid grid-cols-[2rem_1fr] text-[15px] leading-relaxed text-ink-muted">
+											<span class="meta pt-1 text-ink">{String(n + 1).padStart(2, '0')}</span>
+											<span>{item}</span>
+										</li>
+									))}
+								</ol>
+							</div>
+							<div>
+								<h4 class="text-sm font-semibold">{t('work.solutions')}</h4>
+								<ol class="mt-4 space-y-4">
+									{project.solutions.map((item, n) => (
+										<li class="grid grid-cols-[2rem_1fr] text-[15px] leading-relaxed text-ink-muted">
+											<span class="meta pt-1 text-accent-ink">{String(n + 1).padStart(2, '0')}</span>
+											<span>{item}</span>
+										</li>
+									))}
+								</ol>
+							</div>
+						</div>
+
+						<div class="mt-10 flex flex-wrap items-baseline gap-x-5 gap-y-2">
+							<h4 class="meta text-ink-muted">{t('work.stack')}</h4>
+							<ul class="meta flex flex-wrap gap-x-5 gap-y-2">
+								{project.tags.map((tag) => (
+									<li>{tag}</li>
+								))}
+							</ul>
+						</div>
+					</article>
+				))
+			}
 		</div>
-		-->
 	</div>
 </section>
+
+<style>
+	.project-index-link[aria-current='true'] {
+		color: var(--ink);
+	}
+
+	.project-index-link[aria-current='true'] .meta:first-child {
+		color: var(--accent-ink);
+	}
+</style>
+
+<script>
+	// Highlight the case study currently crossing the middle of the viewport.
+	const links = document.querySelectorAll<HTMLAnchorElement>('.project-index-link')
+
+	if (links.length) {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (!entry.isIntersecting) continue
+					links.forEach((link) => {
+						if (link.dataset.target === entry.target.id) {
+							link.setAttribute('aria-current', 'true')
+						} else {
+							link.removeAttribute('aria-current')
+						}
+					})
+				}
+			},
+			{ rootMargin: '-45% 0px -50% 0px' },
+		)
+
+		document.querySelectorAll('article.project').forEach((article) => {
+			observer.observe(article)
+		})
+	}
+</script>

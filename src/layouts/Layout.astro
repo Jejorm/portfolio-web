@@ -1,13 +1,10 @@
 ---
-import { ClientRouter } from 'astro:transitions'
-import Cursor from '../components/Cursor.astro'
 import { getLangFromUrl, useTranslations } from '../i18n/utils'
 import '../styles/global.css'
 
-// Local Fonts
-import '@fontsource-variable/inter'
-import '@fontsource-variable/newsreader'
-import '@fontsource/material-symbols-outlined'
+// Local fonts: Archivo with width + weight axes, JetBrains Mono for metadata
+import '@fontsource-variable/archivo/wdth.css'
+import '@fontsource-variable/jetbrains-mono'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
@@ -15,157 +12,128 @@ const t = useTranslations(lang)
 interface Props {
 	title?: string
 	description?: string
+	noindex?: boolean
 }
 
-const { title = t('seo.title'), description = t('seo.description') } =
-	Astro.props
+const {
+	title = t('seo.title'),
+	description = t('seo.description'),
+	noindex = false,
+} = Astro.props
 
-const canonicalURL = new URL(
-	Astro.url.pathname,
-	Astro.site || 'https://jeremyo.dev',
-)
-const ogImage = new URL('/og-image.png', Astro.site || 'https://jeremyo.dev')
+const site = Astro.site ?? new URL('https://jeremyo.dev')
+const canonicalURL = new URL(Astro.url.pathname, site)
+const ogImage = new URL('/og-image.png', site)
 ---
 
 <!doctype html>
-<html class="dark" lang={lang}>
+<html lang={lang}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<!-- Primary Meta Tags -->
+		<!-- Theme: stored choice, else system preference. Runs before paint. -->
+		<script is:inline>
+			;(() => {
+				const root = document.documentElement
+				root.classList.add('js')
+				try {
+					const stored = localStorage.getItem('theme')
+					if (stored === 'light' || stored === 'dark') root.dataset.theme = stored
+				} catch {}
+			})()
+		</script>
+
 		<title>{title}</title>
 		<meta name="title" content={title} />
 		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
+		{noindex && <meta name="robots" content="noindex" />}
 		<link rel="canonical" href={canonicalURL} />
+		<meta name="theme-color" content="#ececea" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#0e0e0f" media="(prefers-color-scheme: dark)" />
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content={Astro.url} />
+		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={ogImage} />
 
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content={Astro.url} />
+		<meta property="twitter:url" content={canonicalURL} />
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description} />
 		<meta property="twitter:image" content={ogImage} />
 
 		<!-- I18n -->
-		<link
-			rel="alternate"
-			hreflang="en"
-			href={new URL("/", Astro.site || "https://yourdomain.com")}
-		/>
-		<link
-			rel="alternate"
-			hreflang="es"
-			href={new URL("/es", Astro.site || "https://yourdomain.com")}
-		/>
-		<link
-			rel="alternate"
-			hreflang="x-default"
-			href={new URL("/", Astro.site || "https://yourdomain.com")}
-		/>
+		<link rel="alternate" hreflang="en" href={new URL('/', site)} />
+		<link rel="alternate" hreflang="es" href={new URL('/es/', site)} />
+		<link rel="alternate" hreflang="x-default" href={new URL('/', site)} />
 
 		<!-- Favicons -->
 		<link rel="icon" type="image/svg+xml" href="/logo.svg?v=2" />
-		<link rel="alternate icon" type="image/png" href="/logo.svg?v=2" />
 		<link rel="apple-touch-icon" href="/logo.svg?v=2" />
-		<link rel="mask-icon" href="/logo.svg?v=2" color="#c6c6c6" />
-		
-		<!-- Initial Cursor State -->
-		<script is:inline>
-			if (typeof localStorage !== 'undefined' && localStorage.getItem('disable-custom-cursor') === 'true') {
-				document.documentElement.classList.add('disable-custom-cursor');
-			}
-		</script>
-
-		<ClientRouter />
 	</head>
-	<body id="top" class="antialiased overflow-x-hidden relative">
-		<Cursor />
-		<!-- Arquitectural Grain Overlay -->
-		<div
-			id="noise-overlay"
-			class="noise-overlay fixed inset-0 pointer-events-none z-[9999] opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"
+	<body class="min-h-[100dvh] overflow-x-clip antialiased">
+		<a
+			href="#main"
+			class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-accent focus:px-4 focus:py-2 focus:text-on-accent"
 		>
-		</div>
+			{t('skip.link')}
+		</a>
 		<slot />
 
 		<script>
-			import Lenis from 'lenis';
+			import Lenis from 'lenis'
 
-			let lenis;
+			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-			function initLenis() {
-				if (lenis) {
-					lenis.destroy();
-				}
-				
-				lenis = new Lenis({
-					autoRaf: true,
-					duration: 1.2,
-					easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-				});
+			// Inertial scroll only when motion is welcome; native scroll otherwise.
+			const lenis = reduceMotion
+				? null
+				: new Lenis({
+						autoRaf: true,
+						duration: 1.1,
+						easing: (t: number) => Math.min(1, 1.001 - 2 ** (-10 * t)),
+					})
 
-				// Intercept anchor links to use Lenis scroll
-				document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-					anchor.addEventListener('click', function (e) {
-						e.preventDefault();
-						const targetId = this.getAttribute('href');
-						if (targetId && targetId !== '#') {
-							const targetElement = document.querySelector(targetId);
-							if (targetElement) {
-								lenis.scrollTo(targetElement, { offset: -96 }); // -96px for the 6rem header
-								// Update URL to keep history and fix tests
-								history.pushState(null, '', targetId);
-							}
-						}
-					});
-				});
-			}
+			document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((anchor) => {
+				anchor.addEventListener('click', (event) => {
+					const hash = anchor.getAttribute('href')
+					if (!hash || hash === '#') return
+					const target = document.querySelector<HTMLElement>(hash)
+					if (!target) return
+					event.preventDefault()
+					if (lenis) {
+						lenis.scrollTo(target, { offset: hash === '#top' ? 0 : -64 })
+					} else {
+						target.scrollIntoView()
+					}
+					history.pushState(null, '', hash)
+					if (hash !== '#top') {
+						target.setAttribute('tabindex', '-1')
+						target.focus({ preventScroll: true })
+					}
+				})
+			})
 
-			// Tipografía Dinámica - Motor de Scroll
-			const updateScrollProgress = () => {
-				const scrollHeight =
-					document.documentElement.scrollHeight - window.innerHeight;
-				const progress = window.scrollY / scrollHeight;
-				document.documentElement.style.setProperty(
-					"--scroll-progress",
-					progress.toFixed(4),
-				);
-				requestAnimationFrame(updateScrollProgress);
-			};
+			// Entry reveals: one observer, elements unobserved after their first reveal.
+			const revealObserver = new IntersectionObserver(
+				(entries) => {
+					for (const entry of entries) {
+						if (!entry.isIntersecting) continue
+						entry.target.classList.add('is-in')
+						revealObserver.unobserve(entry.target)
+					}
+				},
+				{ rootMargin: '0px 0px -12% 0px' },
+			)
 
-			function initFeatures() {
-				initLenis();
-				
-				// Inicializar motor de tipografía
-				requestAnimationFrame(updateScrollProgress);
-
-				// Observer para Scroll Reveal
-				const revealObserver = new IntersectionObserver(
-					(entries) => {
-						entries.forEach((entry) => {
-							if (entry.isIntersecting) {
-								entry.target.classList.add("active");
-							}
-						});
-					},
-					{ threshold: 0.1 },
-				);
-
-				document
-					.querySelectorAll(".reveal")
-					.forEach((el) => revealObserver.observe(el));
-			}
-
-			initFeatures();
-			document.addEventListener("astro:after-swap", initFeatures);
+			document.querySelectorAll('[data-reveal]').forEach((el) => {
+				revealObserver.observe(el)
+			})
 		</script>
 	</body>
 </html>

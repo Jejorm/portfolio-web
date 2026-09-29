@@ -4,65 +4,63 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils'
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
-const principles = [
-	{
-		number: '01',
-		title: lang === 'es' ? 'S.O.L.I.D sobre Conveniencia' : 'S.O.L.I.D over Convenience',
-		description: lang === 'es' 
-			? 'Priorizo la mantenibilidad a largo plazo sobre los atajos temporales. El código limpio es el único camino a la escalabilidad.' 
-			: 'I prioritize long-term maintainability over temporary shortcuts. Clean code is the only path to scalability.',
-	},
-	{
-		number: '02',
-		title: lang === 'es' ? 'Rendimiento por Diseño' : 'Performance by Design',
-		description: lang === 'es' 
-			? 'El rendimiento no es una optimización posterior, es una base arquitectónica. Cada ms cuenta en la experiencia del usuario.' 
-			: 'Performance is not a post-optimization; it is an architectural foundation. Every ms counts in the user experience.',
-	},
-	{
-		number: '03',
-		title: lang === 'es' ? 'Arquitectura Resiliente' : 'Resilient Architecture',
-		description: lang === 'es' 
-			? 'Diseño sistemas que fallan con elegancia. La robustez técnica nace de prever el error y mitigar su impacto.' 
-			: 'I design systems that fail gracefully. Technical robustness comes from anticipating error and mitigating its impact.',
-	}
-]
+// Tools that actually run in this repository's workflow.
+const qualityTools = ['Biome', 'TypeScript strict', 'Playwright', 'Docker']
 ---
 
-<section class="py-32 px-8 bg-surface-container-lowest border-y border-white/5 reveal" id="principles">
-	<div class="max-w-7xl mx-auto">
-		<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-			<!-- Header -->
-			<div class="lg:col-span-4">
-				<span class="text-[10px] uppercase tracking-[0.4em] text-primary block mb-6">Manifesto // 0.1</span>
-				<h2 class="serif-display text-5xl text-on-surface leading-tight">
-					{lang === 'es' ? 'Principios' : 'Core'} <br /> 
-					<span class="italic text-primary">{lang === 'es' ? 'Técnicos' : 'Principles'}</span>
-				</h2>
-				<p class="mt-8 text-on-surface-variant font-light leading-relaxed max-w-sm">
-					{lang === 'es' 
-						? 'Los dogmas que rigen cada línea de código y cada decisión arquitectónica que tomo.' 
-						: 'The dogmas that govern every line of code and every architectural decision I make.'}
-				</p>
-			</div>
+<section id="principles" class="border-t border-line" aria-labelledby="principles-heading">
+	<div class="mx-auto max-w-[1440px] px-4 py-24 md:px-8 md:py-32">
+		<h2 id="principles-heading" class="display text-[clamp(3rem,6vw,5.5rem)]" data-reveal>
+			{t('principles.title')}
+		</h2>
 
-			<!-- Principles List -->
-			<div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-12">
-				{principles.map((item) => (
-					<div class="space-y-6 group">
-						<div class="flex items-center gap-4">
-							<span class="font-mono text-[10px] text-primary opacity-40 group-hover:opacity-100 transition-opacity">
-								{item.number}
-							</span>
-							<div class="h-[1px] w-12 bg-primary/20 group-hover:w-16 group-hover:bg-primary transition-all duration-700"></div>
-						</div>
-						<h3 class="serif-display text-2xl text-on-surface italic">{item.title}</h3>
-						<p class="text-sm text-on-surface-variant leading-relaxed font-light opacity-80 group-hover:opacity-100 transition-opacity">
-							{item.description}
-						</p>
-					</div>
-				))}
-			</div>
+		<div class="mt-14 grid grid-cols-1 gap-3 md:grid-cols-12">
+			<!-- Lead principle: the accent tile -->
+			<article
+				class="flex min-h-[22rem] flex-col justify-between bg-accent p-6 text-on-accent md:col-span-7 md:row-span-2 md:p-10"
+				data-reveal
+			>
+				<p class="display text-[clamp(5rem,12vw,10rem)] leading-[0.8]" aria-hidden="true">S.O.L.I.D</p>
+				<div>
+					<h3 class="display text-[clamp(2rem,3.6vw,3.25rem)]">{t('principles.p1.title')}</h3>
+					<p class="mt-4 max-w-[44ch] text-lg leading-snug">{t('principles.p1.body')}</p>
+				</div>
+			</article>
+
+			<article class="flex flex-col justify-between gap-10 bg-raised p-6 md:col-span-5 md:p-8" data-reveal style="--d: 1">
+				<h3 class="display text-[clamp(1.75rem,2.6vw,2.5rem)]">{t('principles.p2.title')}</h3>
+				<p class="max-w-[40ch] leading-relaxed text-ink-muted">{t('principles.p2.body')}</p>
+			</article>
+
+			<article
+				class="flex flex-col justify-between gap-10 border border-line p-6 md:col-span-5 md:p-8"
+				data-reveal
+				style="--d: 2"
+			>
+				<h3 class="display text-[clamp(1.75rem,2.6vw,2.5rem)]">{t('principles.p3.title')}</h3>
+				<p class="max-w-[40ch] leading-relaxed text-ink-muted">{t('principles.p3.body')}</p>
+			</article>
+
+			<!-- Quality gate: inverted tile with the real toolchain -->
+			<article
+				class="grid grid-cols-1 gap-8 bg-ink p-6 text-paper md:col-span-12 md:grid-cols-12 md:p-10"
+				data-reveal
+				style="--d: 3"
+			>
+				<div class="md:col-span-5">
+					<h3 class="display text-[clamp(1.75rem,2.6vw,2.5rem)]">{t('principles.quality.title')}</h3>
+					<p class="mt-4 max-w-[40ch] leading-relaxed opacity-75">{t('principles.quality.body')}</p>
+				</div>
+				<ul class="grid grid-cols-2 gap-px self-end md:col-span-7">
+					{
+						qualityTools.map((tool) => (
+							<li class="border-t border-paper/20 pt-3 font-mono text-[clamp(1rem,1.6vw,1.35rem)]">
+								{tool}
+							</li>
+						))
+					}
+				</ul>
+			</article>
 		</div>
 	</div>
 </section>

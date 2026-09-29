@@ -4,85 +4,63 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils'
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
-interface SkillItem {
-	name: string
-	number: string
-}
-
-interface SkillColumn {
-	title: string
-	items: SkillItem[]
-}
-
-const columns: SkillColumn[] = [
+const groups = [
 	{
 		title: t('skills.col1'),
 		items: [
-			{ name: 'React 19 & Next.js', number: '01' },
-			{ name: 'Astro & TypeScript', number: '02' },
-			{ name: 'Tailwind CSS 4', number: '03' },
-			{ name: 'State Management & Signals', number: '04' },
+			'React 19',
+			'Next.js',
+			'Astro',
+			'TypeScript',
+			'Tailwind CSS 4',
+			'Signals',
 		],
 	},
 	{
 		title: t('skills.col2'),
 		items: [
-			{ name: 'Bun / Node.js', number: '05' },
-			{ name: 'PostgreSQL & Supabase', number: '06' },
-			{ name: 'WebSockets & Real-time', number: '07' },
-			{ name: 'Clean Architecture', number: '08' },
+			'Node.js',
+			'Bun',
+			'PostgreSQL',
+			'Supabase',
+			'WebSockets',
+			'Clean Architecture',
 		],
 	},
 	{
 		title: t('skills.col3'),
-		items: [
-			{ name: 'CI/CD & DevOps', number: '09' },
-			{ name: 'Performance Optimization', number: '10' },
-			{ name: 'Zod & Schema Validation', number: '11' },
-			{ name: 'AI Integration', number: '12' },
-		],
+		items: ['Docker', 'CI/CD', 'Zod', 'Playwright', 'Biome', 'AI integration'],
 	},
 ]
 ---
 
-<section class="py-32 px-8 bg-surface reveal" id="skills">
-	<div class="max-w-7xl mx-auto">
-		<!-- Header -->
-		<div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
-			<div class="max-w-2xl">
-				<span class="text-[10px] uppercase tracking-[0.4em] text-primary"
-					>{t('skills.title')}</span
-				>
-				<h2 class="serif-display text-6xl mt-4 text-on-surface">{t('skills.subtitle')}</h2>
-			</div>
-			<p
-				class="text-on-surface-variant max-w-xs text-right hidden md:block italic font-light"
-			>
-				{t('skills.description')}
+<section id="skills" class="border-t border-line" aria-labelledby="skills-heading">
+	<div class="mx-auto max-w-[1440px] px-4 py-24 md:px-8 md:py-32">
+		<div class="flex flex-col gap-4">
+			<h2 id="skills-heading" class="display text-[clamp(3rem,6vw,5.5rem)]" data-reveal>
+				{t('skills.title')}
+			</h2>
+			<p class="max-w-[40ch] text-lg text-ink-muted" data-reveal style="--d: 1">
+				{t('skills.intro')}
 			</p>
 		</div>
 
-		<!-- Skills Grid -->
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
+		<div class="mt-16">
 			{
-				columns.map((column, colIdx) => (
+				groups.map((group, i) => (
 					<div
-						class:list={[
-							'bg-surface p-12 space-y-8 transition-premium hover:bg-surface-container-low group',
-						]}
+						class="grid grid-cols-1 gap-4 border-t border-line py-8 lg:grid-cols-12 lg:gap-8"
+						data-reveal
+						style={`--d: ${i}`}
 					>
-						<h3 class="serif-display text-2xl italic text-primary">
-							{column.title}
-						</h3>
-						<ul class="space-y-4 text-on-surface-variant font-body">
-							{column.items.map((item) => (
-								<li class="flex justify-between items-center group/item">
-									<span class="group-hover/item:text-on-surface transition-colors duration-500">
-										{item.name}
-									</span>
-									<span class="text-[10px] opacity-40 group-hover/item:opacity-100 group-hover/item:text-primary transition-opacity duration-500">
-										{item.number}
-									</span>
+						<h3 class="meta pt-2 text-ink-muted lg:col-span-3">{group.title}</h3>
+						<ul class="display flex flex-wrap gap-x-[0.35em] text-[clamp(2rem,4.6vw,4rem)] leading-[1.02] lg:col-span-9">
+							{group.items.map((item, n) => (
+								<li class="stack-item">
+									<span class="transition-colors duration-300 hover:text-accent-ink">{item}</span>
+									{n < group.items.length - 1 && (
+										<span class="text-ink-muted/50" aria-hidden="true">/</span>
+									)}
 								</li>
 							))}
 						</ul>

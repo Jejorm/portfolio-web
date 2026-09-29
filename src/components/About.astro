@@ -1,97 +1,73 @@
 ---
-import { Image } from 'astro:assets'
-import heroImg from '../assets/images/hero-image.webp'
 import { getLangFromUrl, useTranslations } from '../i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
+
+// Split the statement into words so each can ink in as it is read.
+const words = t('about.statement').split(' ')
+const lastIndex = Math.max(words.length - 1, 1)
+
+const facts = [
+	{ label: t('about.fact.base.label'), value: t('about.fact.base.value') },
+	{ label: t('about.fact.focus.label'), value: t('about.fact.focus.value') },
+	{ label: t('about.fact.work.label'), value: t('about.fact.work.value') },
+]
+
+const areas = [1, 2, 3, 4].map((n) => ({
+	title: t(`about.area${n}.title` as 'about.area1.title'),
+	body: t(`about.area${n}.body` as 'about.area1.body'),
+}))
 ---
 
-<section class="py-32 px-8 bg-surface-container-low reveal" id="about">
-	<div class="max-w-7xl mx-auto">
-		<div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-			<!-- Profile Image -->
-			<div class="relative group">
-				<div
-					class="aspect-[4/5] bg-surface-container overflow-hidden shadow-2xl transition-premium group-hover:shadow-primary/5"
-				>
-					<Image
-						alt="Portrait of the developer in a high-contrast style"
-						class="w-full h-full object-cover grayscale brightness-75 contrast-125 transition-transform-colors duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03] group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100"
-						src={heroImg}
-						widths={[400, 800, 1200]}
-						sizes="(max-width: 768px) 100vw, 50vw"
-						loading="lazy"
-						decoding="async"
-					/>
-				</div>
-				<!-- Floating Location Card -->
-				<div
-					class="absolute -bottom-8 -right-8 w-48 h-48 bg-surface-bright/80 backdrop-blur-3xl p-6 hidden md:flex flex-col justify-end border border-white/5 transition-premium group-hover:-translate-x-2 group-hover:-translate-y-2 shadow-[0_24px_80px_rgba(0,0,0,0.5)]"
-				>
-					<p
-						class="text-[10px] uppercase tracking-[0.3em] text-on-surface-variant mb-2"
-					>
-						{t('about.location.label')}
-					</p>
-					<p class="serif-display text-xl text-on-surface">{t('about.location.value')}</p>
-				</div>
-			</div>
+<section id="about" class="border-t border-line" aria-labelledby="about-heading">
+	<div
+		class="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 px-4 py-24 md:px-8 md:py-32 lg:grid-cols-12 lg:gap-8"
+	>
+		<div class="lg:col-span-3">
+			<h2 id="about-heading" class="display text-[clamp(3rem,6vw,5.5rem)]" data-reveal>
+				{t('about.title')}
+			</h2>
+			<dl class="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-1" data-reveal style="--d: 1">
+				{
+					facts.map((fact) => (
+						<div class="border-t border-line pt-3">
+							<dt class="meta text-ink-muted">{fact.label}</dt>
+							<dd class="mt-1 font-medium">{fact.value}</dd>
+						</div>
+					))
+				}
+			</dl>
+		</div>
 
-			<!-- Content -->
-			<div class="space-y-12">
-				<div class="space-y-4">
-					<span class="text-[10px] uppercase tracking-[0.4em] text-primary"
-						>{t('about.title')}</span
-					>
-					<h2 class="serif-display text-5xl leading-tight text-on-surface">
-						{t('about.subtitle1')} <span class="italic text-primary"
-							>{t('about.subtitle2')}</span
-						> {t('about.subtitle3')} <span class="italic text-primary"
-							>{t('about.subtitle4')}</span
-						>.
-					</h2>
-				</div>
+		<div class="lg:col-span-8 lg:col-start-5">
+			<p
+				class="read-along text-[clamp(1.6rem,3.2vw,2.9rem)] leading-[1.14] font-medium tracking-[-0.02em]"
+			>
+				{
+					words.map((word, i) => (
+						<>
+							<span class="w" style={`--p: ${(i / lastIndex).toFixed(3)}`}>
+								{word}
+							</span>{' '}
+						</>
+					))
+				}
+			</p>
+			<p class="mt-10 max-w-[58ch] text-lg leading-relaxed text-ink-muted" data-reveal>
+				{t('about.body')}
+			</p>
 
-				<div
-					class="space-y-6 text-on-surface-variant font-body leading-relaxed text-lg font-light"
-				>
-					<p>
-						{t('about.description1')}
-					</p>
-					<p>
-						{t('about.description2')}
-					</p>
-				</div>
-
-				<!-- Technical Milestones -->
-				<div class="pt-12 border-t border-white/5 grid grid-cols-2 gap-8">
-					<div class="space-y-2">
-						<span class="text-[9px] uppercase tracking-[0.4em] text-primary/60 font-bold block">01 // Systems Design</span>
-						<p class="text-xs text-on-surface leading-relaxed italic">
-							{t('about.milestone1')}
-						</p>
-					</div>
-					<div class="space-y-2">
-						<span class="text-[9px] uppercase tracking-[0.4em] text-primary/60 font-bold block">02 // Modern Frontend</span>
-						<p class="text-xs text-on-surface leading-relaxed italic">
-							{t('about.milestone2')}
-						</p>
-					</div>
-					<div class="space-y-2">
-						<span class="text-[9px] uppercase tracking-[0.4em] text-primary/60 font-bold block">03 // Runtime & Infra</span>
-						<p class="text-xs text-on-surface leading-relaxed italic">
-							{t('about.milestone3')}
-						</p>
-					</div>
-					<div class="space-y-2">
-						<span class="text-[9px] uppercase tracking-[0.4em] text-primary/60 font-bold block">04 // Quality Culture</span>
-						<p class="text-xs text-on-surface leading-relaxed italic">
-							{t('about.milestone4')}
-						</p>
-					</div>
-				</div>
-			</div>
+			<ul class="mt-16 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2">
+				{
+					areas.map((area, i) => (
+						<li class="border-t border-ink pt-4" data-reveal style={`--d: ${i}`}>
+							<h3 class="text-lg font-semibold tracking-tight">{area.title}</h3>
+							<p class="mt-2 max-w-[40ch] leading-relaxed text-ink-muted">{area.body}</p>
+						</li>
+					))
+				}
+			</ul>
 		</div>
 	</div>
 </section>

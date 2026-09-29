@@ -1,8 +1,9 @@
 {
 	"order": 3,
-	"number": "03.",
 	"title": "Tickets App",
-	"quote": "\"Arquitectura de flujos en tiempo real de alta eficiencia. El ecosistema une React 19 con WebSockets nativos y un backend en Bun/TypeScript para garantizar reactividad instantánea en entornos de alta demanda.\"",
+	"kind": "Sistema en tiempo real",
+	"summary": "Kioscos, escritorios y pantallas sincronizados mediante WebSockets nativos.",
+	"description": "Un sistema de turnos para puntos de atención. Un cliente en React 19 y un servidor en Bun + TypeScript comparten el estado de la cola en tiempo real con WebSockets nativos.",
 	"challenges": [
 		"Sincronización multi-cliente de estado global (Queue State) sin latencia perceptible mediante protocolos binarios/JSON sobre WebSockets.",
 		"Implementación de lógica de priorización dinámica (Normal vs Preferencial) asegurando integridad en entornos concurrentes.",
@@ -13,19 +14,18 @@
 		"Abstracción de lógica de dominio mediante Hooks personalizados (useSocketTicket) y Context API para una gestión de estado limpia.",
 		"Arquitectura desacoplada y containerizada con Docker para despliegues consistentes y escalabilidad horizontal inmediata."
 	],
-	"tags": [
-		{ "label": "React 19", "icon": "react" },
-		{ "label": "Bun", "icon": "bun" },
-		{ "label": "WebSockets", "icon": "socketdotio" },
-		{ "label": "TypeScript", "icon": "typescript" },
-		{ "label": "Zod", "icon": "zod" }
-	],
+	"tags": ["React 19", "Bun", "WebSockets", "TypeScript", "Zod"],
 	"image": "../../../assets/images/project-tickets-websockets.webp",
-	"imageAlt": "Fachada de un rascacielos brutalista moderno con ángulos agudos y sombras dramáticas al atardecer",
+	"imageAlt": "Tres pantallas de Tickets App: el visor de turnos de la sala, la selección de escritorio y el kiosco de tickets.",
 	"liveUrl": "https://ticketsapp-react.vercel.app",
-	"secondaryLabel": "Fuente Frontend",
-	"secondaryUrl": "https://github.com/Jejorm/tickets-app-react",
-	"thirdLabel": "Fuente Backend",
-	"thirdUrl": "https://github.com/Jejorm/tickets-app",
-	"reversed": false
+	"links": [
+		{
+			"label": "Fuente Frontend",
+			"url": "https://github.com/Jejorm/tickets-app-react"
+		},
+		{
+			"label": "Fuente Backend",
+			"url": "https://github.com/Jejorm/tickets-app"
+		}
+	]
 }

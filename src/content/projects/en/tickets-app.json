@@ -1,8 +1,9 @@
 {
 	"order": 3,
-	"number": "03.",
 	"title": "Tickets App",
-	"quote": "\"High-efficiency real-time flow architecture. The ecosystem bridges React 19 with native WebSockets and a Bun/TypeScript backend for instant reactivity.\"",
+	"kind": "Real-time system",
+	"summary": "Kiosks, desks and display boards kept in sync over native WebSockets.",
+	"description": "A turn-management system for service desks. A React 19 client and a Bun + TypeScript server share queue state in real time over native WebSockets.",
 	"challenges": [
 		"Zero-latency multi-client synchronization of global queue state using binary/JSON protocols over WebSockets.",
 		"Implementation of dynamic prioritization logic (Normal vs Preferential) ensuring integrity in concurrent environments.",
@@ -13,19 +14,18 @@
 		"Abstraction of domain logic through custom Hooks (useSocketTicket) and Context API for clean state management.",
 		"Decoupled and containerized architecture with Docker for consistent deployments and immediate horizontal scalability."
 	],
-	"tags": [
-		{ "label": "React 19", "icon": "react" },
-		{ "label": "Bun", "icon": "bun" },
-		{ "label": "WebSockets", "icon": "socketdotio" },
-		{ "label": "TypeScript", "icon": "typescript" },
-		{ "label": "Zod", "icon": "zod" }
-	],
+	"tags": ["React 19", "Bun", "WebSockets", "TypeScript", "Zod"],
 	"image": "../../../assets/images/project-tickets-websockets.webp",
-	"imageAlt": "Modern brutalist skyscraper facade with sharp angles and dramatic shadows at dusk",
+	"imageAlt": "Three Tickets App screens: the waiting-room display board, the desk selection view and the ticket kiosk.",
 	"liveUrl": "https://ticketsapp-react.vercel.app",
-	"secondaryLabel": "Frontend Source",
-	"secondaryUrl": "https://github.com/Jejorm/tickets-app-react",
-	"thirdLabel": "Backend Source",
-	"thirdUrl": "https://github.com/Jejorm/tickets-app",
-	"reversed": false
+	"links": [
+		{
+			"label": "Frontend Source",
+			"url": "https://github.com/Jejorm/tickets-app-react"
+		},
+		{
+			"label": "Backend Source",
+			"url": "https://github.com/Jejorm/tickets-app"
+		}
+	]
 }

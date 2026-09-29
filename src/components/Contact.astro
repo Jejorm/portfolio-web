@@ -3,102 +3,222 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
+
+const email = 'jejorm8@gmail.com'
+const fieldClass =
+	'mt-2 w-full border border-line bg-transparent px-4 py-3.5 text-base text-ink placeholder:text-ink-muted/80 transition-colors hover:border-ink-muted focus:border-ink focus:outline-none aria-[invalid=true]:border-accent'
 ---
 
-<section class="py-32 px-8 bg-surface-container reveal" id="contact">
-	<div class="max-w-7xl mx-auto">
-		<div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
-			<!-- Info -->
-			<div>
-				<span class="text-[10px] uppercase tracking-[0.4em] text-primary"
-					>{t("contact.title")}</span
-				>
-				<h2 class="serif-display text-6xl mt-4 mb-8 text-on-surface">
-					{t("contact.subtitle1")}
-					<br />
-					<span class="italic text-primary">{t("contact.subtitle2")}</span>
-				</h2>
-				<div class="space-y-4">
-					<p class="text-on-surface-variant font-body font-light">
-						{t("contact.description")}
-					</p>
+<section id="contact" class="border-t border-line" aria-labelledby="contact-heading">
+	<div class="mx-auto max-w-[1440px] px-4 py-24 md:px-8 md:py-32">
+		<h2
+			id="contact-heading"
+			class="display text-[clamp(3.5rem,11vw,11rem)] leading-[0.86]"
+			data-reveal
+		>
+			{t('contact.title')}
+		</h2>
+
+		<div class="mt-16 grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-8">
+			<div class="lg:col-span-5">
+				<p class="max-w-[36ch] text-lg text-ink-muted" data-reveal>{t('contact.intro')}</p>
+
+				<div class="mt-10" data-reveal style="--d: 1">
+					<p class="meta text-ink-muted">{t('contact.email.label')}</p>
 					<a
-						class="inline-block text-2xl serif-display text-primary hover:text-white transition-colors duration-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-8 focus-visible:ring-offset-surface-container"
-						href="mailto:jejorm8@gmail.com"
+						href={`mailto:${email}`}
+						class="link-line mt-2 inline-block text-[clamp(1.5rem,2.6vw,2.25rem)] font-medium tracking-tight break-all"
 					>
-						jejorm8@gmail.com
+						{email}
 					</a>
+					<div class="mt-4">
+						<button
+							type="button"
+							id="copy-email"
+							class="meta border border-line px-3 py-1.5 uppercase transition-colors hover:border-ink active:scale-[0.98]"
+							data-email={email}
+							data-copied={t('contact.copied')}
+						>
+							{t('contact.copy')}
+						</button>
+					</div>
 				</div>
+
+				<ul class="mt-12 flex gap-8 text-[15px]" data-reveal style="--d: 2">
+					<li>
+						<a
+							class="link-line inline-flex items-center gap-2"
+							href="https://github.com/Jejorm"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							GitHub <span class="arrow-nudge" aria-hidden="true">↗</span>
+						</a>
+					</li>
+					<li>
+						<a
+							class="link-line inline-flex items-center gap-2"
+							href="https://www.linkedin.com/in/jeremy-orellana-76224023a/"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							LinkedIn <span class="arrow-nudge" aria-hidden="true">↗</span>
+						</a>
+					</li>
+				</ul>
 			</div>
 
-			<!-- Form -->
 			<form
-				class="space-y-12"
+				id="contact-form"
+				class="space-y-7 lg:col-span-6 lg:col-start-7"
 				action="https://formspree.io/f/meepgbyp"
 				method="POST"
+				novalidate
+				data-reveal
+				data-msg-required={t('contact.form.required')}
+				data-msg-email={t('contact.form.invalidEmail')}
+				data-msg-sending={t('contact.form.sending')}
+				data-msg-success={t('contact.form.success')}
+				data-msg-error={t('contact.form.error')}
 			>
-				<div class="relative group">
-					<label
-						class="text-xs uppercase tracking-widest text-primary absolute -top-6 left-0 transition-opacity group-focus-within:opacity-100 opacity-70"
-						for="contact-name"
-					>
-						{t("contact.form.identity")}
-					</label>
+				<div>
+					<label class="text-sm font-medium" for="contact-name">{t('contact.form.name')}</label>
 					<input
 						id="contact-name"
 						name="name"
-						required
-						aria-required="true"
-						autocomplete="name"
-						class="w-full bg-transparent border-b border-white/20 py-5 text-lg focus:outline-none focus:border-primary focus:bg-white/5 transition-all duration-500 text-on-surface placeholder:text-on-surface-variant/40 focus-visible:ring-0 px-4 -mx-4 rounded-t-sm"
-						placeholder={t("contact.form.identity.placeholder")}
 						type="text"
+						required
+						autocomplete="name"
+						placeholder={t('contact.form.name.placeholder')}
+						aria-describedby="contact-name-error"
+						class={fieldClass}
 					/>
+					<p id="contact-name-error" class="field-error mt-2 text-sm text-accent-ink" hidden></p>
 				</div>
 
-				<div class="relative group">
-					<label
-						class="text-xs uppercase tracking-widest text-primary absolute -top-6 left-0 transition-opacity group-focus-within:opacity-100 opacity-70"
-						for="contact-email"
-					>
-						{t("contact.form.communication")}
-					</label>
+				<div>
+					<label class="text-sm font-medium" for="contact-email">{t('contact.form.email')}</label>
 					<input
 						id="contact-email"
 						name="email"
-						required
-						aria-required="true"
-						autocomplete="email"
-						class="w-full bg-transparent border-b border-white/20 py-5 text-lg focus:outline-none focus:border-primary focus:bg-white/5 transition-all duration-500 text-on-surface placeholder:text-on-surface-variant/40 focus-visible:ring-0 px-4 -mx-4 rounded-t-sm"
-						placeholder={t("contact.form.communication.placeholder")}
 						type="email"
+						required
+						autocomplete="email"
+						placeholder={t('contact.form.email.placeholder')}
+						aria-describedby="contact-email-error"
+						class={fieldClass}
 					/>
+					<p id="contact-email-error" class="field-error mt-2 text-sm text-accent-ink" hidden></p>
 				</div>
 
-				<div class="relative group">
-					<label
-						class="text-xs uppercase tracking-widest text-primary absolute -top-6 left-0 transition-opacity group-focus-within:opacity-100 opacity-70"
-						for="contact-message"
-					>
-						{t("contact.form.intent")}
-					</label>
+				<div>
+					<label class="text-sm font-medium" for="contact-message">{t('contact.form.message')}</label>
 					<textarea
 						id="contact-message"
 						name="message"
 						required
-						aria-required="true"
-						class="w-full bg-transparent border-b border-white/20 py-5 text-lg focus:outline-none focus:border-primary focus:bg-white/5 transition-all duration-500 text-on-surface placeholder:text-on-surface-variant/40 resize-none focus-visible:ring-0 px-4 -mx-4 rounded-t-sm min-h-[120px]"
-						placeholder={t("contact.form.intent.placeholder")}
-						rows="4"></textarea>
+						rows="5"
+						placeholder={t('contact.form.message.placeholder')}
+						aria-describedby="contact-message-error"
+						class={`${fieldClass} resize-y`}
+					></textarea>
+					<p id="contact-message-error" class="field-error mt-2 text-sm text-accent-ink" hidden></p>
 				</div>
 
-				<button
-					type="submit"
-					class="w-full py-6 mt-4 bg-primary text-on-primary font-bold uppercase tracking-[0.2em] text-sm transition-all duration-500 hover:bg-white active:scale-[0.99] rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-surface-container cursor-pointer"
-				>
-					{t("contact.form.submit")}
-				</button>
+				<div class="flex flex-wrap items-center gap-6">
+					<button
+						type="submit"
+						class="inline-flex items-center gap-3 bg-ink px-7 py-4 text-[15px] font-medium text-paper transition-[background-color,transform,opacity] duration-300 hover:bg-accent hover:text-on-accent active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60"
+					>
+						<span class="submit-label">{t('contact.form.submit')}</span>
+						<span aria-hidden="true">→</span>
+					</button>
+					<p id="contact-status" class="text-[15px]" role="status" aria-live="polite"></p>
+				</div>
 			</form>
 		</div>
 	</div>
 </section>
+
+<script>
+	// Copy email
+	const copyButton = document.getElementById('copy-email')
+	copyButton?.addEventListener('click', async () => {
+		const { email = '', copied = '' } = copyButton.dataset
+		const original = copyButton.textContent
+		try {
+			await navigator.clipboard.writeText(email)
+			copyButton.textContent = copied
+			setTimeout(() => {
+				copyButton.textContent = original
+			}, 2000)
+		} catch {
+			window.location.href = `mailto:${email}`
+		}
+	})
+
+	// Contact form: inline validation, then an async submit with visible states.
+	const form = document.getElementById('contact-form') as HTMLFormElement | null
+
+	if (form) {
+		const msg = form.dataset
+		const status = document.getElementById('contact-status') as HTMLElement
+		const submit = form.querySelector('button[type="submit"]') as HTMLButtonElement
+		const submitLabel = form.querySelector('.submit-label') as HTMLElement
+		const defaultLabel = submitLabel.textContent
+		const fields = Array.from(
+			form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea'),
+		)
+
+		const validate = (field: HTMLInputElement | HTMLTextAreaElement) => {
+			const error = document.getElementById(`${field.id}-error`) as HTMLElement
+			let message = ''
+			if (field.validity.valueMissing) message = msg.msgRequired ?? ''
+			else if (field.validity.typeMismatch) message = msg.msgEmail ?? ''
+			field.setAttribute('aria-invalid', String(Boolean(message)))
+			error.textContent = message
+			error.hidden = !message
+			return !message
+		}
+
+		fields.forEach((field) => {
+			field.addEventListener('blur', () => {
+				if (field.value) validate(field)
+			})
+			field.addEventListener('input', () => {
+				if (field.getAttribute('aria-invalid') === 'true') validate(field)
+			})
+		})
+
+		form.addEventListener('submit', async (event) => {
+			event.preventDefault()
+			const invalid = fields.filter((field) => !validate(field))
+			if (invalid.length) {
+				invalid[0].focus()
+				return
+			}
+
+			submit.disabled = true
+			submitLabel.textContent = msg.msgSending ?? ''
+			status.textContent = ''
+			status.classList.remove('text-accent-ink')
+
+			try {
+				const response = await fetch(form.action, {
+					method: 'POST',
+					body: new FormData(form),
+					headers: { Accept: 'application/json' },
+				})
+				if (!response.ok) throw new Error(String(response.status))
+				form.reset()
+				status.textContent = msg.msgSuccess ?? ''
+			} catch {
+				status.textContent = msg.msgError ?? ''
+				status.classList.add('text-accent-ink')
+			} finally {
+				submit.disabled = false
+				submitLabel.textContent = defaultLabel
+			}
+		})
+	}
+</script>

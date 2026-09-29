@@ -1,8 +1,9 @@
 {
 	"order": 1,
-	"number": "01.",
 	"title": "Luxe Estate",
-	"quote": "\"Redefiniendo la experiencia inmobiliaria digital de lujo. Luxe Estate combina visualización cinematográfica con una infraestructura robusta basada en Server Components y Server Actions para un rendimiento excepcional.\"",
+	"kind": "Plataforma inmobiliaria",
+	"summary": "Búsqueda de propiedades con filtros sincronizados al mapa, consultas localizadas y renderizado en servidor.",
+	"description": "Una plataforma inmobiliaria full-stack construida con Server Components y Server Actions de Next.js, Supabase para datos y autenticación, y Leaflet para la búsqueda en mapa.",
 	"challenges": [
 		"Sincronización de estado compleja entre mapas interactivos (Leaflet) y filtros de servidor en Next.js 16.",
 		"Gestión de internacionalización dinámica (i18n) que afecta tanto a la UI como a las consultas de base de datos en tiempo real.",
@@ -13,32 +14,14 @@
 		"Implementación de Server Actions con validación estricta y UI optimista para una respuesta instantánea en favoritos y auth.",
 		"Sistema de filtrado híbrido que utiliza Supabase PostgREST para consultas eficientes y seguras desde el servidor."
 	],
-	"tags": [
-		{
-			"label": "Next.js 16",
-			"icon": "nextdotjs"
-		},
-		{
-			"label": "Supabase",
-			"icon": "supabase"
-		},
-		{
-			"label": "Tailwind CSS 4",
-			"icon": "tailwindcss"
-		},
-		{
-			"label": "Leaflet",
-			"icon": "leaflet"
-		},
-		{
-			"label": "i18n",
-			"icon": "googletranslate"
-		}
-	],
+	"tags": ["Next.js 16", "Supabase", "Tailwind CSS 4", "Leaflet", "i18n"],
 	"image": "../../../assets/images/project-luxe-estate.webp",
-	"imageAlt": "Visualización arquitectónica minimalista de una finca de lujo con líneas limpias, bordes afilados y una iluminación monocromática dramática",
+	"imageAlt": "Tres pantallas de Luxe Estate: la búsqueda de propiedades, el detalle de un inmueble con mapa y la tabla de administración.",
 	"liveUrl": "https://luxe-estate-ten.vercel.app",
-	"secondaryLabel": "Fuente",
-	"secondaryUrl": "https://github.com/Jejorm/luxe-estate",
-	"reversed": false
+	"links": [
+		{
+			"label": "Fuente",
+			"url": "https://github.com/Jejorm/luxe-estate"
+		}
+	]
 }

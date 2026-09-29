@@ -1,8 +1,9 @@
 {
 	"order": 2,
-	"number": "02.",
 	"title": "Assembly: Endgame",
-	"quote": "\"A high-stakes word-guessing survival game built with React 19. Players rescue iconic programming languages through dynamic state management and full ARIA accessibility.\"",
+	"kind": "Browser game",
+	"summary": "An accessible word-guessing game with live feedback for screen readers.",
+	"description": "A word-guessing game in React 19. Each wrong guess removes a programming language from the board; the whole game is playable with a keyboard and a screen reader.",
 	"challenges": [
 		"Complex state orchestration for managing language lifecycles, attempts, and real-time win/loss conditions.",
 		"Ensuring universal accessibility (WCAG) in a dynamic game environment through precise ARIA live regions.",
@@ -13,16 +14,14 @@
 		"Modular architecture based on specialized components (Status, LanguageChips, Keyboard) for clean rendering logic.",
 		"Implementation of dynamic visual feedback and celebration effects (react-confetti) to enhance user experience (UX)."
 	],
-	"tags": [
-		{ "label": "React 19", "icon": "react" },
-		{ "label": "CSS Grid", "icon": "css3" },
-		{ "label": "ARIA", "icon": "accessibility" },
-		{ "label": "Hooks", "icon": "react" }
-	],
+	"tags": ["React 19", "CSS Grid", "ARIA", "Hooks"],
 	"image": "../../../assets/images/project-assembly-endgame.webp",
-	"imageAlt": "A digital interface showing a word-guessing game with glowing programming language chips and a retro-futuristic terminal aesthetic",
+	"imageAlt": "Three Assembly: Endgame screens showing the game board, a win state with confetti and a game-over state.",
 	"liveUrl": "https://assembly-endgam3.netlify.app",
-	"secondaryLabel": "Source",
-	"secondaryUrl": "https://github.com/Jejorm/assembly-endgame",
-	"reversed": true
+	"links": [
+		{
+			"label": "Source",
+			"url": "https://github.com/Jejorm/assembly-endgame"
+		}
+	]
 }

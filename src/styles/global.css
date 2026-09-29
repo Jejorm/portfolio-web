@@ -1,333 +1,279 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════
-   ARCHITECT PORTFOLIO — Design System
-   Philosophy: "Architectural Silence"
+   KINETIC INDEX — Design system
+   Monochrome paper/ink + one vermilion accent.
+   Archivo (variable wght + wdth) for everything,
+   JetBrains Mono for metadata. Sharp corners only.
+   See DESIGN.md for the rationale.
    ═══════════════════════════════════════════════════ */
 
-@theme {
-	/* ── Color Tokens: The Material Palette ── */
-	--color-accent-blue: #3b82f6;
-	--color-accent-blue-deep: #1d4ed8;
-	--color-surface: #0e0e0e;
-	--color-surface-dim: #0e0e0e;
-	--color-surface-bright: #2c2c2c;
-	--color-surface-container-lowest: #000000;
-	--color-surface-container-low: #131313;
-	--color-surface-container: #191a1a;
-	--color-surface-container-high: #1f2020;
-	--color-surface-container-highest: #252626;
-	--color-surface-variant: #252626;
-	--color-on-surface: #e7e5e4;
-	--color-on-surface-variant: #acabaa;
-	--color-on-background: #e7e5e4;
-	--color-background: #0e0e0e;
-	--color-primary: #c6c6c6;
-	--color-primary-dim: #b9b9b9;
-	--color-primary-container: #464747;
-	--color-on-primary: #3f4041;
-	--color-on-primary-container: #d0d0d0;
-	--color-secondary: #9f9d9d;
-	--color-secondary-dim: #9f9d9d;
-	--color-secondary-container: #3b3b3b;
-	--color-on-secondary: #202020;
-	--color-on-secondary-container: #c1bfbe;
-	--color-tertiary: #fff8f4;
-	--color-tertiary-dim: #efdccc;
-	--color-tertiary-container: #fbe8d7;
-	--color-on-tertiary: #6a5d50;
-	--color-on-tertiary-container: #615448;
-	--color-outline: #767575;
-	--color-outline-variant: #484848;
-	--color-inverse-surface: #fcf8f8;
-	--color-inverse-on-surface: #565554;
-	--color-inverse-primary: #5e5f5f;
-	--color-error: #ee7d77;
-	--color-error-dim: #bb5551;
-	--color-error-container: #7f2927;
-	--color-on-error: #490106;
-	--color-on-error-container: #ff9993;
-	--color-surface-tint: #c6c6c6;
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-	/* ── Typography ── */
-	--font-headline: "Newsreader", serif;
-	--font-body: "Inter", sans-serif;
-	--font-label: "Inter", sans-serif;
+/* ── Raw tokens: light (default) ── */
+:root {
+	--paper: #ececea;
+	--raised: #e1e1de;
+	--ink: #121213;
+	--ink-muted: #56565b;
+	--line: rgb(18 18 19 / 0.16);
+	--accent: #e2471f;
+	--accent-ink: #b8330f;
+	--on-accent: #121213;
+	--nav-h: 4rem;
+	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+	color-scheme: light;
+}
 
-	/* ── Border Radius — Architectural Precision ── */
-	--radius: 0.25rem;
-	--radius-lg: 0.5rem;
-	--radius-xl: 0.75rem;
+/* ── Raw tokens: dark (system preference or explicit choice) ── */
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		--paper: #0e0e0f;
+		--raised: #1a1a1c;
+		--ink: #ecece8;
+		--ink-muted: #9d9da2;
+		--line: rgb(236 236 232 / 0.14);
+		--accent: #ff5b2e;
+		--accent-ink: #ff5b2e;
+		--on-accent: #0e0e0f;
+		color-scheme: dark;
+	}
+}
+
+:root[data-theme="dark"] {
+	--paper: #0e0e0f;
+	--raised: #1a1a1c;
+	--ink: #ecece8;
+	--ink-muted: #9d9da2;
+	--line: rgb(236 236 232 / 0.14);
+	--accent: #ff5b2e;
+	--accent-ink: #ff5b2e;
+	--on-accent: #0e0e0f;
+	color-scheme: dark;
+}
+
+/* ── Tailwind bridge: utilities read the live variables ── */
+@theme inline {
+	--color-paper: var(--paper);
+	--color-raised: var(--raised);
+	--color-ink: var(--ink);
+	--color-ink-muted: var(--ink-muted);
+	--color-line: var(--line);
+	--color-accent: var(--accent);
+	--color-accent-ink: var(--accent-ink);
+	--color-on-accent: var(--on-accent);
+
+	--font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
+	--font-mono:
+		"JetBrains Mono Variable", ui-monospace, "SFMono-Regular", monospace;
+
+	--radius-none: 0;
 }
 
 /* ═══════════════════════════════════════════════════
-   BASE STYLES — Native CSS for core identity
+   BASE
    ═══════════════════════════════════════════════════ */
 
+@view-transition {
+	navigation: auto;
+}
+
 html {
-	/* Lenis will handle smooth scrolling */
+	scroll-padding-top: var(--nav-h);
+	-webkit-text-size-adjust: 100%;
 }
 
 body {
-	background-color: #0e0e0e;
-	color: #e7e5e4;
-	font-family: "Inter", sans-serif;
+	background-color: var(--paper);
+	color: var(--ink);
+	font-family: var(--font-sans);
+	font-stretch: 100%;
+	font-feature-settings: "ss01";
+	text-rendering: optimizeLegibility;
 }
 
 ::selection {
-	background-color: #3b82f6;
-	color: #fff;
+	background-color: var(--accent);
+	color: var(--on-accent);
 }
 
-/* ── Custom Scrollbar — Minimal ── */
-::-webkit-scrollbar {
-	width: 4px;
+:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 4px;
 }
-::-webkit-scrollbar-track {
-	background: #0e0e0e;
+
+[tabindex="-1"]:focus {
+	outline: none;
 }
-::-webkit-scrollbar-thumb {
-	background: #3b82f6;
+
+h1,
+h2,
+h3 {
+	text-wrap: balance;
+}
+
+p {
+	text-wrap: pretty;
 }
 
 /* ═══════════════════════════════════════════════════
-   UTILITY CLASSES — Native CSS animations & layouts
+   TYPE SYSTEM
    ═══════════════════════════════════════════════════ */
 
-/* ── Typography Engine ── */
-:root {
-	--scroll-progress: 0;
-}
+@layer components {
+	/* Condensed display: section titles and project names */
+	.display {
+		font-weight: 600;
+		font-stretch: 72%;
+		letter-spacing: -0.02em;
+		line-height: 0.95;
+	}
 
-.serif-display {
-	font-family: "Newsreader", serif;
-	font-optical-sizing: auto;
-	/* El opsz se ajusta al tamaño de fuente, pero nosotros le damos un empujón con el scroll */
-	font-variation-settings:
-		"opsz" calc(32 + (var(--scroll-progress) * 40)),
-		"wght" calc(200 + (var(--scroll-progress) * 100));
-	letter-spacing: calc(-0.02em + (var(--scroll-progress) * 0.01em));
-	transition:
-		font-variation-settings 0.1s linear,
-		letter-spacing 0.1s linear;
-}
+	/* Hero wordmark: expanded, then gathers as the page scrolls */
+	.wordmark {
+		font-weight: 800;
+		font-stretch: 118%;
+		letter-spacing: -0.045em;
+		line-height: 0.8;
+		white-space: nowrap;
+	}
 
-/* Forzar opsz máximo en títulos gigantes con escala controlada */
-h1.serif-display {
-	font-size: clamp(3.5rem, 8vw, 6.5rem);
-	line-height: 0.95;
-	font-variation-settings:
-		"opsz" 72,
-		"wght" 300;
-	margin-bottom: 2rem;
-}
+	/* Metadata voice. Used for data, never as a section eyebrow. */
+	.meta {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		line-height: 1.4;
+		letter-spacing: 0.02em;
+	}
 
-/* Opsz medio para secciones con mejor balance */
-h2.serif-display {
-	font-size: clamp(2.5rem, 6vw, 4.5rem);
-	line-height: 1;
-	font-variation-settings:
-		"opsz" 48,
-		"wght" 400;
-}
+	/* Animated underline for text links */
+	.link-line {
+		background-image: linear-gradient(currentColor, currentColor);
+		background-size: 0% 1px;
+		background-position: 0 100%;
+		background-repeat: no-repeat;
+		transition: background-size 0.5s var(--ease-out);
+	}
 
-/* Texto de cuerpo con más presencia */
-.lead-text {
-	font-size: clamp(1.125rem, 2vw, 1.35rem);
-	line-height: 1.6;
-	letter-spacing: -0.01em;
-}
+	.link-line:hover,
+	.link-line:focus-visible {
+		background-size: 100% 1px;
+	}
 
-/* Material Symbols config */
-.material-symbols-outlined {
-	font-variation-settings:
-		"FILL" 0,
-		"wght" 300,
-		"GRAD" 0,
-		"opsz" 24;
-}
+	.arrow-nudge {
+		display: inline-block;
+		transition: transform 0.4s var(--ease-out);
+	}
 
-/* ── Scroll Reveal Animation ── */
-.reveal {
-	opacity: 0;
-	transform: translateY(30px) scale(0.995);
-	filter: blur(8px) contrast(1.2) brightness(0.8);
-	transition:
-		opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-		transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-		filter 0.8s ease-out;
-	will-change: opacity, transform, filter;
-}
-
-.reveal.active {
-	opacity: 1;
-	transform: translateY(0) scale(1);
-	filter: blur(0) contrast(1) brightness(1);
-}
-
-/* ── Material Surface Effects ── */
-.surface-texture {
-	position: relative;
-	background-image: radial-gradient(
-		circle at 2px 2px,
-		rgba(255, 255, 255, 0.05) 1px,
-		transparent 0
-	);
-	background-size: 24px 24px;
-}
-
-/* ── Premium Transition ── */
-.transition-premium {
-	transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* ── Asymmetric Grid ── */
-.asymmetric-grid {
-	display: grid;
-	grid-template-columns: repeat(12, 1fr);
-	gap: 2rem;
-}
-
-/* ── Nav Scrolled State ── */
-nav.scrolled {
-	padding-top: 1rem;
-	padding-bottom: 1rem;
-	background: rgba(14, 14, 14, 0.95);
-	border-color: rgba(59, 130, 246, 0.2);
-}
-
-/* ── Exhibition Gallery Effects ── */
-.museum-frame {
-	position: relative;
-	padding: 1rem;
-	background: var(--color-surface-container-low);
-	border: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-.museum-frame::before {
-	content: "SCALE 1:100";
-	position: absolute;
-	top: -10px;
-	left: 20px;
-	font-size: 8px;
-	letter-spacing: 0.2em;
-	color: var(--color-primary);
-	background: var(--color-surface);
-	padding: 0 5px;
-}
-
-.glass-reflection {
-	position: absolute;
-	inset: 0;
-	background: linear-gradient(
-		135deg,
-		rgba(255, 255, 255, 0.1) 0%,
-		rgba(255, 255, 255, 0.05) 10%,
-		transparent 40%,
-		transparent 100%
-	);
-	pointer-events: none;
-	z-index: 30;
-	opacity: 0.5;
-}
-
-.technical-mark {
-	position: absolute;
-	width: 10px;
-	height: 10px;
-	border: 1px solid var(--color-primary);
-	opacity: 0.3;
-	z-index: 40;
-}
-
-/* ── Precision Cursor Base ── */
-@media (hover: hover) and (pointer: fine) {
-	html:not(.disable-custom-cursor),
-	html:not(.disable-custom-cursor) body,
-	html:not(.disable-custom-cursor) a,
-	html:not(.disable-custom-cursor) button {
-		cursor: none !important;
+	a:hover .arrow-nudge,
+	a:focus-visible .arrow-nudge {
+		transform: translate(3px, -3px);
 	}
 }
 
-:root {
-	--cursor-size: 20px;
-}
+/* ═══════════════════════════════════════════════════
+   MOTION — everything below is opt-in via
+   prefers-reduced-motion: no-preference
+   ═══════════════════════════════════════════════════ */
 
-/* ── Navigation Premium ── */
-.nav-link {
-	position: relative;
-	font-family: var(--font-label);
-	font-size: 11px;
-	font-weight: 500;
-	letter-spacing: 0.3em;
-	text-transform: uppercase;
-	color: var(--color-on-surface-variant);
-	transition:
-		color 0.4s ease,
-		transform 0.2s ease;
-}
-
-.nav-link:hover {
-	color: var(--color-on-surface);
-}
-
-.nav-link:active {
-	transform: scale(0.95);
-}
-
-.nav-link::after {
-	content: "";
-	position: absolute;
-	bottom: -4px;
-	left: 50%;
-	width: 0;
-	height: 1px;
-	background-color: var(--color-primary);
-	transition:
-		width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-		left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.nav-link:hover::after {
-	width: 100%;
-	left: 0;
-}
-
-.logo-container {
-	font-family: var(--font-headline);
-	font-style: italic;
-	font-weight: 200;
-	font-size: 1.25rem;
-	letter-spacing: -0.02em;
-	transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.logo-container:hover {
-	transform: skewX(-5deg);
-}
-
-@keyframes slide-to-left {
-	from {
-		transform: translateX(0);
-		opacity: 1;
-	}
-	to {
-		transform: translateX(-30px);
+@media (prefers-reduced-motion: no-preference) {
+	/* Entry reveal, toggled by an IntersectionObserver in Layout.astro */
+	.js [data-reveal] {
 		opacity: 0;
+		transform: translateY(24px);
+		transition:
+			opacity 0.9s var(--ease-out),
+			transform 0.9s var(--ease-out);
+		transition-delay: calc(var(--d, 0) * 90ms);
 	}
-}
 
-::view-transition-old(root) {
-	animation: 0.6s cubic-bezier(0.16, 1, 0.3, 1) both slide-to-left;
-}
+	.js [data-reveal].is-in {
+		opacity: 1;
+		transform: none;
+	}
 
-::view-transition-new(root) {
-	animation: 0.6s cubic-bezier(0.16, 1, 0.3, 1) both slide-from-right;
-}
+	/* Hero load: lines rise out of a mask */
+	.line-mask {
+		display: block;
+		overflow: hidden;
+		padding-bottom: 0.08em;
+	}
 
-/* Evitar parpadeo en elementos fijos */
-#nav-container,
-.noise-overlay {
-	view-transition-name: persistent-ui;
+	.line-mask > span {
+		display: block;
+		animation: rise 1.1s var(--ease-out) both;
+		animation-delay: calc(var(--d, 0) * 110ms + 120ms);
+	}
+
+	@keyframes rise {
+		from {
+			transform: translateY(105%);
+		}
+	}
+
+	@supports (animation-timeline: scroll()) {
+		/* Wordmark condenses as the hero leaves the viewport */
+		.wordmark-kinetic {
+			animation: gather linear both;
+			animation-timeline: scroll(root);
+			animation-range: 0 100vh;
+		}
+
+		@keyframes gather {
+			to {
+				font-stretch: 64%;
+				font-weight: 500;
+			}
+		}
+
+		/* Project imagery opens from an inset as it enters */
+		.clip-reveal {
+			animation: unclip linear both;
+			animation-timeline: view();
+			animation-range: entry 5% cover 35%;
+		}
+
+		@keyframes unclip {
+			from {
+				clip-path: inset(10% 6% 10% 6%);
+				scale: 1.06;
+			}
+			to {
+				clip-path: inset(0 0 0 0);
+				scale: 1;
+			}
+		}
+
+		/* About statement: words light up as they are read */
+		.read-along {
+			view-timeline-name: --read;
+		}
+
+		.read-along .w {
+			animation: ink-in linear both;
+			animation-timeline: --read;
+			animation-range: cover calc(18% + var(--p) * 38%) cover
+				calc(22% + var(--p) * 38%);
+		}
+
+		@keyframes ink-in {
+			from {
+				opacity: 0.18;
+			}
+		}
+
+		/* Navigation gains its surface after the first 80px of scroll */
+		.nav-surface {
+			animation: nav-in linear both;
+			animation-timeline: scroll(root);
+			animation-range: 0 80px;
+		}
+
+		@keyframes nav-in {
+			from {
+				background-color: transparent;
+				border-color: transparent;
+			}
+		}
+	}
 }
