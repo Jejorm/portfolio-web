@@ -1,18 +1,18 @@
 {
-	"order": 1,
+	"order": 3,
 	"title": "Luxe Estate",
 	"kind": "Real estate platform",
 	"summary": "Property search with map-synced filters, localized queries and server-first rendering.",
-	"description": "A full-stack real estate platform built on Next.js Server Components and Server Actions, with Supabase for data and auth and Leaflet for map search.",
+	"description": "A full-stack real estate platform built on Next.js Server Components and Server Actions, with Supabase for data and auth, Leaflet for map search and localized queries.",
 	"challenges": [
-		"Complex state synchronization between interactive maps (Leaflet) and server-side filters in Next.js 16.",
-		"Dynamic internationalization (i18n) management affecting both the UI and real-time database queries.",
-		"Optimizing high-resolution image loading to maintain a 'Luxe' experience without penalizing Core Web Vitals."
+		"The Leaflet map and the server-side filters had to stay in sync in Next.js 16.",
+		"Favorites and sign-in felt slow when every action waited for a round trip to the server.",
+		"Property pages needed good SEO and fast loads, but high-resolution images can hurt Core Web Vitals."
 	],
 	"solutions": [
-		"Server Components First architecture to minimize client-side JS and maximize SEO performance.",
-		"Implementation of Server Actions with strict validation and optimistic UI for near-instant response in favorites and auth.",
-		"Hybrid filtering system leveraging Supabase PostgREST for efficient and secure server-side querying."
+		"A hybrid filtering system runs queries on the server through Supabase PostgREST, keeping the map and the results consistent.",
+		"Server Actions validate their input strictly and pair with optimistic UI, so favorites and sign-in respond without waiting.",
+		"Pages render with Server Components first, which sends less JavaScript to the browser and keeps content crawlable."
 	],
 	"tags": ["Next.js 16", "Supabase", "Tailwind CSS 4", "Leaflet", "i18n"],
 	"image": "../../../assets/images/project-luxe-estate.webp",
@@ -20,7 +20,7 @@
 	"liveUrl": "https://luxe-estate-ten.vercel.app",
 	"links": [
 		{
-			"label": "Source",
+			"label": "Source code",
 			"url": "https://github.com/Jejorm/luxe-estate"
 		}
 	]

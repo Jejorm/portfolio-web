@@ -1,18 +1,18 @@
 {
-	"order": 3,
+	"order": 2,
 	"title": "Tickets App",
 	"kind": "Real-time system",
 	"summary": "Kiosks, desks and display boards kept in sync over native WebSockets.",
-	"description": "A turn-management system for service desks. A React 19 client and a Bun + TypeScript server share queue state in real time over native WebSockets.",
+	"description": "A turn-management system for service desks, with normal and preferential tickets. A React 19 client and a Bun and TypeScript server share queue state in real time over native WebSockets.",
 	"challenges": [
-		"Zero-latency multi-client synchronization of global queue state using binary/JSON protocols over WebSockets.",
-		"Implementation of dynamic prioritization logic (Normal vs Preferential) ensuring integrity in concurrent environments.",
-		"Designing a robust exponential backoff reconnection infrastructure for critical clients (Kiosks and Board screens)."
+		"Kiosks, desks and display boards all had to show the same queue state at the same time.",
+		"Every screen needed live queue state without each component managing its own socket.",
+		"Kiosks and display boards had to keep working when the network connection dropped."
 	],
 	"solutions": [
-		"Leveraging Bun.serve for high-performance native WebSockets and Zod schemas for strict message validation at the edge.",
-		"Abstraction of domain logic through custom Hooks (useSocketTicket) and Context API for clean state management.",
-		"Decoupled and containerized architecture with Docker for consistent deployments and immediate horizontal scalability."
+		"The Bun server shares queue state with every client over native WebSockets (Bun.serve) and validates each incoming message with a Zod schema.",
+		"A custom hook, useSocketTicket, wraps the socket and a React Context exposes the queue state to every component.",
+		"Clients reconnect automatically with exponential backoff, and the backend runs in a Docker container so deployments stay consistent."
 	],
 	"tags": ["React 19", "Bun", "WebSockets", "TypeScript", "Zod"],
 	"image": "../../../assets/images/project-tickets-websockets.webp",
@@ -20,11 +20,11 @@
 	"liveUrl": "https://ticketsapp-react.vercel.app",
 	"links": [
 		{
-			"label": "Frontend Source",
+			"label": "Frontend source code",
 			"url": "https://github.com/Jejorm/tickets-app-react"
 		},
 		{
-			"label": "Backend Source",
+			"label": "Backend source code",
 			"url": "https://github.com/Jejorm/tickets-app"
 		}
 	]

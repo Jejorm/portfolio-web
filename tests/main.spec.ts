@@ -21,7 +21,7 @@ test.describe('Portfolio Core Experience', () => {
 
 		// Check Hero statement in Spanish
 		await expect(page.locator('#hero-statement')).toContainText(
-			'aplicaciones web escalables',
+			'productos completos',
 		)
 	})
 
@@ -29,9 +29,7 @@ test.describe('Portfolio Core Experience', () => {
 		await page.goto('/')
 
 		// Click on the Hero CTA
-		await page
-			.getByRole('link', { name: /Navigate to selected projects archive/i })
-			.click()
+		await page.getByRole('link', { name: 'View work' }).click()
 
 		// Verify it scrolled to or navigated to the projects section
 		await expect(page).toHaveURL(/.*#projects/)
@@ -45,7 +43,7 @@ test.describe('Portfolio Core Experience', () => {
 		await page.goto('/')
 
 		const articles = page.locator('article.project')
-		await expect(articles).toHaveCount(3)
+		await expect(articles).toHaveCount(4)
 		for (const article of await articles.all()) {
 			await expect(article.locator('ol').first().locator('li')).not.toHaveCount(
 				0,
@@ -54,6 +52,19 @@ test.describe('Portfolio Core Experience', () => {
 				0,
 			)
 		}
+	})
+
+	test('should show Vikoma as a case study with its live link', async ({
+		page,
+	}) => {
+		await page.goto('/')
+
+		const vikoma = page.locator('article#vikoma')
+		await expect(vikoma).toHaveCount(1)
+		await expect(vikoma.getByRole('heading', { name: 'Vikoma' })).toBeVisible()
+		await expect(
+			vikoma.getByRole('link', { name: /Live site/ }),
+		).toHaveAttribute('href', 'https://vikoma.app')
 	})
 
 	test('should persist the chosen color theme across pages', async ({

@@ -1,18 +1,18 @@
 {
-	"order": 1,
+	"order": 3,
 	"title": "Luxe Estate",
 	"kind": "Plataforma inmobiliaria",
-	"summary": "Búsqueda de propiedades con filtros sincronizados al mapa, consultas localizadas y renderizado en servidor.",
-	"description": "Una plataforma inmobiliaria full-stack construida con Server Components y Server Actions de Next.js, Supabase para datos y autenticación, y Leaflet para la búsqueda en mapa.",
+	"summary": "Búsqueda de propiedades con filtros sincronizados con el mapa, consultas localizadas y renderizado en servidor.",
+	"description": "Una plataforma inmobiliaria full-stack construida con Server Components y Server Actions de Next.js, con Supabase para datos y autenticación, Leaflet para la búsqueda en mapa y consultas localizadas.",
 	"challenges": [
-		"Sincronización de estado compleja entre mapas interactivos (Leaflet) y filtros de servidor en Next.js 16.",
-		"Gestión de internacionalización dinámica (i18n) que afecta tanto a la UI como a las consultas de base de datos en tiempo real.",
-		"Optimización de carga de imágenes de alta resolución para mantener una experiencia 'Luxe' sin penalizar el Core Web Vitals."
+		"El mapa de Leaflet y los filtros del servidor debían mantenerse sincronizados en Next.js 16.",
+		"Los favoritos y el inicio de sesión se sentían lentos si cada acción esperaba una ida y vuelta al servidor.",
+		"Las páginas de propiedades necesitaban buen SEO y carga rápida, pero las imágenes de alta resolución pueden perjudicar los Core Web Vitals."
 	],
 	"solutions": [
-		"Arquitectura 'Server Components First' para minimizar el JS enviado al cliente y maximizar el SEO.",
-		"Implementación de Server Actions con validación estricta y UI optimista para una respuesta instantánea en favoritos y auth.",
-		"Sistema de filtrado híbrido que utiliza Supabase PostgREST para consultas eficientes y seguras desde el servidor."
+		"Un sistema de filtrado híbrido ejecuta las consultas en el servidor con Supabase PostgREST, y así el mapa y los resultados coinciden.",
+		"Las Server Actions validan estrictamente sus datos y se combinan con interfaz optimista, así los favoritos y el inicio de sesión responden sin esperar.",
+		"Las páginas se renderizan primero con Server Components, lo que envía menos JavaScript al navegador y mantiene el contenido indexable."
 	],
 	"tags": ["Next.js 16", "Supabase", "Tailwind CSS 4", "Leaflet", "i18n"],
 	"image": "../../../assets/images/project-luxe-estate.webp",
@@ -20,7 +20,7 @@
 	"liveUrl": "https://luxe-estate-ten.vercel.app",
 	"links": [
 		{
-			"label": "Fuente",
+			"label": "Código fuente",
 			"url": "https://github.com/Jejorm/luxe-estate"
 		}
 	]

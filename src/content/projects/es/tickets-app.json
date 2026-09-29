@@ -1,18 +1,18 @@
 {
-	"order": 3,
+	"order": 2,
 	"title": "Tickets App",
 	"kind": "Sistema en tiempo real",
-	"summary": "Kioscos, escritorios y pantallas sincronizados mediante WebSockets nativos.",
-	"description": "Un sistema de turnos para puntos de atención. Un cliente en React 19 y un servidor en Bun + TypeScript comparten el estado de la cola en tiempo real con WebSockets nativos.",
+	"summary": "Kioscos, escritorios y pantallas sincronizados con WebSockets nativos.",
+	"description": "Un sistema de turnos para puntos de atención, con tickets normales y preferenciales. Un cliente en React 19 y un servidor en Bun y TypeScript comparten el estado de la cola en tiempo real con WebSockets nativos.",
 	"challenges": [
-		"Sincronización multi-cliente de estado global (Queue State) sin latencia perceptible mediante protocolos binarios/JSON sobre WebSockets.",
-		"Implementación de lógica de priorización dinámica (Normal vs Preferencial) asegurando integridad en entornos concurrentes.",
-		"Diseño de una infraestructura robusta de reconexión exponencial para clientes críticos (Kioscos y Pantallas de Sala)."
+		"Kioscos, escritorios y pantallas debían mostrar el mismo estado de la cola al mismo tiempo.",
+		"Cada pantalla necesitaba el estado de la cola en vivo sin que cada componente administrara su propio socket.",
+		"Kioscos y pantallas debían seguir funcionando cuando se caía la conexión de red."
 	],
 	"solutions": [
-		"Uso de Bun.serve para WebSockets nativos de alto rendimiento y esquemas Zod para validación estricta de mensajes en el borde.",
-		"Abstracción de lógica de dominio mediante Hooks personalizados (useSocketTicket) y Context API para una gestión de estado limpia.",
-		"Arquitectura desacoplada y containerizada con Docker para despliegues consistentes y escalabilidad horizontal inmediata."
+		"El servidor Bun comparte el estado de la cola con todos los clientes mediante WebSockets nativos (Bun.serve) y valida cada mensaje entrante con un esquema Zod.",
+		"Un hook propio, useSocketTicket, encapsula el socket y un Context de React expone el estado de la cola a todos los componentes.",
+		"Los clientes se reconectan solos con espera exponencial, y el backend corre en un contenedor Docker para que los despliegues sean consistentes."
 	],
 	"tags": ["React 19", "Bun", "WebSockets", "TypeScript", "Zod"],
 	"image": "../../../assets/images/project-tickets-websockets.webp",
@@ -20,11 +20,11 @@
 	"liveUrl": "https://ticketsapp-react.vercel.app",
 	"links": [
 		{
-			"label": "Fuente Frontend",
+			"label": "Código fuente del frontend",
 			"url": "https://github.com/Jejorm/tickets-app-react"
 		},
 		{
-			"label": "Fuente Backend",
+			"label": "Código fuente del backend",
 			"url": "https://github.com/Jejorm/tickets-app"
 		}
 	]

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════
-   KINETIC INDEX — Design system
+   KINETIC INDEX: Design system
    Monochrome paper/ink + one vermilion accent.
    Archivo (variable wght + wdth) for everything,
    JetBrains Mono for metadata. Sharp corners only.
@@ -172,7 +172,7 @@ p {
 }
 
 /* ═══════════════════════════════════════════════════
-   MOTION — everything below is opt-in via
+   MOTION: everything below is opt-in via
    prefers-reduced-motion: no-preference
    ═══════════════════════════════════════════════════ */
 

@@ -1,18 +1,18 @@
 {
-	"order": 2,
+	"order": 4,
 	"title": "Assembly: Endgame",
 	"kind": "Browser game",
 	"summary": "An accessible word-guessing game with live feedback for screen readers.",
 	"description": "A word-guessing game in React 19. Each wrong guess removes a programming language from the board; the whole game is playable with a keyboard and a screen reader.",
 	"challenges": [
-		"Complex state orchestration for managing language lifecycles, attempts, and real-time win/loss conditions.",
-		"Ensuring universal accessibility (WCAG) in a dynamic game environment through precise ARIA live regions.",
-		"Visual and logical synchronization of an interactive keyboard with attempt history for seamless navigation."
+		"The game state (remaining languages, guesses, win and loss) changes on every key press and has to stay consistent.",
+		"Screen reader users needed to hear each guess and the final result without seeing the board.",
+		"The on-screen keyboard had to match the guess history at all times."
 	],
 	"solutions": [
-		"Strategic use of 'aria-live' to notify screen readers of critical state changes and game outcomes.",
-		"Modular architecture based on specialized components (Status, LanguageChips, Keyboard) for clean rendering logic.",
-		"Implementation of dynamic visual feedback and celebration effects (react-confetti) to enhance user experience (UX)."
+		"The game is split into small components (Status, LanguageChips, Keyboard), and each one renders a single part of the state.",
+		"An aria-live region announces each guess and the final result to screen readers.",
+		"The keyboard renders from the same game state as the status area, and react-confetti celebrates a win."
 	],
 	"tags": ["React 19", "CSS Grid", "ARIA", "Hooks"],
 	"image": "../../../assets/images/project-assembly-endgame.webp",
@@ -20,7 +20,7 @@
 	"liveUrl": "https://assembly-endgam3.netlify.app",
 	"links": [
 		{
-			"label": "Source",
+			"label": "Source code",
 			"url": "https://github.com/Jejorm/assembly-endgame"
 		}
 	]
