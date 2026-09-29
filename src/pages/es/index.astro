@@ -1,6 +1,5 @@
 ---
 import About from '../../components/About.astro'
-import CodeBlock from '../../components/CodeBlock.astro'
 import Contact from '../../components/Contact.astro'
 import Footer from '../../components/Footer.astro'
 import Hero from '../../components/Hero.astro'
@@ -9,46 +8,17 @@ import Principles from '../../components/Principles.astro'
 import Projects from '../../components/Projects.astro'
 import Skills from '../../components/Skills.astro'
 import Layout from '../../layouts/Layout.astro'
-
-const lang = 'es'
 ---
 
-<Layout lang={lang}>
+<Layout>
 	<Navigation />
-	<main>
+	<main id="main">
 		<Hero />
+		<Projects />
 		<About />
 		<Skills />
 		<Principles />
-		<Projects />
-		<CodeBlock />
 		<Contact />
 	</main>
 	<Footer />
 </Layout>
-
-<script>
-	// Intersection Observer for scroll-reveal animations
-	function initReveal() {
-		const observerOptions = {
-			threshold: 0.1,
-			rootMargin: '0px 0px -50px 0px',
-		}
-
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					entry.target.classList.add('active')
-				}
-			})
-		}, observerOptions)
-
-		document.querySelectorAll('.reveal').forEach((el) => {
-			observer.observe(el)
-		})
-	}
-
-	// Run on initial load and on view transition
-	initReveal()
-	document.addEventListener('astro:after-swap', initReveal)
-</script>

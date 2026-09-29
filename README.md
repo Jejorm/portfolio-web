@@ -1,24 +1,23 @@
 # 🏛️ Professional Full-Stack Portfolio
 
 ## Overview
-This is a high-end professional portfolio designed under the **"Architectural Silence"** philosophy. It prioritizes light, void, and material density over high-saturation aesthetics, projecting a minimalist and brutalist luxury feel.
+A bilingual (EN/ES) portfolio built around the **"Kinetic Index"** design system: a monochrome paper/ink palette with a single vermilion accent, one variable typeface (Archivo, weight + width axes) that condenses as you scroll, and a sticky project index that tracks the case study you are reading. See [`DESIGN.md`](./DESIGN.md) for the research, audit and rules behind it.
 
 Built with the latest web technologies, this project serves as a demonstration of technical excellence, focusing on **performance, scalability, and clean architecture**.
 
 ## 🛠️ Technical Stack
 - **Framework:** [Astro 6.1+](https://astro.build/) (Static Site Generation)
 - **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
-- **UI Logic:** React 19
 - **Runtime:** Node.js / Bun
 - **Quality Control:** [Biome](https://biomejs.dev/) (Linting & Formatting)
 - **Testing:** [Playwright](https://playwright.dev/) (E2E Testing)
 - **Deployment:** Optimized for Vercel / Netlify
 
 ## ✨ Key Features
-- **Architectural Design:** Custom design system focused on monochromatic tones and intentional asymmetry.
+- **Kinetic Index design system:** Light/dark themes (system preference + persistent toggle), native CSS scroll-driven animations with `prefers-reduced-motion` fallbacks. Documented in `DESIGN.md`.
 - **Bilingual Support (i18n):** Full internationalization engine for English and Spanish.
 - **Senior SEO:** Comprehensive metadata, Open Graph tags, Twitter Cards, and automated sitemaps.
-- **Maximum Performance:** Local font hosting, WebP image optimization with Sharp, and near-perfect Lighthouse scores.
+- **Performance:** Local variable fonts, WebP images with responsive `srcset` via Sharp, no scroll listeners.
 - **Production Ready:** Custom 404 experience and automated quality checks.
 
 ## 🚀 Getting Started

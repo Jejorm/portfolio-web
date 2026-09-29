@@ -1,11 +1,11 @@
 # GEMINI.md - Project Context: Portfolio
 
 ## Project Overview
-**Portfolio2** is a modern, high-end professional portfolio built with **Astro**. It follows a unique design philosophy called **"Architectural Silence"** (or **"Monochromatic Architect"**), which prioritizes light, void, and material density over color and high-saturation aesthetics.
+**Portfolio2** is a modern, high-end professional portfolio built with **Astro**. It follows the **"Kinetic Index"** design system documented in `DESIGN.md`.
 
 - **Main Tech:** Astro (v6.1.1), TypeScript, Biome.
-- **Architecture:** Standard Astro project structure with a heavy focus on a custom design system located in `resources/dark-mode/DESIGN.md`.
-- **Design Philosophy:** Minimalist, brutalist luxury. Rejects "gamer" aesthetics. Uses monochromatic tones (charcoal, ink, silver, bronze) and intentional asymmetry.
+- **Architecture:** Standard Astro project structure with a custom design system documented in `DESIGN.md`.
+- **Design Philosophy:** Swiss-editorial and kinetic. Paper/ink monochrome with one vermilion accent, one variable typeface, motion tied to scroll.
 
 ## Building and Running
 The project uses `pnpm` as the package manager.
@@ -23,15 +23,13 @@ The project uses `pnpm` as the package manager.
 
 ## Development Conventions
 
-### 🎨 Design System (The Monochromatic Architect)
-All UI development **must** strictly adhere to the guidelines in `resources/dark-mode/DESIGN.md`.
-- **Colors:** Use charcoal (#0e0e0e), silver (#c6c6c6), and bronze (#efdccc) tones.
-- **Borders:** Prohibition of 1px solid borders for sectioning. Use background tonal shifts instead.
-- **Shapes:** **Sharp edges only** (0px or 4px radius). No pill shapes or heavy rounds.
-- **Typography:** 
-  - **Headlines:** *Newsreader* (Serif).
-  - **Body:** *Inter* (Sans-serif).
-- **Spacing:** Use wide, cinematic gutters and intentional asymmetry.
+### 🎨 Design System (Kinetic Index)
+All UI development **must** follow `DESIGN.md`.
+- **Colors:** Use the theme tokens only (`paper`, `raised`, `ink`, `ink-muted`, `line`, `accent`, `accent-ink`, `on-accent`). One accent per page; `accent-ink` for small accent text.
+- **Shapes:** Sharp corners only (radius 0).
+- **Typography:** *Archivo Variable* for everything (`.display`, `.wordmark`), *JetBrains Mono* for metadata (`.meta`). No serif, no eyebrow labels above headings.
+- **Copy:** All strings live in `src/i18n/ui.ts`. No em or en dashes in visible text.
+- **Motion:** CSS scroll-driven animations behind `@supports` and `prefers-reduced-motion`; no `window` scroll listeners.
 
 ### 🛠️ Coding Standards
 - **Linter/Formatter:** **Biome** is the official tool.

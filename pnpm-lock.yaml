@@ -11,15 +11,12 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.7.2
         version: 3.7.2
-      '@fontsource-variable/inter':
-        specifier: ^5.2.8
-        version: 5.2.8
-      '@fontsource-variable/newsreader':
-        specifier: ^5.2.10
-        version: 5.2.10
-      '@fontsource/material-symbols-outlined':
-        specifier: ^5.2.39
-        version: 5.2.39
+      '@fontsource-variable/archivo':
+        specifier: ^5.3.0
+        version: 5.3.0
+      '@fontsource-variable/jetbrains-mono':
+        specifier: ^5.3.0
+        version: 5.3.0
       '@tailwindcss/vite':
         specifier: ^4.2.2
         version: 4.2.2(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0))
@@ -308,14 +305,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@fontsource-variable/inter@5.2.8':
-    resolution: {integrity: sha512-kOfP2D+ykbcX/P3IFnokOhVRNoTozo5/JxhAIVYLpea/UBmCQ/YWPBfWIDuBImXX/15KH+eKh4xpEUyS2sQQGQ==}
+  '@fontsource-variable/archivo@5.3.0':
+    resolution: {integrity: sha512-HogK8FJelrD1o7TlZlkIVtHgc20bO5PZRWE7mUeUTdMN055alznQV6/00J00IBeu8FQAH4s3zW9UJNvKExXf+g==}
 
-  '@fontsource-variable/newsreader@5.2.10':
-    resolution: {integrity: sha512-MdI2iRwrqWpMOU/2aV2BgfZ4dJNlj/XlYaY8Zb7t87mWqHskYW0XiUANkt1cyOCiEfW2VQ0bQ5vZgGPp6B2B4w==}
-
-  '@fontsource/material-symbols-outlined@5.2.39':
-    resolution: {integrity: sha512-mEWKdc0GLHoWAhZv/NF4YevijkENSGIqGJTUGT6rWFzX8fec4XISyKlehfTCW2Zr5iwmRhejmRRMGZeqVoorRA==}
+  '@fontsource-variable/jetbrains-mono@5.3.0':
+    resolution: {integrity: sha512-F32xpS2NsGYoQi2ADSkKTgpJj7ozajsGgDJ8woTnqjmIB+dxDIqImjl4pXZVEExu8UFZ2ndhmX18EBS/hdz3Lw==}
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -1961,11 +1955,9 @@ snapshots:
   '@esbuild/win32-x64@0.27.4':
     optional: true
 
-  '@fontsource-variable/inter@5.2.8': {}
+  '@fontsource-variable/archivo@5.3.0': {}
 
-  '@fontsource-variable/newsreader@5.2.10': {}
-
-  '@fontsource/material-symbols-outlined@5.2.39': {}
+  '@fontsource-variable/jetbrains-mono@5.3.0': {}
 
   '@img/colour@1.1.0': {}
 
