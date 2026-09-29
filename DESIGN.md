@@ -209,7 +209,6 @@ Prohibido: listeners de `scroll` en `window`, bucles `requestAnimationFrame` per
 
 ## 9. Pendientes recomendados
 
-1. **`/public/og-image.png` no existe**: el meta `og:image` apunta a un archivo inexistente. Generar una imagen 1200×630 con el wordmark sobre papel.
-2. **Dominio**: `site` en `astro.config.mjs` sigue en `https://jeremyo.dev` (marcado TODO).
-3. **Más proyectos**: el índice sticky escala bien hasta ~6 proyectos; a partir de ahí conviene una página por caso de estudio (`/work/[slug]`) con View Transitions.
-4. **Pruebas en WebKit/Firefox**: el contenedor de desarrollo solo tenía Chromium; el proyecto `mobile-safari` de Playwright debe correrse en local o en CI.
+1. **Dominio**: `site` en `astro.config.mjs` sigue en `https://jeremyo.dev` (marcado TODO).
+2. **Más proyectos**: el índice sticky escala bien hasta ~6 proyectos; a partir de ahí conviene una página por caso de estudio (`/work/[slug]`) con View Transitions.
+3. **Pruebas en WebKit/Firefox**: el contenedor de desarrollo solo tenía Chromium; el proyecto `mobile-safari` de Playwright debe correrse en local o en CI.
