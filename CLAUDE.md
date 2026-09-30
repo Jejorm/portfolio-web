@@ -21,7 +21,7 @@ There are no unit tests; `tests/main.spec.ts` is the only suite and runs against
 
 ## Architecture
 
-Static Astro 6 single-page portfolio, Tailwind CSS 4 via `@tailwindcss/vite`, Biome for lint/format (tabs, single quotes, no semicolons, trailing commas).
+Static Astro 7 single-page portfolio, Tailwind CSS 4 via `@tailwindcss/vite`, Biome for lint/format (tabs, single quotes, no semicolons, trailing commas).
 
 **i18n is URL-driven and component-local.** `astro.config.mjs` sets locales `en` (default, unprefixed) and `es` (`/es/`). `src/pages/index.astro` and `src/pages/es/index.astro` are identical shells that compose the same section components; each component resolves its own language with `getLangFromUrl(Astro.url)` and gets strings via `useTranslations(lang)` from `src/i18n/utils.ts`. All UI copy lives in `src/i18n/ui.ts` as flat keys; `t()` falls back to English when an `es` key is missing. Adding a section means adding it to both page shells and adding keys for both languages.
 
