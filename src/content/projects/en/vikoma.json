@@ -3,11 +3,11 @@
 	"title": "Vikoma",
 	"kind": "Multi-tenant SaaS",
 	"summary": "Appointment software for barbershops and salons, live in production. It replaces paper notebooks and double bookings.",
-	"description": "I built Vikoma on my own for barbershops and beauty salons in Ecuador that work by appointment, from a solo barber to a multi-chair shop. Each professional has an agenda that blocks double bookings. It also covers client history and reference photos with consent (under Ecuador's data protection law), WhatsApp booking confirmations, daily cash close, inventory and a waitlist. The code is split into feature modules with domain, application, infrastructure and UI layers, and the scheduling rules are pure functions tested without a database. The product is in Spanish.",
+	"description": "I built Vikoma on my own for barbershops and beauty salons in Ecuador that work by appointment, from a solo barber to a multi-chair shop. Each professional has an agenda that blocks double bookings. It also covers client history and reference photos with consent (under Ecuador's data protection law), WhatsApp booking confirmations, daily cash close, inventory and a waitlist. The code is split into feature modules with domain, application, infrastructure and UI layers, and the scheduling rules are pure functions tested without a database.",
 	"challenges": [
-		"Tenant isolation relied on foreign keys, but the newer tursodb engine silently ignored them, so nothing stopped a cross-tenant reference.",
+		"One business could reference another business's data: tenant isolation relied on foreign keys, and the newer tursodb engine silently ignored them.",
 		"Concurrent writes, such as two checkouts at the same time, could sell stock that no longer existed or assign the same invoice number twice.",
-		"The OAuth state check treated any two values as equal, because a hex parser applied to base64url input returned empty buffers."
+		"The OAuth sign-in check accepted any value as valid: a hex parser read base64url input and returned empty buffers, so every comparison matched."
 	],
 	"solutions": [
 		"I confirmed it with an insert that should have failed, moved production to libSQL, and made the app refuse to boot when foreign keys are not enforced.",

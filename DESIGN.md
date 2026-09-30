@@ -119,7 +119,7 @@ Cada sección usa una familia de layout distinta (6 secciones, 6 familias).
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│ ■ Jeremy Orellana     Work About Stack Process Contact  EN/ES □ │  nav 64px, una línea
+│ ■ Jeremy Orellana  Work About Stack How I work Contact  EN/ES □ │  nav 64px, una línea
 ├──────────────────────────────────────────────────────────────┤
 │ ■ Open to full-time roles…                        ┌────────┐ │
 │ Full-stack developer. I build and ship complete   │retrato │ │  HERO · split asimétrico

@@ -2,15 +2,15 @@
 	"order": 3,
 	"title": "Luxe Estate",
 	"kind": "Real estate platform",
-	"summary": "Property search with map-synced filters, localized queries and server-first rendering.",
-	"description": "A full-stack real estate platform built on Next.js Server Components and Server Actions, with Supabase for data and auth, Leaflet for map search and localized queries.",
+	"summary": "Property search with filters synced to the map, multilingual content and server-first rendering.",
+	"description": "A full-stack real estate platform built on Next.js Server Components and Server Actions, with Supabase for data and auth, Leaflet for map search and multilingual content.",
 	"challenges": [
-		"The Leaflet map and the server-side filters had to stay in sync in Next.js 16.",
+		"The Leaflet map and the server-side filters had to stay in sync.",
 		"Favorites and sign-in felt slow when every action waited for a round trip to the server.",
 		"Property pages had to load fast and be indexable by search engines."
 	],
 	"solutions": [
-		"A hybrid filtering system runs queries on the server through Supabase PostgREST, keeping the map and the results consistent.",
+		"Filters run as server-side queries through Supabase PostgREST, which keeps the map and the result list consistent.",
 		"Server Actions validate their input strictly and pair with optimistic UI, so favorites and sign-in respond without waiting.",
 		"Pages render with Server Components first, which sends less JavaScript to the browser and keeps content crawlable."
 	],

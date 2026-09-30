@@ -3,11 +3,11 @@
 	"title": "Vikoma",
 	"kind": "SaaS multi-tenant",
 	"summary": "Software de citas para barberías y salones, ya en producción. Reemplaza cuadernos de papel y reservas duplicadas.",
-	"description": "Construí Vikoma por mi cuenta para barberías y salones de belleza de Ecuador que trabajan con cita previa, desde un barbero independiente hasta un local con varios sillones. Cada profesional tiene una agenda que bloquea las reservas duplicadas. También incluye historial de clientes y fotos de referencia con consentimiento (según la ley de protección de datos de Ecuador), confirmaciones de cita por WhatsApp, cierre de caja diario, inventario y lista de espera. El código está dividido en módulos por funcionalidad con capas de dominio, aplicación, infraestructura e interfaz, y las reglas de agenda son funciones puras probadas sin base de datos. El producto está en español.",
+	"description": "Construí Vikoma por mi cuenta para barberías y salones de belleza de Ecuador que trabajan con cita previa, desde un barbero independiente hasta un local con varios sillones. Cada profesional tiene una agenda que bloquea las reservas duplicadas. También incluye historial de clientes y fotos de referencia con consentimiento (según la ley de protección de datos de Ecuador), confirmaciones de cita por WhatsApp, cierre de caja diario, inventario y lista de espera. El código está dividido en módulos por funcionalidad con capas de dominio, aplicación, infraestructura e interfaz, y las reglas de agenda son funciones puras probadas sin base de datos.",
 	"challenges": [
-		"El aislamiento entre negocios dependía de claves foráneas, pero el motor nuevo tursodb las ignoraba sin avisar, así que nada impedía que un negocio referenciara datos de otro.",
+		"Un negocio podía referenciar datos de otro: el aislamiento entre negocios dependía de claves foráneas, y el motor nuevo tursodb las ignoraba sin avisar.",
 		"Las escrituras concurrentes, como dos cobros al mismo tiempo, podían vender stock que ya no existía o asignar dos veces el mismo número de factura.",
-		"La comparación del estado de OAuth daba por iguales dos valores cualquiera, porque un parser hexadecimal aplicado a datos base64url devolvía buffers vacíos."
+		"La verificación del inicio de sesión con OAuth aceptaba cualquier valor como válido: un parser hexadecimal leía datos base64url y devolvía buffers vacíos, así que toda comparación coincidía."
 	],
 	"solutions": [
 		"Lo confirmé con una inserción que debía fallar, llevé producción a libSQL y la app ahora se niega a arrancar si las claves foráneas no se aplican.",
