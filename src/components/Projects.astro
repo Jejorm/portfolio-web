@@ -67,10 +67,11 @@ const projects = (
 								<Image
 									src={project.image}
 									alt={project.imageAlt}
-									widths={[640, 960, 1440]}
+									widths={[720, 1280, 1920, 2560]}
 									sizes="(min-width: 1024px) 60vw, 100vw"
+									quality="high"
 									loading={i === 0 ? 'eager' : 'lazy'}
-									class="h-full w-full scale-[1.35] object-cover object-[50%_48%] transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.4]"
+									class="h-full w-full object-cover object-center transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
 								/>
 							</div>
 						</figure>
