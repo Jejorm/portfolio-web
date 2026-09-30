@@ -13,11 +13,13 @@ Toggle label is hard-coded to "Dark"/"Oscuro", has no icons, aria-label lacks vi
 
 ## Tasks
 - [x] T1 Create AGENTS.md from CLAUDE.md and save to Engram (obs 719)
-- [ ] T2 Fix theme toggle (Navigation.astro, ui.ts, tests) with moon/sun icons, en + es
-- [ ] T3 Verify: pnpm lint, pnpm test, pnpm build
+- [x] T2 Fix theme toggle (Navigation.astro, ui.ts, tests) with moon/sun icons, en + es
+- [x] T3 Verify: pnpm lint, pnpm test, pnpm build
 
 ## Evidence
 - T1: AGENTS.md written and read back; Engram id 719.
 
 ## Next step
-T2 via gentle-ai-worker.
+Report to user; push/PR are user decisions.
+
+- T2/T3: worker lint ok, chromium 21 passed, mobile-safari 21 passed, build ok; parent spot check lint ok + 8 theme tests passed (chromium). Original bug not reproducible; root cause likely the fixed "Dark" label.

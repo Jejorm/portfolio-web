@@ -202,3 +202,115 @@ test.describe('Mobile navigation', () => {
 		await expect(page).toHaveURL(/.*#about/)
 	})
 })
+
+test.describe('Theme toggle', () => {
+	const labels = { '/': 'Dark mode', '/es/': 'Modo oscuro' } as const
+
+	const openToggle = async (page: import('@playwright/test').Page) => {
+		if (!(await page.locator('.theme-toggle:visible').count())) {
+			await page.locator('#menu-toggle').click()
+		}
+		return page.locator('.theme-toggle:visible').first()
+	}
+
+	const expectTheme = async (
+		page: import('@playwright/test').Page,
+		theme: 'dark' | 'light',
+	) => {
+		const toggle = page.locator('.theme-toggle:visible').first()
+		await expect(toggle).toHaveAttribute(
+			'aria-pressed',
+			String(theme === 'dark'),
+		)
+		await expect(toggle.locator('.theme-icon-moon')).toBeVisible({
+			visible: theme === 'dark',
+		})
+		await expect(toggle.locator('.theme-icon-sun')).toBeVisible({
+			visible: theme === 'light',
+		})
+		// Both toggles (desktop and mobile sheet) stay in sync.
+		for (const button of await page.locator('.theme-toggle').all()) {
+			await expect(button).toHaveAttribute(
+				'aria-pressed',
+				String(theme === 'dark'),
+			)
+		}
+		const paper = await page
+			.locator('html')
+			.evaluate((el) => getComputedStyle(el).getPropertyValue('--paper').trim())
+		expect(paper).toBe(theme === 'dark' ? '#0e0e0f' : '#ececea')
+	}
+
+	for (const path of ['/', '/es/'] as const) {
+		test(`switches dark to light and back from the system preference on ${path}`, async ({
+			page,
+		}) => {
+			await page.emulateMedia({ colorScheme: 'dark' })
+			await page.goto(path)
+
+			const toggle = await openToggle(page)
+			await expectTheme(page, 'dark')
+
+			await toggle.click()
+			await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
+			expect(await page.evaluate(() => localStorage.getItem('theme'))).toBe(
+				'light',
+			)
+			await expectTheme(page, 'light')
+
+			await toggle.click()
+			await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+			expect(await page.evaluate(() => localStorage.getItem('theme'))).toBe(
+				'dark',
+			)
+			await expectTheme(page, 'dark')
+		})
+
+		test(`switches a stored light theme to dark on ${path}`, async ({
+			page,
+		}) => {
+			await page.emulateMedia({ colorScheme: 'dark' })
+			await page.addInitScript(() => localStorage.setItem('theme', 'light'))
+			await page.goto(path)
+
+			const toggle = await openToggle(page)
+			await expectTheme(page, 'light')
+
+			await toggle.click()
+			await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+			await expectTheme(page, 'dark')
+		})
+
+		test(`switches a stored dark theme to light under a light system on ${path}`, async ({
+			page,
+		}) => {
+			await page.emulateMedia({ colorScheme: 'light' })
+			await page.addInitScript(() => localStorage.setItem('theme', 'dark'))
+			await page.goto(path)
+
+			const toggle = await openToggle(page)
+			await expectTheme(page, 'dark')
+
+			await toggle.click()
+			await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
+			await expectTheme(page, 'light')
+		})
+
+		test(`names the toggle with its visible text on ${path}`, async ({
+			page,
+		}) => {
+			await page.goto(path)
+			const toggle = await openToggle(page)
+			const visible = (await toggle.innerText()).trim()
+
+			expect(visible.toLowerCase()).toBe(labels[path].toLowerCase())
+			await expect(toggle).toHaveAccessibleName(labels[path])
+			await expect(
+				page.getByRole('button', { name: labels[path] }).first(),
+			).toBeVisible()
+			expect((await toggle.boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(
+				44,
+			)
+		})
+	}
+})
