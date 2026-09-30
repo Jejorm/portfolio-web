@@ -20,6 +20,7 @@
 	--accent: #e2471f;
 	--accent-ink: #b8330f;
 	--on-accent: #121213;
+	--live: #15803d;
 	--nav-h: 4rem;
 	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 	color-scheme: light;
@@ -36,6 +37,7 @@
 		--accent: #ff5b2e;
 		--accent-ink: #ff5b2e;
 		--on-accent: #0e0e0f;
+		--live: #4ade80;
 		color-scheme: dark;
 	}
 }
@@ -49,6 +51,7 @@
 	--accent: #ff5b2e;
 	--accent-ink: #ff5b2e;
 	--on-accent: #0e0e0f;
+	--live: #4ade80;
 	color-scheme: dark;
 }
 
@@ -62,6 +65,7 @@
 	--color-accent: var(--accent);
 	--color-accent-ink: var(--accent-ink);
 	--color-on-accent: var(--on-accent);
+	--color-live: var(--live);
 
 	--font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
 	--font-mono:
@@ -146,6 +150,19 @@ p {
 		letter-spacing: 0.02em;
 	}
 
+	/* Availability lamp. The only round shape in the system: a lit lamp
+	   is a status, not decoration. Steady when motion is reduced. */
+	.lamp {
+		display: inline-block;
+		width: 0.625rem;
+		height: 0.625rem;
+		border: 1px solid var(--live);
+		border-radius: 9999px;
+		background-color: var(--live);
+		box-shadow: 0 0 0.75em 0.05em
+			color-mix(in oklab, var(--live) 55%, transparent);
+	}
+
 	/* Animated underline for text links */
 	.link-line {
 		background-image: linear-gradient(currentColor, currentColor);
@@ -208,6 +225,36 @@ p {
 	@keyframes rise {
 		from {
 			transform: translateY(105%);
+		}
+	}
+
+	/* Availability lamp strikes like a fluorescent tube, once, then holds */
+	.lamp {
+		animation: strike 1.5s step-end 0.9s both;
+	}
+
+	@keyframes strike {
+		0%,
+		15%,
+		37%,
+		53% {
+			background-color: transparent;
+			border-color: var(--ink-muted);
+			box-shadow: 0 0 0 0 transparent;
+		}
+		9%,
+		31%,
+		47% {
+			background-color: color-mix(in oklab, var(--live) 45%, transparent);
+			border-color: var(--live);
+			box-shadow: 0 0 0.3em 0 color-mix(in oklab, var(--live) 40%, transparent);
+		}
+		64% {
+			background-color: var(--live);
+			border-color: var(--live);
+			box-shadow: 0 0 1.25em 0.15em
+				color-mix(in oklab, var(--live) 70%, transparent);
+			animation-timing-function: ease-out;
 		}
 	}
 
