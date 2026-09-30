@@ -26,3 +26,6 @@ pnpm-debug.log*
 # playwright output
 playwright-report/
 test-results/
+
+# agent tooling
+.atl/
