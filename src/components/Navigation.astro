@@ -26,10 +26,9 @@ const locales = Object.keys(languages) as (keyof typeof languages)[]
 	>
 		<a
 			href={home}
-			class="flex items-baseline gap-2 text-[15px] font-semibold tracking-tight"
+			class="text-[15px] font-semibold tracking-tight"
 			aria-label={t('nav.home')}
 		>
-			<span class="inline-block size-2.5 translate-y-[-1px] bg-accent" aria-hidden="true"></span>
 			Jeremy Orellana
 		</a>
 
@@ -84,7 +83,7 @@ const locales = Object.keys(languages) as (keyof typeof languages)[]
 
 		<button
 			type="button"
-			class="meta border border-line px-3 py-1.5 uppercase lg:hidden"
+			class="meta inline-flex min-h-11 items-center border border-line px-4 text-sm uppercase lg:hidden"
 			id="menu-toggle"
 			aria-expanded="false"
 			aria-controls="mobile-menu"
