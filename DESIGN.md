@@ -93,6 +93,7 @@ Monocromo papel/tinta con un acento. Tokens en `src/styles/global.css`, expuesto
 | `--accent` | `#e2471f` | `#ff5b2e` | Fondos de acento, hover de botones, marcas |
 | `--accent-ink` | `#b8330f` (5.1:1) | `#ff5b2e` (6.2:1) | Acento **como texto pequeño** (errores, números) |
 | `--on-accent` | `#121213` (4.6:1) | `#0e0e0f` (6.2:1) | Texto sobre acento |
+| `--live` | `#15803d` (4.3:1) | `#4ade80` (11:1) | Solo la lámpara de disponibilidad del hero |
 
 Reglas: el acento nunca es texto pequeño en su versión `--accent` sobre papel claro (3.4:1). Sin negro ni blanco puros. Tema según el sistema, con conmutador manual que persiste en `localStorage`.
 
@@ -107,7 +108,7 @@ Reglas: el acento nunca es texto pequeño en su versión `--accent` sobre papel 
 
 ### 4.3 Forma y grid
 
-- Esquinas rectas en todo (radio 0). Botones rectangulares de tinta sólida.
+- Esquinas rectas en todo (radio 0). Única excepción: la lámpara de disponibilidad (`.lamp`), redonda porque es un estado, no un adorno. Botones rectangulares de tinta sólida.
 - Contenedor `max-w-[1440px]`, gutter `px-4` (móvil) / `px-8`. Grid de 12 columnas en escritorio, una columna por debajo de `md`/`lg`.
 - Secciones separadas por una línea `border-line` y `py-24 md:py-32`. Tarjetas solo en el bento, donde la elevación comunica jerarquía.
 
@@ -119,12 +120,12 @@ Cada sección usa una familia de layout distinta (6 secciones, 6 familias).
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│ ■ Jeremy Orellana  Work About Stack How I work Contact  EN/ES □ │  nav 64px, una línea
+│ Jeremy Orellana  Work About Stack How I work Contact  EN/ES □ │  nav 64px, una línea
 ├──────────────────────────────────────────────────────────────┤
-│ ■ Open to full-time roles…                        ┌────────┐ │
+│ ● Open to full-time roles…                        ┌────────┐ │
 │ Full-stack developer. I build and ship complete   │retrato │ │  HERO · split asimétrico
 │ products, like Vikoma, a live SaaS…               │  4:5   │ │  + wordmark a sangre
-│ [View work ↓]  jejorm8@gmail.com                  └────────┘ │
+│ [Get in touch ↓] email [Copy email] See projects  └────────┘ │
 │ JEREMY ORELLANA  ← se condensa al hacer scroll               │
 ├──────────────────────────────────────────────────────────────┤
 │ Selected work     │ ┌──────────── imagen 16:10 ───────────┐  │  TRABAJO · índice sticky
@@ -169,11 +170,14 @@ Todo vive dentro de `@media (prefers-reduced-motion: no-preference)`; las animac
 |---|---|---|
 | Líneas del hero que suben desde una máscara | Orden de lectura en la carga | `@keyframes rise` con `animation-delay` escalonado |
 | Wordmark que se condensa (118 % → 64 %, 800 → 500) | Transición de identidad a contenido | `animation-timeline: scroll(root)`, rango `0 100vh` |
+| Wordmark que se expande al entrar (75 % → 118 %) | En móvil el nombre queda bajo el pliegue: reacciona cuando aparece | `animation-timeline: view()` sobre el h1, solo `< md` |
+| Letras del wordmark que se ensanchan al pasar el cursor | Respuesta táctil del nombre | `:hover` + `:has()` por letra, solo `(hover: hover) and (pointer: fine)` |
 | Nav que gana fondo tras 80 px | Estado: el contenido pasa por debajo | `animation-timeline: scroll(root)`, sin JS |
 | Imágenes de proyecto que se abren desde un recorte | Entrada de cada caso de estudio | `clip-path` + `scale` con `animation-timeline: view()` |
 | Índice de proyectos activo | Dónde estás dentro del trabajo | `IntersectionObserver` → `aria-current` |
 | Declaración de "Sobre mí" palabra a palabra | Guía de lectura | `view-timeline` con `animation-range` por palabra (`--p`) |
 | Reveals de entrada (`data-reveal`) | Jerarquía y secuencia | Un único `IntersectionObserver` que se desuscribe |
+| Lámpara de disponibilidad que se enciende con parpadeo, una vez | Estado: disponible ahora | `@keyframes strike`, sin bucle; estática y encendida con `prefers-reduced-motion` |
 | Subrayados, flechas, `scale(.98)` al pulsar | Feedback de interacción | Transiciones CSS en `transform` / `background-size` |
 | Scroll inercial | Peso y continuidad | Lenis, desactivado con `prefers-reduced-motion` |
 | Cambio de idioma | Continuidad entre páginas | `@view-transition { navigation: auto; }` |
@@ -212,3 +216,9 @@ Prohibido: listeners de `scroll` en `window`, bucles `requestAnimationFrame` per
 1. **Dominio**: `site` en `astro.config.mjs` sigue en `https://jeremyo.dev` (marcado TODO).
 2. **Más proyectos**: el índice sticky escala bien hasta ~6 proyectos; a partir de ahí conviene una página por caso de estudio (`/work/[slug]`) con View Transitions.
 3. **Pruebas en WebKit/Firefox**: aún no verificado fuera de Chromium; el proyecto `mobile-safari` de Playwright debe correrse en local o en CI.
+
+### Hero en móvil: contacto primero
+
+- Un solo CTA primario ("Escríbeme" / "Get in touch") a `#contact`, 48 px y ancho completo. Secundario: correo visible (`mailto:`) + botón "Copiar correo" con región `aria-live`. Terciario: enlace de texto a proyectos.
+- Todos los objetivos táctiles miden 44 px o más, con 8 px entre ellos (WCAG 2.5.5, Vercel Web Interface Guidelines, Material 48 dp).
+- El retrato va después de los CTA y ocupa el ancho completo (1:1 en móvil, 4:3 en `sm`, 4:5 desde `md`), para que el CTA quede sobre el pliegue.

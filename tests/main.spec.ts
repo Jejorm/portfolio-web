@@ -27,12 +27,37 @@ test.describe('Portfolio Core Experience', () => {
 		await page.goto('/')
 
 		// Click on the Hero CTA
-		await page.getByRole('link', { name: 'View work' }).click()
+		await page.getByRole('link', { name: 'See projects' }).click()
 
 		// Verify it scrolled to or navigated to the projects section
 		await expect(page).toHaveURL(/.*#projects/)
 		const projectsHeading = page.locator('h2', { hasText: /Selected work/i })
 		await expect(projectsHeading).toBeInViewport()
+	})
+
+	test('should lead the hero with a primary contact call to action', async ({
+		page,
+	}) => {
+		await page.goto('/')
+
+		const primary = page
+			.locator('#top')
+			.getByRole('link', { name: 'Get in touch' })
+		await expect(primary).toHaveAttribute('href', '#contact')
+		await primary.click()
+
+		await expect(page).toHaveURL(/.*#contact/)
+		await expect(page.locator('#contact-heading')).toBeInViewport()
+	})
+
+	test('should keep the name readable to assistive tech after splitting letters', async ({
+		page,
+	}) => {
+		await page.goto('/')
+
+		await expect(
+			page.getByRole('heading', { level: 1, name: 'Jeremy Orellana' }),
+		).toHaveCount(1)
 	})
 
 	test('should render every case study with its problem and solution lists', async ({
@@ -111,6 +136,51 @@ test.describe('Portfolio Core Experience', () => {
 			const text = await page.locator('body').innerText()
 			expect(text).not.toMatch(/[–—]/)
 		}
+	})
+})
+
+test.describe('Hero call to action', () => {
+	test.use({ viewport: { width: 390, height: 664 } })
+
+	test('should size every hero target for touch and expose a copy button', async ({
+		page,
+	}) => {
+		await page.goto('/')
+
+		const hero = page.locator('#top')
+		const primary = hero.getByRole('link', { name: 'Get in touch' })
+		const email = hero.getByRole('link', { name: 'jejorm8@gmail.com' })
+		const copy = hero.getByRole('button', { name: 'Copy email' })
+		const projects = hero.getByRole('link', { name: 'See projects' })
+
+		await expect(copy).toHaveCount(1)
+
+		const height = async (locator: typeof primary) =>
+			(await locator.boundingBox())?.height ?? 0
+
+		expect(await height(primary)).toBeGreaterThanOrEqual(48)
+		for (const target of [email, copy, projects]) {
+			expect(await height(target)).toBeGreaterThanOrEqual(44)
+		}
+	})
+
+	test('should announce the copied email through a status region', async ({
+		page,
+	}) => {
+		// Headless browsers gate the real clipboard; a stub keeps the check deterministic.
+		await page.addInitScript(() => {
+			Object.defineProperty(navigator, 'clipboard', {
+				value: { writeText: async () => {} },
+			})
+		})
+		await page.goto('/')
+
+		// The accessible name changes once copied, so target the hook, not the label.
+		const copy = page.locator('#top [data-copy-email]')
+		await copy.click()
+
+		await expect(page.locator('#copy-status')).toHaveText('Copied')
+		await expect(copy).toHaveText('Copied')
 	})
 })
 

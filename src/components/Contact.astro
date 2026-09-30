@@ -34,7 +34,7 @@ const fieldClass =
 					<div class="mt-4">
 						<button
 							type="button"
-							id="copy-email"
+							data-copy-email
 							class="meta border border-line px-3 py-1.5 uppercase transition-colors hover:border-ink active:scale-[0.98]"
 							data-email={email}
 							data-copied={t('contact.copied')}
@@ -141,22 +141,6 @@ const fieldClass =
 </section>
 
 <script>
-	// Copy email
-	const copyButton = document.getElementById('copy-email')
-	copyButton?.addEventListener('click', async () => {
-		const { email = '', copied = '' } = copyButton.dataset
-		const original = copyButton.textContent
-		try {
-			await navigator.clipboard.writeText(email)
-			copyButton.textContent = copied
-			setTimeout(() => {
-				copyButton.textContent = original
-			}, 2000)
-		} catch {
-			window.location.href = `mailto:${email}`
-		}
-	})
-
 	// Contact form: inline validation, then an async submit with visible states.
 	const form = document.getElementById('contact-form') as HTMLFormElement | null
 

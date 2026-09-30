@@ -38,7 +38,7 @@ The contact form in `Contact.astro` posts to Formspree asynchronously, with a pl
 - No em or en dashes (`—`, `–`) in any visible copy, in either language. An E2E test enforces this.
 - Monochrome paper/ink palette with a single accent; the `--accent` color must not be used for small text on the light theme (fails contrast). No pure black or white.
 - One typeface family (Archivo Variable, weight + width axes) for everything; JetBrains Mono only for `.meta` metadata, never as an eyebrow above a heading. No section eyebrows or section numbering.
-- Radius 0 everywhere. Each section uses a distinct layout family; collapse to one column on mobile.
+- Radius 0 everywhere (only exception: the round green `.lamp` availability indicator in the hero, colored with `--live`). Each section uses a distinct layout family; collapse to one column on mobile.
 - Motion uses native CSS scroll-driven animations behind `@supports (animation-timeline: scroll())`. Never add `window.addEventListener('scroll')`. Always respect `prefers-reduced-motion`.
 - Copy states only verifiable facts about real projects, with one label per call to action. An element's `aria-label` must contain its visible text (WCAG 2.5.3 Label in Name).
 - Keep the existing a11y contract: skip link, visible focus, `aria-current` on language/index, `aria-pressed` on the theme toggle, `aria-expanded` + Escape + focus management on the mobile menu, inline form errors with `aria-invalid`/`aria-describedby`.
