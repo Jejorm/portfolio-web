@@ -296,21 +296,48 @@ test.describe('Theme toggle', () => {
 			await expectTheme(page, 'light')
 		})
 
-		test(`names the toggle with its visible text on ${path}`, async ({
+		test(`shows an icon-only toggle named by aria-label on ${path}`, async ({
 			page,
 		}) => {
 			await page.goto(path)
 			const toggle = await openToggle(page)
-			const visible = (await toggle.innerText()).trim()
 
-			expect(visible.toLowerCase()).toBe(labels[path].toLowerCase())
+			// Icon only: no visible text, accessible name comes from aria-label.
+			expect((await toggle.innerText()).trim()).toBe('')
+			await expect(toggle).toHaveAttribute('aria-label', labels[path])
 			await expect(toggle).toHaveAccessibleName(labels[path])
 			await expect(
-				page.getByRole('button', { name: labels[path] }).first(),
-			).toBeVisible()
-			expect((await toggle.boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(
-				44,
-			)
+				page
+					.getByRole('button', {
+						name: path === '/' ? /Dark mode/ : /Modo oscuro/,
+					})
+					.first(),
+			).toBeAttached()
+			await expect(
+				page.locator('.theme-toggle:visible').getByText(labels[path]),
+			).toHaveCount(0)
+
+			const box = await toggle.boundingBox()
+			expect(box?.height ?? 0).toBeGreaterThanOrEqual(44)
+			expect(box?.width ?? 0).toBeGreaterThanOrEqual(44)
+		})
+
+		test(`binds the theme click handler only once on ${path}`, async ({
+			page,
+		}) => {
+			await page.emulateMedia({ colorScheme: 'light' })
+			await page.goto(path)
+			expect(
+				await page.evaluate(
+					() =>
+						(window as unknown as { __themeToggleBound?: boolean })
+							.__themeToggleBound,
+				),
+			).toBe(true)
+			const toggle = await openToggle(page)
+			await toggle.click()
+			// A double-bound handler would flip twice and land back on light.
+			await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
 		})
 	}
 })

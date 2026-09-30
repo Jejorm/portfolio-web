@@ -23,3 +23,5 @@ Toggle label is hard-coded to "Dark"/"Oscuro", has no icons, aria-label lacks vi
 Report to user; push/PR are user decisions.
 
 - T2/T3: worker lint ok, chromium 21 passed, mobile-safari 21 passed, build ok; parent spot check lint ok + 8 theme tests passed (chromium). Original bug not reproducible; root cause likely the fixed "Dark" label.
+
+- T4 icon-only toggle + inline theme script: worker chromium 23, mobile-safari 23, build ok; parent spot check ok.

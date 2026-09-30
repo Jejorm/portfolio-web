@@ -69,12 +69,12 @@ const locales = Object.keys(languages) as (keyof typeof languages)[]
 			</div>
 			<button
 				type="button"
-				class="theme-toggle meta flex min-h-11 items-center gap-2 uppercase text-ink-muted transition-colors hover:text-ink"
+				class="theme-toggle flex min-h-11 min-w-11 items-center justify-center text-ink-muted transition-colors hover:text-ink"
 				aria-pressed="false"
+				aria-label={t('nav.theme')}
 			>
 				<svg class="theme-icon theme-icon-sun size-4 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true" focusable="false"><rect x="5.25" y="5.25" width="5.5" height="5.5"></rect><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3 3l1 1M12 12l1 1M3 13l1-1M12 4l1-1"></path></svg>
 				<svg class="theme-icon theme-icon-moon size-4 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" aria-hidden="true" focusable="false"><path d="M7 1.75 2.75 6v4L7 14.25h6.5L14.5 12H9.5L7.5 10V6l2-2h5L13.5 1.75Z"></path></svg>
-				<span>{t('nav.theme')}</span>
 			</button>
 		</div>
 
@@ -129,67 +129,65 @@ const locales = Object.keys(languages) as (keyof typeof languages)[]
 		</div>
 		<button
 			type="button"
-			class="theme-toggle flex min-h-11 items-center gap-2 uppercase text-ink-muted transition-colors hover:text-ink"
+			class="theme-toggle flex min-h-11 min-w-11 items-center justify-center text-ink-muted transition-colors hover:text-ink"
 			aria-pressed="false"
+			aria-label={t('nav.theme')}
 		>
 			<svg class="theme-icon theme-icon-sun size-4 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true" focusable="false"><rect x="5.25" y="5.25" width="5.5" height="5.5"></rect><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3 3l1 1M12 12l1 1M3 13l1-1M12 4l1-1"></path></svg>
 			<svg class="theme-icon theme-icon-moon size-4 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" aria-hidden="true" focusable="false"><path d="M7 1.75 2.75 6v4L7 14.25h6.5L14.5 12H9.5L7.5 10V6l2-2h5L13.5 1.75Z"></path></svg>
-			<span>{t('nav.theme')}</span>
 		</button>
 	</div>
 </div>
 
-<!-- Pressed state before first interaction: runs synchronously after both toggles exist. -->
+<!--
+	Theme toggle: inline (not bundled by Vite) so it runs synchronously after both
+	toggles exist and cannot be lost to a stale module or HMR state.
+	After a choice the resolved theme is explicit on <html>. One delegated
+	handler serves both toggles (desktop and mobile sheet).
+-->
 <script is:inline>
 	;(() => {
 		const root = document.documentElement
-		const dark = root.dataset.theme
-			? root.dataset.theme === 'dark'
-			: window.matchMedia('(prefers-color-scheme: dark)').matches
-		for (const button of document.querySelectorAll('.theme-toggle')) {
-			button.setAttribute('aria-pressed', String(dark))
+		const systemDark = window.matchMedia('(prefers-color-scheme: dark)')
+
+		const isDark = () =>
+			root.dataset.theme === 'dark' ||
+			(root.dataset.theme !== 'light' && systemDark.matches)
+
+		const syncToggles = () => {
+			const pressed = String(isDark())
+			for (const button of document.querySelectorAll('.theme-toggle')) {
+				button.setAttribute('aria-pressed', pressed)
+			}
 		}
+
+		syncToggles()
+		if (window.__themeToggleBound) return
+		window.__themeToggleBound = true
+
+		document.addEventListener('click', (event) => {
+			const target = event.target
+			if (!(target instanceof Element) || !target.closest('.theme-toggle')) return
+			const next = isDark() ? 'light' : 'dark'
+			root.dataset.theme = next
+			try {
+				localStorage.setItem('theme', next)
+			} catch {}
+			syncToggles()
+		})
+		systemDark.addEventListener('change', syncToggles)
+		// Back/forward cache restores can carry a theme chosen on another page.
+		window.addEventListener('pageshow', () => {
+			try {
+				const stored = localStorage.getItem('theme')
+				if (stored === 'light' || stored === 'dark') root.dataset.theme = stored
+			} catch {}
+			syncToggles()
+		})
 	})()
 </script>
 
 <script>
-	// Theme: after a choice the resolved theme is explicit on <html>.
-	// One delegated handler serves both toggles (desktop and mobile sheet).
-	const root = document.documentElement
-	const systemDark = window.matchMedia('(prefers-color-scheme: dark)')
-
-	const isDark = () =>
-		root.dataset.theme === 'dark' ||
-		(root.dataset.theme !== 'light' && systemDark.matches)
-
-	const syncToggles = () => {
-		const pressed = String(isDark())
-		for (const button of document.querySelectorAll('.theme-toggle')) {
-			button.setAttribute('aria-pressed', pressed)
-		}
-	}
-
-	document.addEventListener('click', (event) => {
-		const target = event.target as Element | null
-		if (!target?.closest('.theme-toggle')) return
-		const next = isDark() ? 'light' : 'dark'
-		root.dataset.theme = next
-		try {
-			localStorage.setItem('theme', next)
-		} catch {}
-		syncToggles()
-	})
-	systemDark.addEventListener('change', syncToggles)
-	// Back/forward cache restores can carry a theme chosen on another page.
-	window.addEventListener('pageshow', () => {
-		try {
-			const stored = localStorage.getItem('theme')
-			if (stored === 'light' || stored === 'dark') root.dataset.theme = stored
-		} catch {}
-		syncToggles()
-	})
-	syncToggles()
-
 	// Mobile menu
 	const toggle = document.getElementById('menu-toggle')
 	const menu = document.getElementById('mobile-menu')
