@@ -31,3 +31,4 @@ test-results/
 .atl/
 
 .playwright-mcp/
+.codegraph/
