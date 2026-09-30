@@ -142,6 +142,13 @@ p {
 		white-space: nowrap;
 	}
 
+	/* On mobile each word owns a line so the name never re-wraps while it animates */
+	@media (max-width: 767px) {
+		.wordmark .word {
+			display: block;
+		}
+	}
+
 	/* Metadata voice. Used for data, never as a section eyebrow. */
 	.meta {
 		font-family: var(--font-mono);
@@ -228,6 +235,26 @@ p {
 		}
 	}
 
+	/* Desktop pointer: the hovered letter swells and its neighbors give way,
+	   so the name never grows wider than its resting width. */
+	@media (hover: hover) and (pointer: fine) {
+		.wordmark-kinetic .l {
+			transition:
+				font-stretch 0.35s var(--ease-out),
+				font-weight 0.35s var(--ease-out);
+		}
+
+		.wordmark-kinetic .l:hover {
+			font-stretch: 125%;
+			font-weight: 900;
+		}
+
+		.wordmark-kinetic .l:has(+ .l:hover),
+		.wordmark-kinetic .l:hover + .l {
+			font-stretch: 105%;
+		}
+	}
+
 	/* Availability lamp strikes like a fluorescent tube, once, then holds */
 	.lamp {
 		animation: strike 1.5s step-end 0.9s both;
@@ -270,6 +297,25 @@ p {
 			to {
 				font-stretch: 64%;
 				font-weight: 500;
+			}
+		}
+
+		/* Mobile: the name sits below the fold, so it expands as it enters the
+		   viewport instead of gathering on the root scroll. */
+		@media (max-width: 767px) {
+			@supports (animation-timeline: view()) {
+				.wordmark-kinetic {
+					animation: expand linear both;
+					animation-timeline: view();
+					animation-range: entry 0% entry 100%;
+				}
+
+				@keyframes expand {
+					from {
+						font-stretch: 75%;
+						font-weight: 600;
+					}
+				}
 			}
 		}
 

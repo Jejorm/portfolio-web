@@ -85,6 +85,9 @@ const ogImage = new URL('/og-image.png', site)
 		</a>
 		<slot />
 
+		<!-- Announces the result of any "copy email" button -->
+		<p id="copy-status" class="sr-only" role="status" aria-live="polite"></p>
+
 		<script>
 			import Lenis from 'lenis'
 
@@ -116,6 +119,35 @@ const ogImage = new URL('/og-image.png', site)
 						target.setAttribute('tabindex', '-1')
 						target.focus({ preventScroll: true })
 					}
+				})
+			})
+
+			// Copy email: one handler for every [data-copy-email] button (hero and contact).
+			// The button label swaps briefly and a single live region announces the result.
+			const copyStatus = document.getElementById('copy-status')
+			document.querySelectorAll<HTMLButtonElement>('[data-copy-email]').forEach((button) => {
+				let timer: number | undefined
+				button.addEventListener('click', async () => {
+					const { email = '', copied = '' } = button.dataset
+					const original = button.dataset.label ?? button.textContent ?? ''
+					button.dataset.label = original
+					try {
+						await navigator.clipboard.writeText(email)
+					} catch {
+						window.location.href = `mailto:${email}`
+						return
+					}
+					button.textContent = copied
+					if (copyStatus) copyStatus.textContent = ''
+					// Set the text on the next frame so repeated copies are announced again.
+					requestAnimationFrame(() => {
+						if (copyStatus) copyStatus.textContent = copied
+					})
+					window.clearTimeout(timer)
+					timer = window.setTimeout(() => {
+						button.textContent = original
+						if (copyStatus) copyStatus.textContent = ''
+					}, 2000)
 				})
 			})
 

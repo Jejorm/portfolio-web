@@ -5,11 +5,15 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
+
+const email = 'jejorm8@gmail.com'
+const name = 'Jeremy Orellana'
+const words = name.split(' ')
 ---
 
 <section
 	id="top"
-	class="relative flex min-h-[100dvh] flex-col justify-between overflow-hidden pt-24 pb-3 md:pb-5"
+	class="relative flex min-h-[100dvh] flex-col justify-between overflow-clip pt-24 pb-3 md:pb-5"
 	aria-labelledby="hero-heading"
 >
 	<div
@@ -30,42 +34,77 @@ const t = useTranslations(lang)
 					<span>{t('hero.statement')}</span>
 				</p>
 
-				<div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4" data-reveal style="--d: 3">
+				<div
+					class="mt-10 flex flex-col items-start gap-2 md:flex-row md:flex-wrap md:items-center md:gap-x-8"
+					data-reveal
+					style="--d: 3"
+				>
 					<a
-						href="#projects"
-						class="group inline-flex items-center gap-3 bg-ink px-6 py-3.5 text-[15px] font-medium text-paper transition-[background-color,transform] duration-300 hover:bg-accent hover:text-on-accent active:scale-[0.98]"
+						href="#contact"
+						class="group inline-flex min-h-12 w-full items-center justify-center gap-3 bg-ink px-6 text-[15px] font-medium text-paper transition-[background-color,transform] duration-300 hover:bg-accent hover:text-on-accent active:scale-[0.98] sm:w-auto"
 					>
-						{t('hero.cta')}
+						{t('hero.cta.contact')}
 						<span class="transition-transform duration-300 group-hover:translate-y-0.5" aria-hidden="true">↓</span>
 					</a>
-					<a href="mailto:jejorm8@gmail.com" class="link-line text-[15px] text-ink-muted hover:text-ink">
-						jejorm8@gmail.com
+
+					<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+						<a
+							href={`mailto:${email}`}
+							class="link-line inline-block bg-origin-content bg-clip-content py-3 text-[15px] text-ink-muted hover:text-ink"
+						>
+							{email}
+						</a>
+						<button
+							type="button"
+							class="inline-flex min-h-11 min-w-36 touch-manipulation items-center justify-center border border-line px-4 text-[15px] transition-[border-color,transform] duration-300 hover:border-ink active:scale-[0.98]"
+							data-copy-email
+							data-email={email}
+							data-copied={t('contact.copied')}
+						>
+							{t('contact.copy')}
+						</button>
+					</div>
+
+					<a
+						href="#projects"
+						class="link-line inline-block bg-origin-content bg-clip-content py-3 text-[15px] text-ink-muted hover:text-ink"
+					>
+						{t('hero.cta.projects')}
 					</a>
 				</div>
 			</div>
 		</div>
 
-		<figure class="w-3/5 sm:w-1/2 md:w-auto md:col-span-4 md:col-start-9 lg:col-span-3 lg:col-start-10" data-reveal style="--d: 2">
-			<div class="aspect-[4/5] overflow-hidden bg-raised">
+		<figure class="w-full md:col-span-4 md:col-start-9 lg:col-span-3 lg:col-start-10" data-reveal style="--d: 2">
+			<div class="aspect-square overflow-hidden bg-raised sm:aspect-[4/3] md:aspect-[4/5]">
 				<Image
 					src={portrait}
 					alt={t('hero.portrait.alt')}
-					widths={[320, 480, 720]}
-					sizes="(min-width: 1024px) 22vw, (min-width: 768px) 30vw, 90vw"
+					widths={[320, 480, 720, 810]}
+					sizes="(min-width: 1024px) 22vw, (min-width: 768px) 30vw, 100vw"
 					loading="eager"
 					fetchpriority="high"
-					class="h-full w-full object-cover grayscale-[35%] transition-[filter] duration-700 hover:grayscale-0"
+					class="h-full w-full object-cover object-top grayscale-[35%] transition-[filter] duration-700 hover:grayscale-0 md:object-center"
 				/>
 			</div>
 		</figure>
 	</div>
 
-	<!-- Name as the hero's visual anchor; condenses on scroll where supported -->
+	<!-- Name as the hero's visual anchor. Letters are split at build time for the
+	     hover response; aria-label carries the name for assistive tech. -->
 	<h1
 		id="hero-heading"
+		aria-label={name}
 		class="wordmark wordmark-kinetic line-mask mt-12 px-3 text-[20vw] leading-[0.84] whitespace-normal md:px-6 md:text-[10.4vw] md:leading-[0.8] md:whitespace-nowrap"
 		style="--d: 0"
 	>
-		<span>Jeremy Orellana</span>
+		<span aria-hidden="true">
+			{words.map((word, index) => (
+				<>
+					{index > 0 && ' '}
+					<span class="word">{[...word].map((char) => <span class="l">{char}</span>)}</span>
+				</>
+			))}
+		</span>
 	</h1>
 </section>

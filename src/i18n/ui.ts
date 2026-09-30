@@ -24,7 +24,8 @@ export const ui = {
 		'hero.available': 'Open to full-time roles and freelance work',
 		'hero.statement':
 			'Full-stack developer. I build and ship complete products, like Vikoma, a SaaS that is live in production.',
-		'hero.cta': 'View work',
+		'hero.cta.contact': 'Get in touch',
+		'hero.cta.projects': 'See projects',
 		'hero.portrait.alt':
 			'Portrait of Jeremy Orellana wearing glasses and a dark jacket',
 		'work.title': 'Selected work',
@@ -124,7 +125,8 @@ export const ui = {
 			'Disponible para empleo a tiempo completo y proyectos freelance',
 		'hero.statement':
 			'Desarrollador full-stack. Construyo y lanzo productos completos, como Vikoma, un SaaS que ya está en producción.',
-		'hero.cta': 'Ver proyectos',
+		'hero.cta.contact': 'Escríbeme',
+		'hero.cta.projects': 'Ver proyectos',
 		'hero.portrait.alt':
 			'Retrato de Jeremy Orellana con gafas y chaqueta oscura',
 		'work.title': 'Proyectos seleccionados',
