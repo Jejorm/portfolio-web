@@ -39,7 +39,7 @@ La skill usada es **tasteskill** ([Leonxlnx/taste-skill](https://github.com/Leon
 
 ### 2.3 Nota sobre las fuentes
 
-La red del entorno bloqueó el acceso directo a awwwards.com, godly.website, thefwa.com y los blogs de tendencias, así que la investigación se hizo con resultados de búsqueda (fichas de Awwwards/FWA, listados de SOTD de septiembre 2026, artículos sobre tendencias y soporte de navegadores). Conviene revisar a mano los sitios citados:
+La investigación se basa en resultados de búsqueda (fichas de Awwwards/FWA, listados de SOTD de septiembre 2026, artículos sobre tendencias y soporte de navegadores), no en visitas directas a los sitios. Conviene revisar a mano los sitios citados:
 
 - https://www.awwwards.com/websites/developer/
 - https://www.awwwards.com/sites/leo-parpeix-portfolio-2026
@@ -122,17 +122,17 @@ Cada sección usa una familia de layout distinta (6 secciones, 6 familias).
 │ ■ Jeremy Orellana     Work About Stack Process Contact  EN/ES □ │  nav 64px, una línea
 ├──────────────────────────────────────────────────────────────┤
 │ ■ Open to full-time roles…                        ┌────────┐ │
-│ Full-stack developer building scalable,           │retrato │ │  HERO · split asimétrico
-│ real-time web apps and the precise interfaces…    │  4:5   │ │  + wordmark a sangre
+│ Full-stack developer. I build and ship complete   │retrato │ │  HERO · split asimétrico
+│ products, like Vikoma, a live SaaS…               │  4:5   │ │  + wordmark a sangre
 │ [View work ↓]  jejorm8@gmail.com                  └────────┘ │
 │ JEREMY ORELLANA  ← se condensa al hacer scroll               │
 ├──────────────────────────────────────────────────────────────┤
 │ Selected work     │ ┌──────────── imagen 16:10 ───────────┐  │  TRABAJO · índice sticky
 │ intro             │ └─────────────────────────────────────┘  │  + casos de estudio
-│ 01 Luxe Estate ◀──│ 01 / Real estate platform    [Live ↗]   │  (el índice marca el
-│ 02 Assembly       │ Luxe Estate                   Source ↗   │   proyecto activo)
-│ 03 Tickets App    │ resumen · descripción                    │
-│   (sticky)        │ El reto 01-03  │ Cómo lo resolví 01-03   │
+│ 01 Vikoma ◀───────│ 01 / Multi-tenant SaaS       [Live ↗]   │  (el índice marca el
+│ 02 Tickets App    │ Vikoma                                   │   proyecto activo)
+│ 03 Luxe Estate    │ resumen · descripción                    │
+│ 04 Assembly       │ El reto 01-03  │ Cómo lo resolví 01-03   │
 ├──────────────────────────────────────────────────────────────┤
 │ About             │ Declaración grande que se "entinta"      │  SOBRE MÍ · editorial
 │ Base / Focus /    │ palabra a palabra mientras se lee.       │  + ficha de datos
@@ -211,4 +211,4 @@ Prohibido: listeners de `scroll` en `window`, bucles `requestAnimationFrame` per
 
 1. **Dominio**: `site` en `astro.config.mjs` sigue en `https://jeremyo.dev` (marcado TODO).
 2. **Más proyectos**: el índice sticky escala bien hasta ~6 proyectos; a partir de ahí conviene una página por caso de estudio (`/work/[slug]`) con View Transitions.
-3. **Pruebas en WebKit/Firefox**: el contenedor de desarrollo solo tenía Chromium; el proyecto `mobile-safari` de Playwright debe correrse en local o en CI.
+3. **Pruebas en WebKit/Firefox**: aún no verificado fuera de Chromium; el proyecto `mobile-safari` de Playwright debe correrse en local o en CI.
