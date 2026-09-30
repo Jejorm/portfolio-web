@@ -142,26 +142,23 @@ test.describe('Portfolio Core Experience', () => {
 test.describe('Hero call to action', () => {
 	test.use({ viewport: { width: 390, height: 664 } })
 
-	test('should size every hero target for touch and expose a copy button', async ({
+	test('should size both hero buttons for touch and drop the inline email', async ({
 		page,
 	}) => {
 		await page.goto('/')
 
 		const hero = page.locator('#top')
 		const primary = hero.getByRole('link', { name: 'Get in touch' })
-		const email = hero.getByRole('link', { name: 'jejorm8@gmail.com' })
-		const copy = hero.getByRole('button', { name: 'Copy email' })
 		const projects = hero.getByRole('link', { name: 'See projects' })
 
-		await expect(copy).toHaveCount(1)
+		await expect(hero.locator('[data-copy-email]')).toHaveCount(0)
+		await expect(hero.getByText('jejorm8@gmail.com')).toHaveCount(0)
 
 		const height = async (locator: typeof primary) =>
 			(await locator.boundingBox())?.height ?? 0
 
 		expect(await height(primary)).toBeGreaterThanOrEqual(48)
-		for (const target of [email, copy, projects]) {
-			expect(await height(target)).toBeGreaterThanOrEqual(44)
-		}
+		expect(await height(projects)).toBeGreaterThanOrEqual(48)
 	})
 
 	test('should announce the copied email through a status region', async ({
@@ -176,7 +173,7 @@ test.describe('Hero call to action', () => {
 		await page.goto('/')
 
 		// The accessible name changes once copied, so target the hook, not the label.
-		const copy = page.locator('#top [data-copy-email]')
+		const copy = page.locator('#contact [data-copy-email]')
 		await copy.click()
 
 		await expect(page.locator('#copy-status')).toHaveText('Copied')
