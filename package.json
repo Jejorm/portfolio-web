@@ -13,7 +13,8 @@
 		"lint": "biome check .",
 		"format": "biome format --write .",
 		"check": "biome check --write .",
-		"test": "playwright test"
+		"test": "playwright test",
+		"prepare": "simple-git-hooks"
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "^3.7.4",
@@ -27,6 +28,10 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.5.14",
-		"@playwright/test": "^1.63.0"
+		"@playwright/test": "^1.63.0",
+		"simple-git-hooks": "^2.14.0"
+	},
+	"simple-git-hooks": {
+		"pre-commit": "pnpm lint && pnpm test --reporter=line"
 	}
 }
