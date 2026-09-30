@@ -2,15 +2,15 @@
 	"order": 3,
 	"title": "Luxe Estate",
 	"kind": "Plataforma inmobiliaria",
-	"summary": "Búsqueda de propiedades con filtros sincronizados con el mapa, consultas localizadas y renderizado en servidor.",
-	"description": "Una plataforma inmobiliaria full-stack construida con Server Components y Server Actions de Next.js, con Supabase para datos y autenticación, Leaflet para la búsqueda en mapa y consultas localizadas.",
+	"summary": "Búsqueda de propiedades con filtros sincronizados con el mapa, contenido en varios idiomas y renderizado en servidor.",
+	"description": "Una plataforma inmobiliaria full-stack construida con Server Components y Server Actions de Next.js, con Supabase para datos y autenticación, Leaflet para la búsqueda en mapa y contenido en varios idiomas.",
 	"challenges": [
-		"El mapa de Leaflet y los filtros del servidor debían mantenerse sincronizados en Next.js 16.",
+		"El mapa de Leaflet y los filtros del servidor debían mantenerse sincronizados.",
 		"Los favoritos y el inicio de sesión se sentían lentos si cada acción esperaba una ida y vuelta al servidor.",
-		"Las páginas de propiedades necesitaban buen SEO y carga rápida, pero las imágenes de alta resolución pueden perjudicar los Core Web Vitals."
+		"Las páginas de propiedades debían cargar rápido y ser indexables por los buscadores."
 	],
 	"solutions": [
-		"Un sistema de filtrado híbrido ejecuta las consultas en el servidor con Supabase PostgREST, y así el mapa y los resultados coinciden.",
+		"Los filtros se ejecutan como consultas en el servidor con Supabase PostgREST, y así el mapa y la lista de resultados coinciden.",
 		"Las Server Actions validan estrictamente sus datos y se combinan con interfaz optimista, así los favoritos y el inicio de sesión responden sin esperar.",
 		"Las páginas se renderizan primero con Server Components, lo que envía menos JavaScript al navegador y mantiene el contenido indexable."
 	],

@@ -6,11 +6,11 @@ A bilingual (EN/ES) portfolio built around the **"Kinetic Index"** design system
 Built with the latest web technologies, this project serves as a demonstration of technical excellence, focusing on **performance, scalability, and clean architecture**.
 
 ## 🛠️ Technical Stack
-- **Framework:** [Astro 6.1+](https://astro.build/) (Static Site Generation)
-- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
-- **Runtime:** Node.js / Bun
-- **Quality Control:** [Biome](https://biomejs.dev/) (Linting & Formatting)
-- **Testing:** [Playwright](https://playwright.dev/) (E2E Testing)
+- **Framework:** [Astro 7](https://astro.build/) (Static Site Generation)
+- **Styling:** [Tailwind CSS 4.3](https://tailwindcss.com/)
+- **Runtime:** Node.js 22.12+ with [pnpm](https://pnpm.io/)
+- **Quality Control:** [Biome 2.5](https://biomejs.dev/) (Linting & Formatting)
+- **Testing:** [Playwright 1.63](https://playwright.dev/) (E2E Testing, Chromium + WebKit)
 - **Deployment:** Optimized for Vercel / Netlify
 
 ## ✨ Key Features
@@ -23,12 +23,13 @@ Built with the latest web technologies, this project serves as a demonstration o
 ## 🚀 Getting Started
 
 ### Prerequisites
-- [pnpm](https://pnpm.io/) installed.
+- [pnpm](https://pnpm.io/) 11 installed.
 - Node.js v22.12+
 
 ### Installation
 ```bash
 pnpm install
+pnpm exec playwright install  # first run only: downloads test browsers
 ```
 
 ### Development
@@ -52,7 +53,7 @@ pnpm build
 /
 ├── src/
 │   ├── assets/       # Optimized images (.webp)
-│   ├── components/   # Modular Astro/React components
+│   ├── components/   # Modular Astro components
 │   ├── content/      # Project data (JSON-based i18n)
 │   ├── i18n/         # Translation engine logic
 │   ├── layouts/      # Master layouts with SEO injection

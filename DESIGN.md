@@ -119,7 +119,7 @@ Cada sección usa una familia de layout distinta (6 secciones, 6 familias).
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│ ■ Jeremy Orellana     Work About Stack Process Contact  EN/ES □ │  nav 64px, una línea
+│ ■ Jeremy Orellana  Work About Stack How I work Contact  EN/ES □ │  nav 64px, una línea
 ├──────────────────────────────────────────────────────────────┤
 │ ■ Open to full-time roles…                        ┌────────┐ │
 │ Full-stack developer. I build and ship complete   │retrato │ │  HERO · split asimétrico
@@ -144,10 +144,10 @@ Cada sección usa una familia de layout distinta (6 secciones, 6 familias).
 │ Tooling       Docker / CI/CD / Zod / Playwright / …          │
 ├──────────────────────────────────────────────────────────────┤
 │ How I work                                                   │  PROCESO · bento 4 celdas
-│ ┌── ACENTO: S.O.L.I.D ──────┐ ┌─ Performance ─┐              │  (acento, elevada,
+│ ┌── ACENTO: f(x) ───────────┐ ┌─ Performance ─┐              │  (acento, elevada,
 │ │ Built to be changed       │ ├─ Plan for failure ┤          │   con borde, invertida)
 │ └───────────────────────────┘ └───────────────┘              │
-│ ┌── TINTA: Every change is checked · Biome TS Playwright ──┐ │
+│ ┌── TINTA: Automated checks · Biome TS Playwright ─────────┐ │
 ├──────────────────────────────────────────────────────────────┤
 │ LET'S WORK TOGETHER                                          │  CONTACTO · póster
 │ intro · email grande [Copy]  │ Nombre / Email / Mensaje      │  + formulario con estados

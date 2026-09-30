@@ -10,9 +10,9 @@
 		"El teclado en pantalla debía coincidir en todo momento con el historial de intentos."
 	],
 	"solutions": [
-		"El juego se divide en componentes pequeños (Status, LanguageChips, Keyboard) y cada uno dibuja una sola parte del estado.",
+		"El juego se divide en componentes pequeños (Status, LanguageChips, Keyboard) y cada uno renderiza una sola parte del estado.",
 		"Una región aria-live anuncia a los lectores de pantalla cada intento y el resultado final.",
-		"El teclado se dibuja a partir del mismo estado del juego que el área de estado, y react-confetti celebra la victoria."
+		"El teclado se renderiza a partir del mismo estado del juego que el área de estado, así que siempre coincide con el historial de intentos."
 	],
 	"tags": ["React 19", "CSS Grid", "ARIA", "Hooks"],
 	"image": "../../../assets/images/project-assembly-endgame.webp",

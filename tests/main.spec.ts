@@ -5,9 +5,7 @@ test.describe('Portfolio Core Experience', () => {
 		await page.goto('/')
 
 		// Check SEO Title (English - default)
-		await expect(page).toHaveTitle(
-			/Full-Stack Developer \| Professional Portfolio/i,
-		)
+		await expect(page).toHaveTitle(/Jeremy Orellana \| Full-Stack Developer/i)
 		await expect(page.locator('#hero-heading')).toContainText('Jeremy Orellana')
 	})
 
@@ -16,7 +14,7 @@ test.describe('Portfolio Core Experience', () => {
 
 		// Check SEO Title (Spanish)
 		await expect(page).toHaveTitle(
-			/Desarrollador Full-Stack \| Portafolio Profesional/i,
+			/Jeremy Orellana \| Desarrollador Full-Stack/i,
 		)
 
 		// Check Hero statement in Spanish

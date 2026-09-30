@@ -3,16 +3,14 @@
 	"title": "Tickets App",
 	"kind": "Sistema en tiempo real",
 	"summary": "Kioscos, escritorios y pantallas sincronizados con WebSockets nativos.",
-	"description": "Un sistema de turnos para puntos de atención, con tickets normales y preferenciales. Un cliente en React 19 y un servidor en Bun y TypeScript comparten el estado de la cola en tiempo real con WebSockets nativos.",
+	"description": "Un sistema de turnos para puntos de atención, con tickets normales y preferenciales. Un cliente en React 19 y un servidor en Bun y TypeScript comparten el estado de la cola en tiempo real con WebSockets nativos. El backend corre en un contenedor Docker.",
 	"challenges": [
-		"Kioscos, escritorios y pantallas debían mostrar el mismo estado de la cola al mismo tiempo.",
-		"Cada pantalla necesitaba el estado de la cola en vivo sin que cada componente administrara su propio socket.",
-		"Kioscos y pantallas debían seguir funcionando cuando se caía la conexión de red."
+		"Kioscos, escritorios y pantallas debían mostrar el mismo estado de la cola al mismo tiempo, sin que cada componente administrara su propio socket.",
+		"Kioscos y pantallas debían recuperarse solos cuando se caía la conexión de red."
 	],
 	"solutions": [
-		"El servidor Bun comparte el estado de la cola con todos los clientes mediante WebSockets nativos (Bun.serve) y valida cada mensaje entrante con un esquema Zod.",
-		"Un hook propio, useSocketTicket, encapsula el socket y un Context de React expone el estado de la cola a todos los componentes.",
-		"Los clientes se reconectan solos con espera exponencial, y el backend corre en un contenedor Docker para que los despliegues sean consistentes."
+		"El servidor Bun comparte el estado de la cola con todos los clientes mediante WebSockets nativos (Bun.serve) y valida cada mensaje entrante con un esquema Zod. Un hook propio, useSocketTicket, encapsula el socket, y un Context de React expone el estado de la cola a todos los componentes.",
+		"Los clientes se reconectan solos, con reintentos cada vez más espaciados."
 	],
 	"tags": ["React 19", "Bun", "WebSockets", "TypeScript", "Zod"],
 	"image": "../../../assets/images/project-tickets-websockets.webp",
