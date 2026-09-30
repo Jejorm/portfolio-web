@@ -6,7 +6,6 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils'
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
-const email = 'jejorm8@gmail.com'
 const name = 'Jeremy Orellana'
 const words = name.split(' ')
 ---
@@ -35,7 +34,7 @@ const words = name.split(' ')
 				</p>
 
 				<div
-					class="mt-10 flex flex-col items-start gap-2 md:flex-row md:flex-wrap md:items-center md:gap-x-8"
+					class="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center"
 					data-reveal
 					style="--d: 3"
 				>
@@ -47,27 +46,9 @@ const words = name.split(' ')
 						<span class="transition-transform duration-300 group-hover:translate-y-0.5" aria-hidden="true">↓</span>
 					</a>
 
-					<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-						<a
-							href={`mailto:${email}`}
-							class="link-line inline-block bg-origin-content bg-clip-content py-3 text-[15px] text-ink-muted hover:text-ink"
-						>
-							{email}
-						</a>
-						<button
-							type="button"
-							class="inline-flex min-h-11 min-w-36 touch-manipulation items-center justify-center border border-line px-4 text-[15px] transition-[border-color,transform] duration-300 hover:border-ink active:scale-[0.98]"
-							data-copy-email
-							data-email={email}
-							data-copied={t('contact.copied')}
-						>
-							{t('contact.copy')}
-						</button>
-					</div>
-
 					<a
 						href="#projects"
-						class="link-line inline-block bg-origin-content bg-clip-content py-3 text-[15px] text-ink-muted hover:text-ink"
+						class="inline-flex min-h-12 w-full items-center justify-center border border-ink px-6 text-[15px] font-medium text-ink transition-[background-color,transform] duration-300 hover:bg-raised active:scale-[0.98] sm:w-auto"
 					>
 						{t('hero.cta.projects')}
 					</a>
