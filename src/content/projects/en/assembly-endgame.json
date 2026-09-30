@@ -12,7 +12,7 @@
 	"solutions": [
 		"The game is split into small components (Status, LanguageChips, Keyboard), and each one renders a single part of the state.",
 		"An aria-live region announces each guess and the final result to screen readers.",
-		"The keyboard renders from the same game state as the status area, and react-confetti celebrates a win."
+		"The keyboard renders from the same game state as the status area, so it always matches the guess history."
 	],
 	"tags": ["React 19", "CSS Grid", "ARIA", "Hooks"],
 	"image": "../../../assets/images/project-assembly-endgame.webp",

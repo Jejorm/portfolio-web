@@ -29,7 +29,7 @@ export const ui = {
 			'Portrait of Jeremy Orellana wearing glasses and a dark jacket',
 		'work.title': 'Selected work',
 		'work.intro':
-			'Four full-stack projects, from the data layer to the interface.',
+			'Live projects. Each one lists the problems I faced and how I solved them.',
 		'work.index': 'Project index',
 		'work.challenges': 'Problems',
 		'work.solutions': 'How I solved them',
@@ -69,13 +69,13 @@ export const ui = {
 			'I keep business rules in plain functions, apart from the framework, so the next person can change them safely.',
 		'principles.p2.title': 'Performance is a feature',
 		'principles.p2.body':
-			'I set limits for JavaScript, images and fonts at the start of a project, not at the end.',
+			'Pages render on the server first and send less JavaScript to the browser, as in Luxe Estate.',
 		'principles.p3.title': 'Plan for failure',
 		'principles.p3.body':
 			'Reconnection, validation and clear error messages go in the first version. Vikoma refuses to boot if the database does not enforce foreign keys.',
-		'principles.quality.title': 'Every change is checked',
+		'principles.quality.title': 'Automated checks',
 		'principles.quality.body':
-			'Linting, strict types, unit tests and end-to-end tests check every change.',
+			'Vikoma uses ESLint, strict TypeScript and Vitest tests. This site uses Biome, strict TypeScript and Playwright end-to-end tests.',
 		'contact.title': "Let's work together",
 		'contact.intro': 'Tell me about the role or project you have in mind.',
 		'contact.email.label': 'Email',
@@ -129,7 +129,7 @@ export const ui = {
 			'Retrato de Jeremy Orellana con gafas y chaqueta oscura',
 		'work.title': 'Proyectos seleccionados',
 		'work.intro':
-			'Cuatro proyectos full-stack, de la capa de datos a la interfaz.',
+			'Proyectos en producción. Cada uno muestra los problemas que enfrenté y cómo los resolví.',
 		'work.index': 'Índice de proyectos',
 		'work.challenges': 'Problemas',
 		'work.solutions': 'Cómo los resolví',
@@ -169,13 +169,13 @@ export const ui = {
 			'Mantengo las reglas de negocio en funciones simples, separadas del framework, para que la siguiente persona pueda cambiarlas con seguridad.',
 		'principles.p2.title': 'El rendimiento es una función',
 		'principles.p2.body':
-			'Defino límites para JavaScript, imágenes y fuentes al inicio del proyecto, no al final.',
+			'Las páginas se renderizan primero en el servidor y envían menos JavaScript al navegador, como en Luxe Estate.',
 		'principles.p3.title': 'Diseñar para el fallo',
 		'principles.p3.body':
 			'La reconexión, la validación y los mensajes de error claros van en la primera versión. Vikoma no arranca si la base de datos no aplica las claves foráneas.',
-		'principles.quality.title': 'Cada cambio se verifica',
+		'principles.quality.title': 'Verificación automática',
 		'principles.quality.body':
-			'Linting, tipos estrictos, pruebas unitarias y pruebas end-to-end revisan cada cambio.',
+			'Vikoma usa ESLint, TypeScript estricto y pruebas con Vitest. Este sitio usa Biome, TypeScript estricto y pruebas end-to-end con Playwright.',
 		'contact.title': 'Trabajemos juntos',
 		'contact.intro':
 			'Cuéntame sobre el puesto o el proyecto que tienes en mente.',

@@ -4,7 +4,7 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils'
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
-// Tools that actually run in this repository's workflow.
+// Tools used across Vikoma and this site (see principles.quality.body).
 const qualityTools = ['Biome', 'TypeScript strict', 'Vitest', 'Playwright']
 ---
 

@@ -6,12 +6,12 @@
 	"description": "I built Vikoma on my own for barbershops and beauty salons in Ecuador that work by appointment, from a solo barber to a multi-chair shop. Each professional has an agenda that blocks double bookings. It also covers client history and reference photos with consent (under Ecuador's data protection law), WhatsApp booking confirmations, daily cash close, inventory and a waitlist. The code is split into feature modules with domain, application, infrastructure and UI layers, and the scheduling rules are pure functions tested without a database. The product is in Spanish.",
 	"challenges": [
 		"Tenant isolation relied on foreign keys, but the newer tursodb engine silently ignored them, so nothing stopped a cross-tenant reference.",
-		"Concurrent writes, such as two checkouts, two cancellations or invoice numbering, could corrupt stock counts or invoice numbers.",
+		"Concurrent writes, such as two checkouts at the same time, could sell stock that no longer existed or assign the same invoice number twice.",
 		"The OAuth state check treated any two values as equal, because a hex parser applied to base64url input returned empty buffers."
 	],
 	"solutions": [
 		"I confirmed it with an insert that should have failed, moved production to libSQL, and made the app refuse to boot when foreign keys are not enforced.",
-		"Sequences use atomic UPDATE with RETURNING, conditional updates act as guards, and lock errors are retried so the oversell guard decides, tested with 25 concurrent reservations.",
+		"Invoice numbers come from an atomic UPDATE with RETURNING, tested with 25 concurrent requests that must get 25 different numbers. Stock changes use conditional updates as guards against overselling, and lock errors are retried.",
 		"A negative security test caught it, and I replaced the check with a constant-time comparison that hashes both sides first."
 	],
 	"tags": ["Next.js 16", "Turso", "Drizzle", "WhatsApp Cloud API", "Vitest"],

@@ -7,7 +7,7 @@
 	"challenges": [
 		"The Leaflet map and the server-side filters had to stay in sync in Next.js 16.",
 		"Favorites and sign-in felt slow when every action waited for a round trip to the server.",
-		"Property pages needed good SEO and fast loads, but high-resolution images can hurt Core Web Vitals."
+		"Property pages had to load fast and be indexable by search engines."
 	],
 	"solutions": [
 		"A hybrid filtering system runs queries on the server through Supabase PostgREST, keeping the map and the results consistent.",
