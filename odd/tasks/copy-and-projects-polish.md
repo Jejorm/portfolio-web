@@ -29,6 +29,7 @@ The availability copy now targets custom web and app work and freelance projects
 - [x] T4 Prominent live-site button
 - [x] T5 Animated disclosure
 - [x] T6 DESIGN.md diagram, motion table and button rule; lint, tests, browser readback
+- [x] T7 Fix: only the first opening animated. A closed `<details>` keeps reporting its last open height, so later openings went from 253px to 253px (a jump). Opening from closed now starts at 0.
 
 ## Verification evidence
 
@@ -39,6 +40,8 @@ The availability copy now targets custom web and app work and freelance projects
 | Live button, 1440px | 169 × 60px, 20px, accent background |
 | Live button, 390px dark | 358 × 60px, no horizontal overflow |
 | Meta line above title | Not present |
+| Repeated openings (T7) | Cycles 1, 2 and 3 all animate 0 → 253px (before the fix: cycles 2 and 3 went 253 → 253) |
+| Reopen mid-close (T7) | Continues from the current height (22 → 253px) |
 | `pnpm lint` / `pnpm test` | Clean / 50 passed |
 
 ## Next step

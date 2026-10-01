@@ -280,7 +280,9 @@ const moreLabel = (count: number) =>
 			if (reduceMotion.matches) return
 			event.preventDefault()
 
-			const from = `${body.offsetHeight}px`
+			// A closed <details> keeps reporting its last open height, so opening
+			// from closed must start at 0; mid-animation it starts where it is.
+			const from = details.open ? `${body.offsetHeight}px` : '0px'
 			height?.cancel()
 			fade?.cancel()
 
