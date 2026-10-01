@@ -86,41 +86,38 @@ const moreLabel = (count: number) =>
 							</div>
 						</figure>
 
-						<div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-8 md:gap-8">
-							<header class="md:col-span-5">
-								<p class="meta text-ink-muted">
-									{project.index} <span aria-hidden="true">/</span> {project.kind}
-								</p>
-								<h3 id={`${project.slug}-title`} class="display mt-3 text-display-s">
-									{project.title}
-								</h3>
-								<p class="mt-5 max-w-[46ch] text-lead leading-snug">{project.summary}</p>
-							</header>
+						<header class="mt-8">
+							<h3 id={`${project.slug}-title`} class="display text-display-s">
+								{project.title}
+							</h3>
+							<p class="mt-5 max-w-[46ch] text-lead leading-snug">{project.summary}</p>
+						</header>
 
-							<div class="flex flex-col gap-3 md:col-span-3 md:items-end md:pt-7">
+						<!-- The live site is the primary action of each case study: full width on
+						     phones, accent at rest so it reads before hover. -->
+						<div class="mt-8 flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8">
+							<a
+								class="live-link inline-flex min-h-14 items-center justify-between gap-6 bg-accent px-7 py-4 text-lead font-semibold text-on-accent transition-[background-color,color,transform] duration-300 hover:bg-ink hover:text-paper active:scale-[0.98] sm:justify-start"
+								href={project.liveUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								aria-label={`${t('work.live')}: ${project.title}`}
+							>
+								{t('work.live')}
+								<span class="arrow-nudge" aria-hidden="true">↗</span>
+							</a>
+							{project.links.map((link) => (
 								<a
-									class="inline-flex items-center gap-2 bg-ink px-5 py-3 text-body font-medium text-paper transition-[background-color,transform] duration-300 hover:bg-accent hover:text-on-accent active:scale-[0.98]"
-									href={project.liveUrl}
+									class="link-line inline-flex items-center gap-2 self-start text-body text-ink-muted hover:text-ink sm:self-auto"
+									href={link.url}
 									target="_blank"
 									rel="noopener noreferrer"
-									aria-label={`${t('work.live')}: ${project.title}`}
+									aria-label={`${link.label}: ${project.title}`}
 								>
-									{t('work.live')}
+									{link.label}
 									<span class="arrow-nudge" aria-hidden="true">↗</span>
 								</a>
-								{project.links.map((link) => (
-									<a
-										class="link-line inline-flex items-center gap-2 text-body text-ink-muted hover:text-ink"
-										href={link.url}
-										target="_blank"
-										rel="noopener noreferrer"
-										aria-label={`${link.label}: ${project.title}`}
-									>
-										{link.label}
-										<span class="arrow-nudge" aria-hidden="true">↗</span>
-									</a>
-								))}
-							</div>
+							))}
 						</div>
 
 						<p class="mt-8 max-w-[62ch] text-body text-ink-muted">{project.description}</p>
@@ -158,28 +155,30 @@ const moreLabel = (count: number) =>
 										<span class="more-label-open">{t('work.less')}</span>
 										<span class="more-icon" aria-hidden="true" />
 									</summary>
-									<div class="mt-8 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-8">
-										<div>
-											<h4 class="sr-only">{t('work.challenges')}</h4>
-											<ol class="space-y-4">
-												{project.challenges.slice(1).map((item, n) => (
-													<li class="grid grid-cols-[2rem_1fr] text-body text-ink-muted">
-														<span class="meta pt-1 text-ink">{pad(n + 1)}</span>
-														<span>{item}</span>
-													</li>
-												))}
-											</ol>
-										</div>
-										<div>
-											<h4 class="sr-only">{t('work.solutions')}</h4>
-											<ol class="space-y-4">
-												{project.solutions.slice(1).map((item, n) => (
-													<li class="grid grid-cols-[2rem_1fr] text-body text-ink-muted">
-														<span class="meta pt-1 text-accent-ink">{pad(n + 1)}</span>
-														<span>{item}</span>
-													</li>
-												))}
-											</ol>
+									<div class="more-body">
+										<div class="more-content grid grid-cols-1 gap-10 pt-8 md:grid-cols-2 md:gap-8">
+											<div>
+												<h4 class="sr-only">{t('work.challenges')}</h4>
+												<ol class="space-y-4">
+													{project.challenges.slice(1).map((item, n) => (
+														<li class="grid grid-cols-[2rem_1fr] text-body text-ink-muted">
+															<span class="meta pt-1 text-ink">{pad(n + 1)}</span>
+															<span>{item}</span>
+														</li>
+													))}
+												</ol>
+											</div>
+											<div>
+												<h4 class="sr-only">{t('work.solutions')}</h4>
+												<ol class="space-y-4">
+													{project.solutions.slice(1).map((item, n) => (
+														<li class="grid grid-cols-[2rem_1fr] text-body text-ink-muted">
+															<span class="meta pt-1 text-accent-ink">{pad(n + 1)}</span>
+															<span>{item}</span>
+														</li>
+													))}
+												</ol>
+											</div>
 										</div>
 									</div>
 								</details>
@@ -202,8 +201,9 @@ const moreLabel = (count: number) =>
 </section>
 
 <style>
-	/* Native disclosure: no JS, no animation. The +/- icon changes shape, not
-	   just color, so state never relies on color alone. */
+	/* Native disclosure, enhanced by the script below to ease open and closed.
+	   The +/- icon changes shape, not just color, so state never relies on
+	   color alone. */
 	.more-summary {
 		list-style: none;
 	}
@@ -238,10 +238,17 @@ const moreLabel = (count: number) =>
 		inset: 0 calc(50% - 1px);
 	}
 
-	.more[open] .more-icon::after,
+	/* .is-closing flips the label and icon as soon as closing starts, while
+	   [open] stays set until the height animation ends. */
+	.more[open]:not(.is-closing) .more-icon::after,
 	.more:not([open]) .more-label-open,
-	.more[open] .more-label-closed {
+	.more.is-closing .more-label-open,
+	.more[open]:not(.is-closing) .more-label-closed {
 		display: none;
+	}
+
+	.more-body {
+		overflow: clip;
 	}
 
 	.project-index-link[aria-current='true'] {
@@ -254,6 +261,58 @@ const moreLabel = (count: number) =>
 </style>
 
 <script>
+	// Ease the problems/solutions disclosure open and closed: height eases while
+	// the content fades and rises a few pixels. Without JS or with reduced motion
+	// the native <details> toggles instantly.
+	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+	const ease = 'cubic-bezier(0.16, 1, 0.3, 1)'
+
+	document.querySelectorAll<HTMLDetailsElement>('details.more').forEach((details) => {
+		const summary = details.querySelector('summary')
+		const body = details.querySelector<HTMLElement>('.more-body')
+		const content = details.querySelector<HTMLElement>('.more-content')
+		if (!summary || !body || !content) return
+
+		let height: Animation | undefined
+		let fade: Animation | undefined
+
+		summary.addEventListener('click', (event) => {
+			if (reduceMotion.matches) return
+			event.preventDefault()
+
+			const from = `${body.offsetHeight}px`
+			height?.cancel()
+			fade?.cancel()
+
+			const closing = details.open && !details.classList.contains('is-closing')
+			if (closing) {
+				details.classList.add('is-closing')
+				height = body.animate({ height: [from, '0px'] }, { duration: 380, easing: ease })
+				fade = content.animate(
+					{ opacity: [1, 0], transform: ['none', 'translateY(-6px)'] },
+					{ duration: 200, easing: 'ease-in', fill: 'forwards' },
+				)
+				height.onfinish = () => {
+					details.open = false
+					details.classList.remove('is-closing')
+					fade?.cancel()
+				}
+				return
+			}
+
+			details.classList.remove('is-closing')
+			details.open = true
+			height = body.animate(
+				{ height: [from, `${content.offsetHeight}px`] },
+				{ duration: 480, easing: ease },
+			)
+			fade = content.animate(
+				{ opacity: [0, 1], transform: ['translateY(10px)', 'none'] },
+				{ duration: 520, delay: 90, easing: ease, fill: 'backwards' },
+			)
+		})
+	})
+
 	// Highlight the case study currently crossing the middle of the viewport.
 	const links = document.querySelectorAll<HTMLAnchorElement>('.project-index-link')
 

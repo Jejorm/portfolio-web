@@ -19,9 +19,10 @@ export const ui = {
 		'nav.menu.open': 'Open menu',
 		'nav.menu.close': 'Close menu',
 		'nav.menu': 'Menu',
-		'hero.available': 'Open to full-time roles and freelance work',
+		'hero.available':
+			'Available for custom web and app development and freelance projects',
 		'hero.statement':
-			'Full-stack developer. I build and ship complete products, like Vikoma, barbershop software live in production.',
+			'Full-stack developer. I turn ideas into fast, accessible web products, ready for production.',
 		'hero.cta.contact': 'Get in touch',
 		'hero.cta.projects': 'See projects',
 		'hero.portrait.alt':
@@ -47,7 +48,7 @@ export const ui = {
 		'about.fact.focus.label': 'Focus',
 		'about.fact.focus.value': 'Full-stack web apps',
 		'about.fact.work.label': 'Available for',
-		'about.fact.work.value': 'Full-time and freelance',
+		'about.fact.work.value': 'Custom web and apps, freelance',
 		'about.area1.title': 'Real-time systems',
 		'about.area1.body':
 			'WebSocket servers and clients that share one state and reconnect after a network drop.',
@@ -102,7 +103,7 @@ export const ui = {
 		'footer.rights': 'Jeremy Orellana',
 		'seo.title': 'Jeremy Orellana | Full-Stack Developer',
 		'seo.description':
-			'Full-stack developer in Ecuador. I build and ship complete web products, including Vikoma, a live multi-tenant SaaS for barbershops and salons.',
+			'Full-stack developer in Ecuador. I build custom websites and web apps, from idea to production, and take on freelance projects.',
 		'notfound.title': 'Page not found',
 		'notfound.body': 'This address does not exist or has moved.',
 		'notfound.cta': 'Back to home',
@@ -121,9 +122,9 @@ export const ui = {
 		'nav.menu.close': 'Cerrar menú',
 		'nav.menu': 'Menú',
 		'hero.available':
-			'Disponible para empleo a tiempo completo y proyectos freelance',
+			'Disponible para desarrollo web y de apps a medida y proyectos freelance',
 		'hero.statement':
-			'Desarrollador full-stack. Construyo y lanzo productos completos, como Vikoma, software para barberías en producción.',
+			'Desarrollador full-stack. Convierto ideas en productos web rápidos, accesibles y listos para producción.',
 		'hero.cta.contact': 'Escríbeme',
 		'hero.cta.projects': 'Ver proyectos',
 		'hero.portrait.alt':
@@ -149,7 +150,7 @@ export const ui = {
 		'about.fact.focus.label': 'Enfoque',
 		'about.fact.focus.value': 'Aplicaciones web full-stack',
 		'about.fact.work.label': 'Disponible para',
-		'about.fact.work.value': 'Tiempo completo y freelance',
+		'about.fact.work.value': 'Webs y apps a medida, freelance',
 		'about.area1.title': 'Sistemas en tiempo real',
 		'about.area1.body':
 			'Servidores y clientes WebSocket que comparten un mismo estado y se reconectan tras un corte de red.',
@@ -204,7 +205,7 @@ export const ui = {
 		'footer.rights': 'Jeremy Orellana',
 		'seo.title': 'Jeremy Orellana | Desarrollador Full-Stack',
 		'seo.description':
-			'Desarrollador full-stack en Ecuador. Construyo y lanzo productos web completos, entre ellos Vikoma, un SaaS multi-tenant en producción para barberías y salones.',
+			'Desarrollador full-stack en Ecuador. Construyo webs y aplicaciones a medida, de la idea a producción, y acepto proyectos freelance.',
 		'notfound.title': 'Página no encontrada',
 		'notfound.body': 'Esta dirección no existe o ha cambiado.',
 		'notfound.cta': 'Volver al inicio',
