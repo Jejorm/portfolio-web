@@ -370,3 +370,26 @@ p {
 		}
 	}
 }
+
+/* ── Theme toggle icons: same selectors as the tokens, so the right one shows before JS ── */
+.theme-icon-moon {
+	display: none;
+}
+
+:root[data-theme="dark"] .theme-icon-sun {
+	display: none;
+}
+
+:root[data-theme="dark"] .theme-icon-moon {
+	display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) .theme-icon-sun {
+		display: none;
+	}
+
+	:root:not([data-theme="light"]) .theme-icon-moon {
+		display: block;
+	}
+}
