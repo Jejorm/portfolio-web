@@ -188,6 +188,8 @@ Toda animación ligada al scroll usa `--ease-scroll` (curva sinusoidal: arranca 
 
 El botón "Live site" de cada caso es la acción principal: fondo `--accent` en reposo con texto `--on-accent` (4.6:1 / 6.2:1), 20 px, mínimo 56 px de alto, ancho completo en móvil; pasa a `--ink` al hover.
 
+Safari no acepta `animation-timeline` dentro del shorthand `animation`, y el minificador (Lightning CSS) lo mete ahí si el shorthand no lleva ningún `var()`. Por eso las animaciones de scroll lineales usan `var(--ease-linear)`, nunca `linear` a secas. Comprobar en `dist/` que ningún `animation:` contiene `view(`, `scroll(` ni un nombre de timeline.
+
 Prohibido: listeners de `scroll` en `window`, bucles `requestAnimationFrame` permanentes, animar `top/left/width/height`, más de un marquee.
 
 ---
