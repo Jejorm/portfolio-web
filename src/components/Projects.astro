@@ -14,7 +14,17 @@ const projects = (
 		...entry.data,
 		slug: entry.id.split('/').pop() as string,
 		index: String(entry.data.order).padStart(2, '0'),
+		// Pairs beyond the first fold into a native <details>
+		extra:
+			Math.max(entry.data.challenges.length, entry.data.solutions.length) - 1,
 	}))
+
+const pad = (n: number) => String(n + 1).padStart(2, '0')
+const moreLabel = (count: number) =>
+	t(count === 1 ? 'work.more.one' : 'work.more.other').replace(
+		'{n}',
+		String(count),
+	)
 ---
 
 <section id="projects" class="border-t border-line" aria-labelledby="projects-heading">
@@ -115,29 +125,65 @@ const projects = (
 
 						<p class="mt-8 max-w-[62ch] text-body text-ink-muted">{project.description}</p>
 
-						<div class="mt-10 grid grid-cols-1 gap-10 border-t border-line pt-8 md:grid-cols-2 md:gap-8">
-							<div>
-								<h4 class="text-ui font-semibold">{t('work.challenges')}</h4>
-								<ol class="mt-4 space-y-4">
-									{project.challenges.map((item, n) => (
-										<li class="grid grid-cols-[2rem_1fr] text-body text-ink-muted">
-											<span class="meta pt-1 text-ink">{String(n + 1).padStart(2, '0')}</span>
-											<span>{item}</span>
-										</li>
-									))}
-								</ol>
+						<div class="mt-10 border-t border-line pt-8">
+							<div class="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-8">
+								<div>
+									<h4 class="text-ui font-semibold">{t('work.challenges')}</h4>
+									<ol class="mt-4 space-y-4">
+										{project.challenges.slice(0, 1).map((item, n) => (
+											<li class="grid grid-cols-[2rem_1fr] text-body text-ink-muted">
+												<span class="meta pt-1 text-ink">{pad(n)}</span>
+												<span>{item}</span>
+											</li>
+										))}
+									</ol>
+								</div>
+								<div>
+									<h4 class="text-ui font-semibold">{t('work.solutions')}</h4>
+									<ol class="mt-4 space-y-4">
+										{project.solutions.slice(0, 1).map((item, n) => (
+											<li class="grid grid-cols-[2rem_1fr] text-body text-ink-muted">
+												<span class="meta pt-1 text-accent-ink">{pad(n)}</span>
+												<span>{item}</span>
+											</li>
+										))}
+									</ol>
+								</div>
 							</div>
-							<div>
-								<h4 class="text-ui font-semibold">{t('work.solutions')}</h4>
-								<ol class="mt-4 space-y-4">
-									{project.solutions.map((item, n) => (
-										<li class="grid grid-cols-[2rem_1fr] text-body text-ink-muted">
-											<span class="meta pt-1 text-accent-ink">{String(n + 1).padStart(2, '0')}</span>
-											<span>{item}</span>
-										</li>
-									))}
-								</ol>
-							</div>
+
+							{project.extra > 0 && (
+								<details class="more mt-10">
+									<summary class="more-summary flex min-h-11 cursor-pointer items-center justify-between gap-4 border border-line px-4 py-2 text-body font-medium text-ink transition-colors hover:bg-raised">
+										<span class="more-label-closed">{moreLabel(project.extra)}</span>
+										<span class="more-label-open">{t('work.less')}</span>
+										<span class="more-icon" aria-hidden="true" />
+									</summary>
+									<div class="mt-8 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-8">
+										<div>
+											<h4 class="sr-only">{t('work.challenges')}</h4>
+											<ol class="space-y-4">
+												{project.challenges.slice(1).map((item, n) => (
+													<li class="grid grid-cols-[2rem_1fr] text-body text-ink-muted">
+														<span class="meta pt-1 text-ink">{pad(n + 1)}</span>
+														<span>{item}</span>
+													</li>
+												))}
+											</ol>
+										</div>
+										<div>
+											<h4 class="sr-only">{t('work.solutions')}</h4>
+											<ol class="space-y-4">
+												{project.solutions.slice(1).map((item, n) => (
+													<li class="grid grid-cols-[2rem_1fr] text-body text-ink-muted">
+														<span class="meta pt-1 text-accent-ink">{pad(n + 1)}</span>
+														<span>{item}</span>
+													</li>
+												))}
+											</ol>
+										</div>
+									</div>
+								</details>
+							)}
 						</div>
 
 						<div class="mt-10 flex flex-wrap items-baseline gap-x-5 gap-y-2">
@@ -156,6 +202,48 @@ const projects = (
 </section>
 
 <style>
+	/* Native disclosure: no JS, no animation. The +/- icon changes shape, not
+	   just color, so state never relies on color alone. */
+	.more-summary {
+		list-style: none;
+	}
+
+	.more-summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.more-summary::marker {
+		content: '';
+	}
+
+	.more-icon {
+		position: relative;
+		flex: none;
+		width: 0.875rem;
+		height: 0.875rem;
+	}
+
+	.more-icon::before,
+	.more-icon::after {
+		content: '';
+		position: absolute;
+		background-color: currentColor;
+	}
+
+	.more-icon::before {
+		inset: calc(50% - 1px) 0;
+	}
+
+	.more-icon::after {
+		inset: 0 calc(50% - 1px);
+	}
+
+	.more[open] .more-icon::after,
+	.more:not([open]) .more-label-open,
+	.more[open] .more-label-closed {
+		display: none;
+	}
+
 	.project-index-link[aria-current='true'] {
 		color: var(--ink);
 	}

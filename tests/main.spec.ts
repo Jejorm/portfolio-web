@@ -68,13 +68,86 @@ test.describe('Portfolio Core Experience', () => {
 		const articles = page.locator('article.project')
 		await expect(articles).toHaveCount(4)
 		for (const article of await articles.all()) {
-			await expect(article.locator('ol').first().locator('li')).not.toHaveCount(
-				0,
-			)
-			await expect(article.locator('ol').last().locator('li')).not.toHaveCount(
-				0,
-			)
+			// Visible column lists: problems then solutions. The details body holds
+			// the same two lists, so each project has 2 or 4 <ol>.
+			const lists = article.locator('ol')
+			const foldedCount = await article.locator('details').count()
+			await expect(lists).toHaveCount(foldedCount ? 4 : 2)
+
+			// Every problem and solution stays in the DOM, folded or not.
+			const problems =
+				(await lists.nth(0).locator('li').count()) +
+				(foldedCount ? await lists.nth(2).locator('li').count() : 0)
+			const solutions =
+				(await lists.nth(1).locator('li').count()) +
+				(foldedCount ? await lists.nth(3).locator('li').count() : 0)
+			expect(problems).toBeGreaterThanOrEqual(2)
+			expect(solutions).toBeGreaterThanOrEqual(2)
+
+			// The first pair (numbered 01) is visible without any interaction.
+			for (const list of [lists.nth(0), lists.nth(1)]) {
+				await expect(list.locator('li')).toHaveCount(1)
+				await expect(list.locator('li').first()).toBeVisible()
+				await expect(list.locator('li').first()).toContainText('01')
+			}
 		}
+	})
+
+	test('should fold extra problems and solutions in a keyboard operable disclosure', async ({
+		page,
+	}) => {
+		await page.goto('/')
+
+		const articles = page.locator('article.project')
+		let folded = 0
+		for (const article of await articles.all()) {
+			const details = article.locator('details')
+			const hiddenCount = await details.count()
+			if (!hiddenCount) {
+				// One pair or fewer: nothing to fold.
+				await expect(article.locator('ol').first().locator('li')).toHaveCount(1)
+				continue
+			}
+			folded++
+			const items = details.locator('li')
+			const itemCount = await items.count()
+			expect(itemCount).toBeGreaterThan(0)
+			await expect(items.first()).toBeHidden()
+
+			const summary = details.locator('summary')
+			await expect(summary).toBeVisible()
+			expect((await summary.boundingBox())?.height).toBeGreaterThanOrEqual(44)
+			await expect(summary).toContainText(
+				/Show \d+ more problems? and solutions?/,
+			)
+
+			// Reachable and operable by keyboard.
+			await summary.focus()
+			await expect(summary).toBeFocused()
+			await page.keyboard.press('Enter')
+			await expect(details).toHaveJSProperty('open', true)
+			await expect(items.first()).toBeVisible()
+			await expect(items.first()).toContainText('02')
+			await expect(summary).toContainText('Hide')
+
+			await page.keyboard.press('Space')
+			await expect(details).toHaveJSProperty('open', false)
+			await expect(items.first()).toBeHidden()
+		}
+		expect(folded).toBeGreaterThan(0)
+	})
+
+	test('should label the disclosure in Spanish', async ({ page }) => {
+		await page.goto('/es/')
+
+		const summary = page.locator('article.project details summary').first()
+		await expect(summary).toContainText(/Ver \d+ problemas? y soluciones? más/)
+		await summary.focus()
+		await page.keyboard.press('Enter')
+		await expect(summary).toContainText('Ocultar')
+		await expect(
+			summary.locator('xpath=..').locator('li').first(),
+		).toBeVisible()
 	})
 
 	test('should show Vikoma as a case study with its live link', async ({

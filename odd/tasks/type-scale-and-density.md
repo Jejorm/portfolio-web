@@ -30,7 +30,7 @@ Out: new sections, new claims, palette, motion, new pages (`/work/[slug]`).
 
 ## Tasks
 - [x] T1 typeset: define a scale of about 8 steps (tokens in `global.css`), problems/solutions to 16px, metadata and availability to 13-14px, remove one-off sizes. Route: delegated writer (global.css + several components).
-- [ ] T2 distill: in each project show the strongest problem/solution pair, fold the rest in `<details>`/`<summary>` (works without JS, keyboard accessible, new i18n keys in en and es). Route: delegated writer (Projects.astro + ui.ts + global.css).
+- [x] T2 distill: in each project show the strongest problem/solution pair, fold the rest in `<details>`/`<summary>` (works without JS, keyboard accessible, new i18n keys in en and es). Route: delegated writer (Projects.astro + ui.ts + global.css).
 - [ ] T3 clarify: remove summary/description redundancy in the 8 project JSONs, keep facts, no new claims, no dashes. Route: delegated writer (8 JSON files).
 - [ ] T4 layout: separate section `h2` from project `h3` visually, make About and Stack `h3` match their role (sizes and semantics). Route: delegated writer (About, Skills, Projects, global.css).
 - [ ] T5 polish: run lint/test/build, fix leftovers, re-measure type sizes and word counts, close out evidence.
@@ -52,5 +52,13 @@ Out: new sections, new claims, palette, motion, new pages (`/work/[slug]`).
 - Notes for later tasks: `display-m` is shared by project h3 and the Stack list (override locally in T4); 404 h1 keeps its own clamp on purpose; `f(x)` mark is now 56px on mobile (decorative); h4 labels are 14px semibold (T2 may replace them).
 - Commit: 9ee0439 (style(type): introduce type scale tokens and raise reading floor to 16px).
 
+### T2 distill (done)
+- Route: delegated writer (trigger: Projects.astro + ui.ts + tests). Parent spot check: `pnpm lint` clean, no new dashes, screenshots of the first card (closed and open, EN and mobile) reviewed.
+- Structure: pair 01 always visible; pairs 02..N in a native `<details class="more">` with a 44px `<summary>` (CSS plus/minus, `aria-hidden`, no JS, no animation), sr-only `h4` inside so the folded lists keep their labels. Rendered only if a project has more than one pair. i18n keys `work.more.one`, `work.more.other`, `work.less` in en and es (the "Hide" label was an addition by the writer).
+- Tests: the case-study test was rewritten (all items stay in the DOM, first pair visible and numbered 01); two new tests cover keyboard open/close (Enter, Space) in EN and the ES label.
+- Checks: `pnpm check`, `pnpm lint`, `pnpm build`, `pnpm test` = 50 passed (chromium + mobile-safari).
+- Measured (EN, details closed): visible words Vikoma 278 to 179, Tickets about 166 to 149, Luxe about 166 to 104, Assembly about 166 to 110. Page height 10790 to 10711px at 1440px and 12506 to 12223px at 390px: the saving is in words, not pixels, because description and stack stay visible. Height will come from T3/T4.
+- Commit: dc045df (feat(projects): fold secondary problems and solutions behind a disclosure).
+
 ## Next step
-T2 distill.
+T3 clarify.
