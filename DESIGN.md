@@ -173,7 +173,7 @@ Toda animación ligada al scroll usa `--ease-scroll` (curva sinusoidal: arranca 
 | Líneas del hero que suben desde una máscara | Orden de lectura en la carga | `@keyframes rise` con `animation-delay` escalonado |
 | Wordmark que se condensa (118 % → 64 %, 800 → 500); sin respuesta al cursor | Transición de identidad a contenido | `animation-timeline: scroll(root)`, rango `0 100vh` |
 | Retrato del hero que se desliza dentro de su marco | Profundidad mientras el hero sale | `scale` + `translate` (no `transform`, que usa `data-reveal`) con `scroll(root)` |
-| Wordmark que se expande al entrar (75 % → 118 %) | En móvil el nombre queda bajo el pliegue: reacciona cuando aparece | `animation-timeline: view()` sobre el h1, solo `< md` |
+| Wordmark que se condensa en 3 s al aparecer (118 % → 64 %, 800 → 500) | En móvil el nombre queda bajo el pliegue: llega a todo el ancho y se recoge despacio mientras se mira. Ligado al scroll ocupaba ~140 px y un gesto rápido se lo saltaba | `IntersectionObserver` (60 % visible, una sola vez) añade `.is-gathered`; animación `gather` de 3 s con `--ease-scroll`, solo `< md` |
 | Nav que gana fondo tras 80 px | Estado: el contenido pasa por debajo | `animation-timeline: scroll(root)`, sin JS |
 | Desplegable de problemas y soluciones que se abre y cierra con suavidad | Continuidad: el contenido no aparece de golpe | WAAPI sobre el `<details>` nativo: altura con `--ease-out`, el contenido sube 10 px y aparece; sin JS o con `prefers-reduced-motion` alterna al instante |
 | Imágenes de proyecto que se abren desde un recorte | Entrada de cada caso de estudio | `clip-path` + `scale` con `animation-timeline: view()` |
@@ -230,4 +230,6 @@ Prohibido: listeners de `scroll` en `window`, bucles `requestAnimationFrame` per
 
 - Un solo CTA primario ("Escríbeme" / "Get in touch") a `#contact`, 48 px y ancho completo. Secundario: correo visible (`mailto:`) + botón "Copiar correo" con región `aria-live`. Terciario: enlace de texto a proyectos.
 - Todos los objetivos táctiles miden 44 px o más, con 8 px entre ellos (WCAG 2.5.5, Vercel Web Interface Guidelines, Material 48 dp).
+- Los enlaces de texto con subrayado (`.link-line`) amplían su zona táctil con `.hit` (un `::after` invisible de `--hit`, 10 px por lado) en lugar de padding, para que el subrayado no se separe del texto.
+- Sin resaltado gris de toque (`-webkit-tap-highlight-color: transparent`): rompe el radio 0; el estado pulsado lo dan los `:active`.
 - El retrato va después de los CTA y ocupa el ancho completo (1:1 en móvil, 4:3 en `sm`, 4:5 desde `md`), para que el CTA quede sobre el pliegue.

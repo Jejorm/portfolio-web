@@ -254,6 +254,51 @@ test.describe('Hero call to action', () => {
 	})
 })
 
+test.describe('Mobile wordmark', () => {
+	test.use({ viewport: { width: 390, height: 664 } })
+
+	test('should condense the name over about 3 seconds once it is on screen', async ({
+		page,
+	}) => {
+		await page.emulateMedia({ reducedMotion: 'no-preference' })
+		await page.goto('/')
+
+		const name = page.locator('#hero-heading')
+		const stretch = async () =>
+			Number.parseFloat(
+				await name.evaluate((el) => getComputedStyle(el).fontStretch),
+			)
+
+		// Off screen it holds the full-width state.
+		expect(await stretch()).toBe(118)
+
+		await name.scrollIntoViewIfNeeded()
+		await expect(name).toHaveClass(/is-gathered/)
+
+		// Still mid-way well after a scroll-linked change would have finished.
+		await page.waitForTimeout(1000)
+		const midway = await stretch()
+		expect(midway).toBeLessThan(118)
+		expect(midway).toBeGreaterThan(64)
+
+		await expect.poll(stretch, { timeout: 4000 }).toBe(64)
+	})
+
+	test('should keep the name still when motion is reduced', async ({
+		page,
+	}) => {
+		await page.emulateMedia({ reducedMotion: 'reduce' })
+		await page.goto('/')
+
+		const name = page.locator('#hero-heading')
+		await name.scrollIntoViewIfNeeded()
+		await page.waitForTimeout(500)
+		expect(await name.evaluate((el) => getComputedStyle(el).fontStretch)).toBe(
+			'118%',
+		)
+	})
+})
+
 test.describe('Mobile navigation', () => {
 	test.use({ viewport: { width: 390, height: 844 } })
 

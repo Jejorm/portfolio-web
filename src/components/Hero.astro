@@ -88,3 +88,20 @@ const words = name.split(' ')
 		</span>
 	</h1>
 </section>
+
+<script>
+	// Mobile wordmark: condense on a 3s clock once the name is mostly on screen.
+	// The animation itself lives in global.css, behind prefers-reduced-motion.
+	const wordmark = document.getElementById('hero-heading')
+	if (wordmark && window.matchMedia('(max-width: 767px)').matches) {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				if (!entries.some((entry) => entry.isIntersecting)) return
+				wordmark.classList.add('is-gathered')
+				observer.disconnect()
+			},
+			{ threshold: 0.6 },
+		)
+		observer.observe(wordmark)
+	}
+</script>

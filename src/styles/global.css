@@ -128,6 +128,9 @@
 html {
 	scroll-padding-top: var(--nav-h);
 	-webkit-text-size-adjust: 100%;
+	/* No rounded grey flash on tap: it breaks the radius-0 system. Pressed
+	   states come from :active styles; keyboard focus keeps its outline. */
+	-webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -227,6 +230,18 @@ p {
 		background-size: 100% 1px;
 	}
 
+	/* Larger touch target for text links without moving their underline:
+	   adds --hit (10px) of invisible hit area on every side (26px link -> 46px). */
+	.hit {
+		position: relative;
+	}
+
+	.hit::after {
+		content: "";
+		position: absolute;
+		inset: calc(var(--hit, 0.625rem) * -1);
+	}
+
 	.arrow-nudge {
 		display: inline-block;
 		transition: transform 0.4s var(--ease-out);
@@ -308,39 +323,31 @@ p {
 		}
 	}
 
+	@keyframes gather {
+		to {
+			font-stretch: 64%;
+			font-weight: 500;
+			letter-spacing: -0.02em;
+		}
+	}
+
+	/* Mobile: the name sits below the fold. Tied to scroll it changed within
+	   ~140px, so a flick skipped it. Instead it arrives full width and, once
+	   on screen, condenses over 3s (Hero.astro adds .is-gathered, once). */
+	@media (max-width: 767px) {
+		.wordmark-kinetic.is-gathered {
+			animation: gather 3s var(--ease-scroll) both;
+		}
+	}
+
 	@supports (animation-timeline: scroll()) {
-		/* Wordmark condenses as the hero leaves the viewport */
-		.wordmark-kinetic {
-			animation: gather var(--ease-scroll) both;
-			animation-timeline: scroll(root);
-			animation-range: 0 100vh;
-		}
-
-		@keyframes gather {
-			to {
-				font-stretch: 64%;
-				font-weight: 500;
-				letter-spacing: -0.02em;
-			}
-		}
-
-		/* Mobile: the name sits below the fold, so it expands as it enters the
-		   viewport instead of gathering on the root scroll. */
-		@media (max-width: 767px) {
-			@supports (animation-timeline: view()) {
-				.wordmark-kinetic {
-					animation: expand var(--ease-scroll) both;
-					animation-timeline: view();
-					animation-range: entry 0% entry 100%;
-				}
-
-				@keyframes expand {
-					from {
-						font-stretch: 75%;
-						font-weight: 600;
-						letter-spacing: -0.02em;
-					}
-				}
+		/* Wordmark condenses as the hero leaves the viewport. Desktop only:
+		   mobile runs the same change on a clock (see below). */
+		@media (min-width: 768px) {
+			.wordmark-kinetic {
+				animation: gather var(--ease-scroll) both;
+				animation-timeline: scroll(root);
+				animation-range: 0 100vh;
 			}
 		}
 

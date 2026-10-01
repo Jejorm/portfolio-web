@@ -26,7 +26,7 @@ const locales = Object.keys(languages) as (keyof typeof languages)[]
 	>
 		<a
 			href={home}
-			class="text-body font-semibold tracking-tight"
+			class="hit text-body font-semibold tracking-tight"
 			aria-label={t('nav.home')}
 		>
 			Jeremy Orellana
@@ -97,7 +97,7 @@ const locales = Object.keys(languages) as (keyof typeof languages)[]
 <!-- Mobile menu: full-height sheet with large type -->
 <div
 	id="mobile-menu"
-	class="fixed inset-x-0 top-16 bottom-0 z-30 flex flex-col justify-between border-t border-line bg-paper px-4 pt-8 pb-10 lg:hidden"
+	class="fixed inset-x-0 top-16 bottom-0 z-30 flex flex-col overscroll-contain justify-between border-t border-line bg-paper px-4 pt-8 pb-10 lg:hidden"
 	hidden
 >
 	<ul class="space-y-1">
@@ -200,6 +200,8 @@ const locales = Object.keys(languages) as (keyof typeof languages)[]
 				'aria-label',
 				(open ? toggle.dataset.closeLabel : toggle.dataset.openLabel) ?? '',
 			)
+			// Lock both roots: iOS Safari ignores a lock on body alone.
+			document.documentElement.style.overflow = open ? 'hidden' : ''
 			document.body.style.overflow = open ? 'hidden' : ''
 			if (open) menu.querySelector('a')?.focus()
 		}
