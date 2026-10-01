@@ -3,7 +3,7 @@
 	"title": "Tickets App",
 	"kind": "Real-time system",
 	"summary": "Kiosks, desks and display boards kept in sync over native WebSockets.",
-	"description": "A turn-management system for service desks, with normal and preferential tickets. A React 19 client and a Bun and TypeScript server share queue state in real time over native WebSockets. The backend runs in a Docker container.",
+	"description": "A turn-management system for service desks, with normal and preferential tickets. It pairs a React 19 client with a Bun and TypeScript server, and the backend runs in a Docker container.",
 	"challenges": [
 		"Kiosks, desks and display boards had to show the same queue state at the same time, without each component managing its own socket.",
 		"Kiosks and display boards had to recover on their own when the network connection dropped."

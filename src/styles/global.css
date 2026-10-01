@@ -55,6 +55,47 @@
 	color-scheme: dark;
 }
 
+/* ── Type scale ──────────────────────────────────────
+   One scale for the whole site. Reading and UI steps follow a ~1.25 ratio
+   from the 16px body; display steps are fluid clamp()s. Components use the
+   generated utilities (text-meta, text-body, ...), never raw px values.
+
+   Reading and UI (fixed)
+   meta        13px  JetBrains Mono metadata: indexes, kinds, labels, EN/ES
+   ui          14px  Dense UI text: form labels and errors, stack tags,
+                     the hero availability line
+   body        16px  Reading floor: paragraphs, lists, nav, links, buttons
+   lead        20px  Summaries and section intros
+   heading     25px  Small headings (About areas)
+
+   Display (fluid, used with .display or on their own)
+   title       28 to 40px   Card titles, contact email
+   display-s   28 to 48px   Project titles, hero statement, About statement, lead principle
+   display-m   40 to 68px   Stack tool names
+   display-l   48 to 88px   Section titles
+   poster      56 to 176px  Contact poster, f(x) mark
+
+   The hero and 404 wordmarks size themselves with vw units on purpose.
+   ──────────────────────────────────────────────────── */
+@theme static {
+	--text-meta: 0.8125rem;
+	--text-meta--line-height: 1.4;
+	--text-ui: 0.875rem;
+	--text-ui--line-height: 1.45;
+	--text-body: 1rem;
+	--text-body--line-height: 1.6;
+	--text-lead: 1.25rem;
+	--text-lead--line-height: 1.4;
+	--text-heading: 1.5625rem;
+	--text-heading--line-height: 1.25;
+
+	--text-title: clamp(1.75rem, 2.6vw, 2.5rem);
+	--text-display-s: clamp(1.75rem, 3.4vw, 3rem);
+	--text-display-m: clamp(2.5rem, 5vw, 4.25rem);
+	--text-display-l: clamp(3rem, 6vw, 5.5rem);
+	--text-poster: clamp(3.5rem, 11vw, 11rem);
+}
+
 /* ── Tailwind bridge: utilities read the live variables ── */
 @theme inline {
 	--color-paper: var(--paper);
@@ -152,7 +193,7 @@ p {
 	/* Metadata voice. Used for data, never as a section eyebrow. */
 	.meta {
 		font-family: var(--font-mono);
-		font-size: 0.75rem;
+		font-size: var(--text-meta);
 		line-height: 1.4;
 		letter-spacing: 0.02em;
 	}

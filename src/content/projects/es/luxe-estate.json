@@ -3,7 +3,7 @@
 	"title": "Luxe Estate",
 	"kind": "Plataforma inmobiliaria",
 	"summary": "Búsqueda de propiedades con filtros sincronizados con el mapa, contenido en varios idiomas y renderizado en servidor.",
-	"description": "Una plataforma inmobiliaria full-stack construida con Server Components y Server Actions de Next.js, con Supabase para datos y autenticación, Leaflet para la búsqueda en mapa y contenido en varios idiomas.",
+	"description": "Full-stack, construida con Server Components y Server Actions de Next.js. Supabase se encarga de los datos y la autenticación, y Leaflet de la búsqueda en mapa.",
 	"challenges": [
 		"El mapa de Leaflet y los filtros del servidor debían mantenerse sincronizados.",
 		"Los favoritos y el inicio de sesión se sentían lentos si cada acción esperaba una ida y vuelta al servidor.",

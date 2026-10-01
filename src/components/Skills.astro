@@ -38,15 +38,15 @@ const groups = [
 <section id="skills" class="border-t border-line" aria-labelledby="skills-heading">
 	<div class="mx-auto max-w-[1440px] px-4 py-24 md:px-8 md:py-32">
 		<div class="flex flex-col gap-4">
-			<h2 id="skills-heading" class="display text-[clamp(3rem,6vw,5.5rem)]" data-reveal>
+			<h2 id="skills-heading" class="display text-display-l" data-reveal>
 				{t('skills.title')}
 			</h2>
-			<p class="max-w-[40ch] text-lg text-ink-muted" data-reveal style="--d: 1">
+			<p class="max-w-[40ch] text-lead text-ink-muted" data-reveal style="--d: 1">
 				{t('skills.intro')}
 			</p>
 		</div>
 
-		<div class="mt-16">
+		<dl class="mt-16">
 			{
 				groups.map((group, i) => (
 					<div
@@ -54,20 +54,22 @@ const groups = [
 						data-reveal
 						style={`--d: ${i}`}
 					>
-						<h3 class="meta pt-2 text-ink-muted lg:col-span-3">{group.title}</h3>
-						<ul class="display flex flex-wrap gap-x-[0.35em] text-[clamp(2rem,4.6vw,4rem)] leading-[1.02] lg:col-span-9">
-							{group.items.map((item, n) => (
-								<li class="stack-item">
-									<span class="transition-colors duration-300 hover:text-accent-ink">{item}</span>
-									{n < group.items.length - 1 && (
-										<span class="text-ink-muted/50" aria-hidden="true">/</span>
-									)}
-								</li>
-							))}
-						</ul>
+						<dt class="meta pt-2 text-ink-muted lg:col-span-3">{group.title}</dt>
+						<dd class="lg:col-span-9">
+							<ul class="display flex flex-wrap gap-x-[0.35em] text-display-m leading-[1.02]">
+								{group.items.map((item, n) => (
+									<li class="stack-item">
+										<span class="transition-colors duration-300 hover:text-accent-ink">{item}</span>
+										{n < group.items.length - 1 && (
+											<span class="text-ink-muted/50" aria-hidden="true">/</span>
+										)}
+									</li>
+								))}
+							</ul>
+						</dd>
 					</div>
 				))
 			}
-		</div>
+		</dl>
 	</div>
 </section>

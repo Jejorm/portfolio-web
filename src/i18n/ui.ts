@@ -21,7 +21,7 @@ export const ui = {
 		'nav.menu': 'Menu',
 		'hero.available': 'Open to full-time roles and freelance work',
 		'hero.statement':
-			'Full-stack developer. I build and ship complete products, like Vikoma, a SaaS that is live in production.',
+			'Full-stack developer. I build and ship complete products, like Vikoma, barbershop software live in production.',
 		'hero.cta.contact': 'Get in touch',
 		'hero.cta.projects': 'See projects',
 		'hero.portrait.alt':
@@ -32,6 +32,9 @@ export const ui = {
 		'work.index': 'Project index',
 		'work.challenges': 'Problems',
 		'work.solutions': 'How I solved them',
+		'work.more.one': 'Show 1 more problem and solution',
+		'work.more.other': 'Show {n} more problems and solutions',
+		'work.less': 'Hide the extra problems and solutions',
 		'work.live': 'Live site',
 		'work.stack': 'Built with',
 		'about.title': 'About',
@@ -120,7 +123,7 @@ export const ui = {
 		'hero.available':
 			'Disponible para empleo a tiempo completo y proyectos freelance',
 		'hero.statement':
-			'Desarrollador full-stack. Construyo y lanzo productos completos, como Vikoma, un SaaS que ya está en producción.',
+			'Desarrollador full-stack. Construyo y lanzo productos completos, como Vikoma, software para barberías en producción.',
 		'hero.cta.contact': 'Escríbeme',
 		'hero.cta.projects': 'Ver proyectos',
 		'hero.portrait.alt':
@@ -131,6 +134,9 @@ export const ui = {
 		'work.index': 'Índice de proyectos',
 		'work.challenges': 'Problemas',
 		'work.solutions': 'Cómo los resolví',
+		'work.more.one': 'Ver 1 problema y solución más',
+		'work.more.other': 'Ver {n} problemas y soluciones más',
+		'work.less': 'Ocultar los problemas y soluciones adicionales',
 		'work.live': 'Ver sitio',
 		'work.stack': 'Construido con',
 		'about.title': 'Sobre mí',

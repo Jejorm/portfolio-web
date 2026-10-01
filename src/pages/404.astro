@@ -9,16 +9,16 @@ const home = lang === 'en' ? '/' : `/${lang}/`
 
 <Layout title={`404 | ${t('notfound.title')}`} description={t('notfound.body')} noindex>
 	<main id="main" class="mx-auto flex min-h-[100dvh] max-w-[1440px] flex-col justify-between px-4 pt-10 pb-6 md:px-8">
-		<a href={home} class="flex items-baseline gap-2 text-[15px] font-semibold tracking-tight">
+		<a href={home} class="flex items-baseline gap-2 text-body font-semibold tracking-tight">
 			<span class="inline-block size-2.5 bg-accent" aria-hidden="true"></span>
 			Jeremy Orellana
 		</a>
 		<div>
 			<h1 class="display text-[clamp(3rem,9vw,8rem)]">{t('notfound.title')}</h1>
-			<p class="mt-6 max-w-[40ch] text-lg text-ink-muted">{t('notfound.body')}</p>
+			<p class="mt-6 max-w-[40ch] text-lead text-ink-muted">{t('notfound.body')}</p>
 			<a
 				href={home}
-				class="mt-10 inline-flex items-center gap-3 bg-ink px-6 py-3.5 text-[15px] font-medium text-paper transition-colors hover:bg-accent hover:text-on-accent"
+				class="mt-10 inline-flex items-center gap-3 bg-ink px-6 py-3.5 text-body font-medium text-paper transition-colors hover:bg-accent hover:text-on-accent"
 			>
 				<span aria-hidden="true">←</span>
 				{t('notfound.cta')}

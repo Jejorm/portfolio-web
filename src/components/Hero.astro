@@ -19,7 +19,7 @@ const words = name.split(' ')
 		class="mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-10 px-4 md:grid-cols-12 md:gap-8 md:px-8"
 	>
 		<div class="flex flex-col justify-between gap-12 md:col-span-7 lg:col-span-6">
-			<p class="meta flex items-start gap-3 text-ink-muted">
+			<p class="meta flex items-start gap-3 text-ui text-ink-muted">
 				<span class="lamp mt-[0.3em] shrink-0" aria-hidden="true"></span>
 				{t('hero.available')}
 			</p>
@@ -27,7 +27,7 @@ const words = name.split(' ')
 			<div>
 				<p
 					id="hero-statement"
-					class="line-mask max-w-[22ch] text-[clamp(1.75rem,3.4vw,3rem)] leading-[1.08] font-medium tracking-[-0.02em]"
+					class="line-mask max-w-[22ch] text-display-s leading-[1.08] font-medium tracking-[-0.02em]"
 					style="--d: 1"
 				>
 					<span>{t('hero.statement')}</span>
@@ -40,7 +40,7 @@ const words = name.split(' ')
 				>
 					<a
 						href="#contact"
-						class="group inline-flex min-h-12 w-full items-center justify-center gap-3 bg-ink px-6 text-[15px] font-medium text-paper transition-[background-color,transform] duration-300 hover:bg-accent hover:text-on-accent active:scale-[0.98] sm:w-auto"
+						class="group inline-flex min-h-12 w-full items-center justify-center gap-3 bg-ink px-6 text-body font-medium text-paper transition-[background-color,transform] duration-300 hover:bg-accent hover:text-on-accent active:scale-[0.98] sm:w-auto"
 					>
 						{t('hero.cta.contact')}
 						<span class="transition-transform duration-300 group-hover:translate-y-0.5" aria-hidden="true">↓</span>
@@ -48,7 +48,7 @@ const words = name.split(' ')
 
 					<a
 						href="#projects"
-						class="inline-flex min-h-12 w-full items-center justify-center border border-ink px-6 text-[15px] font-medium text-ink transition-[background-color,transform] duration-300 hover:bg-raised active:scale-[0.98] sm:w-auto"
+						class="inline-flex min-h-12 w-full items-center justify-center border border-ink px-6 text-body font-medium text-ink transition-[background-color,transform] duration-300 hover:bg-raised active:scale-[0.98] sm:w-auto"
 					>
 						{t('hero.cta.projects')}
 					</a>
