@@ -2,19 +2,31 @@
 	"order": 1,
 	"title": "Vikoma",
 	"kind": "Multi-tenant SaaS",
-	"summary": "Appointment software for barbershops and salons, live in production. It replaces paper notebooks and double bookings.",
-	"description": "I built it on my own for businesses in Ecuador. Beyond appointments, it covers client history, reference photos with consent under Ecuador's data protection law, WhatsApp booking confirmations, daily cash close, inventory and a waitlist. Feature modules have domain, application, infrastructure and UI layers; scheduling rules are pure functions tested without a database.",
+	"summary": "A platform for barbershops in Ecuador that replaces notebooks, chats and hand-balanced cash. Live in production: its first pilot barbershop has already signed up and set up its business.",
+	"description": "Each business gets its own space, with its own barbers, services and clients. The owner signs in with Google and finishes setup in about 5 minutes, measured with the pilot barbershop. It includes WhatsApp confirmations, a waitlist, reference photos with consent under Ecuador's data law, monthly cash reports and owner and barber roles. The agenda stays readable when the internet drops. I built it solo: money in whole cents, times in UTC and 2,679 automated tests that run in about 16 seconds, with ≈81% line coverage of business logic and repositories.",
 	"challenges": [
-		"One business could reference another business's data: tenant isolation relied on foreign keys, and the newer tursodb engine silently ignored them.",
-		"Concurrent writes, such as two checkouts at the same time, could sell stock that no longer existed or assign the same invoice number twice.",
-		"The OAuth sign-in check accepted any value as valid: a hex parser read base64url input and returned empty buffers, so every comparison matched."
+		"One business could reference another's data. The tursodb engine silently ignored foreign keys.",
+		"Two clients must never book the same slot, even at the same moment.",
+		"Two simultaneous checkouts could sell sold-out stock or repeat an invoice number.",
+		"The OAuth sign-in check accepted any value. A hex parser read base64url input and returned empty buffers, so everything matched.",
+		"A WhatsApp failure must not block a booking."
 	],
 	"solutions": [
-		"I confirmed it with an insert that should have failed, moved production to libSQL, and made the app refuse to boot when foreign keys are not enforced.",
-		"Invoice numbers come from an atomic UPDATE with RETURNING, tested with 25 concurrent requests that must get 25 different numbers. Stock changes use conditional updates as guards against overselling, and lock errors are retried.",
-		"A negative security test caught it, and I replaced the check with a constant-time comparison that hashes both sides first."
+		"I confirmed it with an insert that had to fail and moved production to libSQL. Data goes through a single access point, with tests proving it never mixes. The app refuses to boot if foreign keys are not enforced.",
+		"Every booking rechecks the slot inside the database transaction, not just on screen.",
+		"Invoice numbers come from an atomic UPDATE with RETURNING. A test with 25 concurrent requests demands 25 distinct numbers. Stock uses conditional updates and retries lock errors.",
+		"A negative security test caught it. The comparison is now constant-time and hashes both sides first.",
+		"The message is queued with the appointment and sent later, with retries. Without client consent, it never goes out."
 	],
-	"tags": ["Next.js 16", "Turso", "Drizzle", "WhatsApp Cloud API", "Vitest"],
+	"tags": [
+		"Next.js 16",
+		"TypeScript",
+		"Turso",
+		"Drizzle",
+		"WhatsApp Cloud API",
+		"Cloudflare R2",
+		"Vitest"
+	],
 	"image": "../../../assets/images/project-vikoma.webp",
 	"imageAlt": "Vikoma agenda in Spanish, shown on a wide desktop screen with one column per barber and on a phone as a list of appointments.",
 	"liveUrl": "https://vikoma.app",

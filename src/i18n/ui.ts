@@ -21,7 +21,7 @@ export const ui = {
 		'nav.menu': 'Menu',
 		'hero.available': 'Open to full-time roles and freelance work',
 		'hero.statement':
-			'Full-stack developer. I build and ship complete products, like Vikoma, a SaaS that is live in production.',
+			'Full-stack developer. I build and ship complete products, like Vikoma, barbershop software live in production.',
 		'hero.cta.contact': 'Get in touch',
 		'hero.cta.projects': 'See projects',
 		'hero.portrait.alt':
@@ -123,7 +123,7 @@ export const ui = {
 		'hero.available':
 			'Disponible para empleo a tiempo completo y proyectos freelance',
 		'hero.statement':
-			'Desarrollador full-stack. Construyo y lanzo productos completos, como Vikoma, un SaaS que ya está en producción.',
+			'Desarrollador full-stack. Construyo y lanzo productos completos, como Vikoma, software para barberías en producción.',
 		'hero.cta.contact': 'Escríbeme',
 		'hero.cta.projects': 'Ver proyectos',
 		'hero.portrait.alt':

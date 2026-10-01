@@ -2,19 +2,31 @@
 	"order": 1,
 	"title": "Vikoma",
 	"kind": "SaaS multi-tenant",
-	"summary": "Software de citas para barberías y salones, ya en producción. Reemplaza cuadernos de papel y reservas duplicadas.",
-	"description": "Lo construí por mi cuenta para negocios de Ecuador. Más allá de las citas, incluye historial de clientes, fotos de referencia con consentimiento según la ley de protección de datos de Ecuador, confirmaciones de cita por WhatsApp, cierre de caja diario, inventario y lista de espera. Los módulos por funcionalidad tienen capas de dominio, aplicación, infraestructura e interfaz; las reglas de agenda son funciones puras probadas sin base de datos.",
+	"summary": "Plataforma para barberías de Ecuador que reemplaza cuadernos, chats y cuadres a mano. En producción: su primera barbería piloto ya se registró y configuró su negocio.",
+	"description": "Cada negocio tiene su propio espacio, con sus barberos, servicios y clientes. El dueño entra con Google y deja todo configurado en unos 5 minutos, medidos con la barbería piloto. Incluye confirmaciones por WhatsApp, lista de espera, fotos de referencia con consentimiento según la ley de datos de Ecuador, reportes mensuales de caja y roles de dueño y barbero. La agenda se consulta aunque falle el internet. Lo construí solo: dinero en centavos enteros, horas en UTC y 2.679 pruebas automáticas que corren en unos 16 segundos, con ≈81 % de cobertura de líneas en lógica de negocio y repositorios.",
 	"challenges": [
-		"Un negocio podía referenciar datos de otro: el aislamiento entre negocios dependía de claves foráneas, y el motor nuevo tursodb las ignoraba sin avisar.",
-		"Las escrituras concurrentes, como dos cobros al mismo tiempo, podían vender stock que ya no existía o asignar dos veces el mismo número de factura.",
-		"La verificación del inicio de sesión con OAuth aceptaba cualquier valor como válido: un parser hexadecimal leía datos base64url y devolvía buffers vacíos, así que toda comparación coincidía."
+		"Un negocio podía referenciar datos de otro. El motor tursodb ignoraba las claves foráneas sin avisar.",
+		"Dos clientes no debían reservar la misma hora, ni siquiera al mismo tiempo.",
+		"Dos cobros simultáneos podían vender stock agotado o repetir un número de factura.",
+		"El inicio de sesión con OAuth aceptaba cualquier valor. Un parser hexadecimal leía base64url y devolvía buffers vacíos, así que todo coincidía.",
+		"Un fallo de WhatsApp no debía frenar la reserva."
 	],
 	"solutions": [
-		"Lo confirmé con una inserción que debía fallar, llevé producción a libSQL y la app ahora se niega a arrancar si las claves foráneas no se aplican.",
-		"Los números de factura salen de un UPDATE atómico con RETURNING, probado con 25 solicitudes concurrentes que deben recibir 25 números distintos. Los cambios de stock usan actualizaciones condicionales como guardas contra la sobreventa, y los errores de bloqueo se reintentan.",
-		"Una prueba de seguridad negativa lo detectó, y reemplacé la comparación por una de tiempo constante que primero aplica un hash a ambos lados."
+		"Lo confirmé con una inserción que debía fallar y llevé producción a libSQL. Los datos pasan por un único acceso, con pruebas de que nunca se mezclan. La app no arranca si las claves foráneas no se aplican.",
+		"Cada reserva revalida el horario dentro de la transacción, no solo en pantalla.",
+		"Los números de factura salen de un UPDATE atómico con RETURNING. Una prueba con 25 solicitudes concurrentes exige 25 números distintos. El stock usa actualizaciones condicionales y reintenta los bloqueos.",
+		"Una prueba de seguridad negativa lo detectó. Ahora la comparación es de tiempo constante y aplica un hash a ambos lados primero.",
+		"El mensaje se encola junto a la cita y se envía después, con reintentos. Sin consentimiento del cliente, no sale."
 	],
-	"tags": ["Next.js 16", "Turso", "Drizzle", "WhatsApp Cloud API", "Vitest"],
+	"tags": [
+		"Next.js 16",
+		"TypeScript",
+		"Turso",
+		"Drizzle",
+		"WhatsApp Cloud API",
+		"Cloudflare R2",
+		"Vitest"
+	],
 	"image": "../../../assets/images/project-vikoma.webp",
 	"imageAlt": "Agenda de Vikoma en español, en una pantalla de escritorio con una columna por barbero y en un teléfono como lista de citas.",
 	"liveUrl": "https://vikoma.app",
