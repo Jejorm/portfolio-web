@@ -193,7 +193,10 @@ Prohibido: listeners de `scroll` en `window`, bucles `requestAnimationFrame` per
 
 - Enlace "Saltar al contenido", foco visible (`outline` de acento), `aria-current` en idioma e índice, `aria-pressed` en el conmutador de tema, menú móvil con `aria-expanded`, cierre con Escape y foco gestionado.
 - Formulario: etiquetas encima del campo, errores en línea (`aria-invalid` + `aria-describedby`), región `role="status"` para envío/éxito/error, envío asíncrono a Formspree con fallback a POST normal sin JS.
-- Contraste AA verificado para todos los pares de texto (tabla 4.1).
+- Contraste AA verificado para todos los pares de texto (tabla 4.1), en ambos temas, medido sobre el render real.
+- Bordes de controles de formulario en `--ink-muted` (≥ 3:1, WCAG 1.4.11); `--line` es solo para divisores, nunca para delimitar un campo. Los campos conservan el `outline` de foco global.
+- Placeholders en `--ink-muted` sin transparencia. Separadores decorativos (`/`) con al menos 3:1.
+- Tamaño mínimo de texto: 14 px (`meta` y `ui`); índices y números de proyecto incluidos.
 - Fuentes locales, imágenes `astro:assets` en WebP con `srcset`, retrato con `fetchpriority="high"`, sin scripts de terceros en el camino crítico.
 
 ---

@@ -63,7 +63,7 @@
    generated utilities (text-meta, text-body, ...), never raw px values.
 
    Reading and UI (fixed)
-   meta        13px  JetBrains Mono metadata: indexes, kinds, labels, EN/ES
+   meta        14px  JetBrains Mono metadata: indexes, kinds, labels, EN/ES
    ui          14px  Dense UI text: form labels and errors, stack tags,
                      the hero availability line
    body        16px  Reading floor: paragraphs, lists, nav, links, buttons
@@ -80,7 +80,7 @@
    The hero and 404 wordmarks size themselves with vw units on purpose.
    ──────────────────────────────────────────────────── */
 @theme static {
-	--text-meta: 0.8125rem;
+	--text-meta: 0.875rem;
 	--text-meta--line-height: 1.4;
 	--text-ui: 0.875rem;
 	--text-ui--line-height: 1.45;
