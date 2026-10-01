@@ -33,7 +33,7 @@ Out: new sections, new claims, palette, motion, new pages (`/work/[slug]`).
 - [x] T2 distill: in each project show the strongest problem/solution pair, fold the rest in `<details>`/`<summary>` (works without JS, keyboard accessible, new i18n keys in en and es). Route: delegated writer (Projects.astro + ui.ts + global.css).
 - [x] T3 clarify: remove summary/description redundancy in the 8 project JSONs, keep facts, no new claims, no dashes. Route: delegated writer (8 JSON files).
 - [x] T4 layout: separate section `h2` from project `h3` visually, make About and Stack `h3` match their role (sizes and semantics). Route: delegated writer (About, Skills, Projects, global.css).
-- [ ] T5 polish: run lint/test/build, fix leftovers, re-measure type sizes and word counts, close out evidence.
+- [x] T5 polish: run lint/test/build, fix leftovers, re-measure type sizes and word counts, close out evidence.
 
 ## Acceptance criteria
 - Smallest informative text is 13px or more; 12px only for purely decorative marks.
@@ -77,5 +77,16 @@ Out: new sections, new claims, palette, motion, new pages (`/work/[slug]`).
 ## Findings
 - The long-running dev server on :4321 (started the day before) serves stale content-collection data: it still renders the pre-T3 project descriptions, while `pnpm build` output has the new copy. Everything about the copy (word counts, screenshots) must be measured against a fresh build (`pnpm preview`), not the dev server. Tests reuse that dev server and none assert project copy, so the passing runs are valid for markup and style only.
 
+### T5 polish (done)
+- Route: inline (verification and measurement only, no source edits). Measured against a fresh `pnpm build` served by `pnpm preview` on :4323 (not the stale dev server), reduced motion, EN and ES, 1440px and 390px.
+- Distinct font sizes: 17/18 before, 11 (1440px) and 10 (390px) after. Share of text at 16px: 27% before, about 59% (EN 1440px) after; 15px text (41% before): 0. Text under 13px: 0 at all four combinations (83 and 70 nodes before). Visible `h2`/project `h3` ratio 1.80 desktop, 1.71 mobile.
+- Words visible by default (details closed): page 1158 to 879 (EN, 24% less; ES 949). Projects 813 to 439 words in total (Vikoma 278 to 135, Tickets 166 to 126, Luxe 166 to 83, Assembly 166 to 95). Page height: 10790 to 10542px at 1440px, 12506 to 12063px at 390px (the saving is mostly words, not pixels).
+- No em or en dashes in the rendered text of `/` or `/es/`; no horizontal overflow at 1440 or 390.
+- Checks: the commit hook ran `pnpm lint` and `pnpm test` on every commit (last run: 50 passed, chromium and mobile-safari); `pnpm build` run again at the end: 3 pages built.
+- Commit: this documentation update (docs(odd): close type-scale-and-density).
+
+## Result
+All five tasks done on branch `refactor/type-scale-and-density`: dda2e80, 8a0d2ed, b817394, 4211b65 plus the closing docs commit. Push, PR and merge are left to the user.
+
 ## Next step
-T5 polish.
+Optional follow-ups: a smaller step for the Stack tool names (68px), a `/work/[slug]` page per case study (DESIGN.md section 9), and restarting the dev server to clear its stale content cache.
