@@ -95,12 +95,12 @@ Monocromo papel/tinta con un acento. Tokens en `src/styles/global.css`, expuesto
 | `--on-accent` | `#121213` (4.6:1) | `#0e0e0f` (6.2:1) | Texto sobre acento |
 | `--live` | `#15803d` (4.3:1) | `#4ade80` (11:1) | Solo la lámpara de disponibilidad del hero |
 
-Reglas: el acento nunca es texto pequeño en su versión `--accent` sobre papel claro (3.4:1). Sin negro ni blanco puros. Tema según el sistema, con conmutador manual que persiste en `localStorage`.
+Reglas: el acento nunca es texto pequeño en su versión `--accent` sobre papel claro (3.4:1). Sí puede colorear texto muy grande (WCAG AA texto grande ≥ 3:1): el wordmark móvil termina en `--accent`. Sin negro ni blanco puros. Tema según el sistema, con conmutador manual que persiste en `localStorage`.
 
 ### 4.2 Tipografía
 
 - **Archivo Variable** (`@fontsource-variable/archivo/wdth.css`): ejes `wght 100-900` y `wdth 62-125 %`. Una sola familia para todo:
-  - `.wordmark`: 800 / 118 % (expandido), se condensa a 500 / 64 % con el scroll.
+  - `.wordmark`: 800 / 118 % (expandido), se condensa a 500 / 64 % con el scroll (escritorio). En móvil va de 300 / 125 % a 800 / 110 % sin cambiar de ancho.
   - `.display`: 600 / 72 % (condensado), `line-height .95`, `tracking -0.02em`. Títulos de sección y de proyecto.
   - Texto: 400-500 / 100 %.
 - **JetBrains Mono Variable** para metadatos (`.meta`): índices, tipo de proyecto, stack. Nunca como eyebrow encima de un titular.
@@ -166,14 +166,14 @@ El trabajo va justo después del hero: es lo que un reclutador busca primero.
 
 Todo vive dentro de `@media (prefers-reduced-motion: no-preference)`; las animaciones de scroll además dentro de `@supports (animation-timeline: scroll())`. Sin soporte, el contenido se muestra estático y completo.
 
-Toda animación ligada al scroll usa `--ease-scroll` (curva sinusoidal: arranca y se asienta con suavidad). Un contenedor con `overflow: hidden` rompe `view()` en sus hijos; para recortar usa `overflow: clip`.
+Toda animación ligada al scroll usa `--ease-scroll` (curva sinusoidal: arranca y se asienta con suavidad). Un contenedor con `overflow: hidden` rompe `view()` en sus hijos; para recortar usa `overflow: clip` (también `.line-mask`).
 
 | Animación | Qué comunica | Técnica |
 |---|---|---|
 | Líneas del hero que suben desde una máscara | Orden de lectura en la carga | `@keyframes rise` con `animation-delay` escalonado |
 | Wordmark que se condensa (118 % → 64 %, 800 → 500); sin respuesta al cursor | Transición de identidad a contenido | `animation-timeline: scroll(root)`, rango `0 100vh` |
 | Retrato del hero que se desliza dentro de su marco | Profundidad mientras el hero sale | `scale` + `translate` (no `transform`, que usa `data-reveal`) con `scroll(root)` |
-| Wordmark que se condensa en 3 s al aparecer (118 % → 64 %, 800 → 500) | En móvil el nombre queda bajo el pliegue: llega a todo el ancho y se recoge despacio mientras se mira. Ligado al scroll ocupaba ~140 px y un gesto rápido se lo saltaba | `IntersectionObserver` (60 % visible, una sola vez) añade `.is-gathered`; animación `gather` de 3 s con `--ease-scroll`, solo `< md` |
+| Wordmark que pasa de ligero a bold mientras sube (300 → 800), siempre a todo el ancho, y se calienta de tinta a acento | En móvil el nombre queda bajo el pliegue: gana peso mientras se lee, con "Jeremy" una línea por delante de "Orellana" | `animation-timeline: view()` por palabra, rango `entry 0% contain 60%`, solo `< md`. El eje `wdth` baja (125 % → 110 %) a medida que sube el peso para que "Orellana" mida siempre 4,27 em; `font-size: calc((100vw - 1.5rem) / 4.3)`. La tinta se mantiene hasta la mitad: la mezcla oscuro → naranja se ve marrón |
 | Nav que gana fondo tras 80 px | Estado: el contenido pasa por debajo | `animation-timeline: scroll(root)`, sin JS |
 | Desplegable de problemas y soluciones que se abre y cierra con suavidad | Continuidad: el contenido no aparece de golpe | WAAPI sobre el `<details>` nativo: altura con `--ease-out`, el contenido sube 10 px y aparece; sin JS o con `prefers-reduced-motion` alterna al instante |
 | Imágenes de proyecto que se abren desde un recorte | Entrada de cada caso de estudio | `clip-path` + `scale` con `animation-timeline: view()` |

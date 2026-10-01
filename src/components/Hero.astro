@@ -75,7 +75,7 @@ const words = name.split(' ')
 	     its own line while the name condenses on scroll. -->
 	<h1
 		id="hero-heading"
-		class="wordmark wordmark-kinetic line-mask mt-12 px-3 text-[20vw] leading-[0.84] whitespace-normal md:px-6 md:text-[10.4vw] md:leading-[0.8] md:whitespace-nowrap"
+		class="wordmark wordmark-kinetic line-mask mt-12 px-3 leading-[0.84] whitespace-normal md:px-6 md:text-[10.4vw] md:leading-[0.8] md:whitespace-nowrap"
 		style="--d: 0"
 	>
 		<span>
@@ -89,19 +89,3 @@ const words = name.split(' ')
 	</h1>
 </section>
 
-<script>
-	// Mobile wordmark: condense on a 3s clock once the name is mostly on screen.
-	// The animation itself lives in global.css, behind prefers-reduced-motion.
-	const wordmark = document.getElementById('hero-heading')
-	if (wordmark && window.matchMedia('(max-width: 767px)').matches) {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				if (!entries.some((entry) => entry.isIntersecting)) return
-				wordmark.classList.add('is-gathered')
-				observer.disconnect()
-			},
-			{ threshold: 0.6 },
-		)
-		observer.observe(wordmark)
-	}
-</script>

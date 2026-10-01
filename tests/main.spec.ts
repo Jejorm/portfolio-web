@@ -257,45 +257,67 @@ test.describe('Hero call to action', () => {
 test.describe('Mobile wordmark', () => {
 	test.use({ viewport: { width: 390, height: 664 } })
 
-	test('should condense the name over about 3 seconds once it is on screen', async ({
+	const readWords = (page: import('@playwright/test').Page) =>
+		page.locator('#hero-heading .word').evaluateAll((words) =>
+			words.map((word) => {
+				const style = getComputedStyle(word)
+				const range = document.createRange()
+				range.selectNodeContents(word)
+				return {
+					weight: Number(style.fontWeight),
+					color: style.color,
+					right: range.getBoundingClientRect().right,
+				}
+			}),
+		)
+
+	test('should go from light to bold with the scroll while filling the width', async ({
 		page,
 	}) => {
-		await page.emulateMedia({ reducedMotion: 'no-preference' })
+		await page.emulateMedia({
+			reducedMotion: 'no-preference',
+			colorScheme: 'light',
+		})
 		await page.goto('/')
 
-		const name = page.locator('#hero-heading')
-		const stretch = async () =>
-			Number.parseFloat(
-				await name.evaluate((el) => getComputedStyle(el).fontStretch),
-			)
+		const top = await page
+			.locator('#hero-heading')
+			.evaluate((el) => el.getBoundingClientRect().top + window.scrollY)
+		const samples = []
+		for (const offset of [-664, -440, -330, -220, 0]) {
+			await page.evaluate((y) => window.scrollTo(0, y), top + offset)
+			await page.waitForTimeout(150)
+			samples.push(await readWords(page))
+		}
 
-		// Off screen it holds the full-width state.
-		expect(await stretch()).toBe(118)
+		const [start, , middle, , end] = samples
+		expect(start[1].weight).toBe(300)
+		expect(middle[1].weight).toBeGreaterThan(300)
+		expect(middle[1].weight).toBeLessThan(800)
+		expect(end[1].weight).toBe(800)
+		// Jeremy leads Orellana by a line.
+		expect(middle[0].weight).toBeGreaterThan(middle[1].weight)
+		// Ink to accent.
+		expect(start[1].color).toBe('rgb(18, 18, 19)')
+		expect(end[1].color).toBe('rgb(226, 71, 31)')
 
-		await name.scrollIntoViewIfNeeded()
-		await expect(name).toHaveClass(/is-gathered/)
-
-		// Still mid-way well after a scroll-linked change would have finished.
-		await page.waitForTimeout(1000)
-		const midway = await stretch()
-		expect(midway).toBeLessThan(118)
-		expect(midway).toBeGreaterThan(64)
-
-		await expect.poll(stretch, { timeout: 4000 }).toBe(64)
+		// The longest word reaches the right gutter (378px) at every step.
+		for (const words of samples) {
+			expect(Math.abs(words[1].right - 376)).toBeLessThanOrEqual(4)
+		}
 	})
 
-	test('should keep the name still when motion is reduced', async ({
+	test('should rest bold and in ink when motion is reduced', async ({
 		page,
 	}) => {
-		await page.emulateMedia({ reducedMotion: 'reduce' })
+		await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: 'light' })
 		await page.goto('/')
+		await page.locator('#hero-heading').scrollIntoViewIfNeeded()
 
-		const name = page.locator('#hero-heading')
-		await name.scrollIntoViewIfNeeded()
-		await page.waitForTimeout(500)
-		expect(await name.evaluate((el) => getComputedStyle(el).fontStretch)).toBe(
-			'118%',
-		)
+		const words = await readWords(page)
+		expect(words[1].weight).toBe(800)
+		expect(words[1].color).toBe('rgb(18, 18, 19)')
+		expect(Math.abs(words[1].right - 376)).toBeLessThanOrEqual(4)
 	})
 })
 
