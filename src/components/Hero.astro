@@ -65,25 +65,24 @@ const words = name.split(' ')
 					sizes="(min-width: 1024px) 30vw, (min-width: 768px) 40vw, 100vw"
 					loading="eager"
 					fetchpriority="high"
-					class="h-full w-full object-cover object-top grayscale-[35%] transition-[filter] duration-700 hover:grayscale-0 md:object-center"
+					class="portrait-drift h-full w-full object-cover object-top grayscale-[35%] transition-[filter] duration-700 hover:grayscale-0 md:object-center"
 				/>
 			</div>
 		</figure>
 	</div>
 
-	<!-- Name as the hero's visual anchor. Letters are split at build time for the
-	     hover response; aria-label carries the name for assistive tech. -->
+	<!-- Name as the hero's visual anchor. Words are wrapped so mobile can give each
+	     its own line while the name condenses on scroll. -->
 	<h1
 		id="hero-heading"
-		aria-label={name}
 		class="wordmark wordmark-kinetic line-mask mt-12 px-3 text-[20vw] leading-[0.84] whitespace-normal md:px-6 md:text-[10.4vw] md:leading-[0.8] md:whitespace-nowrap"
 		style="--d: 0"
 	>
-		<span aria-hidden="true">
+		<span>
 			{words.map((word, index) => (
 				<>
 					{index > 0 && ' '}
-					<span class="word">{[...word].map((char) => <span class="l">{char}</span>)}</span>
+					<span class="word">{word}</span>
 				</>
 			))}
 		</span>

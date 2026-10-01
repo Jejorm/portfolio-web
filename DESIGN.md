@@ -166,15 +166,18 @@ El trabajo va justo después del hero: es lo que un reclutador busca primero.
 
 Todo vive dentro de `@media (prefers-reduced-motion: no-preference)`; las animaciones de scroll además dentro de `@supports (animation-timeline: scroll())`. Sin soporte, el contenido se muestra estático y completo.
 
+Toda animación ligada al scroll usa `--ease-scroll` (curva sinusoidal: arranca y se asienta con suavidad). Un contenedor con `overflow: hidden` rompe `view()` en sus hijos; para recortar usa `overflow: clip`.
+
 | Animación | Qué comunica | Técnica |
 |---|---|---|
 | Líneas del hero que suben desde una máscara | Orden de lectura en la carga | `@keyframes rise` con `animation-delay` escalonado |
-| Wordmark que se condensa (118 % → 64 %, 800 → 500) | Transición de identidad a contenido | `animation-timeline: scroll(root)`, rango `0 100vh` |
+| Wordmark que se condensa (118 % → 64 %, 800 → 500); sin respuesta al cursor | Transición de identidad a contenido | `animation-timeline: scroll(root)`, rango `0 100vh` |
+| Retrato del hero que se desliza dentro de su marco | Profundidad mientras el hero sale | `scale` + `translate` (no `transform`, que usa `data-reveal`) con `scroll(root)` |
 | Wordmark que se expande al entrar (75 % → 118 %) | En móvil el nombre queda bajo el pliegue: reacciona cuando aparece | `animation-timeline: view()` sobre el h1, solo `< md` |
-| Letras del wordmark que se ensanchan al pasar el cursor | Respuesta táctil del nombre | `:hover` + `:has()` por letra, solo `(hover: hover) and (pointer: fine)` |
 | Nav que gana fondo tras 80 px | Estado: el contenido pasa por debajo | `animation-timeline: scroll(root)`, sin JS |
 | Imágenes de proyecto que se abren desde un recorte | Entrada de cada caso de estudio | `clip-path` + `scale` con `animation-timeline: view()` |
 | Índice de proyectos activo | Dónde estás dentro del trabajo | `IntersectionObserver` → `aria-current` |
+| Título de contacto que gana peso al entrar (400 → 600) | Cierre de la página, eco del wordmark | `view()`, solo `≥ md`: en móvil el cambio de peso reacomodaría las líneas |
 | Declaración de "Sobre mí" palabra a palabra | Guía de lectura | `view-timeline` con `animation-range` por palabra (`--p`) |
 | Reveals de entrada (`data-reveal`) | Jerarquía y secuencia | Un único `IntersectionObserver` que se desuscribe |
 | Lámpara de disponibilidad que se enciende con parpadeo, una vez | Estado: disponible ahora | `@keyframes strike`, sin bucle; estática y encendida con `prefers-reduced-motion` |

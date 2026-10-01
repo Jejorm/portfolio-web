@@ -72,7 +72,7 @@ const moreLabel = (count: number) =>
 			{
 				projects.map((project, i) => (
 					<article id={project.slug} class="project group scroll-mt-24" aria-labelledby={`${project.slug}-title`}>
-						<figure class="overflow-hidden bg-raised">
+						<figure class="overflow-clip bg-raised">
 							<div class="clip-reveal aspect-[16/10]">
 								<Image
 									src={project.image}

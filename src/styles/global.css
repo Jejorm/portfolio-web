@@ -23,6 +23,8 @@
 	--live: #15803d;
 	--nav-h: 4rem;
 	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+	/* Sine-like curve for scroll-driven motion: starts and settles softly */
+	--ease-scroll: cubic-bezier(0.37, 0, 0.63, 1);
 	color-scheme: light;
 }
 
@@ -276,26 +278,6 @@ p {
 		}
 	}
 
-	/* Desktop pointer: the hovered letter swells and its neighbors give way,
-	   so the name never grows wider than its resting width. */
-	@media (hover: hover) and (pointer: fine) {
-		.wordmark-kinetic .l {
-			transition:
-				font-stretch 0.35s var(--ease-out),
-				font-weight 0.35s var(--ease-out);
-		}
-
-		.wordmark-kinetic .l:hover {
-			font-stretch: 125%;
-			font-weight: 900;
-		}
-
-		.wordmark-kinetic .l:has(+ .l:hover),
-		.wordmark-kinetic .l:hover + .l {
-			font-stretch: 105%;
-		}
-	}
-
 	/* Availability lamp strikes like a fluorescent tube, once, then holds */
 	.lamp {
 		animation: strike 1.5s step-end 0.9s both;
@@ -329,7 +311,7 @@ p {
 	@supports (animation-timeline: scroll()) {
 		/* Wordmark condenses as the hero leaves the viewport */
 		.wordmark-kinetic {
-			animation: gather linear both;
+			animation: gather var(--ease-scroll) both;
 			animation-timeline: scroll(root);
 			animation-range: 0 100vh;
 		}
@@ -338,6 +320,7 @@ p {
 			to {
 				font-stretch: 64%;
 				font-weight: 500;
+				letter-spacing: -0.02em;
 			}
 		}
 
@@ -346,7 +329,7 @@ p {
 		@media (max-width: 767px) {
 			@supports (animation-timeline: view()) {
 				.wordmark-kinetic {
-					animation: expand linear both;
+					animation: expand var(--ease-scroll) both;
 					animation-timeline: view();
 					animation-range: entry 0% entry 100%;
 				}
@@ -355,14 +338,35 @@ p {
 					from {
 						font-stretch: 75%;
 						font-weight: 600;
+						letter-spacing: -0.02em;
 					}
 				}
 			}
 		}
 
-		/* Project imagery opens from an inset as it enters */
+		/* Hero portrait drifts inside its frame as the hero leaves. Uses the
+		   individual scale/translate properties: data-reveal owns transform. */
+		.portrait-drift {
+			scale: 1.08;
+			animation: drift var(--ease-scroll) both;
+			animation-timeline: scroll(root);
+			animation-range: 0 100vh;
+		}
+
+		@keyframes drift {
+			from {
+				translate: 0 -3%;
+			}
+			to {
+				translate: 0 3%;
+			}
+		}
+
+		/* Project imagery opens from an inset as it enters. Its figure must be
+		   overflow-clip: overflow-hidden makes it a scroll container and the
+		   view() timeline never progresses. */
 		.clip-reveal {
-			animation: unclip linear both;
+			animation: unclip var(--ease-scroll) both;
 			animation-timeline: view();
 			animation-range: entry 5% cover 35%;
 		}
@@ -393,6 +397,23 @@ p {
 		@keyframes ink-in {
 			from {
 				opacity: 0.18;
+			}
+		}
+
+		/* Contact title gains weight as it enters, closing the page the way the
+		   hero name opens it. Desktop only: on phones the weight change would
+		   re-wrap the title mid-scroll. */
+		@media (min-width: 768px) {
+			.type-settle {
+				animation: settle var(--ease-scroll) both;
+				animation-timeline: view();
+				animation-range: entry 0% cover 40%;
+			}
+
+			@keyframes settle {
+				from {
+					font-weight: 400;
+				}
 			}
 		}
 
