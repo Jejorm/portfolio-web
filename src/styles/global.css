@@ -344,10 +344,11 @@ p {
 			}
 		}
 
-		/* Hero portrait drifts inside its frame as the hero leaves. Uses the
-		   individual scale/translate properties: data-reveal owns transform. */
+		/* Hero portrait settles closer as the hero leaves. The zoom is anchored to
+		   the top edge so the hair never leaves the frame. Uses the individual
+		   scale property: data-reveal owns transform. */
 		.portrait-drift {
-			scale: 1.08;
+			transform-origin: 50% 0;
 			animation: drift var(--ease-scroll) both;
 			animation-timeline: scroll(root);
 			animation-range: 0 100vh;
@@ -355,10 +356,10 @@ p {
 
 		@keyframes drift {
 			from {
-				translate: 0 -3%;
+				scale: 1;
 			}
 			to {
-				translate: 0 3%;
+				scale: 1.06;
 			}
 		}
 
