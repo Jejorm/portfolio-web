@@ -33,6 +33,16 @@ Round 1 (3s time-based condense to 64%) was rejected by the user: they want it s
 | Fallback | Reduced motion or no `view()` support: static 800 / 110%, ink, full width |
 | Desktop | Unchanged: scroll-linked `gather` scoped to `min-width: 768px` |
 
+## Round 3: Safari showed no scroll animation
+
+| Topic | Finding |
+|-------|---------|
+| Symptom | User report: on iOS Safari nothing animates on scroll; Chromium and the E2E suite (dev server, unminified CSS) were fine |
+| Root cause | In the production build Lightning CSS folded the timeline into the shorthand for every rule written with a bare `linear`: `animation:linear both embolden view()`, `ink-in --read`, `nav-in scroll(root)`. Safari rejects a timeline inside `animation`, drops the declaration, and the element stays static. Rules using `var(--ease-scroll)` were not folded |
+| Fix | `--ease-linear: linear` token; embolden, ink-in and nav-in use `var(--ease-linear)`, so the minifier leaves `animation-timeline` as a longhand |
+| Evidence | Built CSS: no `animation:` shorthand contains `view(`, `scroll(` or `--read`; six separate `animation-timeline` longhands. `pnpm preview` at 390px: name 300 to 638 to 800 weight with the scroll, nav background transparent at 0, 85% paper at 200px |
+| Not verified | Real iOS Safari (no WebKit here). Safari before 26 has no scroll-driven animations at all and shows the static bold name by design. iOS "Reduce Motion" also keeps everything still |
+
 ## Checklist
 
 - [x] T1 Mobile wordmark: scroll-linked light to bold, constant width, ink to accent, per-word stagger
@@ -41,6 +51,7 @@ Round 1 (3s time-based condense to 64%) was rejected by the user: they want it s
 - [x] T4 Menu scroll lock on iOS
 - [x] T5 E2E tests: weight ramp, stagger, colour, width at every step, reduced motion
 - [x] T6 DESIGN.md motion table and mobile notes updated
+- [x] T7 Safari: keep animation-timeline out of the minified shorthand (`--ease-linear`)
 
 ## Verification evidence
 

@@ -25,6 +25,10 @@
 	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 	/* Sine-like curve for scroll-driven motion: starts and settles softly */
 	--ease-scroll: cubic-bezier(0.37, 0, 0.63, 1);
+	/* Linear easing for scroll-driven animations. Always write it as this var:
+	   with a bare "linear" the minifier folds animation-timeline into the
+	   animation shorthand, which Safari rejects, so the animation never runs. */
+	--ease-linear: linear;
 	color-scheme: light;
 }
 
@@ -358,7 +362,7 @@ p {
 		   rises so the line keeps the same length (measured per 100 of weight). */
 		@media (max-width: 767px) {
 			.wordmark-kinetic .word {
-				animation: embolden linear both;
+				animation: embolden var(--ease-linear) both;
 				animation-timeline: view();
 				animation-range: entry 0% contain 60%;
 			}
@@ -443,7 +447,7 @@ p {
 		}
 
 		.read-along .w {
-			animation: ink-in linear both;
+			animation: ink-in var(--ease-linear) both;
 			animation-timeline: --read;
 			animation-range: cover calc(18% + var(--p) * 38%) cover
 				calc(22% + var(--p) * 38%);
@@ -474,7 +478,7 @@ p {
 
 		/* Navigation gains its surface after the first 80px of scroll */
 		.nav-surface {
-			animation: nav-in linear both;
+			animation: nav-in var(--ease-linear) both;
 			animation-timeline: scroll(root);
 			animation-range: 0 80px;
 		}
