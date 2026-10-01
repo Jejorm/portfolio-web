@@ -3,7 +3,7 @@
 	"title": "Assembly: Endgame",
 	"kind": "Juego web",
 	"summary": "Un juego de adivinar palabras accesible, con avisos en vivo para lectores de pantalla.",
-	"description": "Un juego de adivinar palabras en React 19. Cada error elimina un lenguaje de programación del tablero; se puede jugar completo con teclado y lector de pantalla.",
+	"description": "Hecho en React 19. Cada error elimina un lenguaje de programación del tablero, y el juego completo se puede jugar con teclado y lector de pantalla.",
 	"challenges": [
 		"El estado del juego (lenguajes restantes, intentos, victoria y derrota) cambia con cada tecla y debe mantenerse consistente.",
 		"Las personas que usan lector de pantalla necesitaban escuchar cada intento y el resultado final sin ver el tablero.",

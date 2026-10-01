@@ -3,7 +3,7 @@
 	"title": "Vikoma",
 	"kind": "Multi-tenant SaaS",
 	"summary": "Appointment software for barbershops and salons, live in production. It replaces paper notebooks and double bookings.",
-	"description": "I built Vikoma on my own for barbershops and beauty salons in Ecuador that work by appointment, from a solo barber to a multi-chair shop. Each professional has an agenda that blocks double bookings. It also covers client history and reference photos with consent (under Ecuador's data protection law), WhatsApp booking confirmations, daily cash close, inventory and a waitlist. The code is split into feature modules with domain, application, infrastructure and UI layers, and the scheduling rules are pure functions tested without a database.",
+	"description": "I built it on my own for businesses in Ecuador. Beyond appointments, it covers client history, reference photos with consent under Ecuador's data protection law, WhatsApp booking confirmations, daily cash close, inventory and a waitlist. Feature modules have domain, application, infrastructure and UI layers; scheduling rules are pure functions tested without a database.",
 	"challenges": [
 		"One business could reference another business's data: tenant isolation relied on foreign keys, and the newer tursodb engine silently ignored them.",
 		"Concurrent writes, such as two checkouts at the same time, could sell stock that no longer existed or assign the same invoice number twice.",

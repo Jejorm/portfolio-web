@@ -31,7 +31,7 @@ Out: new sections, new claims, palette, motion, new pages (`/work/[slug]`).
 ## Tasks
 - [x] T1 typeset: define a scale of about 8 steps (tokens in `global.css`), problems/solutions to 16px, metadata and availability to 13-14px, remove one-off sizes. Route: delegated writer (global.css + several components).
 - [x] T2 distill: in each project show the strongest problem/solution pair, fold the rest in `<details>`/`<summary>` (works without JS, keyboard accessible, new i18n keys in en and es). Route: delegated writer (Projects.astro + ui.ts + global.css).
-- [ ] T3 clarify: remove summary/description redundancy in the 8 project JSONs, keep facts, no new claims, no dashes. Route: delegated writer (8 JSON files).
+- [x] T3 clarify: remove summary/description redundancy in the 8 project JSONs, keep facts, no new claims, no dashes. Route: delegated writer (8 JSON files).
 - [ ] T4 layout: separate section `h2` from project `h3` visually, make About and Stack `h3` match their role (sizes and semantics). Route: delegated writer (About, Skills, Projects, global.css).
 - [ ] T5 polish: run lint/test/build, fix leftovers, re-measure type sizes and word counts, close out evidence.
 
@@ -60,5 +60,12 @@ Out: new sections, new claims, palette, motion, new pages (`/work/[slug]`).
 - Measured (EN, details closed): visible words Vikoma 278 to 179, Tickets about 166 to 149, Luxe about 166 to 104, Assembly about 166 to 110. Page height 10790 to 10711px at 1440px and 12506 to 12223px at 390px: the saving is in words, not pixels, because description and stack stay visible. Height will come from T3/T4.
 - Commit: dc045df (feat(projects): fold secondary problems and solutions behind a disclosure).
 
+### T3 clarify (done)
+- Route: delegated writer (8 project JSON files). Parent review of the before/after text of every `description` and the first challenge/solution pairs, with three corrections applied inline: restored "Ecuador's data protection law" in Vikoma (EN and ES), restored "screen reader" in Assembly (EN and ES), reverted the redundant Luxe first-challenge rewording (EN and ES).
+- Result: `summary` untouched everywhere; each `description` no longer restates audience, product type or status from the summary; no fact added. Visible words (EN, details closed): Vikoma 179 to about 172, Tickets 149 to 132, Luxe 104 to 89, Assembly 110 to about 98 (after restorations). Page height unchanged (10711px at 1440px), as predicted: the saving is words, not pixels.
+- Dropped facts that the summary or `kind` already state: "word-guessing game", "real estate platform", "barbershops and beauty salons", "from a solo barber to a multi-chair shop", "double bookings" sentence in Vikoma.
+- Checks: `pnpm check`, `pnpm lint`, `pnpm build`, `pnpm test` (50 passed, chromium and mobile-safari); no dashes in added lines.
+- Commit: fbfa048 (refactor(content): remove summary and description overlap in case studies).
+
 ## Next step
-T3 clarify.
+T4 layout.

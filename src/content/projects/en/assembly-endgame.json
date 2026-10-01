@@ -3,7 +3,7 @@
 	"title": "Assembly: Endgame",
 	"kind": "Browser game",
 	"summary": "An accessible word-guessing game with live feedback for screen readers.",
-	"description": "A word-guessing game in React 19. Each wrong guess removes a programming language from the board; the whole game is playable with a keyboard and a screen reader.",
+	"description": "Built in React 19. Each wrong guess removes a programming language from the board, and the whole game is playable with a keyboard and a screen reader.",
 	"challenges": [
 		"The game state (remaining languages, guesses, win and loss) changes on every key press and has to stay consistent.",
 		"Screen reader users needed to hear each guess and the final result without seeing the board.",
