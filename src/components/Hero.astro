@@ -57,7 +57,7 @@ const words = name.split(' ')
 		</div>
 
 		<figure class="w-full md:col-span-5 lg:col-span-4" data-reveal style="--d: 2">
-			<div class="aspect-square overflow-hidden bg-raised sm:aspect-[4/3] md:aspect-[4/5]">
+			<div class="aspect-square overflow-hidden bg-raised sm:aspect-[4/3] md:aspect-[3/4]">
 				<Image
 					src={portrait}
 					alt={t('hero.portrait.alt')}
@@ -65,7 +65,7 @@ const words = name.split(' ')
 					sizes="(min-width: 1024px) 30vw, (min-width: 768px) 40vw, 100vw"
 					loading="eager"
 					fetchpriority="high"
-					class="portrait-drift h-full w-full object-cover object-top grayscale-[35%] transition-[filter] duration-700 hover:grayscale-0 md:object-center"
+					class="portrait-drift h-full w-full object-cover object-top grayscale-[35%] transition-[filter] duration-700 hover:grayscale-0"
 				/>
 			</div>
 		</figure>

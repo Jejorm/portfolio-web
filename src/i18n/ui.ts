@@ -19,8 +19,7 @@ export const ui = {
 		'nav.menu.open': 'Open menu',
 		'nav.menu.close': 'Close menu',
 		'nav.menu': 'Menu',
-		'hero.available':
-			'Available for custom web and app development and freelance projects',
+		'hero.available': 'Available for freelance work: custom websites and apps',
 		'hero.statement':
 			'Full-stack developer. I turn ideas into fast, accessible web products, ready for production.',
 		'hero.cta.contact': 'Get in touch',
@@ -40,27 +39,27 @@ export const ui = {
 		'work.stack': 'Built with',
 		'about.title': 'About',
 		'about.statement':
-			'I am Jeremy, a full-stack developer in Ecuador, working remotely. I built Vikoma on my own, from the database schema to the interface.',
+			'I am Jeremy, a full-stack developer in Ecuador, working remotely. I take web products from the idea to production.',
 		'about.body':
-			'I prefer projects where I own a feature end to end: the data model, the business rules and the interface.',
+			'I like owning the whole path: the data model, the business rules and the interface. You work with one person who understands your business, replies quickly and delivers a tested, accessible product ready for production.',
 		'about.fact.base.label': 'Base',
 		'about.fact.base.value': 'Ecuador, remote',
 		'about.fact.focus.label': 'Focus',
 		'about.fact.focus.value': 'Full-stack web apps',
 		'about.fact.work.label': 'Available for',
 		'about.fact.work.value': 'Custom web and apps, freelance',
-		'about.area1.title': 'Real-time systems',
+		'about.area1.title': 'SaaS products',
 		'about.area1.body':
-			'WebSocket servers and clients that share one state and reconnect after a network drop.',
-		'about.area2.title': 'Accessible frontend',
+			'Multi-tenant apps with owner and staff roles, data isolated per business, billing and cash reports, covered by automated tests.',
+		'about.area2.title': 'Real-time systems',
 		'about.area2.body':
-			'React and Next.js interfaces that work with a keyboard and a screen reader.',
-		'about.area3.title': 'Backend and data',
+			'Kiosks, desks and displays that share one state over WebSockets and reconnect after a network drop.',
+		'about.area3.title': 'Accessible frontend',
 		'about.area3.body':
-			'Node.js and Bun services, SQL databases with data isolated per business, and Docker deployments.',
+			'React and Next.js interfaces that work with a keyboard and a screen reader, in several languages and with interactive maps.',
 		'about.area4.title': 'Integrations',
 		'about.area4.body':
-			'Third-party APIs such as WhatsApp Cloud API, OAuth sign-in and Supabase Auth.',
+			'WhatsApp Cloud API, Google sign-in, Supabase and file storage on Cloudflare R2.',
 		'skills.title': 'Stack',
 		'skills.intro': 'The tools I use across my projects.',
 		'skills.col1': 'Frontend',
@@ -122,7 +121,7 @@ export const ui = {
 		'nav.menu.close': 'Cerrar menú',
 		'nav.menu': 'Menú',
 		'hero.available':
-			'Disponible para desarrollo web y de apps a medida y proyectos freelance',
+			'Disponible para proyectos freelance: webs y apps a medida',
 		'hero.statement':
 			'Desarrollador full-stack. Convierto ideas en productos web rápidos, accesibles y listos para producción.',
 		'hero.cta.contact': 'Escríbeme',
@@ -142,27 +141,27 @@ export const ui = {
 		'work.stack': 'Construido con',
 		'about.title': 'Sobre mí',
 		'about.statement':
-			'Soy Jeremy, desarrollador full-stack en Ecuador, y trabajo en remoto. Construí Vikoma por mi cuenta, del esquema de base de datos a la interfaz.',
+			'Soy Jeremy, desarrollador full-stack en Ecuador, y trabajo en remoto. Llevo productos web de la idea a producción.',
 		'about.body':
-			'Prefiero proyectos donde me encargo de una funcionalidad de punta a punta: el modelo de datos, las reglas de negocio y la interfaz.',
+			'Me gusta encargarme de todo el recorrido: el modelo de datos, las reglas de negocio y la interfaz. Tratas con una sola persona que entiende tu negocio, responde rápido y entrega un producto probado, accesible y listo para producción.',
 		'about.fact.base.label': 'Base',
 		'about.fact.base.value': 'Ecuador, remoto',
 		'about.fact.focus.label': 'Enfoque',
 		'about.fact.focus.value': 'Aplicaciones web full-stack',
 		'about.fact.work.label': 'Disponible para',
 		'about.fact.work.value': 'Webs y apps a medida, freelance',
-		'about.area1.title': 'Sistemas en tiempo real',
+		'about.area1.title': 'Productos SaaS',
 		'about.area1.body':
-			'Servidores y clientes WebSocket que comparten un mismo estado y se reconectan tras un corte de red.',
-		'about.area2.title': 'Frontend accesible',
+			'Aplicaciones multi-tenant con roles de dueño y personal, datos aislados por negocio, facturación y reportes de caja, cubiertas con pruebas automáticas.',
+		'about.area2.title': 'Sistemas en tiempo real',
 		'about.area2.body':
-			'Interfaces en React y Next.js que funcionan con teclado y lector de pantalla.',
-		'about.area3.title': 'Backend y datos',
+			'Kioscos, escritorios y pantallas que comparten un mismo estado por WebSockets y se reconectan tras un corte de red.',
+		'about.area3.title': 'Frontend accesible',
 		'about.area3.body':
-			'Servicios en Node.js y Bun, bases de datos SQL con datos aislados por negocio y despliegues con Docker.',
+			'Interfaces en React y Next.js que funcionan con teclado y lector de pantalla, en varios idiomas y con mapas interactivos.',
 		'about.area4.title': 'Integraciones',
 		'about.area4.body':
-			'APIs de terceros como WhatsApp Cloud API, inicio de sesión con OAuth y Supabase Auth.',
+			'WhatsApp Cloud API, inicio de sesión con Google, Supabase y almacenamiento de archivos en Cloudflare R2.',
 		'skills.title': 'Stack',
 		'skills.intro': 'Las herramientas que uso en mis proyectos.',
 		'skills.col1': 'Frontend',
