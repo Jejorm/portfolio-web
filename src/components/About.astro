@@ -25,7 +25,7 @@ const areas = [1, 2, 3, 4].map((n) => ({
 		class="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 px-4 py-24 md:px-8 md:py-32 lg:grid-cols-12 lg:gap-8"
 	>
 		<div class="lg:col-span-3">
-			<h2 id="about-heading" class="display text-[clamp(3rem,6vw,5.5rem)]" data-reveal>
+			<h2 id="about-heading" class="display text-display-l" data-reveal>
 				{t('about.title')}
 			</h2>
 			<dl class="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-1" data-reveal style="--d: 1">
@@ -42,7 +42,7 @@ const areas = [1, 2, 3, 4].map((n) => ({
 
 		<div class="lg:col-span-8 lg:col-start-5">
 			<p
-				class="read-along text-[clamp(1.6rem,3.2vw,2.9rem)] leading-[1.14] font-medium tracking-[-0.02em]"
+				class="read-along text-display-s leading-[1.14] font-medium tracking-[-0.02em]"
 			>
 				{
 					words.map((word, i) => (
@@ -54,7 +54,7 @@ const areas = [1, 2, 3, 4].map((n) => ({
 					))
 				}
 			</p>
-			<p class="mt-10 max-w-[58ch] text-lg leading-relaxed text-ink-muted" data-reveal>
+			<p class="mt-10 max-w-[58ch] text-lead leading-relaxed text-ink-muted" data-reveal>
 				{t('about.body')}
 			</p>
 
@@ -62,7 +62,7 @@ const areas = [1, 2, 3, 4].map((n) => ({
 				{
 					areas.map((area, i) => (
 						<li class="border-t border-ink pt-4" data-reveal style={`--d: ${i}`}>
-							<h3 class="text-lg font-semibold tracking-tight">{area.title}</h3>
+							<h3 class="text-lead font-semibold tracking-tight">{area.title}</h3>
 							<p class="mt-2 max-w-[40ch] leading-relaxed text-ink-muted">{area.body}</p>
 						</li>
 					))

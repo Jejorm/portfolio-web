@@ -24,10 +24,10 @@ const projects = (
 		<!-- Sticky index: title, intro and a live table of contents -->
 		<div class="lg:col-span-4">
 			<div class="lg:sticky lg:top-28">
-				<h2 id="projects-heading" class="display text-[clamp(3rem,6vw,5.5rem)]" data-reveal>
+				<h2 id="projects-heading" class="display text-display-l" data-reveal>
 					{t('work.title')}
 				</h2>
-				<p class="mt-6 max-w-[32ch] text-lg text-ink-muted" data-reveal style="--d: 1">
+				<p class="mt-6 max-w-[32ch] text-lead text-ink-muted" data-reveal style="--d: 1">
 					{t('work.intro')}
 				</p>
 
@@ -43,7 +43,7 @@ const projects = (
 									>
 										<span class="meta">{project.index}</span>
 										<span>
-											<span class="block text-xl font-semibold tracking-tight">
+											<span class="block text-lead font-semibold tracking-tight">
 												{project.title}
 											</span>
 											<span class="meta mt-1 block">{project.kind}</span>
@@ -81,15 +81,15 @@ const projects = (
 								<p class="meta text-ink-muted">
 									{project.index} <span aria-hidden="true">/</span> {project.kind}
 								</p>
-								<h3 id={`${project.slug}-title`} class="display mt-3 text-[clamp(2.5rem,5vw,4.25rem)]">
+								<h3 id={`${project.slug}-title`} class="display mt-3 text-display-m">
 									{project.title}
 								</h3>
-								<p class="mt-5 max-w-[46ch] text-lg leading-snug">{project.summary}</p>
+								<p class="mt-5 max-w-[46ch] text-lead leading-snug">{project.summary}</p>
 							</header>
 
 							<div class="flex flex-col gap-3 md:col-span-3 md:items-end md:pt-7">
 								<a
-									class="inline-flex items-center gap-2 bg-ink px-5 py-3 text-[15px] font-medium text-paper transition-[background-color,transform] duration-300 hover:bg-accent hover:text-on-accent active:scale-[0.98]"
+									class="inline-flex items-center gap-2 bg-ink px-5 py-3 text-body font-medium text-paper transition-[background-color,transform] duration-300 hover:bg-accent hover:text-on-accent active:scale-[0.98]"
 									href={project.liveUrl}
 									target="_blank"
 									rel="noopener noreferrer"
@@ -100,7 +100,7 @@ const projects = (
 								</a>
 								{project.links.map((link) => (
 									<a
-										class="link-line inline-flex items-center gap-2 text-[15px] text-ink-muted hover:text-ink"
+										class="link-line inline-flex items-center gap-2 text-body text-ink-muted hover:text-ink"
 										href={link.url}
 										target="_blank"
 										rel="noopener noreferrer"
@@ -113,14 +113,14 @@ const projects = (
 							</div>
 						</div>
 
-						<p class="mt-8 max-w-[62ch] leading-relaxed text-ink-muted">{project.description}</p>
+						<p class="mt-8 max-w-[62ch] text-body text-ink-muted">{project.description}</p>
 
 						<div class="mt-10 grid grid-cols-1 gap-10 border-t border-line pt-8 md:grid-cols-2 md:gap-8">
 							<div>
-								<h4 class="text-sm font-semibold">{t('work.challenges')}</h4>
+								<h4 class="text-ui font-semibold">{t('work.challenges')}</h4>
 								<ol class="mt-4 space-y-4">
 									{project.challenges.map((item, n) => (
-										<li class="grid grid-cols-[2rem_1fr] text-[15px] leading-relaxed text-ink-muted">
+										<li class="grid grid-cols-[2rem_1fr] text-body text-ink-muted">
 											<span class="meta pt-1 text-ink">{String(n + 1).padStart(2, '0')}</span>
 											<span>{item}</span>
 										</li>
@@ -128,10 +128,10 @@ const projects = (
 								</ol>
 							</div>
 							<div>
-								<h4 class="text-sm font-semibold">{t('work.solutions')}</h4>
+								<h4 class="text-ui font-semibold">{t('work.solutions')}</h4>
 								<ol class="mt-4 space-y-4">
 									{project.solutions.map((item, n) => (
-										<li class="grid grid-cols-[2rem_1fr] text-[15px] leading-relaxed text-ink-muted">
+										<li class="grid grid-cols-[2rem_1fr] text-body text-ink-muted">
 											<span class="meta pt-1 text-accent-ink">{String(n + 1).padStart(2, '0')}</span>
 											<span>{item}</span>
 										</li>
@@ -142,7 +142,7 @@ const projects = (
 
 						<div class="mt-10 flex flex-wrap items-baseline gap-x-5 gap-y-2">
 							<h4 class="meta text-ink-muted">{t('work.stack')}</h4>
-							<ul class="meta flex flex-wrap gap-x-5 gap-y-2">
+							<ul class="meta text-ui flex flex-wrap gap-x-5 gap-y-2">
 								{project.tags.map((tag) => (
 									<li>{tag}</li>
 								))}
