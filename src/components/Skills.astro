@@ -46,7 +46,7 @@ const groups = [
 			</p>
 		</div>
 
-		<div class="mt-16">
+		<dl class="mt-16">
 			{
 				groups.map((group, i) => (
 					<div
@@ -54,20 +54,22 @@ const groups = [
 						data-reveal
 						style={`--d: ${i}`}
 					>
-						<h3 class="meta pt-2 text-ink-muted lg:col-span-3">{group.title}</h3>
-						<ul class="display flex flex-wrap gap-x-[0.35em] text-display-m leading-[1.02] lg:col-span-9">
-							{group.items.map((item, n) => (
-								<li class="stack-item">
-									<span class="transition-colors duration-300 hover:text-accent-ink">{item}</span>
-									{n < group.items.length - 1 && (
-										<span class="text-ink-muted/50" aria-hidden="true">/</span>
-									)}
-								</li>
-							))}
-						</ul>
+						<dt class="meta pt-2 text-ink-muted lg:col-span-3">{group.title}</dt>
+						<dd class="lg:col-span-9">
+							<ul class="display flex flex-wrap gap-x-[0.35em] text-display-m leading-[1.02]">
+								{group.items.map((item, n) => (
+									<li class="stack-item">
+										<span class="transition-colors duration-300 hover:text-accent-ink">{item}</span>
+										{n < group.items.length - 1 && (
+											<span class="text-ink-muted/50" aria-hidden="true">/</span>
+										)}
+									</li>
+								))}
+							</ul>
+						</dd>
 					</div>
 				))
 			}
-		</div>
+		</dl>
 	</div>
 </section>

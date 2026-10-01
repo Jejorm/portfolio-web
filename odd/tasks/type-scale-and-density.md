@@ -32,7 +32,7 @@ Out: new sections, new claims, palette, motion, new pages (`/work/[slug]`).
 - [x] T1 typeset: define a scale of about 8 steps (tokens in `global.css`), problems/solutions to 16px, metadata and availability to 13-14px, remove one-off sizes. Route: delegated writer (global.css + several components).
 - [x] T2 distill: in each project show the strongest problem/solution pair, fold the rest in `<details>`/`<summary>` (works without JS, keyboard accessible, new i18n keys in en and es). Route: delegated writer (Projects.astro + ui.ts + global.css).
 - [x] T3 clarify: remove summary/description redundancy in the 8 project JSONs, keep facts, no new claims, no dashes. Route: delegated writer (8 JSON files).
-- [ ] T4 layout: separate section `h2` from project `h3` visually, make About and Stack `h3` match their role (sizes and semantics). Route: delegated writer (About, Skills, Projects, global.css).
+- [x] T4 layout: separate section `h2` from project `h3` visually, make About and Stack `h3` match their role (sizes and semantics). Route: delegated writer (About, Skills, Projects, global.css).
 - [ ] T5 polish: run lint/test/build, fix leftovers, re-measure type sizes and word counts, close out evidence.
 
 ## Acceptance criteria
@@ -62,10 +62,20 @@ Out: new sections, new claims, palette, motion, new pages (`/work/[slug]`).
 
 ### T3 clarify (done)
 - Route: delegated writer (8 project JSON files). Parent review of the before/after text of every `description` and the first challenge/solution pairs, with three corrections applied inline: restored "Ecuador's data protection law" in Vikoma (EN and ES), restored "screen reader" in Assembly (EN and ES), reverted the redundant Luxe first-challenge rewording (EN and ES).
-- Result: `summary` untouched everywhere; each `description` no longer restates audience, product type or status from the summary; no fact added. Visible words (EN, details closed): Vikoma 179 to about 172, Tickets 149 to 132, Luxe 104 to 89, Assembly 110 to about 98 (after restorations). Page height unchanged (10711px at 1440px), as predicted: the saving is words, not pixels.
+- Result: `summary` untouched everywhere; each `description` no longer restates audience, product type or status from the summary; no fact added. Visible words (EN, details closed): approximate figures from the writer, taken from a stale dev server (see Findings), re-measured in T5. Page height unchanged (10711px at 1440px), as predicted: the saving is words, not pixels.
 - Dropped facts that the summary or `kind` already state: "word-guessing game", "real estate platform", "barbershops and beauty salons", "from a solo barber to a multi-chair shop", "double bookings" sentence in Vikoma.
 - Checks: `pnpm check`, `pnpm lint`, `pnpm build`, `pnpm test` (50 passed, chromium and mobile-safari); no dashes in added lines.
 - Commit: fbfa048 (refactor(content): remove summary and description overlap in case studies).
 
+### T4 layout (done)
+- Route: delegated writer (Projects, About, Skills, global.css comment). Parent review of the heading sizes report and the screenshots (Projects card at 1440px, About and Stack at 390px).
+- Project `h3` `display-m` to `display-s` (68 to 48px at 1440px, 40 to 28px at 390px); section h2/h3 ratio 1.27 to 1.80 (desktop), 1.20 to 1.71 (mobile). About `h3` 20 to 25px (`heading` token, weight 600). Stack group names are now `<dl>`/`<dt class="meta">` plus `<dd><ul>` (labels, not headings; the tool list stays a real list). Heading outline has no skipped levels. No horizontal overflow at 1440 or 390.
+- Checks: `pnpm check`, `pnpm lint`, `pnpm build`, `pnpm test` (50 passed).
+- Note: the Stack tool names (`display-m`, 68px) are larger than project titles by design (a tool list, not headings); a smaller step is an optional follow-up.
+- Commit: f5c8dd8 (refactor(layout): match heading sizes and Stack markup to their roles).
+
+## Findings
+- The long-running dev server on :4321 (started the day before) serves stale content-collection data: it still renders the pre-T3 project descriptions, while `pnpm build` output has the new copy. Everything about the copy (word counts, screenshots) must be measured against a fresh build (`pnpm preview`), not the dev server. Tests reuse that dev server and none assert project copy, so the passing runs are valid for markup and style only.
+
 ## Next step
-T4 layout.
+T5 polish.

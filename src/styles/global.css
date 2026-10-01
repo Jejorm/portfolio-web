@@ -66,12 +66,12 @@
                      the hero availability line
    body        16px  Reading floor: paragraphs, lists, nav, links, buttons
    lead        20px  Summaries and section intros
-   heading     25px  Reserved for small headings (About and Stack h3)
+   heading     25px  Small headings (About areas)
 
    Display (fluid, used with .display or on their own)
    title       28 to 40px   Card titles, contact email
-   display-s   28 to 48px   Hero statement, About statement, lead principle
-   display-m   40 to 68px   Project and Stack names
+   display-s   28 to 48px   Project titles, hero statement, About statement, lead principle
+   display-m   40 to 68px   Stack tool names
    display-l   48 to 88px   Section titles
    poster      56 to 176px  Contact poster, f(x) mark
 
