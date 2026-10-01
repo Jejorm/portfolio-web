@@ -122,18 +122,18 @@ Cada sección usa una familia de layout distinta (6 secciones, 6 familias).
 ┌──────────────────────────────────────────────────────────────┐
 │ Jeremy Orellana  Work About Stack How I work Contact  EN/ES □ │  nav 64px, una línea
 ├──────────────────────────────────────────────────────────────┤
-│ ● Open to full-time roles…                        ┌────────┐ │
-│ Full-stack developer. I build and ship complete   │retrato │ │  HERO · split asimétrico
-│ products, like Vikoma, a live SaaS…               │  4:5   │ │  + wordmark a sangre
+│ ● Available for custom web and app development…   ┌────────┐ │
+│ Full-stack developer. I turn ideas into fast,     │retrato │ │  HERO · split asimétrico
+│ accessible web products, ready for production.    │  4:5   │ │  + wordmark a sangre
 │ [Get in touch ↓] email [Copy email] See projects  └────────┘ │
 │ JEREMY ORELLANA  ← se condensa al hacer scroll               │
 ├──────────────────────────────────────────────────────────────┤
 │ Selected work     │ ┌──────────── imagen 16:10 ───────────┐  │  TRABAJO · índice sticky
 │ intro             │ └─────────────────────────────────────┘  │  + casos de estudio
-│ 01 Vikoma ◀───────│ 01 / Multi-tenant SaaS       [Live ↗]   │  (el índice marca el
-│ 02 Tickets App    │ Vikoma                                   │   proyecto activo)
-│ 03 Luxe Estate    │ resumen · descripción                    │
-│ 04 Assembly       │ El reto 01-03  │ Cómo lo resolví 01-03   │
+│ 01 Vikoma ◀───────│ Vikoma                                   │  (el índice marca el
+│ 02 Tickets App    │ resumen                                  │   proyecto activo y da
+│ 03 Luxe Estate    │ [ Live site ↗ ] (acento, grande)  GitHub │   número y tipo: el caso
+│ 04 Assembly       │ descripción · Problemas │ Cómo resolví   │   no los repite)
 ├──────────────────────────────────────────────────────────────┤
 │ About             │ Declaración grande que se "entinta"      │  SOBRE MÍ · editorial
 │ Base / Focus /    │ palabra a palabra mientras se lee.       │  + ficha de datos
@@ -166,21 +166,27 @@ El trabajo va justo después del hero: es lo que un reclutador busca primero.
 
 Todo vive dentro de `@media (prefers-reduced-motion: no-preference)`; las animaciones de scroll además dentro de `@supports (animation-timeline: scroll())`. Sin soporte, el contenido se muestra estático y completo.
 
+Toda animación ligada al scroll usa `--ease-scroll` (curva sinusoidal: arranca y se asienta con suavidad). Un contenedor con `overflow: hidden` rompe `view()` en sus hijos; para recortar usa `overflow: clip`.
+
 | Animación | Qué comunica | Técnica |
 |---|---|---|
 | Líneas del hero que suben desde una máscara | Orden de lectura en la carga | `@keyframes rise` con `animation-delay` escalonado |
-| Wordmark que se condensa (118 % → 64 %, 800 → 500) | Transición de identidad a contenido | `animation-timeline: scroll(root)`, rango `0 100vh` |
+| Wordmark que se condensa (118 % → 64 %, 800 → 500); sin respuesta al cursor | Transición de identidad a contenido | `animation-timeline: scroll(root)`, rango `0 100vh` |
+| Retrato del hero que se desliza dentro de su marco | Profundidad mientras el hero sale | `scale` + `translate` (no `transform`, que usa `data-reveal`) con `scroll(root)` |
 | Wordmark que se expande al entrar (75 % → 118 %) | En móvil el nombre queda bajo el pliegue: reacciona cuando aparece | `animation-timeline: view()` sobre el h1, solo `< md` |
-| Letras del wordmark que se ensanchan al pasar el cursor | Respuesta táctil del nombre | `:hover` + `:has()` por letra, solo `(hover: hover) and (pointer: fine)` |
 | Nav que gana fondo tras 80 px | Estado: el contenido pasa por debajo | `animation-timeline: scroll(root)`, sin JS |
+| Desplegable de problemas y soluciones que se abre y cierra con suavidad | Continuidad: el contenido no aparece de golpe | WAAPI sobre el `<details>` nativo: altura con `--ease-out`, el contenido sube 10 px y aparece; sin JS o con `prefers-reduced-motion` alterna al instante |
 | Imágenes de proyecto que se abren desde un recorte | Entrada de cada caso de estudio | `clip-path` + `scale` con `animation-timeline: view()` |
 | Índice de proyectos activo | Dónde estás dentro del trabajo | `IntersectionObserver` → `aria-current` |
+| Título de contacto que gana peso al entrar (400 → 600) | Cierre de la página, eco del wordmark | `view()`, solo `≥ md`: en móvil el cambio de peso reacomodaría las líneas |
 | Declaración de "Sobre mí" palabra a palabra | Guía de lectura | `view-timeline` con `animation-range` por palabra (`--p`) |
 | Reveals de entrada (`data-reveal`) | Jerarquía y secuencia | Un único `IntersectionObserver` que se desuscribe |
 | Lámpara de disponibilidad que se enciende con parpadeo, una vez | Estado: disponible ahora | `@keyframes strike`, sin bucle; estática y encendida con `prefers-reduced-motion` |
 | Subrayados, flechas, `scale(.98)` al pulsar | Feedback de interacción | Transiciones CSS en `transform` / `background-size` |
 | Scroll inercial | Peso y continuidad | Lenis, desactivado con `prefers-reduced-motion` |
 | Cambio de idioma | Continuidad entre páginas | `@view-transition { navigation: auto; }` |
+
+El botón "Live site" de cada caso es la acción principal: fondo `--accent` en reposo con texto `--on-accent` (4.6:1 / 6.2:1), 20 px, mínimo 56 px de alto, ancho completo en móvil; pasa a `--ink` al hover.
 
 Prohibido: listeners de `scroll` en `window`, bucles `requestAnimationFrame` permanentes, animar `top/left/width/height`, más de un marquee.
 
@@ -190,7 +196,10 @@ Prohibido: listeners de `scroll` en `window`, bucles `requestAnimationFrame` per
 
 - Enlace "Saltar al contenido", foco visible (`outline` de acento), `aria-current` en idioma e índice, `aria-pressed` en el conmutador de tema, menú móvil con `aria-expanded`, cierre con Escape y foco gestionado.
 - Formulario: etiquetas encima del campo, errores en línea (`aria-invalid` + `aria-describedby`), región `role="status"` para envío/éxito/error, envío asíncrono a Formspree con fallback a POST normal sin JS.
-- Contraste AA verificado para todos los pares de texto (tabla 4.1).
+- Contraste AA verificado para todos los pares de texto (tabla 4.1), en ambos temas, medido sobre el render real.
+- Bordes de controles de formulario en `--ink-muted` (≥ 3:1, WCAG 1.4.11); `--line` es solo para divisores, nunca para delimitar un campo. Los campos conservan el `outline` de foco global.
+- Placeholders en `--ink-muted` sin transparencia. Separadores decorativos (`/`) con al menos 3:1.
+- Tamaño mínimo de texto: 14 px (`meta` y `ui`); índices y números de proyecto incluidos.
 - Fuentes locales, imágenes `astro:assets` en WebP con `srcset`, retrato con `fetchpriority="high"`, sin scripts de terceros en el camino crítico.
 
 ---

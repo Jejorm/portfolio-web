@@ -49,7 +49,7 @@ const locales = Object.keys(languages) as (keyof typeof languages)[]
 				{
 					locales.map((l, i) => (
 						<>
-							{i > 0 && <span class="text-line" aria-hidden="true">/</span>}
+							{i > 0 && <span class="text-ink-muted" aria-hidden="true">/</span>}
 							<a
 								href={l === 'en' ? '/' : `/${l}/`}
 								hreflang={l}
