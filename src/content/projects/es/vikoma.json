@@ -1,22 +1,22 @@
 {
 	"order": 1,
 	"title": "Vikoma",
-	"kind": "SaaS multi-tenant",
-	"summary": "Plataforma para barberías de Ecuador que reemplaza cuadernos, chats y cuadres a mano. En producción: su primera barbería piloto ya se registró y configuró su negocio.",
-	"description": "Cada negocio tiene su propio espacio, con sus barberos, servicios y clientes. El dueño entra con Google y deja todo configurado en unos 5 minutos, medidos con la barbería piloto. Incluye confirmaciones por WhatsApp, lista de espera, fotos de referencia con consentimiento según la ley de datos de Ecuador, reportes mensuales de caja y roles de dueño y barbero. La agenda se consulta aunque falle el internet. Lo construí solo: dinero en centavos enteros, horas en UTC y 2.679 pruebas automáticas que corren en unos 16 segundos, con ≈81 % de cobertura de líneas en lógica de negocio y repositorios.",
+	"kind": "Sistema en línea para negocios",
+	"summary": "Sistema para barberías de Ecuador que reemplaza el cuaderno, los chats y el cuadre de caja a mano. Ya está en uso: la primera barbería de prueba se registró y configuró su negocio.",
+	"description": "Cada barbería tiene su propio espacio, con sus barberos, servicios y clientes. El dueño entra con su cuenta de Google y deja todo listo en unos 5 minutos, según lo medido con la barbería de prueba. Incluye confirmaciones por WhatsApp, lista de espera, fotos de referencia con permiso del cliente según la ley de protección de datos de Ecuador, reportes mensuales de caja y roles de dueño y barbero. La agenda se puede ver aunque se caiga el internet. Lo hice solo: el dinero se guarda en centavos para evitar errores de redondeo, las horas en UTC, y tiene 2.679 pruebas automáticas que corren en unos 16 segundos y cubren cerca del 81 % del código de las reglas de negocio y del acceso a datos.",
 	"challenges": [
-		"Un negocio podía referenciar datos de otro. El motor tursodb ignoraba las claves foráneas sin avisar.",
-		"Dos clientes no debían reservar la misma hora, ni siquiera al mismo tiempo.",
-		"Dos cobros simultáneos podían vender stock agotado o repetir un número de factura.",
-		"El inicio de sesión con OAuth aceptaba cualquier valor. Un parser hexadecimal leía base64url y devolvía buffers vacíos, así que todo coincidía.",
-		"Un fallo de WhatsApp no debía frenar la reserva."
+		"Los datos de un negocio podían quedar enlazados con los de otro, porque la base de datos tursodb no revisaba las relaciones entre tablas y no avisaba.",
+		"Dos clientes no podían reservar la misma hora, aunque lo intentaran en el mismo instante.",
+		"Dos cobros al mismo tiempo podían vender productos sin stock o repetir un número de factura.",
+		"El inicio de sesión (OAuth) daba por bueno cualquier valor. Una función leía el texto en el formato equivocado (hexadecimal en vez de base64url), obtenía datos vacíos y todo coincidía.",
+		"Una falla de WhatsApp no debía impedir que se guardara la cita."
 	],
 	"solutions": [
-		"Lo confirmé con una inserción que debía fallar y llevé producción a libSQL. Los datos pasan por un único acceso, con pruebas de que nunca se mezclan. La app no arranca si las claves foráneas no se aplican.",
-		"Cada reserva revalida el horario dentro de la transacción, no solo en pantalla.",
-		"Los números de factura salen de un UPDATE atómico con RETURNING. Una prueba con 25 solicitudes concurrentes exige 25 números distintos. El stock usa actualizaciones condicionales y reintenta los bloqueos.",
-		"Una prueba de seguridad negativa lo detectó. Ahora la comparación es de tiempo constante y aplica un hash a ambos lados primero.",
-		"El mensaje se encola junto a la cita y se envía después, con reintentos. Sin consentimiento del cliente, no sale."
+		"Lo comprobé con una prueba que debía fallar y pasé producción a libSQL. Todos los datos pasan por un solo punto de acceso, con pruebas que confirman que nunca se mezclan. La app no arranca si la base de datos no revisa esas relaciones.",
+		"Cada reserva vuelve a revisar el horario en el momento de guardarse, no solo en la pantalla.",
+		"El número de factura se asigna en un solo paso dentro de la base de datos. Una prueba con 25 cobros al mismo tiempo exige 25 números distintos. El stock solo se descuenta si alcanza, y si la base de datos está ocupada, se vuelve a intentar.",
+		"Lo detectó una prueba de seguridad que intentaba entrar con datos falsos. Ahora se compara un hash de ambos valores, y la comparación siempre tarda lo mismo para no dar pistas.",
+		"El mensaje se guarda en una cola junto con la cita y se envía después, con reintentos. Si el cliente no dio su permiso, no se envía."
 	],
 	"tags": [
 		"Next.js 16",
@@ -28,7 +28,7 @@
 		"Vitest"
 	],
 	"image": "../../../assets/images/project-vikoma.webp",
-	"imageAlt": "Agenda de Vikoma en español, en una pantalla de escritorio con una columna por barbero y en un teléfono como lista de citas.",
+	"imageAlt": "Agenda de Vikoma en español, en una computadora con una columna por barbero y en un celular como lista de citas.",
 	"liveUrl": "https://vikoma.app",
 	"links": []
 }

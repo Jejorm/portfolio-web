@@ -2,21 +2,21 @@
 	"order": 4,
 	"title": "Assembly: Endgame",
 	"kind": "Juego web",
-	"summary": "Un juego de adivinar palabras accesible, con avisos en vivo para lectores de pantalla.",
-	"description": "Hecho en React 19. Cada error elimina un lenguaje de programación del tablero, y el juego completo se puede jugar con teclado y lector de pantalla.",
+	"summary": "Juego de adivinar palabras que también se puede jugar con lector de pantalla.",
+	"description": "Hecho en React 19. Cada error borra un lenguaje de programación del tablero, y todo el juego se puede jugar con el teclado y con lector de pantalla.",
 	"challenges": [
-		"El estado del juego (lenguajes restantes, intentos, victoria y derrota) cambia con cada tecla y debe mantenerse consistente.",
-		"Las personas que usan lector de pantalla necesitaban escuchar cada intento y el resultado final sin ver el tablero.",
-		"El teclado en pantalla debía coincidir en todo momento con el historial de intentos."
+		"El estado del juego (lenguajes que quedan, intentos, si ganaste o perdiste) cambia con cada tecla y debía estar siempre correcto.",
+		"Quienes usan lector de pantalla necesitaban escuchar cada intento y el resultado final sin ver el tablero.",
+		"El teclado en pantalla debía coincidir siempre con las letras ya usadas."
 	],
 	"solutions": [
-		"El juego se divide en componentes pequeños (Status, LanguageChips, Keyboard) y cada uno renderiza una sola parte del estado.",
-		"Una región aria-live anuncia a los lectores de pantalla cada intento y el resultado final.",
-		"El teclado se renderiza a partir del mismo estado del juego que el área de estado, así que siempre coincide con el historial de intentos."
+		"El juego está dividido en componentes pequeños (Status, LanguageChips, Keyboard) y cada uno muestra una sola parte del estado.",
+		"Una región aria-live le avisa al lector de pantalla cada intento y el resultado final.",
+		"El teclado se dibuja a partir del mismo estado que el resto del juego, así que siempre coincide con las letras ya usadas."
 	],
 	"tags": ["React 19", "CSS Grid", "ARIA", "Hooks"],
 	"image": "../../../assets/images/project-assembly-endgame.webp",
-	"imageAlt": "Tres pantallas de Assembly: Endgame con el tablero, una victoria con confeti y un fin de partida.",
+	"imageAlt": "Tres pantallas de Assembly: Endgame: el tablero, una victoria con confeti y el final de una partida.",
 	"liveUrl": "https://assembly-endgam3.netlify.app",
 	"links": [
 		{
