@@ -2,17 +2,38 @@ import { expect, test } from '@playwright/test'
 
 test.describe('Portfolio Core Experience', () => {
 	test('should load the main page with correct SEO title', async ({ page }) => {
-		await page.goto('/')
+		await page.goto('/en/')
 
-		// Check SEO Title (English - default)
+		// Check SEO Title (English)
 		await expect(page).toHaveTitle(/Jeremy Orellana \| Full-Stack Developer/i)
 		await expect(page.locator('#hero-heading')).toContainText('Jeremy Orellana')
 	})
 
-	test('should switch to Spanish and update content', async ({ page }) => {
-		await page.goto('/es')
+	test('should serve Spanish at the root, link previews included', async ({
+		page,
+	}) => {
+		await page.goto('/')
 
-		// Check SEO Title (Spanish)
+		await expect(page.locator('html')).toHaveAttribute('lang', 'es')
+		await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute(
+			'content',
+			'es_EC',
+		)
+		await expect(
+			page.locator('meta[property="og:description"]'),
+		).toHaveAttribute('content', /^Desarrollador full-stack en Ecuador/)
+	})
+
+	test('should redirect the old Spanish path to the root', async ({ page }) => {
+		await page.goto('/es/')
+		await expect(page.locator('html')).toHaveAttribute('lang', 'es')
+		expect(new URL(page.url()).pathname).toBe('/')
+	})
+
+	test('should switch to Spanish and update content', async ({ page }) => {
+		await page.goto('/')
+
+		// Check SEO Title (Spanish, default)
 		await expect(page).toHaveTitle(
 			/Jeremy Orellana \| Desarrollador Full-Stack/i,
 		)
@@ -24,7 +45,7 @@ test.describe('Portfolio Core Experience', () => {
 	})
 
 	test('should have a functional navigation to projects', async ({ page }) => {
-		await page.goto('/')
+		await page.goto('/en/')
 
 		// Click on the Hero CTA
 		await page.getByRole('link', { name: 'See projects' }).click()
@@ -38,7 +59,7 @@ test.describe('Portfolio Core Experience', () => {
 	test('should lead the hero with a primary contact call to action', async ({
 		page,
 	}) => {
-		await page.goto('/')
+		await page.goto('/en/')
 
 		const primary = page
 			.locator('#top')
@@ -53,7 +74,7 @@ test.describe('Portfolio Core Experience', () => {
 	test('should keep the name readable to assistive tech after splitting letters', async ({
 		page,
 	}) => {
-		await page.goto('/')
+		await page.goto('/en/')
 
 		await expect(
 			page.getByRole('heading', { level: 1, name: 'Jeremy Orellana' }),
@@ -63,7 +84,7 @@ test.describe('Portfolio Core Experience', () => {
 	test('should render every case study with its problem and solution lists', async ({
 		page,
 	}) => {
-		await page.goto('/')
+		await page.goto('/en/')
 
 		const articles = page.locator('article.project')
 		await expect(articles).toHaveCount(4)
@@ -96,7 +117,7 @@ test.describe('Portfolio Core Experience', () => {
 	test('should fold extra problems and solutions in a keyboard operable disclosure', async ({
 		page,
 	}) => {
-		await page.goto('/')
+		await page.goto('/en/')
 
 		const articles = page.locator('article.project')
 		let folded = 0
@@ -138,7 +159,7 @@ test.describe('Portfolio Core Experience', () => {
 	})
 
 	test('should label the disclosure in Spanish', async ({ page }) => {
-		await page.goto('/es/')
+		await page.goto('/')
 
 		const summary = page.locator('article.project details summary').first()
 		await expect(summary).toContainText(/Ver \d+ problemas? y soluciones? más/)
@@ -153,7 +174,7 @@ test.describe('Portfolio Core Experience', () => {
 	test('should show Vikoma as a case study with its live link', async ({
 		page,
 	}) => {
-		await page.goto('/')
+		await page.goto('/en/')
 
 		const vikoma = page.locator('article#vikoma')
 		await expect(vikoma).toHaveCount(1)
@@ -166,7 +187,7 @@ test.describe('Portfolio Core Experience', () => {
 	test('should persist the chosen color theme across pages', async ({
 		page,
 	}) => {
-		await page.goto('/')
+		await page.goto('/en/')
 
 		const toggle = page.locator('.theme-toggle:visible').first()
 		if (!(await toggle.count())) await page.locator('#menu-toggle').click()
@@ -182,7 +203,7 @@ test.describe('Portfolio Core Experience', () => {
 		expect(after).not.toBe(before)
 
 		const chosen = await html.getAttribute('data-theme')
-		await page.goto('/es/')
+		await page.goto('/')
 		await expect(page.locator('html')).toHaveAttribute(
 			'data-theme',
 			chosen ?? '',
@@ -192,7 +213,7 @@ test.describe('Portfolio Core Experience', () => {
 	test('should show inline errors when the contact form is empty', async ({
 		page,
 	}) => {
-		await page.goto('/')
+		await page.goto('/en/')
 
 		await page.locator('#contact-form button[type="submit"]').click()
 		await expect(page.locator('#contact-name')).toHaveAttribute(
@@ -204,7 +225,7 @@ test.describe('Portfolio Core Experience', () => {
 	})
 
 	test('should not use em or en dashes in visible copy', async ({ page }) => {
-		for (const path of ['/', '/es/']) {
+		for (const path of ['/en/', '/']) {
 			await page.goto(path)
 			const text = await page.locator('body').innerText()
 			expect(text).not.toMatch(/[–—]/)
@@ -218,7 +239,7 @@ test.describe('Hero call to action', () => {
 	test('should size both hero buttons for touch and drop the inline email', async ({
 		page,
 	}) => {
-		await page.goto('/')
+		await page.goto('/en/')
 
 		const hero = page.locator('#top')
 		const primary = hero.getByRole('link', { name: 'Get in touch' })
@@ -243,7 +264,7 @@ test.describe('Hero call to action', () => {
 				value: { writeText: async () => {} },
 			})
 		})
-		await page.goto('/')
+		await page.goto('/en/')
 
 		// The accessible name changes once copied, so target the hook, not the label.
 		const copy = page.locator('#contact [data-copy-email]')
@@ -278,7 +299,7 @@ test.describe('Mobile wordmark', () => {
 			reducedMotion: 'no-preference',
 			colorScheme: 'light',
 		})
-		await page.goto('/')
+		await page.goto('/en/')
 
 		const top = await page
 			.locator('#hero-heading')
@@ -311,7 +332,7 @@ test.describe('Mobile wordmark', () => {
 		page,
 	}) => {
 		await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: 'light' })
-		await page.goto('/')
+		await page.goto('/en/')
 		await page.locator('#hero-heading').scrollIntoViewIfNeeded()
 
 		const words = await readWords(page)
@@ -327,7 +348,7 @@ test.describe('Mobile navigation', () => {
 	test('should open the menu and close it after choosing a section', async ({
 		page,
 	}) => {
-		await page.goto('/')
+		await page.goto('/en/')
 
 		const toggle = page.locator('#menu-toggle')
 		const menu = page.locator('#mobile-menu')
@@ -344,7 +365,7 @@ test.describe('Mobile navigation', () => {
 })
 
 test.describe('Theme toggle', () => {
-	const labels = { '/': 'Dark mode', '/es/': 'Modo oscuro' } as const
+	const labels = { '/en/': 'Dark mode', '/': 'Modo oscuro' } as const
 
 	const openToggle = async (page: import('@playwright/test').Page) => {
 		if (!(await page.locator('.theme-toggle:visible').count())) {
@@ -381,7 +402,7 @@ test.describe('Theme toggle', () => {
 		expect(paper).toBe(theme === 'dark' ? '#0e0e0f' : '#ececea')
 	}
 
-	for (const path of ['/', '/es/'] as const) {
+	for (const path of ['/en/', '/'] as const) {
 		test(`switches dark to light and back from the system preference on ${path}`, async ({
 			page,
 		}) => {
@@ -449,7 +470,7 @@ test.describe('Theme toggle', () => {
 			await expect(
 				page
 					.getByRole('button', {
-						name: path === '/' ? /Dark mode/ : /Modo oscuro/,
+						name: path === '/en/' ? /Dark mode/ : /Modo oscuro/,
 					})
 					.first(),
 			).toBeAttached()

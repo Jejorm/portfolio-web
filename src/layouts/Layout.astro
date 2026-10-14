@@ -55,6 +55,7 @@ const ogImage = new URL('/og-image.png', site)
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
+		<meta property="og:locale" content={lang === 'es' ? 'es_EC' : 'en_US'} />
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
@@ -68,8 +69,8 @@ const ogImage = new URL('/og-image.png', site)
 		<meta property="twitter:image" content={ogImage} />
 
 		<!-- I18n -->
-		<link rel="alternate" hreflang="en" href={new URL('/', site)} />
-		<link rel="alternate" hreflang="es" href={new URL('/es/', site)} />
+		<link rel="alternate" hreflang="es" href={new URL('/', site)} />
+		<link rel="alternate" hreflang="en" href={new URL('/en/', site)} />
 		<link rel="alternate" hreflang="x-default" href={new URL('/', site)} />
 
 		<!-- Favicons -->
