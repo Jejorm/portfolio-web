@@ -2,8 +2,8 @@
 	"order": 1,
 	"title": "Vikoma",
 	"kind": "Sistema en línea para negocios",
-	"summary": "Sistema para barberías de Ecuador que reemplaza el cuaderno, los chats y el cuadre de caja a mano. Ya está en uso: la primera barbería de prueba se registró y configuró su negocio.",
-	"description": "Cada barbería tiene su propio espacio, con sus barberos, servicios y clientes. El dueño entra con su cuenta de Google y deja todo listo en unos 5 minutos, según lo medido con la barbería de prueba. Incluye confirmaciones por WhatsApp, lista de espera, fotos de referencia con permiso del cliente según la ley de protección de datos de Ecuador, reportes mensuales de caja y roles de dueño y barbero. La agenda se puede ver aunque se caiga el internet. Lo hice solo: el dinero se guarda en centavos para evitar errores de redondeo, las horas en UTC, y tiene 2.679 pruebas automáticas que corren en unos 16 segundos y cubren cerca del 81 % del código de las reglas de negocio y del acceso a datos.",
+	"summary": "Sistema para negocios de Ecuador que trabajan con citas, como salones de belleza, peluquerías, estudios de uñas, spas y barberías. Reemplaza el cuaderno, los chats y el cuadre de caja a mano. Ya está en uso: la primera barbería de prueba se registró y configuró su negocio.",
+	"description": "Cada negocio tiene su propio espacio, con su equipo, servicios y clientes. El dueño entra con su cuenta de Google y deja todo listo en unos 5 minutos, según lo medido con la barbería de prueba. Incluye agenda sin cruces, inventario que baja solo con cada venta, caja y reportes de ingresos, confirmaciones por WhatsApp, lista de espera, fotos de referencia con permiso del cliente según la ley de protección de datos de Ecuador y permisos distintos para el dueño y el equipo. La agenda se puede ver aunque se caiga el internet. Lo hice solo: el dinero se guarda en centavos para evitar errores de redondeo, las horas en UTC, y tiene 2.679 pruebas automáticas que corren en unos 16 segundos y cubren cerca del 81 % del código de las reglas de negocio y del acceso a datos.",
 	"challenges": [
 		"Los datos de un negocio podían quedar enlazados con los de otro, porque la base de datos tursodb no revisaba las relaciones entre tablas y no avisaba.",
 		"Dos clientes no podían reservar la misma hora, aunque lo intentaran en el mismo instante.",
@@ -28,7 +28,7 @@
 		"Vitest"
 	],
 	"image": "../../../assets/images/project-vikoma.webp",
-	"imageAlt": "Agenda de Vikoma en español, en una computadora con una columna por barbero y en un celular como lista de citas.",
+	"imageAlt": "Agenda de Vikoma en español, en una computadora con una columna por profesional y en un celular como lista de citas.",
 	"liveUrl": "https://vikoma.app",
 	"links": []
 }

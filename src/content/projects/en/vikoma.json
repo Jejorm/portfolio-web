@@ -2,8 +2,8 @@
 	"order": 1,
 	"title": "Vikoma",
 	"kind": "Multi-tenant SaaS",
-	"summary": "A platform for barbershops in Ecuador that replaces notebooks, chats and hand-balanced cash. Live in production: its first pilot barbershop has already signed up and set up its business.",
-	"description": "Each business gets its own space, with its own barbers, services and clients. The owner signs in with Google and finishes setup in about 5 minutes, measured with the pilot barbershop. It includes WhatsApp confirmations, a waitlist, reference photos with consent under Ecuador's data law, monthly cash reports and owner and barber roles. The agenda stays readable when the internet drops. I built it solo: money in whole cents, times in UTC and 2,679 automated tests that run in about 16 seconds, with ≈81% line coverage of business logic and repositories.",
+	"summary": "A platform for appointment-based businesses in Ecuador, such as beauty salons, hair salons, nail studios, spas and barbershops. It replaces notebooks, chats and hand-balanced cash. Live in production: its first pilot barbershop has already signed up and set up its business.",
+	"description": "Each business gets its own space, with its own team, services and clients. The owner signs in with Google and finishes setup in about 5 minutes, measured with the pilot barbershop. It includes conflict-free scheduling, inventory that drops automatically with each sale, cash flow and revenue reports, WhatsApp confirmations, a waitlist, reference photos with consent under Ecuador's data law, and separate permissions for the owner and the team. The agenda stays readable when the internet drops. I built it solo: money in whole cents, times in UTC and 2,679 automated tests that run in about 16 seconds, with ≈81% line coverage of business logic and repositories.",
 	"challenges": [
 		"One business could reference another's data. The tursodb engine silently ignored foreign keys.",
 		"Two clients must never book the same slot, even at the same moment.",
@@ -28,7 +28,7 @@
 		"Vitest"
 	],
 	"image": "../../../assets/images/project-vikoma.webp",
-	"imageAlt": "Vikoma agenda in Spanish, shown on a wide desktop screen with one column per barber and on a phone as a list of appointments.",
+	"imageAlt": "Vikoma agenda in Spanish, shown on a wide desktop screen with one column per professional and on a phone as a list of appointments.",
 	"liveUrl": "https://vikoma.app",
 	"links": []
 }
