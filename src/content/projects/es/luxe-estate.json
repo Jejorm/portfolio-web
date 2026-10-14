@@ -1,22 +1,22 @@
 {
 	"order": 3,
 	"title": "Luxe Estate",
-	"kind": "Plataforma inmobiliaria",
-	"summary": "Búsqueda de propiedades con filtros sincronizados con el mapa, contenido en varios idiomas y renderizado en servidor.",
-	"description": "Full-stack, construida con Server Components y Server Actions de Next.js. Supabase se encarga de los datos y la autenticación, y Leaflet de la búsqueda en mapa.",
+	"kind": "Plataforma de bienes raíces",
+	"summary": "Buscador de propiedades con filtros que se actualizan junto con el mapa, en varios idiomas y con páginas generadas en el servidor.",
+	"description": "Aplicación completa hecha con Server Components y Server Actions de Next.js. Supabase maneja los datos y el inicio de sesión, y Leaflet el mapa.",
 	"challenges": [
-		"El mapa de Leaflet y los filtros del servidor debían mantenerse sincronizados.",
-		"Los favoritos y el inicio de sesión se sentían lentos si cada acción esperaba una ida y vuelta al servidor.",
-		"Las páginas de propiedades debían cargar rápido y ser indexables por los buscadores."
+		"El mapa y los filtros debían mostrar siempre los mismos resultados.",
+		"Guardar favoritos e iniciar sesión se sentía lento si cada clic esperaba la respuesta del servidor.",
+		"Las páginas de propiedades debían cargar rápido y aparecer en buscadores como Google."
 	],
 	"solutions": [
-		"Los filtros se ejecutan como consultas en el servidor con Supabase PostgREST, y así el mapa y la lista de resultados coinciden.",
-		"Las Server Actions validan estrictamente sus datos y se combinan con interfaz optimista, así los favoritos y el inicio de sesión responden sin esperar.",
-		"Las páginas se renderizan primero con Server Components, lo que envía menos JavaScript al navegador y mantiene el contenido indexable."
+		"Los filtros se aplican con una sola consulta en el servidor (Supabase PostgREST), así el mapa y la lista siempre coinciden.",
+		"Las Server Actions revisan bien los datos, y la pantalla muestra el cambio al instante sin esperar la respuesta del servidor.",
+		"Las páginas se generan primero en el servidor, llegan con menos JavaScript y los buscadores pueden leer su contenido."
 	],
 	"tags": ["Next.js 16", "Supabase", "Tailwind CSS 4", "Leaflet", "i18n"],
 	"image": "../../../assets/images/project-luxe-estate.webp",
-	"imageAlt": "Tres pantallas de Luxe Estate: la búsqueda de propiedades, el detalle de un inmueble con mapa y la tabla de administración.",
+	"imageAlt": "Tres pantallas de Luxe Estate: la búsqueda de propiedades, el detalle de una propiedad con mapa y la tabla de administración.",
 	"liveUrl": "https://luxe-estate-ten.vercel.app",
 	"links": [
 		{

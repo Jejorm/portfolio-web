@@ -2,15 +2,15 @@
 	"order": 2,
 	"title": "Tickets App",
 	"kind": "Sistema en tiempo real",
-	"summary": "Kioscos, escritorios y pantallas sincronizados con WebSockets nativos.",
-	"description": "Un sistema de turnos para puntos de atención, con tickets normales y preferenciales. Combina un cliente en React 19 con un servidor en Bun y TypeScript, y el backend corre en un contenedor Docker.",
+	"summary": "Kioscos, escritorios de atención y pantallas que muestran los mismos turnos al instante.",
+	"description": "Un sistema de turnos para lugares de atención al público, con turnos normales y preferenciales. La interfaz está hecha en React 19 y el servidor en Bun con TypeScript, dentro de un contenedor Docker.",
 	"challenges": [
-		"Kioscos, escritorios y pantallas debían mostrar el mismo estado de la cola al mismo tiempo, sin que cada componente administrara su propio socket.",
-		"Kioscos y pantallas debían recuperarse solos cuando se caía la conexión de red."
+		"Kioscos, escritorios y pantallas debían mostrar la misma fila de turnos al mismo tiempo, sin que cada parte manejara su propia conexión.",
+		"Kioscos y pantallas debían reconectarse solos si se caía el internet."
 	],
 	"solutions": [
-		"El servidor Bun comparte el estado de la cola con todos los clientes mediante WebSockets nativos (Bun.serve) y valida cada mensaje entrante con un esquema Zod. Un hook propio, useSocketTicket, encapsula el socket, y un Context de React expone el estado de la cola a todos los componentes.",
-		"Los clientes se reconectan solos, con reintentos cada vez más espaciados."
+		"El servidor envía el estado de la fila a todos los equipos por WebSockets y revisa con Zod cada mensaje que recibe. Un hook propio (useSocketTicket) maneja la conexión, y un Context de React comparte el estado con toda la app.",
+		"Se reconectan solos y esperan un poco más entre cada intento."
 	],
 	"tags": ["React 19", "Bun", "WebSockets", "TypeScript", "Zod"],
 	"image": "../../../assets/images/project-tickets-websockets.webp",

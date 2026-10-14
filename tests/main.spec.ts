@@ -19,7 +19,7 @@ test.describe('Portfolio Core Experience', () => {
 
 		// Check Hero statement in Spanish
 		await expect(page.locator('#hero-statement')).toContainText(
-			'listos para producción',
+			'listas para publicar',
 		)
 	})
 
