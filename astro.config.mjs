@@ -12,9 +12,13 @@ export default defineConfig({
 		plugins: [tailwindcss()],
 	},
 	integrations: [sitemap()],
+	// Spanish moved from /es/ to the root; keep shared links working.
+	redirects: {
+		'/es': '/',
+	},
 	i18n: {
-		defaultLocale: 'en',
-		locales: ['en', 'es'],
+		defaultLocale: 'es',
+		locales: ['es', 'en'],
 		routing: {
 			prefixDefaultLocale: false,
 		},

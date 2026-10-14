@@ -1,11 +1,11 @@
 ---
-import { languages } from '../i18n/ui'
+import { defaultLang, languages } from '../i18n/ui'
 import { getLangFromUrl, useTranslations } from '../i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
-const home = lang === 'en' ? '/' : `/${lang}/`
+const home = lang === defaultLang ? '/' : `/${lang}/`
 const links = [
 	{ href: '#projects', label: t('nav.work') },
 	{ href: '#about', label: t('nav.about') },
@@ -51,7 +51,7 @@ const locales = Object.keys(languages) as (keyof typeof languages)[]
 						<>
 							{i > 0 && <span class="text-ink-muted" aria-hidden="true">/</span>}
 							<a
-								href={l === 'en' ? '/' : `/${l}/`}
+								href={l === defaultLang ? '/' : `/${l}/`}
 								hreflang={l}
 								lang={l}
 								aria-current={lang === l ? 'true' : undefined}
@@ -116,7 +116,7 @@ const locales = Object.keys(languages) as (keyof typeof languages)[]
 			{
 				locales.map((l) => (
 					<a
-						href={l === 'en' ? '/' : `/${l}/`}
+						href={l === defaultLang ? '/' : `/${l}/`}
 						hreflang={l}
 						lang={l}
 						aria-current={lang === l ? 'true' : undefined}
